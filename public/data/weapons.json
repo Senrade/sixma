@@ -1,0 +1,16 @@
+{
+  "conspiracy_framing": {
+    "id": "conspiracy_framing",
+    "name": "Conspiracy Framing",
+    "definition": "Rejecting the most likely explanation for an event and replacing it with a secret, malicious plot coordinated by powerful actors.",
+    "why_it_works": "Preys on technology anxiety by providing a distinct villain to blame for complex changes.",
+    "what_to_do": "Ask: Is there direct, verifiable evidence of a hidden plot, or is the author guessing motives based on fear?"
+  },
+  "intentionality_bias": {
+    "id": "intentionality_bias",
+    "name": "Intentionality Bias",
+    "definition": "Assuming that an event or outcome was purposely caused by someone, rather than being accidental, natural, or a structural pilot.",
+    "why_it_works": "The human brain naturally prefers tracking active intent over systemic complexity.",
+    "what_to_do": "Evaluate whether the outcome could simply be a standard trial, operational mistake, or neutral event."
+  }
+}

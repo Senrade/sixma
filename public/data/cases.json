@@ -1,0 +1,131 @@
+[
+  {
+    "level": "RED",
+    "case_id": "R001",
+    "theme": ["Education", "Technology"],
+    "story_context": "A misinformation campaign based on the rumor that AI will replace teachers",
+    "modules": {
+      "step_1_image_forensics": {
+        "mechanic_type": "IMAGE_FORENSICS",
+        "image_url": "/assets/images/R001_fake_classroom_leak.jpg",
+        "context_text": "The leaked image attached to the controversy post is claimed to be 'evidence that AI is monitoring and evaluating students during class.' Find one visual anomaly in this photo.",
+        "target_anomalies": [
+          {
+            "anomaly_id": "R001_IMG_01",
+            "name": "gibberish_text",
+            "x_pct": 42.9,
+            "y_pct": 4.2,
+            "radius_pct": 10.0,
+            "description": "Distorted, unreadable gibberish text rendered on the digital whiteboard screen."
+          },
+          {
+            "anomaly_id": "R001_IMG_02",
+            "name": "clipping_students",
+            "x_pct": 42.1,
+            "y_pct": 52.9,
+            "radius_pct": 10.0,
+            "description": "Students in the center foreground are abnormally overlapping and clipping into each other."
+          }
+        ],
+        "socratic_quiz": {
+          "question": "What visual clue exposes this image as a Deepfake created to spread panic?",
+          "options": [
+            "A. The classroom colors are dark and heavily edited to create a suffocating atmosphere.",
+            "B. The digital whiteboard displays garbled, overlapping text characters, and students in the center background clip into each other unnaturally.",
+            "C. The robot's mechanical joints are not aligned with standard industrial design templates."
+          ],
+          "correct_option": "B",
+          "explanation": "AI-generation tools often fail at maintaining consistent spatial logic (causing characters or people to clip/merge) and cannot render clean, readable text on backgrounds. These structural errors expose the image as simulated propaganda."
+        }
+      },
+      "step_2_text_highlight": {
+        "mechanic_type": "TEXT_HIGHLIGHT",
+        "simulated_post": {
+          "author": "Anonymous Education Community",
+          "time_posted": "2 hours ago",
+          "content": "Just found out the Ministry of Education is piloting a new AI learning assistant in several schools next term. Honestly, this looks like a covert move to phase out real human teachers entirely. It's pretty obvious big tech is just trying to fully automate education to exploit student data for profit. Even Professor Tan stated in his latest report that 'AI is now taking full control over the classroom'. If parents don't stand up and boycott this rollout immediately, our kids will completely lose their capacity for critical thinking!"
+        },
+        "traps": [
+          {
+            "trap_id": "R001_TRAP_01",
+            "ground_truth_start": 111,
+            "ground_truth_end": 193,
+            "matched_text": "Honestly, this looks like a covert move to phase out real human teachers entirely.",
+            "weapon_type": ["conspiracy_theory", "intentionality_bias"],
+            "socratic_quiz": {
+              "question": "What primary logical flaw is the author relying on to convince you that teachers are being replaced?",
+              "options": [
+                "A. Relying on verified strategic documents published openly by the Ministry of Education.",
+                "B. Analyzing the statistical decline of employment numbers in the education sector over the last decade.",
+                "C. Attributing a sinister, hidden motive to a standard technology pilot without presenting concrete evidence."
+              ],
+              "correct_option": "C",
+              "explanation": "The author jumps straight to a hidden conspiracy theory, presenting a pilot program as a malicious plot without any verifiable proof."
+            }
+          },
+          {
+            "trap_id": "R001_TRAP_02",
+            "ground_truth_start": 194,
+            "ground_truth_end": 301,
+            "matched_text": "It's pretty obvious big tech is just trying to fully automate education to exploit student data for profit.",
+            "weapon_type": ["attribution_bias", "overgeneralization", "conspiracy_theory"],
+            "socratic_quiz": {
+              "question": "How does the phrase 'It's pretty obvious' serve to manipulate the reader's analytical thinking?",
+              "options": [
+                "A. It indicates that the statement is backed by a broad consensus of peer-reviewed research.",
+                "B. It invites the reader to review the privacy terms and conditions of the software independently.",
+                "C. It bypasses the need for factual proof by presenting a complex assumption as an undeniable truth."
+              ],
+              "correct_option": "C",
+              "explanation": "Phrases like 'it's pretty obvious' are rhetorical tricks used to smuggle in major, unproven assertions as if they are unquestionable facts."
+            }
+          },
+          {
+            "trap_id": "R001_TRAP_03",
+            "ground_truth_start": 406,
+            "ground_truth_end": 537,
+            "matched_text": "If parents don't stand up and boycott this rollout immediately, our kids will completely lose their capacity for critical thinking.",
+            "weapon_type": ["false_dilemma", "slippery_slope"],
+            "socratic_quiz": {
+              "push_question": "What psychological trap does the author force the reader into with how this closing statement is framed?",
+              "options": [
+                "A. Providing a clear, step-by-step roadmap to solve the issue.",
+                "B. Forcing a choice between an immediate boycott or facing absolute disaster, eliminating any moderate solutions.",
+                "C. Encouraging parents to conduct independent research before making a final decision."
+              ],
+              "correct_option": "B",
+              "explanation": "The author uses a false dilemma fallacy to strip away your ability to make a neutral, analytical choice."
+            }
+          }
+        ]
+      },
+      "step_3_sorting_game": {
+        "mechanic_type": "DRAG_AND_DROP_SORTING",
+        "task_instruction": "Based on the panic spread by the post above, the attacker has targeted parents with a phishing email. Arrange the steps to uncover the manipulation strategy behind the scam.",
+        "pool_items": [
+          {
+            "item_id": "R001_SORT_01",
+            "text": "Click the security link below to pay a processing fee (50,000 VND) and verify your right to opt out."
+          },
+          {
+            "item_id": "R001_SORT_02",
+            "text": "WARNING: Your child's personal data is currently scheduled to be synchronized with the Ministry's AI system."
+          },
+          {
+            "item_id": "R001_SORT_03",
+            "text": "To protect privacy and remove your child's name from the project, parents must complete the 'Opt-Out Form' within 24 hours."
+          }
+        ],
+        "correct_sequence": ["R001_SORT_02", "R001_SORT_03", "R001_SORT_01"],
+        "validation_feedback": {
+          "success": "Correct. You have decoded the classic psychological manipulation chain: Create fear and urgency (Hook) → Introduce an urgent solution (Pivot) → Insert a trap to collect money or personal data (Trap).",
+          "failure": "Incorrect logic. Phishing attacks rarely ask for money immediately. They usually begin by creating a fake crisis to overwhelm the victim's critical thinking."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Mom/Dad, if a message from the school asks parents to click an unfamiliar link and make an urgent payment to 'protect their child's learning data,' what key sign proves that it is a scam?",
+      "mil_insight": "Help parents and students compare the message against standard administrative procedures: legitimate educational institutions never use time pressure (such as a 24-hour deadline) or unofficial payment links to handle security issues."
+    }
+  }
+]
