@@ -22,12 +22,15 @@ export interface ImageAnomaly {
   y_pct: number;
   radius_pct: number;
   description: string;
+  socratic_quiz?: SocraticQuiz;
 }
 
 export interface ImageForensicsModule {
   mechanic_type: string;
   image_url: string;
   context_text: string;
+  image_width?: number;
+  image_height?: number;
   target_anomalies: ImageAnomaly[];
   socratic_quiz: SocraticQuiz;
 }
@@ -187,29 +190,41 @@ export default function GameController({
         <ImageForensics
           imageUrl={imageModule.image_url}
           contextText={imageModule.context_text}
-          onTargetClick={handleStepComplete}
+          imageWidth={imageModule.image_width}
+          imageHeight={imageModule.image_height}
+          targetAnomalies={imageModule.target_anomalies.map((anomaly) => ({
+            ...anomaly,
+            socratic_quiz: anomaly.socratic_quiz
+              ? {
+                  question: getQuizQuestion(anomaly.socratic_quiz),
+                  options: anomaly.socratic_quiz.options,
+                  correct_option: anomaly.socratic_quiz.correct_option,
+                  explanation: anomaly.socratic_quiz.explanation,
+                }
+              : undefined,
+          }))}
+          socraticQuiz={{
+            question: getQuizQuestion(imageModule.socratic_quiz),
+            options: imageModule.socratic_quiz.options,
+            correct_option: imageModule.socratic_quiz.correct_option,
+            explanation: imageModule.socratic_quiz.explanation,
+          }}
+          onComplete={handleStepComplete}
         />
       );
       break;
     }
     case 2: {
       const textModule = caseData.modules.step_2_text_highlight;
-      const firstTrapQuiz = textModule.traps[0]?.socratic_quiz;
 
       activeModule = (
         <TextHighlight
           postAuthor={textModule.simulated_post.author}
           postTime={textModule.simulated_post.time_posted}
           content={textModule.simulated_post.content}
-          socraticQuiz={
-            firstTrapQuiz
-              ? {
-                  question: getQuizQuestion(firstTrapQuiz),
-                  options: firstTrapQuiz.options,
-                }
-              : undefined
-          }
-          onSelectionComplete={() => handleStepComplete()}
+          traps={textModule.traps}
+          iouThreshold={0.7}
+          onComplete={handleStepComplete}
         />
       );
       break;
@@ -223,7 +238,9 @@ export default function GameController({
             id: item.item_id,
             text: item.text,
           }))}
-          onSort={() => handleStepComplete()}
+          correctSequence={sortingModule.correct_sequence}
+          validationFeedback={sortingModule.validation_feedback}
+          onComplete={handleStepComplete}
         />
       );
       break;
