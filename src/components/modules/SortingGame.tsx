@@ -18,6 +18,7 @@ export interface SortingGameProps {
   validationFeedback?: SortingValidationFeedback;
   onSort?: (sequence: string[]) => void;
   onComplete?: () => void;
+  onBack?: () => void;
 }
 
 type SortStatus = "Ready" | "Incorrect" | "Correct";
@@ -32,6 +33,7 @@ export function SortingGame({
   validationFeedback,
   onSort,
   onComplete,
+  onBack,
 }: SortingGameProps) {
   const [sequence, setSequence] = useState<(string | null)[]>(() =>
     Array.from({ length: poolItems.length }, () => null),
@@ -43,6 +45,7 @@ export function SortingGame({
   const [feedback, setFeedback] = useState("");
   const pointerMovedRef = useRef(false);
   const completionSentRef = useRef(false);
+  const suppressNextSlotClickRef = useRef(false);
 
   const expectedSequence = correctSequence ?? poolItems.map((item) => item.id);
   const placedIds = new Set(sequence.filter((itemId): itemId is string => itemId !== null));
@@ -109,6 +112,7 @@ export function SortingGame({
   const handlePointerDown = (
     itemId: string,
     event: PointerEvent<HTMLDivElement>,
+    fromTimeline = false,
   ) => {
     setSelectedId(itemId);
 
@@ -120,6 +124,10 @@ export function SortingGame({
     pointerMovedRef.current = false;
     setDraggingId(itemId);
     event.currentTarget.setPointerCapture(event.pointerId);
+
+    if (fromTimeline) {
+      suppressNextSlotClickRef.current = false;
+    }
   };
 
   const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
@@ -134,6 +142,7 @@ export function SortingGame({
   const handlePointerUp = (
     itemId: string,
     event: PointerEvent<HTMLDivElement>,
+    fromTimeline = false,
   ) => {
     if (event.pointerType === "mouse") {
       return;
@@ -143,10 +152,12 @@ export function SortingGame({
 
     if (pointerMovedRef.current && targetIndex !== null) {
       placeItemAt(itemId, targetIndex);
+      suppressNextSlotClickRef.current = fromTimeline;
     } else {
       setSelectedId(itemId);
       setDraggingId(null);
       setDragTargetIndex(null);
+      suppressNextSlotClickRef.current = fromTimeline;
     }
 
     pointerMovedRef.current = false;
@@ -155,11 +166,13 @@ export function SortingGame({
   const handleDragStart = (
     itemId: string,
     event: DragEvent<HTMLDivElement>,
+    fromTimeline = false,
   ) => {
     event.dataTransfer.effectAllowed = "move";
     event.dataTransfer.setData("text/plain", itemId);
     setSelectedId(itemId);
     setDraggingId(itemId);
+    suppressNextSlotClickRef.current = fromTimeline;
   };
 
   const handleDrop = (
@@ -185,6 +198,11 @@ export function SortingGame({
   };
 
   const handleSlotClick = (slotIndex: number) => {
+    if (suppressNextSlotClickRef.current) {
+      suppressNextSlotClickRef.current = false;
+      return;
+    }
+
     if (selectedId) {
       placeItemAt(selectedId, slotIndex);
       return;
@@ -207,11 +225,11 @@ export function SortingGame({
   };
 
   return (
-    <RetroWindow title="Sort.exe ” Sequence Builder">
+    <RetroWindow title="Sort.exe  |  Sequence Builder" onClose={onBack}>
       <div className="grid gap-2 md:grid-cols-2">
         <div className="bg-[#c0c0c0] p-2 shadow-[inset_2px_2px_0_#808080,inset_-1px_-1px_0_#fff]">
           <div className="mb-2 bg-[#000080] px-1 py-0.5 text-[10px] font-bold text-white">
-            â–¼ EVIDENCE BANK
+            EVIDENCE BANK
           </div>
           <div className="space-y-1">
             {poolItems.map((item) => {
@@ -240,7 +258,7 @@ export function SortingGame({
                   onKeyDown={(event) => handleItemKeyDown(item.id, event)}
                   className={`flex cursor-grab items-center gap-2 bg-[#c0c0c0] px-2 py-1 text-xs shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:cursor-grabbing ${isPlaced ? "opacity-60" : ""} ${isSelected ? "ring-2 ring-[#000080]" : ""}`}
                 >
-                  <span className="text-[10px] text-[#606060]">â‰¡</span>
+                  <span className="text-[10px] text-[#606060]"></span>
                   <span className="flex-1">{item.text}</span>
                   <span className="bg-white px-1 text-[10px] text-[#606060] shadow-[inset_1px_1px_0_#808080]">
                     {item.id}
@@ -253,7 +271,7 @@ export function SortingGame({
 
         <div className="bg-[#c0c0c0] p-2 shadow-[inset_2px_2px_0_#808080,inset_-1px_-1px_0_#fff]">
           <div className="mb-2 bg-[#000080] px-1 py-0.5 text-[10px] font-bold text-white">
-            â–¼ TIMELINE
+            TIMELINE
           </div>
           <div className="space-y-1">
             {sequence.map((itemId, index) => {
@@ -264,8 +282,28 @@ export function SortingGame({
                 <div
                   key={index}
                   data-slot-index={index}
+                  draggable={Boolean(item)}
                   role="button"
                   tabIndex={0}
+                  onPointerDown={
+                    item
+                      ? (event) => handlePointerDown(item.id, event, true)
+                      : undefined
+                  }
+                  onPointerMove={item ? handlePointerMove : undefined}
+                  onPointerUp={
+                    item
+                      ? (event) => handlePointerUp(item.id, event, true)
+                      : undefined
+                  }
+                  onPointerCancel={
+                    item
+                      ? () => {
+                          setDraggingId(null);
+                          setDragTargetIndex(null);
+                        }
+                      : undefined
+                  }
                   onClick={() => handleSlotClick(index)}
                   onKeyDown={(event) => handleSlotKeyDown(index, event)}
                   onDragOver={(event) => {
@@ -273,6 +311,19 @@ export function SortingGame({
                     setDragTargetIndex(index);
                   }}
                   onDrop={(event) => handleDrop(index, event)}
+                  onDragStart={
+                    item
+                      ? (event) => handleDragStart(item.id, event, true)
+                      : undefined
+                  }
+                  onDragEnd={
+                    item
+                      ? () => {
+                          setDraggingId(null);
+                          setDragTargetIndex(null);
+                        }
+                      : undefined
+                  }
                   className={`flex min-h-[34px] items-center gap-2 border-2 border-dashed border-[#808080] bg-white/50 px-2 py-2 text-xs text-[#808080] ${isDropTarget ? "ring-2 ring-[#000080]" : ""}`}
                 >
                   <span className="flex h-5 w-5 shrink-0 items-center justify-center bg-[#000080] text-[10px] font-bold text-white">

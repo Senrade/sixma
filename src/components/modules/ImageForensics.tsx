@@ -1,4 +1,9 @@
-import { useState, type CSSProperties, type MouseEvent } from "react";
+import {
+  useRef,
+  useState,
+  type CSSProperties,
+  type PointerEvent,
+} from "react";
 import Image from "next/image";
 import { RetroWindow } from "./RetroWindow";
 
@@ -27,9 +32,17 @@ export interface ImageForensicsProps {
   imageWidth?: number;
   imageHeight?: number;
   onComplete?: () => void;
+  onBack?: () => void;
 }
 
 type QuizState = "idle" | "incorrect" | "correct";
+
+interface DrawnCircle {
+  x_pct: number;
+  y_pct: number;
+  radius_pct: number;
+  result: "pending" | "incorrect" | "correct";
+}
 
 function getOptionKey(option: string): string {
   return option.trim().charAt(0).toUpperCase();
@@ -43,12 +56,15 @@ export function ImageForensics({
   imageWidth = 16,
   imageHeight = 9,
   onComplete,
+  onBack,
 }: ImageForensicsProps) {
   const [foundAnomalyIds, setFoundAnomalyIds] = useState<string[]>([]);
   const [activeAnomalyId, setActiveAnomalyId] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState("");
   const [quizState, setQuizState] = useState<QuizState>("idle");
   const [clickMessage, setClickMessage] = useState("");
+  const [drawnCircle, setDrawnCircle] = useState<DrawnCircle | null>(null);
+  const drawStartRef = useRef<{ x_pct: number; y_pct: number } | null>(null);
 
   const activeAnomaly = targetAnomalies.find(
     (anomaly) => anomaly.anomaly_id === activeAnomalyId,
@@ -61,33 +77,106 @@ export function ImageForensics({
     aspectRatio: `${imageWidth} / ${imageHeight}`,
   } satisfies CSSProperties;
 
-  const handleImageClick = (event: MouseEvent<HTMLDivElement>) => {
+  const getImagePoint = (event: PointerEvent<HTMLDivElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width) * 100;
-    const y = ((event.clientY - rect.top) / rect.height) * 100;
+    return {
+      x_pct: ((event.clientX - rect.left) / rect.width) * 100,
+      y_pct: ((event.clientY - rect.top) / rect.height) * 100,
+    };
+  };
+
+  const evaluateDrawnCircle = (circle: DrawnCircle) => {
     const selectedAnomaly = targetAnomalies.find((anomaly) => {
       const distance = Math.hypot(
-        x - anomaly.x_pct,
-        y - anomaly.y_pct,
+        circle.x_pct - anomaly.x_pct,
+        circle.y_pct - anomaly.y_pct,
       );
 
-      return distance <= anomaly.radius_pct;
+      return distance <= circle.radius_pct + anomaly.radius_pct;
     });
 
     if (!selectedAnomaly) {
+      setDrawnCircle({ ...circle, result: "incorrect" });
       setClickMessage("No suspicious detail was found at that location.");
       return;
     }
 
     if (foundAnomalyIds.includes(selectedAnomaly.anomaly_id)) {
+      setDrawnCircle({ ...circle, result: "incorrect" });
       setClickMessage("That anomaly is already in your investigation log.");
       return;
     }
 
+    setDrawnCircle({ ...circle, result: "correct" });
     setClickMessage("");
     setActiveAnomalyId(selectedAnomaly.anomaly_id);
     setSelectedOption("");
     setQuizState("idle");
+  };
+
+  const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    if (activeAnomalyId) {
+      return;
+    }
+
+    event.preventDefault();
+    const point = getImagePoint(event);
+    drawStartRef.current = point;
+    setClickMessage("");
+    setDrawnCircle({ ...point, radius_pct: 0, result: "pending" });
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    if (!drawStartRef.current || activeAnomalyId) {
+      return;
+    }
+
+    const point = getImagePoint(event);
+    const radius = Math.max(
+      Math.hypot(
+        point.x_pct - drawStartRef.current.x_pct,
+        point.y_pct - drawStartRef.current.y_pct,
+      ),
+      0.5,
+    );
+
+    setDrawnCircle({
+      ...drawStartRef.current,
+      radius_pct: radius,
+      result: "pending",
+    });
+  };
+
+  const handlePointerUp = (event: PointerEvent<HTMLDivElement>) => {
+    if (!drawStartRef.current || activeAnomalyId) {
+      return;
+    }
+
+    const point = getImagePoint(event);
+    const circle: DrawnCircle = {
+      ...drawStartRef.current,
+      radius_pct: Math.max(
+        Math.hypot(
+          point.x_pct - drawStartRef.current.x_pct,
+          point.y_pct - drawStartRef.current.y_pct,
+        ),
+        5,
+      ),
+      result: "pending",
+    };
+
+    drawStartRef.current = null;
+    evaluateDrawnCircle(circle);
+
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+  };
+
+  const handlePointerCancel = () => {
+    drawStartRef.current = null;
+    setDrawnCircle(null);
   };
 
   const handleQuizSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -118,6 +207,7 @@ export function ImageForensics({
     setActiveAnomalyId(null);
     setSelectedOption("");
     setQuizState("idle");
+    setDrawnCircle(null);
 
     if (allAnomaliesFound) {
       onComplete?.();
@@ -125,12 +215,15 @@ export function ImageForensics({
   };
 
   return (
-    <RetroWindow title="Image Forensics Lab.exe">
+    <RetroWindow title="Image Forensics Lab.exe" onClose={onBack}>
       <div className="grid gap-2 md:grid-cols-[1fr_240px]">
         <div
-          onClick={handleImageClick}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerCancel}
           style={imageStyle}
-          className="relative w-full cursor-crosshair overflow-hidden bg-black shadow-[inset_2px_2px_0_#000,inset_-2px_-2px_0_#dfdfdf,inset_4px_4px_0_#808080]"
+          className="relative w-full touch-none cursor-crosshair overflow-hidden bg-black shadow-[inset_2px_2px_0_#000,inset_-2px_-2px_0_#dfdfdf,inset_4px_4px_0_#808080]"
         >
           <Image
             src={imageUrl}
@@ -142,6 +235,26 @@ export function ImageForensics({
             className="h-full w-full object-cover"
           />
           <div className="pointer-events-none absolute inset-0">
+            {drawnCircle && (
+              <div
+                aria-label="Current drawn evidence circle"
+                className={`absolute rounded-full border-2 ${
+                  drawnCircle.result === "incorrect"
+                    ? "border-red-500 bg-red-400/20"
+                    : drawnCircle.result === "correct"
+                      ? "border-green-500 bg-green-400/20"
+                      : "border-yellow-300 bg-yellow-300/10"
+                }`}
+                style={{
+                  left: `${drawnCircle.x_pct}%`,
+                  top: `${drawnCircle.y_pct}%`,
+                  width: `${drawnCircle.radius_pct * 2}%`,
+                  height: "auto",
+                  aspectRatio: "1",
+                  transform: "translate(-50%, -50%)",
+                }}
+              />
+            )}
             {targetAnomalies
               .filter((anomaly) =>
                 foundAnomalyIds.includes(anomaly.anomaly_id),

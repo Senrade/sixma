@@ -3,9 +3,10 @@ import type { ReactNode } from "react";
 export interface RetroWindowProps {
   title: string;
   children: ReactNode;
+  onClose?: () => void;
 }
 
-export function RetroWindow({ title, children }: RetroWindowProps) {
+export function RetroWindow({ title, children, onClose }: RetroWindowProps) {
   return (
     <div className="bg-[#c0c0c0] font-mono text-black shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#dfdfdf,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#fff]">
       {/* Title bar */}
@@ -18,6 +19,8 @@ export function RetroWindow({ title, children }: RetroWindowProps) {
           {["_", "▢", "✕"].map((s, i) => (
             <button
               key={i}
+              type="button"
+              onClick={i === 2 ? onClose : undefined}
               className="h-5 w-5 bg-[#c0c0c0] text-black text-[10px] leading-none shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff]"
             >
               {s}

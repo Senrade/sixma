@@ -91,6 +91,7 @@ export interface GameControllerProps {
 
 const FIRST_STEP: GameStep = 1;
 const LAST_STEP: GameStep = 3;
+const STORAGE_VERSION = "v2";
 
 function parseStoredStep(value: string | null): GameStep | null {
   const parsedValue = Number(value);
@@ -135,7 +136,8 @@ export default function GameController({
   storageKey,
 }: GameControllerProps) {
   const persistenceKey =
-    storageKey ?? `unesco-mil-game:${caseData.case_id}:current-step`;
+    storageKey ??
+    `unesco-mil-game:${STORAGE_VERSION}:${caseData.case_id}:current-step`;
   const [currentStep, setCurrentStep] = useState<GameStep>(FIRST_STEP);
   const [hasRestoredStep, setHasRestoredStep] = useState(false);
 
@@ -181,6 +183,14 @@ export default function GameController({
     });
   }, [persistenceKey]);
 
+  const handleStepBack = useCallback(() => {
+    setCurrentStep((step) => {
+      const previousStep = Math.max(step - 1, FIRST_STEP) as GameStep;
+      writeStoredStep(persistenceKey, previousStep);
+      return previousStep;
+    });
+  }, [persistenceKey]);
+
   let activeModule: React.ReactNode;
 
   switch (currentStep) {
@@ -210,6 +220,7 @@ export default function GameController({
             explanation: imageModule.socratic_quiz.explanation,
           }}
           onComplete={handleStepComplete}
+          onBack={handleStepBack}
         />
       );
       break;
@@ -225,6 +236,7 @@ export default function GameController({
           traps={textModule.traps}
           iouThreshold={0.7}
           onComplete={handleStepComplete}
+          onBack={handleStepBack}
         />
       );
       break;
@@ -241,6 +253,7 @@ export default function GameController({
           correctSequence={sortingModule.correct_sequence}
           validationFeedback={sortingModule.validation_feedback}
           onComplete={handleStepComplete}
+          onBack={handleStepBack}
         />
       );
       break;
@@ -254,4 +267,4 @@ export default function GameController({
 
 
 
-// nguoi dep trai 2 was here 
+// nguoi dep trai 2 was here

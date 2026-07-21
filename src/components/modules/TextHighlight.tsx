@@ -31,6 +31,7 @@ export interface TextHighlightProps {
   iouThreshold?: number;
   socraticQuiz?: TextHighlightQuiz;
   onComplete?: () => void;
+  onBack?: () => void;
   onSelectionComplete?: (start: number, end: number) => void;
 }
 
@@ -105,6 +106,7 @@ export function TextHighlight({
   iouThreshold = 0.7,
   socraticQuiz,
   onComplete,
+  onBack,
   onSelectionComplete,
 }: TextHighlightProps) {
   const [activeTrapId, setActiveTrapId] = useState<string | null>(null);
@@ -127,6 +129,10 @@ export function TextHighlight({
   const activeTrap = traps.find((trap) => trap.trap_id === activeTrapId);
   const activeQuiz = activeTrap?.socratic_quiz ?? socraticQuiz;
   const allTrapsCompleted = traps.length > 0 && completedTrapIds.length === traps.length;
+  const finalTrapSelected =
+    activeTrap !== undefined &&
+    traps.length > 0 &&
+    completedTrapIds.length === traps.length - 1;
 
   const inspectSelection = () => {
     if (!textRootRef.current) {
@@ -216,7 +222,7 @@ export function TextHighlight({
   };
 
   return (
-    <RetroWindow title="AnonForum.exe  |  thread://viewer">
+    <RetroWindow title="AnonForum.exe  |  thread://viewer" onClose={onBack}>
       <div className="bg-white p-3 shadow-[inset_2px_2px_0_#808080,inset_-1px_-1px_0_#fff]">
         <div className="mb-2 flex items-center gap-2 border-b border-dashed border-[#808080] pb-1">
           <div className="h-8 w-8 bg-[#000080] text-center text-[10px] leading-8 text-white shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff]">
@@ -288,7 +294,7 @@ export function TextHighlight({
               aria-label="Close critical thinking question"
               className="h-4 w-5 bg-[#c0c0c0] text-[10px] leading-none text-black shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff]"
             >
-              âœ•
+              
             </button>
           </div>
           <form onSubmit={handleQuizSubmit} className="flex gap-3 p-3">
@@ -333,7 +339,7 @@ export function TextHighlight({
                     onClick={handleQuizContinue}
                     className="min-w-[70px] bg-[#c0c0c0] px-3 py-1 text-xs shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff]"
                   >
-                    {allTrapsCompleted ? "Next" : "OK"}
+                    {finalTrapSelected || allTrapsCompleted ? "Next" : "OK"}
                   </button>
                 ) : (
                   <button
