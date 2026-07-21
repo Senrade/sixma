@@ -2,29 +2,54 @@
   {
     "level": "RED",
     "case_id": "R001",
-    "theme": ["Education", "Technology"],
+    "theme": [
+      "Education",
+      "Technology"
+    ],
     "story_context": "A misinformation campaign based on the rumor that AI will replace teachers",
     "modules": {
       "step_1_image_forensics": {
         "mechanic_type": "IMAGE_FORENSICS",
-        "image_url": "/assets/images/R001_fake_classroom_leak.jpg",
+        "image_url": "/assets/images/R001/R001_fake.jpg",
+        "image_width": 1000,
+        "image_height": 1000,
         "context_text": "The leaked image attached to the controversy post is claimed to be 'evidence that AI is monitoring and evaluating students during class.' Find one visual anomaly in this photo.",
         "target_anomalies": [
           {
             "anomaly_id": "R001_IMG_01",
             "name": "gibberish_text",
-            "x_pct": 42.9,
-            "y_pct": 4.2,
-            "radius_pct": 10.0,
-            "description": "Distorted, unreadable gibberish text rendered on the digital whiteboard screen."
+            "x_pct": 57.4,
+            "y_pct": 18.7,
+            "radius_pct": 14.5,
+            "description": "Distorted, unreadable gibberish text rendered on the digital whiteboard screen.",
+            "socratic_quiz": {
+              "question": "Why is the writing on the classroom screen a strong warning sign?",
+              "options": [
+                "A. The screen is too bright for a classroom.",
+                "B. The writing is garbled and overlaps instead of forming readable words.",
+                "C. The screen is mounted above the teacher's desk."
+              ],
+              "correct_option": "B",
+              "explanation": "Image generators often produce plausible shapes but fail to keep text legible and consistent. Gibberish text is stronger evidence of manipulation than the screen's brightness or location."
+            }
           },
           {
             "anomaly_id": "R001_IMG_02",
             "name": "clipping_students",
-            "x_pct": 42.1,
-            "y_pct": 52.9,
-            "radius_pct": 10.0,
-            "description": "Students in the center foreground are abnormally overlapping and clipping into each other."
+            "x_pct": 57.8,
+            "y_pct": 68.6,
+            "radius_pct": 15.7,
+            "description": "Students in the center foreground are abnormally overlapping and clipping into each other.",
+            "socratic_quiz": {
+              "question": "What makes the students in this area a likely AI-generation error?",
+              "options": [
+                "A. Several students are seated close together.",
+                "B. The students overlap and merge in ways that do not match their bodies or seats.",
+                "C. The group is facing away from the camera."
+              ],
+              "correct_option": "B",
+              "explanation": "A crowded classroom can be natural, but bodies that merge or clip through one another break the scene's physical logic. That structural inconsistency is a useful deepfake clue."
+            }
           }
         ],
         "socratic_quiz": {
@@ -51,7 +76,10 @@
             "ground_truth_start": 111,
             "ground_truth_end": 193,
             "matched_text": "Honestly, this looks like a covert move to phase out real human teachers entirely.",
-            "weapon_type": ["conspiracy_theory", "intentionality_bias"],
+            "weapon_type": [
+              "conspiracy_theory",
+              "intentionality_bias"
+            ],
             "socratic_quiz": {
               "question": "What primary logical flaw is the author relying on to convince you that teachers are being replaced?",
               "options": [
@@ -68,7 +96,11 @@
             "ground_truth_start": 194,
             "ground_truth_end": 301,
             "matched_text": "It's pretty obvious big tech is just trying to fully automate education to exploit student data for profit.",
-            "weapon_type": ["attribution_bias", "overgeneralization", "conspiracy_theory"],
+            "weapon_type": [
+              "attribution_bias",
+              "overgeneralization",
+              "conspiracy_theory"
+            ],
             "socratic_quiz": {
               "question": "How does the phrase 'It's pretty obvious' serve to manipulate the reader's analytical thinking?",
               "options": [
@@ -84,8 +116,11 @@
             "trap_id": "R001_TRAP_03",
             "ground_truth_start": 406,
             "ground_truth_end": 537,
-            "matched_text": "If parents don't stand up and boycott this rollout immediately, our kids will completely lose their capacity for critical thinking.",
-            "weapon_type": ["false_dilemma", "slippery_slope"],
+            "matched_text": "If parents don't stand up and boycott this rollout immediately, our kids will completely lose their capacity for critical thinking!",
+            "weapon_type": [
+              "false_dilemma",
+              "slippery_slope"
+            ],
             "socratic_quiz": {
               "push_question": "What psychological trap does the author force the reader into with how this closing statement is framed?",
               "options": [
@@ -116,7 +151,11 @@
             "text": "To protect privacy and remove your child's name from the project, parents must complete the 'Opt-Out Form' within 24 hours."
           }
         ],
-        "correct_sequence": ["R001_SORT_02", "R001_SORT_03", "R001_SORT_01"],
+        "correct_sequence": [
+          "R001_SORT_02",
+          "R001_SORT_03",
+          "R001_SORT_01"
+        ],
         "validation_feedback": {
           "success": "Correct. You have decoded the classic psychological manipulation chain: Create fear and urgency (Hook) → Introduce an urgent solution (Pivot) → Insert a trap to collect money or personal data (Trap).",
           "failure": "Incorrect logic. Phishing attacks rarely ask for money immediately. They usually begin by creating a fake crisis to overwhelm the victim's critical thinking."

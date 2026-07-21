@@ -22,12 +22,15 @@ export interface ImageAnomaly {
   y_pct: number;
   radius_pct: number;
   description: string;
+  socratic_quiz?: SocraticQuiz;
 }
 
 export interface ImageForensicsModule {
   mechanic_type: string;
   image_url: string;
   context_text: string;
+  image_width?: number;
+  image_height?: number;
   target_anomalies: ImageAnomaly[];
   socratic_quiz: SocraticQuiz;
 }
@@ -88,6 +91,7 @@ export interface GameControllerProps {
 
 const FIRST_STEP: GameStep = 1;
 const LAST_STEP: GameStep = 3;
+const STORAGE_VERSION = "v2";
 
 function parseStoredStep(value: string | null): GameStep | null {
   const parsedValue = Number(value);
@@ -132,7 +136,8 @@ export default function GameController({
   storageKey,
 }: GameControllerProps) {
   const persistenceKey =
-    storageKey ?? `unesco-mil-game:${caseData.case_id}:current-step`;
+    storageKey ??
+    `unesco-mil-game:${STORAGE_VERSION}:${caseData.case_id}:current-step`;
   const [currentStep, setCurrentStep] = useState<GameStep>(FIRST_STEP);
   const [hasRestoredStep, setHasRestoredStep] = useState(false);
 
@@ -178,6 +183,14 @@ export default function GameController({
     });
   }, [persistenceKey]);
 
+  const handleStepBack = useCallback(() => {
+    setCurrentStep((step) => {
+      const previousStep = Math.max(step - 1, FIRST_STEP) as GameStep;
+      writeStoredStep(persistenceKey, previousStep);
+      return previousStep;
+    });
+  }, [persistenceKey]);
+
   let activeModule: React.ReactNode;
 
   switch (currentStep) {
@@ -187,29 +200,43 @@ export default function GameController({
         <ImageForensics
           imageUrl={imageModule.image_url}
           contextText={imageModule.context_text}
-          onTargetClick={handleStepComplete}
+          imageWidth={imageModule.image_width}
+          imageHeight={imageModule.image_height}
+          targetAnomalies={imageModule.target_anomalies.map((anomaly) => ({
+            ...anomaly,
+            socratic_quiz: anomaly.socratic_quiz
+              ? {
+                  question: getQuizQuestion(anomaly.socratic_quiz),
+                  options: anomaly.socratic_quiz.options,
+                  correct_option: anomaly.socratic_quiz.correct_option,
+                  explanation: anomaly.socratic_quiz.explanation,
+                }
+              : undefined,
+          }))}
+          socraticQuiz={{
+            question: getQuizQuestion(imageModule.socratic_quiz),
+            options: imageModule.socratic_quiz.options,
+            correct_option: imageModule.socratic_quiz.correct_option,
+            explanation: imageModule.socratic_quiz.explanation,
+          }}
+          onComplete={handleStepComplete}
+          onBack={handleStepBack}
         />
       );
       break;
     }
     case 2: {
       const textModule = caseData.modules.step_2_text_highlight;
-      const firstTrapQuiz = textModule.traps[0]?.socratic_quiz;
 
       activeModule = (
         <TextHighlight
           postAuthor={textModule.simulated_post.author}
           postTime={textModule.simulated_post.time_posted}
           content={textModule.simulated_post.content}
-          socraticQuiz={
-            firstTrapQuiz
-              ? {
-                  question: getQuizQuestion(firstTrapQuiz),
-                  options: firstTrapQuiz.options,
-                }
-              : undefined
-          }
-          onSelectionComplete={() => handleStepComplete()}
+          traps={textModule.traps}
+          iouThreshold={0.7}
+          onComplete={handleStepComplete}
+          onBack={handleStepBack}
         />
       );
       break;
@@ -223,7 +250,10 @@ export default function GameController({
             id: item.item_id,
             text: item.text,
           }))}
-          onSort={() => handleStepComplete()}
+          correctSequence={sortingModule.correct_sequence}
+          validationFeedback={sortingModule.validation_feedback}
+          onComplete={handleStepComplete}
+          onBack={handleStepBack}
         />
       );
       break;
@@ -232,3 +262,9 @@ export default function GameController({
 
   return activeModule;
 }
+
+
+
+
+
+// nguoi dep trai 2 was here
