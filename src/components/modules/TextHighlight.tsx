@@ -314,7 +314,12 @@ export function TextHighlight({
                       name={`socratic-${activeTrap.trap_id}`}
                       value={option}
                       checked={selectedOption === option}
-                      onChange={(event) => setSelectedOption(event.target.value)}
+                      onChange={(event) => {
+                        setSelectedOption(event.target.value);
+                        if (quizState === "incorrect") {
+                          setQuizState("idle");
+                        }
+                      }}
                       className="mt-0.5"
                     />
                     <span>{option}</span>
