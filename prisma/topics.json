@@ -1,0 +1,646 @@
+[
+  {
+    "set_id": "R001",
+    "theme": [
+      "Body-shaming",
+      "Anonymous Confession",
+      "Cyberbullying"
+    ],
+    "story_context": "An anonymous confession post targeting Student A with subtle body-shaming and personal attacks disguised as honest feedback.",
+    "mechanic_type": "TEXT_HIGHLIGHT",
+    "simulated_post": {
+      "author": "Anonymous Confession",
+      "time_posted": "Just now",
+      "content": "NGL, Student A really needs someone to be so fr with them. Every day it's a brand-new outfit that's somehow even more cringe than the last one, and it's giving main character syndrome. Lowkey, I used to think I was just being mean, but fr, everyone I've talked to says the exact same thing and just laughs about it later. ATP, if people keep making the same comments, maybe it's time to stop acting delulu and realize confidence doesn't automatically make the look work. No offense, but this is getting second-hand embarrassing 💀."
+    },
+    "traps": [
+      {
+        "trap_id": "R001_TRAP_01",
+        "matched_text": "Every day it's a brand-new outfit that's somehow even more cringe than the last one, and it's giving main character syndrome",
+        "weapon_type": [
+          "personal_attack",
+          "body_shaming"
+        ],
+        "socratic_quiz": {
+          "question": "What psychological flaw does this passage demonstrate?",
+          "options": [
+            "A. A subtle compliment about A's diverse fashion sense",
+            "B. Mocking someone's personal style with sarcastic language to demean them, not to offer feedback",
+            "C. A neutral observation about changing outfits daily"
+          ],
+          "correct_option": "B",
+          "explanation": "Terms like 'cringe' and 'main character syndrome' are common sarcastic internet slang used to personally attack someone under the guise of 'just being honest' — in reality, it demeans A's appearance and style."
+        }
+      },
+      {
+        "trap_id": "R001_TRAP_02",
+        "matched_text": "everyone I've talked to says the exact same thing and just laughs about it later",
+        "weapon_type": [
+          "bandwagon_fallacy"
+        ],
+        "socratic_quiz": {
+          "question": "What is the purpose of claiming that 'everyone' says the same thing?",
+          "options": [
+            "A. Citing a specific survey with clear data",
+            "B. Creating an illusion of collective agreement to turn a personal opinion into an 'obvious fact,' making it harder to challenge",
+            "C. Simply describing a random conversation"
+          ],
+          "correct_option": "B",
+          "explanation": "'Everyone I've talked to' names no one, gives no numbers, and offers no real evidence. This is a classic bandwagon fallacy — using an imagined majority to justify mocking someone behind their back."
+        }
+      },
+      {
+        "trap_id": "R001_TRAP_03",
+        "matched_text": "I used to think I was just being mean, but fr",
+        "weapon_type": [
+          "false_self_awareness"
+        ],
+        "socratic_quiz": {
+          "question": "What effect does this sentence have on the attack that follows?",
+          "options": [
+            "A. It shows genuine remorse and signals the person will stop criticizing",
+            "B. It uses fake 'self-awareness' to sound credible, then continues the attack with even more force — as if it's been carefully considered and must be true",
+            "C. It is a direct apology addressed to Student A"
+          ],
+          "correct_option": "B",
+          "explanation": "This is the 'I used to think I was wrong, but...' fallacy: the writer builds a false image of thoughtfulness and objectivity, only to continue the attack immediately after — making it seem more credible to the reader."
+        }
+      },
+      {
+        "trap_id": "R001_TRAP_04",
+        "matched_text": "No offense, but this is getting second-hand embarrassing",
+        "weapon_type": [
+          "preemptive_dismissal",
+          "responsibility_deflection"
+        ],
+        "socratic_quiz": {
+          "question": "What function does the phrase 'No offense, but...' serve here?",
+          "options": [
+            "A. It ensures the listener understands the following statement is not meant to be offensive at all",
+            "B. It acts as a verbal 'shield' to dodge responsibility for an insulting comment, letting the speaker feel blameless even though the words still cause harm",
+            "C. It is a sincere compliment directed at Student A"
+          ],
+          "correct_option": "B",
+          "explanation": "'No offense, but...' is a classic phrase used to grant oneself permission to say something hurtful without taking responsibility for it. It doesn't reduce the harm of the statement."
+        }
+      }
+    ],
+    "dialogue_trigger": {
+      "question": "How can we distinguish between genuine constructive feedback and online bullying hidden behind internet slang?",
+      "mil_insight": "Bullying posts often use slang, fake consensus ('everyone says so'), and disclaimer phrases like 'no offense' to evade responsibility while inflicting harm. Always evaluate whether concrete, respectful evidence is provided."
+    }
+  },
+  {
+    "set_id": "R002",
+    "theme": [
+      "Flexing",
+      "Social Comparison",
+      "Elitism"
+    ],
+    "story_context": "Flexing achievements and luxury goods while belittling others' socioeconomic status and effort.",
+    "mechanic_type": "TEXT_HIGHLIGHT",
+    "simulated_post": {
+      "author": "Flexing_Lifestyle",
+      "time_posted": "1 hour ago",
+      "content": "It's honestly funny how some people keep saying \"money doesn't buy happiness\" every time someone posts something nice. Like... just because you can't afford it doesn't mean it's \"showing off.\" Meanwhile, everyone I know is out here grinding, getting internships, buying what they want, and actually doing something with their lives. If you're still making excuses while everyone else is moving up, maybe stop blaming other people and ask yourself why you're getting left behind. Stay mad if you want, but don't expect the world to wait for you."
+    },
+    "traps": [
+      {
+        "trap_id": "R002_TRAP_01",
+        "matched_text": "just because you can't afford it doesn't mean it's \"showing off.\"",
+        "weapon_type": [
+          "attacking_motive_fallacy",
+          "strawman"
+        ],
+        "socratic_quiz": {
+          "question": "What is this sentence really trying to do to anyone who criticizes the flex post?",
+          "options": [
+            "A. Directly addresses why the post might be considered showing off",
+            "B. Assigns a negative motive (jealousy over money) to anyone who criticizes, instead of engaging with whether the criticism is actually valid",
+            "C. Provides an objective, neutral explanation"
+          ],
+          "correct_option": "B",
+          "explanation": "This is an attacking-the-motive fallacy: instead of responding to the actual argument, the writer assumes any critic is simply 'broke and jealous' to dodge the issue."
+        }
+      },
+      {
+        "trap_id": "R002_TRAP_02",
+        "matched_text": "everyone I know is out here grinding, getting internships, buying what they want, and actually doing something with their lives",
+        "weapon_type": [
+          "false_comparison"
+        ],
+        "socratic_quiz": {
+          "question": "What is the logical problem with this comparison?",
+          "options": [
+            "A. It's a fair comparison since everyone starts from the exact same circumstances",
+            "B. It lumps together unrelated things (effort, internships, shopping) to imply that anyone who can't afford luxury goods is 'not doing anything with their life,' ignoring differences in actual circumstances",
+            "C. It's an accurate statistic about the writer's actual acquaintances"
+          ],
+          "correct_option": "B",
+          "explanation": "This is a false comparison: it equates 'being able to buy what you want' with 'succeeding in life,' while ignoring varying economic backgrounds."
+        }
+      },
+      {
+        "trap_id": "R002_TRAP_03",
+        "matched_text": "If you're still making excuses while everyone else is moving up, maybe stop blaming other people and ask yourself why you're getting left behind",
+        "weapon_type": [
+          "inducing_fomo",
+          "personal_attack"
+        ],
+        "socratic_quiz": {
+          "question": "How is this sentence psychologically affecting the reader?",
+          "options": [
+            "A. It offers sincere, actionable advice to help the reader grow",
+            "B. It creates a fear of being left behind (FOMO) by painting a picture of 'everyone moving up,' while implicitly blaming and belittling the reader",
+            "C. It's simply a rhetorical question with no particular purpose"
+          ],
+          "correct_option": "B",
+          "explanation": "This uses FOMO combined with a personal attack to pressure readers into feeling inadequate about an arbitrary, unverified social standard."
+        }
+      },
+      {
+        "trap_id": "R002_TRAP_04",
+        "matched_text": "Stay mad if you want, but don't expect the world to wait for you",
+        "weapon_type": [
+          "emotional_dismissal"
+        ],
+        "socratic_quiz": {
+          "question": "What is the purpose of this closing sentence in response to any pushback?",
+          "options": [
+            "A. It invites an open conversation to understand other people's perspectives",
+            "B. It dismisses any negative reaction or criticism by labeling it as 'being mad,' allowing the writer to avoid reflecting on their own behavior",
+            "C. It offers genuine encouragement to everyone reading"
+          ],
+          "correct_option": "B",
+          "explanation": "This is an emotional dismissal tactic: criticism is labeled as 'staying mad,' letting the writer avoid examining their own bragging behavior."
+        }
+      }
+    ],
+    "dialogue_trigger": {
+      "question": "Why do flex posts often induce anxiety, and how do writers deflect criticism back onto the audience?",
+      "mil_insight": "Flex posts exploit social comparison and FOMO to create feelings of inadequacy. Labeling critics as 'jealous' or 'mad' is a common defense mechanism to avoid genuine reflection."
+    }
+  },
+  {
+    "set_id": "R004",
+    "theme": [
+      "Misleading Ads",
+      "Overgeneralization",
+      "Fake Guarantees"
+    ],
+    "story_context": "Course advertisement promising unrealistically high scores, targeting students' laziness and grade pressure.",
+    "mechanic_type": "TEXT_HIGHLIGHT",
+    "simulated_post": {
+      "author": "Speedy Tutor",
+      "time_posted": "Sponsored",
+      "content": "Thousands of students who lost their basics have achieved a 9+ in Math after just 1 week of my 'Brain Hack' course! 100% guaranteed admission to your first choice without having to stay up late or wake up early to study. Register today to receive the exclusive quick-solving formula that crushes every exam!"
+    },
+    "traps": [
+      {
+        "trap_id": "R004_TRAP_01",
+        "matched_text": "Thousands of students who lost their basics have achieved a 9+ in Math after just 1 week of my 'Brain Hack' course!",
+        "weapon_type": [
+          "overgeneralization"
+        ],
+        "socratic_quiz": {
+          "question": "What psychological trick is used in this advertising pitch?",
+          "options": [
+            "A. Hasty generalization, using the unreasonable number 'thousands of students' to exaggerate the truth.",
+            "B. Providing objective scientific evidence about the brain's absorption capacity.",
+            "C. Sharing real-life stories to inspire learning."
+          ],
+          "correct_option": "A",
+          "explanation": "The writer uses the overgeneralization fallacy and unverifiable numbers to exaggerate the course's effectiveness."
+        }
+      },
+      {
+        "trap_id": "R004_TRAP_02",
+        "matched_text": "100% guaranteed admission to your first choice without having to stay up late or wake up early to study.",
+        "weapon_type": [
+          "fake_guarantee",
+          "laziness_appeal"
+        ],
+        "socratic_quiz": {
+          "question": "Which psychological weakness does the '100% pass without studying' guarantee target in students?",
+          "options": [
+            "A. Curiosity about new and highly effective learning methods.",
+            "B. Laziness, wanting to achieve great results without putting in proportionate effort.",
+            "C. The desire to show off one's innate intellectual abilities."
+          ],
+          "correct_option": "B",
+          "explanation": "Scam advertisements often paint a picture of perfect results requiring no effort, luring students who are under pressure but reluctant to study."
+        }
+      }
+    ],
+    "dialogue_trigger": {
+      "question": "Why isn't there any course that can 'hack' a 9+ score in just 1 week for someone who lost their basics?",
+      "mil_insight": "Knowledge acquisition is a long-term process of learning and practice. Promises of 'high scores without studying' completely contradict educational reality and are usually just traps set to exploit students for tuition fees."
+    }
+  },
+  {
+    "set_id": "R005",
+    "theme": [
+      "Scam",
+      "FinancialBait",
+      "PartTimeJobFraud"
+    ],
+    "story_context": "A post recruiting high school students for an easy work-from-home job that requires a small upfront deposit before starting.",
+    "mechanic_type": "TEXT_HIGHLIGHT",
+    "simulated_post": {
+      "author": "HomeJobs_ForStudents",
+      "time_posted": "10 minutes ago",
+      "content": "URGENT HIRING: Looking for students to work from home packing bracelets, only 1-2 hours a day, earning up to $150 a week! No experience needed, but you must transfer a small $20 deposit for materials — fully refunded after your first shift. Only 10 slots left, message me now before they're gone!"
+    },
+    "traps": [
+      {
+        "trap_id": "R005_TRAP_01",
+        "matched_text": "earning up to $150 a week!",
+        "weapon_type": [
+          "financial_bait"
+        ],
+        "socratic_quiz": {
+          "question": "Why does the post emphasize a specific high income like '$150 a week' for such simple work?",
+          "options": [
+            "A. Because packing bracelets is genuinely a high-value skill worth that much.",
+            "B. To dangle an unrealistic profit as bait, making readers focus on the reward instead of questioning the job's legitimacy.",
+            "C. To give an accurate estimate of average part-time wages for students."
+          ],
+          "correct_option": "B",
+          "explanation": "Scammers use an eye-catching, disproportionate income figure (Financial Bait) to distract victims from evaluating whether the offer is even realistic."
+        }
+      },
+      {
+        "trap_id": "R005_TRAP_02",
+        "matched_text": "you must transfer a small $20 deposit for materials — fully refunded after your first shift.",
+        "weapon_type": [
+          "hidden_risk_disguise",
+          "false_promise"
+        ],
+        "socratic_quiz": {
+          "question": "What psychological trick is used when the post says the deposit is 'fully refunded'?",
+          "options": [
+            "A. It hides the real risk of losing money by wrapping it in a reassuring promise that is never verified.",
+            "B. It legally guarantees the money will be returned no matter what.",
+            "C. It proves the employer is a trustworthy, registered company."
+          ],
+          "correct_option": "A",
+          "explanation": "A vague refund promise is used to disguise a genuine financial risk (Hidden Risk Disguise) — legitimate employers never require payment from a new hire before work begins."
+        }
+      },
+      {
+        "trap_id": "R005_TRAP_03",
+        "matched_text": "Only 10 slots left, message me now before they're gone!",
+        "weapon_type": [
+          "urgency_hook",
+          "artificial_scarcity"
+        ],
+        "socratic_quiz": {
+          "question": "What is the purpose of saying 'Only 10 slots left' at the end of the post?",
+          "options": [
+            "A. To give readers time to research the company before applying.",
+            "B. To accurately report how many workers the company currently needs.",
+            "C. To pressure readers into acting immediately without stopping to think or verify the offer."
+          ],
+          "correct_option": "C",
+          "explanation": "Fake scarcity plus urgency (Urgency Hook) is a classic manipulation combo designed to short-circuit careful, critical decision-making."
+        }
+      }
+    ],
+    "dialogue_trigger": {
+      "question": "If a job asks you to pay money before you've even started working, is that a normal hiring process? What would you check before responding?",
+      "mil_insight": "No legitimate employer ever asks a new employee to pay money upfront — real jobs pay you, they don't charge you. Before replying to any such offer, students should verify the company's registration, search for reviews or scam reports, and talk to a parent or teacher first."
+    }
+  },
+  {
+    "set_id": "R006",
+    "theme": [
+      "FakeCharity",
+      "EmotionalManipulation",
+      "Scam"
+    ],
+    "story_context": "An urgent post begging for donations to cover a student's hospital bills, using a fake name and a photo taken from the internet.",
+    "mechanic_type": "TEXT_HIGHLIGHT",
+    "simulated_post": {
+      "author": "Help_Save_Minh_2026",
+      "time_posted": "35 minutes ago",
+      "content": "PLEASE SHARE, EVERY SECOND COUNTS! Minh, a 10th grader, is fighting for her life in the ICU right now and her family can't afford the surgery. Doctors say if we don't reach the amount by tonight, she may not survive. Please transfer any amount to the account below, every single dollar can save her life."
+    },
+    "traps": [
+      {
+        "trap_id": "R006_TRAP_01",
+        "matched_text": "EVERY SECOND COUNTS!",
+        "weapon_type": [
+          "urgency_hook",
+          "emotional_manipulation"
+        ],
+        "socratic_quiz": {
+          "question": "Why does the post open with 'EVERY SECOND COUNTS!' in all caps?",
+          "options": [
+            "A. To calmly inform readers of a medical emergency timeline.",
+            "B. To trigger panic and urgency so readers donate immediately without verifying the story.",
+            "C. To follow standard hospital emergency announcement format."
+          ],
+          "correct_option": "B",
+          "explanation": "Loud, urgent phrasing is an Urgency Hook designed to spike emotional arousal and prevent readers from pausing to check the facts."
+        }
+      },
+      {
+        "trap_id": "R006_TRAP_02",
+        "matched_text": "is fighting for her life in the ICU right now and her family can't afford the surgery.",
+        "weapon_type": [
+          "pity_appeal",
+          "emotional_manipulation"
+        ],
+        "socratic_quiz": {
+          "question": "What technique is being used by describing a dramatic, detailed medical crisis without any proof (like hospital documents)?",
+          "options": [
+            "A. Objective reporting based on verified medical records.",
+            "B. Exploiting the reader's compassion (pity) to bypass critical thinking, since emotional stories are hard to fact-check on the spot.",
+            "C. A standard format used by all hospitals to request donations."
+          ],
+          "correct_option": "B",
+          "explanation": "This is a Pity Appeal — vivid suffering details are used to trigger sympathy so strongly that readers act before questioning the story's authenticity."
+        }
+      },
+      {
+        "trap_id": "R006_TRAP_03",
+        "matched_text": "Doctors say if we don't reach the amount by tonight, she may not survive.",
+        "weapon_type": [
+          "fear_appeal",
+          "false_dilemma"
+        ],
+        "socratic_quiz": {
+          "question": "What is the effect of adding an unverifiable deadline ('by tonight') and life-or-death stakes to the request?",
+          "options": [
+            "A. It gives readers enough time to verify the claim with the hospital.",
+            "B. It creates a false urgency and fear that pressures people to donate immediately instead of checking if the story is real.",
+            "C. It is a legally required hospital notice."
+          ],
+          "correct_option": "B",
+          "explanation": "This combines Fear Appeal with a false urgent deadline, a common fundraising scam tactic that manufactures crisis pressure to stop victims from verifying the claim."
+        }
+      },
+      {
+        "trap_id": "R006_TRAP_04",
+        "matched_text": "every single dollar can save her life",
+        "weapon_type": [
+          "emotional_manipulation",
+          "vague_impact_claim"
+        ],
+        "socratic_quiz": {
+          "question": "Why does the post claim 'every single dollar can save her life' instead of specifying an actual medical cost or hospital account?",
+          "options": [
+            "A. It provides a transparent, verifiable breakdown of medical expenses.",
+            "B. It uses a vague, emotionally-charged promise to encourage giving without accountability or proof of where the money goes.",
+            "C. It is standard financial disclosure required by charities."
+          ],
+          "correct_option": "B",
+          "explanation": "Vague but emotionally powerful claims about impact are used to bypass the reader's need for concrete evidence, a hallmark of fake charity scams."
+        }
+      }
+    ],
+    "dialogue_trigger": {
+      "question": "Before donating to an urgent charity post online, what steps would you take to verify the story is real?",
+      "mil_insight": "Legitimate fundraisers are usually verified by a hospital, school, or registered charity organization and provide official documents or a traceable account name. Always check the photo (reverse image search), contact the school or hospital directly, and never transfer money based on urgency alone."
+    }
+  },
+  {
+    "set_id": "R007",
+    "theme": [
+      "Fake News",
+      "Conspiracy Theory"
+    ],
+    "story_context": "An anonymous post goes viral, accusing the school cafeteria of selling dirty and spoiled food to make a profit.",
+    "mechanic_type": "TEXT_HIGHLIGHT",
+    "simulated_post": {
+      "author": "Outraged Student (Confession)",
+      "time_posted": "Just now",
+      "content": "Huge scandal! I heard the school cafeteria has been secretly buying cheap, spoiled meat lately to save money. There's definitely some shady profit-sharing going on between the suppliers and the school. We need to boycott the cafeteria immediately before someone gets seriously poisoned. Share this everywhere to expose them!"
+    },
+    "traps": [
+      {
+        "trap_id": "R007_TRAP_01",
+        "matched_text": "I heard the school cafeteria has been secretly buying cheap, spoiled meat lately to save money.",
+        "weapon_type": [
+          "Unverified rumor"
+        ],
+        "socratic_quiz": {
+          "question": "Why does the phrase 'I heard' make this information suspicious?",
+          "options": [
+            "A. It shows this is an unverified rumor treated as absolute truth.",
+            "B. It proves the author has a reliable secret source inside the school.",
+            "C. It confirms that the incident was witnessed by multiple students."
+          ],
+          "correct_option": "A",
+          "explanation": "Using 'I heard' to make serious accusations relies on baseless rumors, easily inciting unverified outrage."
+        }
+      },
+      {
+        "trap_id": "R007_TRAP_02",
+        "matched_text": "There's definitely some shady profit-sharing going on between the suppliers and the school.",
+        "weapon_type": [
+          "Conspiracy theory"
+        ],
+        "socratic_quiz": {
+          "question": "What is the purpose of this 'Conspiracy theory' statement?",
+          "options": [
+            "A. To provide a logical financial analysis based on concrete evidence.",
+            "B. To assign a baseless malicious motive to incite students' outrage.",
+            "C. To offer a reasonable solution to improve the cafeteria's food supply."
+          ],
+          "correct_option": "B",
+          "explanation": "A conspiracy theory occurs when the author assigns a baseless malicious motive to trigger emotions and manipulate the crowd without proof."
+        }
+      }
+    ],
+    "dialogue_trigger": {
+      "question": "Did you notice how the post combines unverified rumors and malicious assumptions to inflate the situation into a crisis?",
+      "mil_insight": "Fake news often exploits conspiracy theories to sow panic. When facing shocking information, the most important skill is to stay calm and demand verifiable evidence."
+    }
+  },
+  {
+    "set_id": "R008",
+    "theme": [
+      "Fake News",
+      "Attribution Bias"
+    ],
+    "story_context": "A malicious rumor spreads about hidden cameras being installed in the school to ruin its reputation and cause panic.",
+    "mechanic_type": "TEXT_HIGHLIGHT",
+    "simulated_post": {
+      "author": "Anonymous Source",
+      "time_posted": "2 hours ago",
+      "content": "I just saw some electricians sneaking around the restrooms this morning. I am absolutely sure the school is secretly installing hidden cameras to spy on us. This is a massive privacy violation! Don't use the restrooms anymore, and share this so everyone knows the truth!"
+    },
+    "traps": [
+      {
+        "trap_id": "R008_TRAP_01",
+        "matched_text": "I just saw some electricians sneaking around the restrooms this morning.",
+        "weapon_type": [
+          "Misleading framing"
+        ],
+        "socratic_quiz": {
+          "question": "How does the word 'sneaking' distort the reality of the situation?",
+          "options": [
+            "A. It accurately describes the standard protocol for maintenance workers.",
+            "B. It frames a potentially normal activity as suspicious to manipulate the reader's perception.",
+            "C. It provides concrete proof that the workers are doing something illegal."
+          ],
+          "correct_option": "B",
+          "explanation": "Using loaded words like 'sneaking' forces a negative and suspicious perspective on normal activities, intentionally misleading the reader."
+        }
+      },
+      {
+        "trap_id": "R008_TRAP_02",
+        "matched_text": "I am absolutely sure the school is secretly installing hidden cameras to spy on us.",
+        "weapon_type": [
+          "Attribution Bias"
+        ],
+        "socratic_quiz": {
+          "question": "How is 'Attribution bias' demonstrated in this detail?",
+          "options": [
+            "A. Jumping to an extreme, malicious conclusion for a normal action like fixing the lights.",
+            "B. Objectively analyzing the electricians' actions based on technical expertise.",
+            "C. Correctly assessing the situation because electricians only appear to install hidden cameras."
+          ],
+          "correct_option": "A",
+          "explanation": "Attribution bias causes the author to ignore reasonable causes (like maintenance work) and automatically assume the most negative, malicious intent."
+        }
+      }
+    ],
+    "dialogue_trigger": {
+      "question": "Did you see how the author jumped from a normal observation to an extreme accusation without any proof?",
+      "mil_insight": "Attribution bias leads us to assume the worst intentions behind others' actions. Always consider alternative, more reasonable explanations before jumping to conclusions."
+    }
+  },
+  {
+    "set_id": "R009",
+    "theme": [
+      "Fanwar",
+      "Cyberbullying",
+      "Misinformation"
+    ],
+    "story_context": "A toxic fanwar post taking an idol's interview quote out of context to incite hate.",
+    "mechanic_type": "TEXT_HIGHLIGHT",
+    "simulated_post": {
+      "author": "AntiToxic123",
+      "time_posted": "1 hour ago",
+      "content": "Did you see X's interview? They said they want to focus on their solo career right now. That basically means X hates the group and thinks the other members are untalented burdens! X is so selfish and arrogant. We need to cancel them before they ruin the entire fandom!"
+    },
+    "traps": [
+      {
+        "trap_id": "R009_TRAP_01",
+        "matched_text": "That basically means X hates the group and thinks the other members are untalented burdens!",
+        "weapon_type": [
+          "straw_man_fallacy"
+        ],
+        "socratic_quiz": {
+          "question": "How does the author distort the idol's original statement about focusing on a solo career?",
+          "options": [
+            "A. By providing solid evidence of the idol fighting with group members.",
+            "B. By exaggerating and twisting a neutral statement into a malicious attack to easily criticize them.",
+            "C. By ignoring the interview and talking about a completely different topic."
+          ],
+          "correct_option": "B",
+          "explanation": "The author uses the Straw Man fallacy by twisting the idol's words into something much worse, making it easier to attack them."
+        }
+      },
+      {
+        "trap_id": "R009_TRAP_02",
+        "matched_text": "We need to cancel them before they ruin the entire fandom!",
+        "weapon_type": [
+          "fear_appeal",
+          "mob_mentality"
+        ],
+        "socratic_quiz": {
+          "question": "What is the intended effect of telling the fandom they need to 'cancel' the idol immediately?",
+          "options": [
+            "A. To incite panic and mobilize a hate mob based on distorted information.",
+            "B. To encourage a healthy and peaceful discussion about the group's future.",
+            "C. To protect the idol from online bullying."
+          ],
+          "correct_option": "A",
+          "explanation": "This uses fear and pressure to incite a mob mentality, urging readers to attack the target without thinking critically."
+        }
+      }
+    ],
+    "dialogue_trigger": {
+      "question": "Why is it dangerous to jump to conclusions based on what a fan account claims an idol said?",
+      "mil_insight": "In fanwars, quotes are often taken out of context or maliciously exaggerated. Always find the original source or full video to verify what was actually said before reacting."
+    }
+  },
+  {
+    "set_id": "R010",
+    "theme": [
+      "Phishing",
+      "Scam",
+      "SocialEngineering"
+    ],
+    "story_context": "A deceptive social media post offering cheap, insider concert tickets to trick enthusiastic fans into clicking a phishing link.",
+    "mechanic_type": "TEXT_HIGHLIGHT",
+    "simulated_post": {
+      "author": "TaylorFan99",
+      "time_posted": "15 minutes ago",
+      "content": "OMG swifties! My uncle works at the stadium and got me 10 VIP Eras Tour tickets for only $150 each! 😭 I'm selling the extras. I need the money tonight, so click my link below to secure your spot before they are gone forever! If you miss this, you're not a real fan!"
+    },
+    "traps": [
+      {
+        "trap_id": "R010_TRAP_01",
+        "matched_text": "My uncle works at the stadium and got me 10 VIP Eras Tour tickets for only $150 each!",
+        "weapon_type": [
+          "too_good_to_be_true",
+          "fake_authority"
+        ],
+        "socratic_quiz": {
+          "question": "How does the scammer try to make this unbelievable offer seem trustworthy?",
+          "options": [
+            "A. By claiming a personal insider connection and setting a price that is unrealistically low.",
+            "B. By showing official verification stamps from the stadium management.",
+            "C. By providing a detailed map of the VIP seating area."
+          ],
+          "correct_option": "A",
+          "explanation": "Scammers often invent fake authority or 'insider connections' combined with a 'too good to be true' price to bypass your logical skepticism."
+        }
+      },
+      {
+        "trap_id": "R010_TRAP_02",
+        "matched_text": "I need the money tonight, so click my link below to secure your spot before they are gone forever!",
+        "weapon_type": [
+          "urgency_hook",
+          "phishing_bait"
+        ],
+        "socratic_quiz": {
+          "question": "What is the primary psychological trigger used here to make you click the link?",
+          "options": [
+            "A. Explaining the logical and personal reasons for selling the tickets.",
+            "B. Creating intense urgency and Fear Of Missing Out (FOMO) to force a quick action.",
+            "C. Promising a secure and fast payment gateway through the provided link."
+          ],
+          "correct_option": "B",
+          "explanation": "Creating extreme urgency (FOMO) prevents victims from thinking critically or verifying the link, pushing them right into a phishing trap."
+        }
+      },
+      {
+        "trap_id": "R010_TRAP_03",
+        "matched_text": "If you miss this, you're not a real fan!",
+        "weapon_type": [
+          "guilt_trip",
+          "identity_manipulation"
+        ],
+        "socratic_quiz": {
+          "question": "Why does the poster attack your identity as a 'real fan'?",
+          "options": [
+            "A. To start a friendly debate about music preferences and dedication.",
+            "B. To sort buyers based on how long they have been listening to the artist.",
+            "C. To manipulate your emotions and pressure you into buying just to prove your loyalty."
+          ],
+          "correct_option": "C",
+          "explanation": "Cybercriminals exploit the emotional investment of fans, using toxic identity manipulation to force impulsive decisions without double-checking the facts."
+        }
+      }
+    ],
+    "dialogue_trigger": {
+      "question": "If you desperately want to see your idol but tickets are sold out, how can you spot a fake ticket offer online?",
+      "mil_insight": "Always remember: if a deal seems too good to be true, it probably is. Never click on unverified links, avoid sellers demanding immediate transfer, and only buy from official ticketing platforms or trusted fan-to-fan exchanges."
+    }
+  }
+]

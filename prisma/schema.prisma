@@ -1,0 +1,27 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Topic {
+  id              String   @id @default(cuid())
+  setId           String   @unique // R001, R002, R004...
+  themeJson       String   // Mảng chủ đề/nhãn dạng JSON string
+  storyContext    String   // Ngữ cảnh câu chuyện
+  mechanicType    String   // Loại mechanic (TEXT_HIGHLIGHT)
+  simulatedPost   String   // Dữ liệu bài viết dạng JSON string
+  trapsJson       String   // Danh sách bẫy & quiz dạng JSON string
+  dialogueTrigger String   // Dữ liệu đúc kết MIL dạng JSON string
+  createdAt       DateTime @default(now())
+}
+
+model UserSession {
+  id         String   @id @default(cuid())
+  cardCode   String   // Mã thẻ bài vật lý
+  score      Int      @default(0)
+  createdAt  DateTime @default(now())
+}
