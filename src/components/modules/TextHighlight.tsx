@@ -113,6 +113,7 @@ export function TextHighlight({
   const [completedTrapIds, setCompletedTrapIds] = useState<string[]>([]);
   const [completedRanges, setCompletedRanges] = useState<CharacterRange[]>([]);
   const [selectedRange, setSelectedRange] = useState<CharacterRange | null>(null);
+  const [pendingRange, setPendingRange] = useState<CharacterRange | null>(null);
   const [selectedOption, setSelectedOption] = useState("");
   const [quizState, setQuizState] = useState<QuizState>("idle");
   const [selectionFeedback, setSelectionFeedback] = useState("");
@@ -134,39 +135,51 @@ export function TextHighlight({
     traps.length > 0 &&
     completedTrapIds.length === traps.length - 1;
 
-  const inspectSelection = () => {
-    if (!textRootRef.current) {
-      return;
-    }
-
+  const captureSelection = () => {
+    if (!textRootRef.current) return;
     const range = getSelectionRange(textRootRef.current);
 
-    if (!range) {
-      return;
+    if (range) {
+      setPendingRange(range);
+      setSelectedRange(null);
+      setActiveTrapId(null);
+      setQuizState("idle");
+      setSelectionFeedback("");
+      window.getSelection()?.removeAllRanges();
     }
+  };
+
+  const handleConfirmHighlight = () => {
+    if (!pendingRange) return;
 
     const candidate = traps
       .filter((trap) => !completedTrapIds.includes(trap.trap_id))
-      .map((trap) => ({ trap, score: calculateIoU(range, trap) }))
+      .map((trap) => ({ trap, score: calculateIoU(pendingRange, trap) }))
       .sort((left, right) => right.score - left.score)[0];
 
     if (!candidate || candidate.score < iouThreshold) {
-      setSelectedRange(range);
+      setSelectedRange(pendingRange);
       setActiveTrapId(null);
       setSelectionFeedback(
         `Selection overlap is ${Math.round((candidate?.score ?? 0) * 100)}%. Select at least ${Math.round(iouThreshold * 100)}% of one manipulation.`,
       );
+      setPendingRange(null);
       return;
     }
 
-    setSelectedRange(range);
+    setSelectedRange(pendingRange);
     setActiveTrapId(candidate.trap.trap_id);
     setSelectedOption("");
     setQuizState("idle");
     setSelectionFeedback(
       `Potential manipulation selected (${Math.round(candidate.score * 100)}% overlap).`,
     );
-    onSelectionComplete?.(range.start, range.end);
+    onSelectionComplete?.(pendingRange.start, pendingRange.end);
+    setPendingRange(null);
+  };
+
+  const handleCancelHighlight = () => {
+    setPendingRange(null);
   };
 
   const scheduleSelectionInspection = () => {
@@ -176,7 +189,7 @@ export function TextHighlight({
 
     selectionTimerRef.current = window.setTimeout(() => {
       selectionTimerRef.current = null;
-      inspectSelection();
+      captureSelection();
     }, 0);
   };
 
@@ -189,6 +202,13 @@ export function TextHighlight({
 
     if (getOptionKey(selectedOption) === activeQuiz.correct_option) {
       setQuizState("correct");
+      if (activeTrapId) {
+        setCompletedTrapIds((prev) => [...prev, activeTrapId]);
+      }
+      if (selectedRange) {
+        setCompletedRanges((prev) => [...prev, selectedRange]);
+      }
+      setSelectedRange(null);
       return;
     }
 
@@ -255,18 +275,47 @@ export function TextHighlight({
               selectedRange !== null &&
               start < selectedRange.end &&
               end > selectedRange.start;
+            const isPending =
+              pendingRange !== null &&
+              start < pendingRange.end &&
+              end > pendingRange.start;
 
             return (
               <span
                 key={index}
                 data-index={start}
-                className={`${isCompleted ? "bg-[#d7ffd7]" : ""} ${isSelected ? "bg-[#fff2a8]" : ""} hover:bg-[#fff2a8]`}
+                className={`${isCompleted ? "bg-[#d7ffd7]" : ""} ${isSelected || isPending ? "bg-[#fff2a8]" : ""} hover:bg-[#fff2a8]`}
               >
                 {token}
               </span>
             );
           })}
         </div>
+
+        {pendingRange && (
+          <div className="mt-3 bg-[#c0c0c0] p-3 shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#dfdfdf,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#fff]">
+            <p className="mb-2 text-xs font-bold text-black">
+              Confirm this selection?
+            </p>
+            <div className="flex justify-end gap-2">
+              <button
+                type="button"
+                onClick={handleConfirmHighlight}
+                className="min-w-[70px] bg-[#c0c0c0] px-3 py-1 text-xs text-black shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff]"
+              >
+                OK
+              </button>
+              <button
+                type="button"
+                onClick={handleCancelHighlight}
+                className="min-w-[70px] bg-[#c0c0c0] px-3 py-1 text-xs text-black shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff]"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        )}
+
         {selectionFeedback && (
           <p className="mt-2 border-t border-dashed border-[#808080] pt-2 text-[10px] text-[#404040]" role="status" aria-live="polite">
             {selectionFeedback}
@@ -314,7 +363,12 @@ export function TextHighlight({
                       name={`socratic-${activeTrap.trap_id}`}
                       value={option}
                       checked={selectedOption === option}
-                      onChange={(event) => setSelectedOption(event.target.value)}
+                      onChange={(event) => {
+                        setSelectedOption(event.target.value);
+                        if (quizState === "incorrect") {
+                          setQuizState("idle");
+                        }
+                      }}
                       className="mt-0.5"
                     />
                     <span>{option}</span>
