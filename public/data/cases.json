@@ -179,7 +179,7 @@
     "modules": {
       "step_1_image_forensics": {
         "mechanic_type": "IMAGE_FORENSICS",
-        "image_url": "/assets/images/R007/R007_fake.jpg",
+        "image_url": "/assets/images/R007/R007_fake.png",
         "image_width": 1000,
         "image_height": 1000,
         "context_text": "The leaked image attached to the extortion email claims to show 'a disgusting cockroach served in the high school canteen food tray.' Find one visual anomaly in this photo.",
@@ -237,7 +237,7 @@
         "simulated_post": {
           "author": "Anonymous Extortionist",
           "time_posted": "1 hour ago",
-          "content": "High school X has cockroaches in the students' food tray. If you don't want me to post this online and ruin the school's reputation, you must act now. Give me [...] VND to keep my mouth shut."
+          "content": "High school X has cockroaches in the students' food tray. If you don't want me to post this online and ruin the school's reputation, you must act now. Give me $2000 to keep my mouth shut."
         },
         "traps": [
           {
@@ -265,7 +265,7 @@
             "trap_id": "R007_TRAP_02",
             "ground_truth_start": 151,
             "ground_truth_end": 191,
-            "matched_text": "Give me [...] VND to keep my mouth shut.",
+            "matched_text": "Give me $2000 to keep my mouth shut.",
             "weapon_type": [
               "financial_extortion",
               "blackmail"
@@ -297,7 +297,7 @@
           },
           {
             "item_id": "R007_SORT_03",
-            "text": "Give me [...] VND to keep my mouth shut."
+            "text": "Give me $2000 to keep my mouth shut."
           }
         ],
         "correct_sequence": [
