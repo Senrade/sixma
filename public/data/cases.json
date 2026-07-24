@@ -166,5 +166,154 @@
       "question": "Mom/Dad, if a message from the school asks parents to click an unfamiliar link and make an urgent payment to 'protect their child's learning data,' what key sign proves that it is a scam?",
       "mil_insight": "Help parents and students compare the message against standard administrative procedures: legitimate educational institutions never use time pressure (such as a 24-hour deadline) or unofficial payment links to handle security issues."
     }
+  },
+  {
+    "level": "RED",
+    "case_id": "R007",
+    "theme": [
+      "Health",
+      "Safety",
+      "School"
+    ],
+    "story_context": "An anonymous extortion email claiming contaminated food in the school canteen, demanding money to prevent reputational damage.",
+    "modules": {
+      "step_1_image_forensics": {
+        "mechanic_type": "IMAGE_FORENSICS",
+        "image_url": "/assets/images/R007/R007_fake.jpg",
+        "image_width": 1000,
+        "image_height": 1000,
+        "context_text": "The leaked image attached to the extortion email claims to show 'a disgusting cockroach served in the high school canteen food tray.' Find one visual anomaly in this photo.",
+        "target_anomalies": [
+          {
+            "anomaly_id": "R007_IMG_01",
+            "name": "unnatural_shadow",
+            "x_pct": 45.2,
+            "y_pct": 62.1,
+            "radius_pct": 12.0,
+            "description": "The shadow cast by the insect contradicts the primary light source direction of the food tray.",
+            "socratic_quiz": {
+              "question": "Why is the shadow of the insect a critical clue of image tampering?",
+              "options": [
+                "A. The shadow is too dark for a cafeteria setting.",
+                "B. The shadow direction does not match the lighting angles of the surrounding food items.",
+                "C. The shadow is completely missing from the tray surface."
+              ],
+              "correct_option": "B",
+              "explanation": "In composite or manipulated images, mismatched lighting and incorrect shadow angles often betray digital insertion because the added object does not interact naturally with the scene's light source."
+            }
+          },
+          {
+            "anomaly_id": "R007_IMG_02",
+            "name": "pixel_blur_clipping",
+            "x_pct": 48.5,
+            "y_pct": 65.4,
+            "radius_pct": 10.5,
+            "description": "Pixels surrounding the insect are heavily blurred and distorted, unlike the sharp texture of the rice grains.",
+            "socratic_quiz": {
+              "question": "What indicates that this area has been artificially pasted or altered?",
+              "options": [
+                "A. The rice grains are cooked differently.",
+                "B. The texture around the edges shows artificial smoothing and pixel distortion.",
+                "C. The entire tray is viewed from a top-down angle."
+              ],
+              "correct_option": "B",
+              "explanation": "Cloned or digitally pasted elements often leave behind distinct artifacts, such as unnatural edge blurring or pixel smudging that clashes with diploma sharpness or natural grain texture."
+            }
+          }
+        ],
+        "socratic_quiz": {
+          "question": "What visual evidence exposes this canteen food photo as a fabricated setup?",
+          "options": [
+            "A. The tray color does not match standard school cafeteria equipment.",
+            "B. The insect's shadow mismatches the light source, and the surrounding texture shows clear digital editing artifacts.",
+            "C. The food portion size is significantly larger than usual."
+          ],
+          "correct_option": "B",
+          "explanation": "Inconsistencies in physics like lighting/shadow direction combined with editing artifacts prove the image was intentionally staged to defame the school."
+        }
+      },
+      "step_2_text_highlight": {
+        "mechanic_type": "TEXT_HIGHLIGHT",
+        "simulated_post": {
+          "author": "Anonymous Extortionist",
+          "time_posted": "1 hour ago",
+          "content": "High school X has cockroaches in the students' food tray. If you don't want me to post this online and ruin the school's reputation, you must act now. Give me [...] VND to keep my mouth shut."
+        },
+        "traps": [
+          {
+            "trap_id": "R007_TRAP_01",
+            "ground_truth_start": 58,
+            "ground_truth_end": 132,
+            "matched_text": "If you don't want me to post this online and ruin the school's reputation,",
+            "weapon_type": [
+              "fear_mongering",
+              "coercion",
+              "reputational_threat"
+            ],
+            "socratic_quiz": {
+              "question": "How does this sentence psychologically manipulate school administrators?",
+              "options": [
+                "A. By offering a constructive channel to inspect kitchen hygiene standards.",
+                "B. By leveraging the fear of a public relations disaster to force an immediate, unverified reaction.",
+                "C. By providing legal evidence from a certified health inspector."
+              ],
+              "correct_option": "B",
+              "explanation": "Threatening a school's reputation exploits institutional vulnerability to panic and public backlash, bypassing standard investigative procedures."
+            }
+          },
+          {
+            "trap_id": "R007_TRAP_02",
+            "ground_truth_start": 151,
+            "ground_truth_end": 191,
+            "matched_text": "Give me [...] VND to keep my mouth shut.",
+            "weapon_type": [
+              "financial_extortion",
+              "blackmail"
+            ],
+            "socratic_quiz": {
+              "question": "What is the primary underlying objective of this specific phrasing?",
+              "options": [
+                "A. Requesting a donation for school food safety improvements.",
+                "B. Demanding an illicit financial payout in exchange for withholding fabricated evidence.",
+                "C. Proposing a transparent fee for a media review service."
+              ],
+              "correct_option": "B",
+              "explanation": "Demanding money to 'keep quiet' defines classic criminal blackmail and extortion, proving the message is a scam rather than genuine public whistleblowing."
+            }
+          }
+        ]
+      },
+      "step_3_sorting_game": {
+        "mechanic_type": "DRAG_AND_DROP_SORTING",
+        "task_instruction": "The attacker sent a scrambled extortion message. Arrange the scrambled parts into the correct logical structure of a blackmail threat.",
+        "pool_items": [
+          {
+            "item_id": "R007_SORT_01",
+            "text": "If you don't want me to post this online and ruin the school's reputation,"
+          },
+          {
+            "item_id": "R007_SORT_02",
+            "text": "High school X has cockroaches in the students' food tray."
+          },
+          {
+            "item_id": "R007_SORT_03",
+            "text": "Give me [...] VND to keep my mouth shut."
+          }
+        ],
+        "correct_sequence": [
+          "R007_SORT_02",
+          "R007_SORT_01",
+          "R007_SORT_03"
+        ],
+        "validation_feedback": {
+          "success": "Correct. You have successfully decoded the extortion structure: State the fabricated crisis (Hook) → Threaten reputational damage (Pressure) → Demand financial payoff (Extortion).",
+          "failure": "Incorrect logic. Blackmail threats always start by planting a shocking premise, leverage fear of exposure next, and conclude with a financial demand."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Teacher/Principal, if someone sends an anonymous message threatening to expose a food safety scandal unless an immediate cash transfer is made, what should be done?",
+      "mil_insight": "Never negotiate or transfer money to anonymous sources. Immediately verify food safety via internal physical checks and report extortion attempts to local cyber security authorities."
+    }
   }
 ]
