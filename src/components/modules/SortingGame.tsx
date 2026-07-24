@@ -1,4 +1,5 @@
 import {
+  useEffect,
   useRef,
   useState,
   type DragEvent,
@@ -43,14 +44,31 @@ export function SortingGame({
   const [dragTargetIndex, setDragTargetIndex] = useState<number | null>(null);
   const [status, setStatus] = useState<SortStatus>("Ready");
   const [feedback, setFeedback] = useState("");
+
   const pointerMovedRef = useRef(false);
   const completionSentRef = useRef(false);
   const suppressNextSlotClickRef = useRef(false);
 
   const expectedSequence = correctSequence ?? poolItems.map((item) => item.id);
-  const placedIds = new Set(sequence.filter((itemId): itemId is string => itemId !== null));
+  const placedIds = new Set(
+    sequence.filter((itemId): itemId is string => itemId !== null),
+  );
 
-  const getSlotIndexFromPoint = (clientX: number, clientY: number): number | null => {
+  // Sync state khi props poolItems hoac correctSequence thay doi
+  useEffect(() => {
+    setSequence(Array.from({ length: poolItems.length }, () => null));
+    setSelectedId(null);
+    setDraggingId(null);
+    setDragTargetIndex(null);
+    setStatus("Ready");
+    setFeedback("");
+    completionSentRef.current = false;
+  }, [poolItems, correctSequence]);
+
+  const getSlotIndexFromPoint = (
+    clientX: number,
+    clientY: number,
+  ): number | null => {
     const element = document.elementFromPoint(clientX, clientY);
     const slot = element?.closest<HTMLElement>("[data-slot-index]");
     const index = slot?.dataset.slotIndex;
@@ -82,16 +100,37 @@ export function SortingGame({
     }
   };
 
+  const removeItem = (itemId: string) => {
+    const previousIndex = sequence.indexOf(itemId);
+    if (previousIndex !== -1) {
+      const nextSequence = [...sequence];
+      nextSequence[previousIndex] = null;
+      setSequence(nextSequence);
+      setStatus("Ready");
+      setFeedback("");
+    }
+    setSelectedId(null);
+    setDraggingId(null);
+    setDragTargetIndex(null);
+  };
+
   const placeItemAt = (itemId: string, targetIndex: number) => {
     if (targetIndex < 0 || targetIndex >= poolItems.length) {
       return;
     }
 
+    const previousIndex = sequence.indexOf(itemId);
+
+    // Neu click/drop chinh item do vao vi tri no dang dung -> Go item khoi Timeline
+    if (previousIndex === targetIndex) {
+      removeItem(itemId);
+      return;
+    }
+
     const nextSequence = [...sequence];
-    const previousIndex = nextSequence.indexOf(itemId);
     const displacedId = nextSequence[targetIndex];
 
-    if (previousIndex !== -1 && previousIndex !== targetIndex) {
+    if (previousIndex !== -1) {
       nextSequence[previousIndex] = displacedId ?? null;
     }
 
@@ -112,9 +151,8 @@ export function SortingGame({
   const handlePointerDown = (
     itemId: string,
     event: PointerEvent<HTMLDivElement>,
-    fromTimeline = false,
   ) => {
-    setSelectedId(itemId);
+    setSelectedId((prev) => (prev === itemId ? null : itemId));
 
     if (event.pointerType === "mouse") {
       return;
@@ -124,10 +162,6 @@ export function SortingGame({
     pointerMovedRef.current = false;
     setDraggingId(itemId);
     event.currentTarget.setPointerCapture(event.pointerId);
-
-    if (fromTimeline) {
-      suppressNextSlotClickRef.current = false;
-    }
   };
 
   const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
@@ -142,7 +176,6 @@ export function SortingGame({
   const handlePointerUp = (
     itemId: string,
     event: PointerEvent<HTMLDivElement>,
-    fromTimeline = false,
   ) => {
     if (event.pointerType === "mouse") {
       return;
@@ -152,27 +185,25 @@ export function SortingGame({
 
     if (pointerMovedRef.current && targetIndex !== null) {
       placeItemAt(itemId, targetIndex);
-      suppressNextSlotClickRef.current = fromTimeline;
-    } else {
-      setSelectedId(itemId);
-      setDraggingId(null);
-      setDragTargetIndex(null);
-      suppressNextSlotClickRef.current = fromTimeline;
+    } else if (pointerMovedRef.current) {
+      // Drag va drop ra ngoai slot -> Go khoi timeline
+      removeItem(itemId);
     }
 
+    suppressNextSlotClickRef.current = true;
     pointerMovedRef.current = false;
+    setDraggingId(null);
+    setDragTargetIndex(null);
   };
 
   const handleDragStart = (
     itemId: string,
     event: DragEvent<HTMLDivElement>,
-    fromTimeline = false,
   ) => {
     event.dataTransfer.effectAllowed = "move";
     event.dataTransfer.setData("text/plain", itemId);
     setSelectedId(itemId);
     setDraggingId(itemId);
-    suppressNextSlotClickRef.current = fromTimeline;
   };
 
   const handleDrop = (
@@ -193,7 +224,7 @@ export function SortingGame({
   ) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
-      setSelectedId(itemId);
+      setSelectedId((prev) => (prev === itemId ? null : itemId));
     }
   };
 
@@ -227,7 +258,18 @@ export function SortingGame({
   return (
     <RetroWindow title="Sort.exe  |  Sequence Builder" onClose={onBack}>
       <div className="grid gap-2 md:grid-cols-2">
-        <div className="bg-[#c0c0c0] p-2 shadow-[inset_2px_2px_0_#808080,inset_-1px_-1px_0_#fff]">
+        {/* EVIDENCE BANK CONTAINER */}
+        <div
+          className="bg-[#c0c0c0] p-2 shadow-[inset_2px_2px_0_#808080,inset_-1px_-1px_0_#fff]"
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={(e) => {
+            e.preventDefault();
+            const droppedId = e.dataTransfer.getData("text/plain") || draggingId;
+            if (droppedId) {
+              removeItem(droppedId);
+            }
+          }}
+        >
           <div className="mb-2 bg-[#000080] px-1 py-0.5 text-[10px] font-bold text-white">
             EVIDENCE BANK
           </div>
@@ -256,9 +298,10 @@ export function SortingGame({
                     setDragTargetIndex(null);
                   }}
                   onKeyDown={(event) => handleItemKeyDown(item.id, event)}
-                  className={`flex cursor-grab items-center gap-2 bg-[#c0c0c0] px-2 py-1 text-xs shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:cursor-grabbing ${isPlaced ? "opacity-60" : ""} ${isSelected ? "ring-2 ring-[#000080]" : ""}`}
+                  className={`flex cursor-grab items-center gap-2 bg-[#c0c0c0] px-2 py-1 text-xs shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:cursor-grabbing ${
+                    isPlaced ? "opacity-60" : ""
+                  } ${isSelected ? "ring-2 ring-[#000080]" : ""}`}
                 >
-                  <span className="text-[10px] text-[#606060]"></span>
                   <span className="flex-1">{item.text}</span>
                   <span className="bg-white px-1 text-[10px] text-[#606060] shadow-[inset_1px_1px_0_#808080]">
                     {item.id}
@@ -269,6 +312,7 @@ export function SortingGame({
           </div>
         </div>
 
+        {/* TIMELINE CONTAINER */}
         <div className="bg-[#c0c0c0] p-2 shadow-[inset_2px_2px_0_#808080,inset_-1px_-1px_0_#fff]">
           <div className="mb-2 bg-[#000080] px-1 py-0.5 text-[10px] font-bold text-white">
             TIMELINE
@@ -287,13 +331,13 @@ export function SortingGame({
                   tabIndex={0}
                   onPointerDown={
                     item
-                      ? (event) => handlePointerDown(item.id, event, true)
+                      ? (event) => handlePointerDown(item.id, event)
                       : undefined
                   }
                   onPointerMove={item ? handlePointerMove : undefined}
                   onPointerUp={
                     item
-                      ? (event) => handlePointerUp(item.id, event, true)
+                      ? (event) => handlePointerUp(item.id, event)
                       : undefined
                   }
                   onPointerCancel={
@@ -310,10 +354,22 @@ export function SortingGame({
                     event.preventDefault();
                     setDragTargetIndex(index);
                   }}
+                  onDragLeave={(event) => {
+                    if (
+                      event.currentTarget.contains(
+                        event.relatedTarget as Node,
+                      )
+                    ) {
+                      return;
+                    }
+                    setDragTargetIndex((prev) =>
+                      prev === index ? null : prev,
+                    );
+                  }}
                   onDrop={(event) => handleDrop(index, event)}
                   onDragStart={
                     item
-                      ? (event) => handleDragStart(item.id, event, true)
+                      ? (event) => handleDragStart(item.id, event)
                       : undefined
                   }
                   onDragEnd={
@@ -324,7 +380,9 @@ export function SortingGame({
                         }
                       : undefined
                   }
-                  className={`flex min-h-[34px] items-center gap-2 border-2 border-dashed border-[#808080] bg-white/50 px-2 py-2 text-xs text-[#808080] ${isDropTarget ? "ring-2 ring-[#000080]" : ""}`}
+                  className={`flex min-h-[34px] items-center gap-2 border-2 border-dashed border-[#808080] bg-white/50 px-2 py-2 text-xs text-[#808080] ${
+                    isDropTarget ? "ring-2 ring-[#000080]" : ""
+                  }`}
                 >
                   <span className="flex h-5 w-5 shrink-0 items-center justify-center bg-[#000080] text-[10px] font-bold text-white">
                     {index + 1}
@@ -349,7 +407,9 @@ export function SortingGame({
       </div>
       {feedback && (
         <p
-          className={`mt-2 p-2 text-xs ${status === "Correct" ? "bg-[#d7ffd7]" : "bg-[#ffd7d7]"}`}
+          className={`mt-2 p-2 text-xs ${
+            status === "Correct" ? "bg-[#d7ffd7]" : "bg-[#ffd7d7]"
+          }`}
           role="status"
           aria-live="polite"
         >
