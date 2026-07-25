@@ -182,42 +182,24 @@
         "image_url": "/assets/images/R007/R007_fake.png",
         "image_width": 1020,
         "image_height": 680,
-        "context_text": "The leaked image attached to the extortion email claims to show 'a disgusting cockroach served in the high school canteen food tray.' Find one visual anomaly in this photo.",
+        "context_text": "The leaked image attached to the extortion email claims to show 'a disgusting cockroach served in the high school canteen food tray.' Find the visual anomaly in this photo.",
         "target_anomalies": [
           {
             "anomaly_id": "R007_IMG_01",
-            "name": "unnatural_shadow",
+            "name": "fake_cockroach_insertion",
             "x_pct": 69.5,
             "y_pct": 73.0,
-            "radius_pct": 12.0,
-            "description": "The shadow cast by the insect contradicts the primary light source direction of the food tray.",
+            "radius_pct": 13.5,
+            "description": "The insect appears digitally pasted onto the rice tray, exhibiting mismatched light direction, unnatural shadows, and blurred edge artifacts.",
             "socratic_quiz": {
-              "question": "Why is the shadow of the insect a critical clue of image tampering?",
+              "question": "Why does the cockroach in this photo indicate digital tampering?",
               "options": [
-                "A. The shadow is too dark for a cafeteria setting.",
-                "B. The shadow direction does not match the lighting angles of the surrounding food items.",
-                "C. The shadow is completely missing from the tray surface."
+                "A. The cockroach is too large compared to standard rice grains.",
+                "B. Its shadow direction contradicts the main lighting, and its edges show artificial blurring from digital editing.",
+                "C. Cockroaches cannot land on cooked rice in a school canteen."
               ],
               "correct_option": "B",
-              "explanation": "In composite or manipulated images, mismatched lighting and incorrect shadow angles often betray digital insertion because the added object does not interact naturally with the scene's light source."
-            }
-          },
-          {
-            "anomaly_id": "R007_IMG_02",
-            "name": "pixel_blur_clipping",
-            "x_pct": 48.5,
-            "y_pct": 65.4,
-            "radius_pct": 10.5,
-            "description": "Pixels surrounding the insect are heavily blurred and distorted, unlike the sharp texture of the rice grains.",
-            "socratic_quiz": {
-              "question": "What indicates that this area has been artificially pasted or altered?",
-              "options": [
-                "A. The rice grains are cooked differently.",
-                "B. The texture around the edges shows artificial smoothing and pixel distortion.",
-                "C. The entire tray is viewed from a top-down angle."
-              ],
-              "correct_option": "B",
-              "explanation": "Cloned or digitally pasted elements often leave behind distinct artifacts, such as unnatural edge blurring or pixel smudging that clashes with diploma sharpness or natural grain texture."
+              "explanation": "In composite or digitally manipulated images, mismatched lighting angles and edge-smudging artifacts around the inserted object betray digital insertion."
             }
           }
         ],
@@ -225,11 +207,11 @@
           "question": "What visual evidence exposes this canteen food photo as a fabricated setup?",
           "options": [
             "A. The tray color does not match standard school cafeteria equipment.",
-            "B. The insect's shadow mismatches the light source, and the surrounding texture shows clear digital editing artifacts.",
+            "B. The insect's shadow mismatches the light source, and its edges show clear digital editing artifacts.",
             "C. The food portion size is significantly larger than usual."
           ],
           "correct_option": "B",
-          "explanation": "Inconsistencies in physics like lighting/shadow direction combined with editing artifacts prove the image was intentionally staged to defame the school."
+          "explanation": "Inconsistencies in physics like lighting and shadow direction combined with digital editing artifacts prove the image was intentionally fabricated to defame the school."
         }
       },
       "step_2_text_highlight": {
