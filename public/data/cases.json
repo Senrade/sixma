@@ -180,15 +180,15 @@
       "step_1_image_forensics": {
         "mechanic_type": "IMAGE_FORENSICS",
         "image_url": "/assets/images/R007/R007_fake.png",
-        "image_width": 1000,
-        "image_height": 1000,
+        "image_width": 1020,
+        "image_height": 680,
         "context_text": "The leaked image attached to the extortion email claims to show 'a disgusting cockroach served in the high school canteen food tray.' Find one visual anomaly in this photo.",
         "target_anomalies": [
           {
             "anomaly_id": "R007_IMG_01",
             "name": "unnatural_shadow",
-            "x_pct": 45.2,
-            "y_pct": 62.1,
+            "x_pct": 69.5,
+            "y_pct": 73.0,
             "radius_pct": 12.0,
             "description": "The shadow cast by the insect contradicts the primary light source direction of the food tray.",
             "socratic_quiz": {
