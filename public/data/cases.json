@@ -219,77 +219,86 @@
         "simulated_post": {
           "author": "Anonymous Extortionist",
           "time_posted": "1 hour ago",
-          "content": "High school X has cockroaches in the students' food tray. If you don't want me to post this online and ruin the school's reputation, you must act now. Give me $2000 to keep my mouth shut."
+          "content": "We have exclusive photo evidence showing severe contamination in High School X's lunch trays today. As you can see in the attached photo, a live cockroach was served directly on top of a student's meal. If this image reaches local news outlets and parent group chats, your school's enrollment and public reputation will be destroyed overnight. You have exactly 12 hours to transfer $2,000 to our anonymous crypto account to keep this quiet. Failure to pay on time will result in an immediate viral media campaign against your administration."
         },
         "traps": [
           {
             "trap_id": "R007_TRAP_01",
-            "ground_truth_start": 58,
-            "ground_truth_end": 132,
-            "matched_text": "If you don't want me to post this online and ruin the school's reputation,",
+            "ground_truth_start": 201,
+            "ground_truth_end": 348,
+            "matched_text": "If this image reaches local news outlets and parent group chats, your school's enrollment and public reputation will be destroyed overnight.",
             "weapon_type": [
               "fear_mongering",
-              "coercion",
               "reputational_threat"
             ],
             "socratic_quiz": {
-              "question": "How does this sentence psychologically manipulate school administrators?",
+              "question": "What psychological coercion technique is the attacker applying in this statement?",
               "options": [
-                "A. By offering a constructive channel to inspect kitchen hygiene standards.",
-                "B. By leveraging the fear of a public relations disaster to force an immediate, unverified reaction.",
-                "C. By providing legal evidence from a certified health inspector."
+                "A. Offering a constructive feedback loop for school cafeteria staff.",
+                "B. Weaponizing public relations panic to force an immediate emotional reaction without factual verification.",
+                "C. Citing legal health regulations regarding cafeteria hygiene standards."
               ],
               "correct_option": "B",
-              "explanation": "Threatening a school's reputation exploits institutional vulnerability to panic and public backlash, bypassing standard investigative procedures."
+              "explanation": "Threatening severe reputational fallout bypasses logical verification and exploits institutional vulnerability to panic and public backlash."
             }
           },
           {
             "trap_id": "R007_TRAP_02",
-            "ground_truth_start": 151,
-            "ground_truth_end": 191,
-            "matched_text": "Give me $2000 to keep my mouth shut.",
+            "ground_truth_start": 349,
+            "ground_truth_end": 444,
+            "matched_text": "You have exactly 12 hours to transfer $2,000 to our anonymous crypto account to keep this quiet.",
             "weapon_type": [
               "financial_extortion",
-              "blackmail"
+              "artificial_urgency"
             ],
             "socratic_quiz": {
-              "question": "What is the primary underlying objective of this specific phrasing?",
+              "question": "Why does the attacker enforce a strict 12-hour deadline alongside a payment demand?",
               "options": [
-                "A. Requesting a donation for school food safety improvements.",
-                "B. Demanding an illicit financial payout in exchange for withholding fabricated evidence.",
-                "C. Proposing a transparent fee for a media review service."
+                "A. To give the school administration adequate time to perform a thorough health inspection.",
+                "B. To create extreme time pressure that prevents targets from consulting law enforcement or conducting forensic image analysis.",
+                "C. To comply with standard banking settlement procedures."
               ],
               "correct_option": "B",
-              "explanation": "Demanding money to 'keep quiet' defines classic criminal blackmail and extortion, proving the message is a scam rather than genuine public whistleblowing."
+              "explanation": "Artificial urgency deprives the victim of critical thinking time, forcing hasty decisions before the fraudulent nature of the claim can be investigated."
             }
           }
         ]
       },
       "step_3_sorting_game": {
         "mechanic_type": "DRAG_AND_DROP_SORTING",
-        "task_instruction": "The attacker sent a scrambled extortion message. Arrange the scrambled parts into the correct logical structure of a blackmail threat.",
+        "task_instruction": "An online agitator launched a 5-step panic campaign against the school. Arrange these scrambled statements into the correct psychological manipulation sequence.",
         "pool_items": [
           {
+            "item_id": "R007_SORT_03",
+            "text": "School principals are actively censoring posts and silencing parents to protect their reputation."
+          },
+          {
+            "item_id": "R007_SORT_05",
+            "text": "Click here to donate to our independent legal fund to shut down the corrupt canteen management immediately!"
+          },
+          {
             "item_id": "R007_SORT_01",
-            "text": "If you don't want me to post this online and ruin the school's reputation,"
+            "text": "BREAKING: Photos surface showing dangerous insect contamination in High School X's lunch trays!"
+          },
+          {
+            "item_id": "R007_SORT_04",
+            "text": "If we stay silent, our children's lives will remain in constant danger every single day."
           },
           {
             "item_id": "R007_SORT_02",
-            "text": "High school X has cockroaches in the students' food tray."
-          },
-          {
-            "item_id": "R007_SORT_03",
-            "text": "Give me $2000 to keep my mouth shut."
+            "text": "Multiple students are already reporting severe food poisoning symptoms after eating today's lunch."
           }
         ],
         "correct_sequence": [
-          "R007_SORT_02",
           "R007_SORT_01",
-          "R007_SORT_03"
+          "R007_SORT_02",
+          "R007_SORT_03",
+          "R007_SORT_04",
+          "R007_SORT_05"
         ],
         "validation_feedback": {
-          "success": "Correct. You have successfully decoded the extortion structure: State the fabricated crisis (Hook) → Threaten reputational damage (Pressure) → Demand financial payoff (Extortion).",
-          "failure": "Incorrect logic. Blackmail threats always start by planting a shocking premise, leverage fear of exposure next, and conclude with a financial demand."
+          "success": "Excellent! You unravelled the 5-stage manipulation formula: Visual Shock (Hook) → Escalating Harm (Fear) → Accusing Authority (Distrust) → Emotional Ultimatums (Pressure) → Solicit Financial Action (Extortion/Trap).",
+          "failure": "Incorrect sequence. Fake news campaigns systematically move from fake shock evidence, to escalating harm, undermining trust, triggering emotional panic, and finally demanding action/money."
         }
       }
     },
