@@ -180,16 +180,16 @@
       "step_1_image_forensics": {
         "mechanic_type": "IMAGE_FORENSICS",
         "image_url": "/assets/images/R007/R007_fake.png",
-        "image_width": 1020,
-        "image_height": 680,
+        "image_width": 1024,
+        "image_height": 683,
         "context_text": "The leaked image attached to the extortion email claims to show 'a disgusting cockroach served in the high school canteen food tray.' Find the visual anomaly in this photo.",
         "target_anomalies": [
           {
             "anomaly_id": "R007_IMG_01",
             "name": "fake_cockroach_insertion",
-            "x_pct": 69.5,
-            "y_pct": 73.0,
-            "radius_pct": 13.5,
+            "x_pct": 588,
+            "y_pct": 370,
+            "radius_pct": 14.5,
             "description": "The insect appears digitally pasted onto the rice tray, exhibiting mismatched light direction, unnatural shadows, and blurred edge artifacts.",
             "socratic_quiz": {
               "question": "Why does the cockroach in this photo indicate digital tampering?",
