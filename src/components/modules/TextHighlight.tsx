@@ -222,21 +222,10 @@ export function TextHighlight({
   };
 
   const handleQuizContinue = () => {
-    if (!activeTrap || quizState !== "correct" || !selectedRange) {
-      return;
-    }
-
-    const nextCompletedTrapIds = completedTrapIds.includes(activeTrap.trap_id)
-      ? completedTrapIds
-      : [...completedTrapIds, activeTrap.trap_id];
-
-    setCompletedTrapIds(nextCompletedTrapIds);
-    setCompletedRanges((ranges) => [...ranges, selectedRange]);
     setActiveTrapId(null);
     setSelectedOption("");
     setQuizState("idle");
-
-    if (traps.length > 0 && nextCompletedTrapIds.length === traps.length) {
+    if (traps.length > 0 && completedTrapIds.length >= traps.length) {
       onComplete?.();
     }
   };
