@@ -7,6 +7,13 @@ import {
   type PointerEvent,
 } from "react";
 import { RetroWindow } from "./RetroWindow";
+import {
+  gameButton,
+  gameFeedbackError,
+  gameFeedbackSuccess,
+  gamePanel,
+  gameSectionBar,
+} from "./moduleStyles";
 
 export interface SortingValidationFeedback {
   success: string;
@@ -97,10 +104,15 @@ export function SortingGame({
     );
     onSort?.(candidate);
 
-    if (correct && !completionSentRef.current) {
-      completionSentRef.current = true;
-      onComplete?.();
+  };
+
+  const handleComplete = () => {
+    if (status !== "Correct" || completionSentRef.current) {
+      return;
     }
+
+    completionSentRef.current = true;
+    onComplete?.();
   };
 
   const removeItem = (itemId: string) => {
@@ -124,7 +136,7 @@ export function SortingGame({
 
     const previousIndex = sequence.indexOf(itemId);
 
-    // Neu click/drop chinh item do vao vi tri no dang dung -> Go item khoi Timeline
+    // Dropping an item onto its current slot removes it from the timeline.
     if (previousIndex === targetIndex) {
       removeItem(itemId);
       return;
@@ -189,7 +201,7 @@ export function SortingGame({
     if (pointerMovedRef.current && targetIndex !== null) {
       placeItemAt(itemId, targetIndex);
     } else if (pointerMovedRef.current) {
-      // Drag va drop ra ngoai slot -> Go khoi timeline
+      // Dropping outside the timeline returns the item to the evidence bank.
       removeItem(itemId);
     }
 
@@ -259,11 +271,11 @@ export function SortingGame({
   };
 
   return (
-    <RetroWindow title="Sort.exe  |  Sequence Builder" onClose={onBack}>
-      <div className="grid gap-2 md:grid-cols-2">
+    <RetroWindow title="Module 03 / Sequence Reconstruction" onClose={onBack}>
+      <div className="grid gap-4 md:grid-cols-2">
         {/* EVIDENCE BANK CONTAINER */}
         <div
-          className="bg-[#c0c0c0] p-2 shadow-[inset_2px_2px_0_#808080,inset_-1px_-1px_0_#fff]"
+          className={gamePanel}
           onDragOver={(e) => e.preventDefault()}
           onDrop={(e) => {
             e.preventDefault();
@@ -273,7 +285,7 @@ export function SortingGame({
             }
           }}
         >
-          <div className="mb-2 bg-[#000080] px-1 py-0.5 text-[10px] font-bold text-white">
+          <div className={gameSectionBar}>
             EVIDENCE BANK
           </div>
           <div className="space-y-1">
@@ -301,12 +313,12 @@ export function SortingGame({
                     setDragTargetIndex(null);
                   }}
                   onKeyDown={(event) => handleItemKeyDown(item.id, event)}
-                  className={`flex cursor-grab items-center gap-2 bg-[#c0c0c0] px-2 py-1 text-xs shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:cursor-grabbing ${
+                  className={`flex min-h-12 cursor-grab items-center gap-3 rounded-[6px] border-2 border-ink bg-background px-3 py-2 text-sm text-ink shadow-[3px_3px_0_0_var(--color-ink)] transition-transform hover:-translate-y-px active:cursor-grabbing ${
                     isPlaced ? "opacity-60" : ""
-                  } ${isSelected ? "ring-2 ring-[#000080]" : ""}`}
+                  } ${isSelected ? "bg-accent outline-2 outline-offset-2 outline-info" : ""}`}
                 >
                   <span className="flex-1">{item.text}</span>
-                  <span className="bg-white px-1 text-[10px] text-[#606060] shadow-[inset_1px_1px_0_#808080]">
+                  <span className="rounded-[4px] border-2 border-ink bg-surface-2 px-1.5 py-0.5 font-mono text-[10px] font-bold text-ink-soft">
                     {item.id}
                   </span>
                 </div>
@@ -316,8 +328,8 @@ export function SortingGame({
         </div>
 
         {/* TIMELINE CONTAINER */}
-        <div className="bg-[#c0c0c0] p-2 shadow-[inset_2px_2px_0_#808080,inset_-1px_-1px_0_#fff]">
-          <div className="mb-2 bg-[#000080] px-1 py-0.5 text-[10px] font-bold text-white">
+        <div className={gamePanel}>
+          <div className={gameSectionBar}>
             TIMELINE
           </div>
           <div className="space-y-1">
@@ -383,17 +395,17 @@ export function SortingGame({
                         }
                       : undefined
                   }
-                  className={`flex min-h-[34px] items-center gap-2 border-2 border-dashed border-[#808080] bg-white/50 px-2 py-2 text-xs text-[#808080] ${
-                    isDropTarget ? "ring-2 ring-[#000080]" : ""
+                  className={`flex min-h-14 items-center gap-3 rounded-[6px] border-2 border-dashed border-ink bg-surface-2 px-3 py-2 text-sm text-ink-soft transition-colors ${
+                    isDropTarget ? "bg-accent outline-2 outline-offset-2 outline-info" : ""
                   }`}
                 >
-                  <span className="flex h-5 w-5 shrink-0 items-center justify-center bg-[#000080] text-[10px] font-bold text-white">
+                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-[4px] border-2 border-ink bg-info font-mono text-xs font-black text-info-foreground">
                     {index + 1}
                   </span>
                   {item ? (
-                    <span className="flex-1 text-black">{item.text}</span>
+                    <span className="flex-1 text-ink">{item.text}</span>
                   ) : (
-                    <span className="italic">”drop here”</span>
+                    <span className="italic">Drop here</span>
                   )}
                 </div>
               );
@@ -402,7 +414,7 @@ export function SortingGame({
         </div>
       </div>
 
-      <div className="mt-2 flex items-center justify-between bg-[#c0c0c0] px-2 py-1 text-[10px] shadow-[inset_1px_1px_0_#808080,inset_-1px_-1px_0_#fff]">
+      <div className="mt-4 flex items-center justify-between rounded-[6px] border-2 border-ink bg-surface-2 px-3 py-2 font-mono text-xs font-bold text-ink-soft">
         <span>Items: {poolItems.length}</span>
         <span role="status" aria-live="polite">
           Status: {status}
@@ -410,14 +422,19 @@ export function SortingGame({
       </div>
       {feedback && (
         <p
-          className={`mt-2 p-2 text-xs ${
-            status === "Correct" ? "bg-[#d7ffd7]" : "bg-[#ffd7d7]"
-          }`}
+          className={`mt-3 ${status === "Correct" ? gameFeedbackSuccess : gameFeedbackError}`}
           role="status"
           aria-live="polite"
         >
           {feedback}
         </p>
+      )}
+      {status === "Correct" && (
+        <div className="mt-4 flex justify-end">
+          <button type="button" onClick={handleComplete} className={gameButton}>
+            Complete investigation
+          </button>
+        </div>
       )}
     </RetroWindow>
   );

@@ -154,12 +154,12 @@ export default function GameController({
                 }
               : undefined,
           }))}
-          socraticQuiz={{
+          socraticQuiz={imageModule.socratic_quiz ? {
             question: getQuizQuestion(imageModule.socratic_quiz),
             options: imageModule.socratic_quiz.options,
             correct_option: imageModule.socratic_quiz.correct_option,
             explanation: imageModule.socratic_quiz.explanation,
-          }}
+          } : undefined}
           onComplete={handleStepComplete}
           onBack={handleStepBack}
         />

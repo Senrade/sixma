@@ -5,6 +5,15 @@ import {
   type PointerEvent,
 } from "react";
 import { RetroWindow } from "./RetroWindow";
+import {
+  gameButton,
+  gameButtonSecondary,
+  gameFeedbackError,
+  gameFeedbackSuccess,
+  gameOption,
+  gamePanel,
+  gameSectionBar,
+} from "./moduleStyles";
 
 export interface TextHighlightQuiz {
   question?: string;
@@ -231,17 +240,17 @@ export function TextHighlight({
   };
 
   return (
-    <RetroWindow title="AnonForum.exe  |  thread://viewer" onClose={onBack}>
-      <div className="bg-white p-3 shadow-[inset_2px_2px_0_#808080,inset_-1px_-1px_0_#fff]">
-        <div className="mb-2 flex items-center gap-2 border-b border-dashed border-[#808080] pb-1">
-          <div className="h-8 w-8 bg-[#000080] text-center text-[10px] leading-8 text-white shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff]">
+    <RetroWindow title="Module 02 / Language Analysis" onClose={onBack}>
+      <div className={gamePanel}>
+        <div className="mb-4 flex items-center gap-3 border-b-2 border-ink pb-3">
+          <div className="grid h-10 w-10 place-items-center rounded-[5px] border-2 border-ink bg-info text-xs font-black text-info-foreground">
             ??
           </div>
           <div className="flex-1">
-            <div className="text-xs font-bold">{postAuthor}</div>
-            <div className="text-[10px] text-[#606060]">{postTime}</div>
+            <div className="text-sm font-black">{postAuthor}</div>
+            <div className="font-mono text-xs text-ink-soft">{postTime}</div>
           </div>
-          <div className="text-[10px] text-[#606060]">#anonymous</div>
+          <div className="hidden font-mono text-xs text-ink-soft sm:block">#anonymous</div>
         </div>
 
         <div
@@ -253,7 +262,7 @@ export function TextHighlight({
             }
           }}
           onTouchEnd={scheduleSelectionInspection}
-          className="select-text whitespace-pre-wrap text-sm leading-relaxed text-black"
+          className="select-text whitespace-pre-wrap text-base leading-8 text-ink"
         >
           {tokensWithOffsets.map(({ token, start }, index) => {
             const end = start + token.length;
@@ -273,7 +282,7 @@ export function TextHighlight({
               <span
                 key={index}
                 data-index={start}
-                className={`${isCompleted ? "bg-[#d7ffd7]" : ""} ${isSelected || isPending ? "bg-[#fff2a8]" : ""} hover:bg-[#fff2a8]`}
+                className={`${isCompleted ? "bg-success/45" : ""} ${isSelected || isPending ? "bg-accent" : ""} hover:bg-accent/60`}
               >
                 {token}
               </span>
@@ -282,22 +291,22 @@ export function TextHighlight({
         </div>
 
         {pendingRange && (
-          <div className="mt-3 bg-[#c0c0c0] p-3 shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#dfdfdf,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#fff]">
-            <p className="mb-2 text-xs font-bold text-black">
+          <div className="mt-4 rounded-[6px] border-2 border-ink bg-warn p-3 text-warn-foreground">
+            <p className="mb-3 text-sm font-black">
               Confirm this selection?
             </p>
             <div className="flex justify-end gap-2">
               <button
                 type="button"
                 onClick={handleConfirmHighlight}
-                className="min-w-[70px] bg-[#c0c0c0] px-3 py-1 text-xs text-black shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff]"
+                className={gameButton}
               >
                 OK
               </button>
               <button
                 type="button"
                 onClick={handleCancelHighlight}
-                className="min-w-[70px] bg-[#c0c0c0] px-3 py-1 text-xs text-black shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff]"
+                className={gameButtonSecondary}
               >
                 Cancel
               </button>
@@ -306,37 +315,37 @@ export function TextHighlight({
         )}
 
         {selectionFeedback && (
-          <p className="mt-2 border-t border-dashed border-[#808080] pt-2 text-[10px] text-[#404040]" role="status" aria-live="polite">
+          <p className="mt-3 border-t-2 border-ink pt-3 font-mono text-xs text-ink-soft" role="status" aria-live="polite">
             {selectionFeedback}
           </p>
         )}
         {traps.length > 0 && (
-          <p className="mt-1 text-[10px] text-[#606060]">
+          <p className="mt-2 font-mono text-xs text-ink-soft">
             Highlights found: {completedTrapIds.length} / {traps.length}
           </p>
         )}
         {allTrapsCompleted && (
-          <p className="mt-1 text-[10px] font-bold text-green-700" role="status">
+          <p className="mt-2 text-sm font-black text-success" role="status">
             All manipulation cues are documented.
           </p>
         )}
       </div>
 
       {activeQuiz && activeTrap && (
-        <div className="mt-3 bg-[#c0c0c0] shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#dfdfdf,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#fff]">
-          <div className="flex items-center justify-between bg-[#000080] px-1 py-0.5 text-white">
-            <span className="text-xs font-bold">System Critical Thinking</span>
+        <div className={`mt-5 ${gamePanel}`}>
+          <div className="flex items-start justify-between gap-3">
+            <span className={gameSectionBar}>Critical thinking check</span>
             <button
               type="button"
               onClick={handleQuizCancel}
               aria-label="Close critical thinking question"
-              className="h-4 w-5 bg-[#c0c0c0] text-[10px] leading-none text-black shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff]"
+              className="grid h-8 w-8 place-items-center rounded-[5px] border-2 border-ink bg-surface text-lg font-black text-ink hover:bg-danger hover:text-danger-foreground"
             >
-              
+              &times;
             </button>
           </div>
-          <form onSubmit={handleQuizSubmit} className="flex gap-3 p-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-yellow-300 text-lg font-bold shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff]">
+          <form onSubmit={handleQuizSubmit} className="flex flex-col gap-4 sm:flex-row">
+            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[5px] border-2 border-ink bg-accent text-xl font-black text-accent-foreground shadow-[3px_3px_0_0_var(--color-ink)]">
               ?
             </div>
             <div className="flex-1">
@@ -345,7 +354,7 @@ export function TextHighlight({
                 {activeQuiz.options.map((option) => (
                   <label
                     key={option}
-                    className="flex cursor-pointer items-start gap-2 bg-white px-2 py-1 text-xs shadow-[inset_1px_1px_0_#808080,inset_-1px_-1px_0_#fff]"
+                    className={gameOption}
                   >
                     <input
                       type="radio"
@@ -365,12 +374,12 @@ export function TextHighlight({
                 ))}
               </div>
               {quizState === "incorrect" && (
-                <p className="mt-2 bg-[#ffd7d7] p-2 text-xs" role="alert">
+                <p className={`mt-3 ${gameFeedbackError}`} role="alert">
                   That answer does not match the selected manipulation. Try again.
                 </p>
               )}
               {quizState === "correct" && (
-                <div className="mt-2 bg-[#d7ffd7] p-2 text-xs" role="status">
+                <div className={`mt-3 ${gameFeedbackSuccess}`} role="status">
                   <p className="font-bold">Correct.</p>
                   {activeQuiz.explanation && <p>{activeQuiz.explanation}</p>}
                 </div>
@@ -380,7 +389,7 @@ export function TextHighlight({
                   <button
                     type="button"
                     onClick={handleQuizContinue}
-                    className="min-w-[70px] bg-[#c0c0c0] px-3 py-1 text-xs shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff]"
+                    className={gameButton}
                   >
                     {finalTrapSelected || allTrapsCompleted ? "Next" : "OK"}
                   </button>
@@ -388,7 +397,7 @@ export function TextHighlight({
                   <button
                     type="submit"
                     disabled={!selectedOption}
-                    className="min-w-[70px] bg-[#c0c0c0] px-3 py-1 text-xs shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] enabled:active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff] disabled:cursor-not-allowed disabled:text-[#808080]"
+                    className={gameButton}
                   >
                     OK
                   </button>
@@ -396,7 +405,7 @@ export function TextHighlight({
                 <button
                   type="button"
                   onClick={handleQuizCancel}
-                  className="min-w-[70px] bg-[#c0c0c0] px-3 py-1 text-xs shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff]"
+                  className={gameButtonSecondary}
                 >
                   Cancel
                 </button>

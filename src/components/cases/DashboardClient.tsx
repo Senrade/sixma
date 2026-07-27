@@ -44,10 +44,13 @@ export function DashboardClient({ cases }: { cases: CaseData[] }) {
         <Card tone="success" className="p-5"><p className="text-sm font-bold">Completed</p><p className="mt-2 text-4xl font-black">{completed}</p></Card>
       </div>
       <div className="mt-10 grid gap-8 md:grid-cols-2">
-        {cases.map((caseData) => {
+        {cases.map((caseData, caseIndex) => {
           const state = progress[caseData.case_id];
           const percentage = state.completedAt ? 100 : state.step > 0 ? Math.round(((state.step - 1) / 3) * 100) : 0;
-          return <CaseFolder key={caseData.case_id} caseData={caseData} progress={percentage} />;
+          const previousCase = caseIndex > 0 ? cases[caseIndex - 1] : undefined;
+          const previousCompleted = previousCase ? Boolean(progress[previousCase.case_id]?.completedAt) : true;
+          const access = state.completedAt ? "completed" : previousCompleted ? "available" : "locked";
+          return <CaseFolder key={caseData.case_id} caseData={caseData} progress={percentage} access={access} revealDetails={Boolean(state.completedAt)} prerequisiteCaseId={previousCase?.case_id} />;
         })}
       </div>
       <div className="mt-12 border-t-2 border-ink pt-8">

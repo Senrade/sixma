@@ -11,7 +11,7 @@ export function SiteFooter() {
           <div className="mt-4 flex flex-wrap gap-2"><Chip tone="amber">Hackathon prototype</Chip><Chip>Independent project</Chip></div>
         </div>
         <FooterColumn title="Explore" links={[["/cases", "Case hub"], ["/learn", "Knowledge hub"], ["/achievements", "Achievements"], ["/redeem", "Event access"]]} />
-        <FooterColumn title="Project" links={[["/about", "About"], ["/faq", "FAQ"], ["/contact", "Contact"], ["/privacy", "Privacy"], ["/terms", "Terms"]]} />
+        <FooterColumn title="Project" links={[["/about", "About"], ["/#faq", "FAQ"], ["/contact", "Contact"], ["/privacy", "Privacy"], ["/terms", "Terms"]]} />
       </div>
       <p className="border-t-2 border-ink px-4 py-4 text-center text-xs text-ink-soft">Prototype built for a UNESCO MIL hackathon. Not affiliated with or endorsed by UNESCO.</p>
     </footer>

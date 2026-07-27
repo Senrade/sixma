@@ -25,7 +25,7 @@ export interface ImageForensicsModule {
   image_height?: number;
   context_text: string;
   target_anomalies: ImageAnomaly[];
-  socratic_quiz: SocraticQuiz;
+  socratic_quiz?: SocraticQuiz;
 }
 
 export interface TextHighlightTrap {

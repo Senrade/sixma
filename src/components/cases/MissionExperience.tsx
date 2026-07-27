@@ -29,28 +29,28 @@ export function MissionExperience({ caseData }: { caseData: CaseData }) {
   }, [caseData.case_id, router]);
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
-      <header className="sticky top-0 z-40 border-b-2 border-white/20 bg-slate-950 px-3 py-3 sm:px-6">
+    <main className="case-grid-bg min-h-screen bg-background text-foreground">
+      <header className="sticky top-0 z-40 border-b-2 border-ink bg-background px-3 py-3 sm:px-6">
         <div className="mx-auto flex max-w-7xl items-center gap-3">
           <Link
             href={`/cases/${caseData.case_id}`}
-            className="inline-flex min-h-10 items-center border-2 border-white/30 px-3 text-sm font-bold hover:bg-white/10"
+            className="inline-flex min-h-10 items-center rounded-[6px] border-2 border-ink bg-surface px-3 text-sm font-bold text-ink shadow-[3px_3px_0_0_var(--color-ink)] hover:bg-accent"
           >
             <span aria-hidden>&lt;-</span>
             <span className="ml-2 hidden sm:inline">Exit mission</span>
           </Link>
           <div className="min-w-0 flex-1">
             <div className="flex items-baseline justify-between gap-3">
-              <p className="truncate font-mono text-xs font-black uppercase text-cyan-300">
+              <p className="truncate font-mono text-xs font-black uppercase text-danger">
                 {caseData.case_id} / {STEP_LABELS[currentStep - 1]}
               </p>
-              <span className="shrink-0 font-mono text-xs text-slate-300">
+              <span className="shrink-0 font-mono text-xs text-ink-soft">
                 Step {currentStep} of 3
               </span>
             </div>
             <Progress
               value={(currentStep / 3) * 100}
-              className="mt-1.5 h-2 border-white/30 bg-slate-800 [&>div]:bg-cyan-400"
+              className="mt-1.5 h-2 bg-surface [&>div]:bg-info"
             />
           </div>
         </div>
