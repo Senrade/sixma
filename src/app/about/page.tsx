@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { InfoPage } from "@/components/site/InfoPage";
+
+export const metadata: Metadata = { title: "About" };
+export default function AboutPage() { return <InfoPage eyebrow="The project" title="Critical thinking under pressure" intro="Veritas.Lab is an interactive media and information literacy prototype for students, families, and educators."><h2>Why this format</h2><p>Misinformation is rarely defeated by memorizing a checklist. Each case asks the learner to inspect evidence, make a judgment, receive feedback, and explain the reasoning behind that judgment.</p><h2>Built for practice</h2><p>The case structure combines image forensics, rhetorical analysis, and manipulation-chain reconstruction. These skills transfer to suspicious posts, scams, altered media, and high-pressure messages outside the classroom.</p><h2>Project status</h2><p>This is an independent hackathon prototype. It is not affiliated with or endorsed by UNESCO. Case questions and learning content remain subject to educator and subject-matter review.</p></InfoPage>; }

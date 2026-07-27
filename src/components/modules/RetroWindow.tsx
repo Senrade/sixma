@@ -8,29 +8,18 @@ export interface RetroWindowProps {
 
 export function RetroWindow({ title, children, onClose }: RetroWindowProps) {
   return (
-    <div className="bg-[#c0c0c0] font-mono text-black shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#dfdfdf,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#fff]">
-      {/* Title bar */}
-      <div className="flex items-center justify-between bg-[#000080] px-1 py-0.5 text-white">
-        <div className="flex items-center gap-1">
-          <div className="h-4 w-4 bg-[#c0c0c0] shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff]" />
-          <span className="text-xs font-bold tracking-wide">{title}</span>
+    <section className="overflow-hidden rounded-[8px] border-2 border-ink bg-surface font-sans text-ink shadow-[8px_8px_0_0_var(--color-ink)]">
+      <header className="flex min-h-12 items-center justify-between gap-3 border-b-2 border-ink bg-ink px-3 py-2 text-background sm:px-4">
+        <div className="flex min-w-0 items-center gap-3">
+          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-[5px] border-2 border-background bg-accent font-mono text-xs font-black text-accent-foreground">V</span>
+          <h2 className="truncate font-mono text-xs font-black uppercase sm:text-sm">{title}</h2>
         </div>
-        <div className="flex gap-0.5">
-          {["_", "▢", "✕"].map((s, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={i === 2 ? onClose : undefined}
-              className="h-5 w-5 bg-[#c0c0c0] text-black text-[10px] leading-none shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff]"
-            >
-              {s}
-            </button>
-          ))}
-        </div>
-      </div>
-      {/* Body */}
-      <div className="p-2">{children}</div>
-    </div>
+        {onClose && (
+          <button type="button" onClick={onClose} aria-label="Return to the previous module" className="grid h-8 w-8 shrink-0 place-items-center rounded-[5px] border-2 border-background bg-surface text-lg font-black text-ink hover:bg-accent">&times;</button>
+        )}
+      </header>
+      <div className="p-3 sm:p-4">{children}</div>
+    </section>
   );
 }
 

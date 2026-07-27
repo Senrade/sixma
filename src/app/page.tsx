@@ -1,65 +1,113 @@
 import Image from "next/image";
+import { CaseFolder } from "@/components/cases/CaseFolder";
+import { AppShell } from "@/components/site/AppShell";
+import { FaqAccordion } from "@/components/site/FaqAccordion";
+import { ScrollReveal } from "@/components/site/ScrollReveal";
+import { ButtonLink, SectionLabel } from "@/components/ui/Primitives";
+import { getCases } from "@/lib/cases";
 
-export default function Home() {
+export default async function Home() {
+  const cases = await getCases();
+  const featuredCase = cases[0];
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+    <AppShell>
+      <section className="relative min-h-[calc(88svh-4rem)] overflow-hidden border-b-2 border-ink bg-slate-950 text-white">
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
+          src={featuredCase.spotted_url}
+          alt="A marked-up investigation image from the featured case"
+          fill
           priority
+          sizes="100vw"
+          className="object-cover object-center opacity-45"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+        <div className="absolute inset-0 bg-slate-950/45" aria-hidden />
+        <div className="relative mx-auto flex min-h-[calc(88svh-4rem)] max-w-7xl items-end px-4 pb-14 pt-20 sm:px-6 lg:pb-16">
+          <div className="max-w-3xl">
+            <p className="mb-4 font-mono text-sm font-black uppercase text-amber-300">Media literacy, learned by doing</p>
+            <h1 className="font-display text-4xl font-black leading-[1.05] sm:text-6xl lg:text-7xl">
+              Veritas.Lab
+            </h1>
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-100 sm:text-xl">
+              An interactive media-literacy game for students, families, and educators. Work through realistic cases before the same pressure appears in real life.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <ButtonLink href="/cases" tone="accent">Open case hub</ButtonLink>
+              <ButtonLink href={`/cases/${featuredCase.case_id}`} tone="secondary">View featured case</ButtonLink>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="border-b-2 border-ink bg-background py-14 sm:py-18">
+        <ScrollReveal className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+            <div>
+              <SectionLabel>What it is</SectionLabel>
+              <h2 className="mt-3 text-3xl font-black leading-tight sm:text-4xl">Practice the pause before you trust or share</h2>
+              <p className="mt-4 max-w-xl text-base leading-7 text-ink-soft">Veritas.Lab turns misinformation patterns into short investigations. Players inspect the source material, identify the persuasive technique, and trace how an unsupported claim grows.</p>
+            </div>
+            <div>
+              <p className="font-mono text-xs font-black uppercase text-danger">Built for</p>
+              <div className="mt-3 grid gap-px border-2 border-ink bg-ink sm:grid-cols-3">
+                {[
+                  ["Students", "Build verification habits before reacting to viral content."],
+                  ["Families", "Discuss scams, emotional pressure, and suspicious claims together."],
+                  ["Educators", "Use compact cases for guided media-literacy practice."],
+                ].map(([audience, copy]) => (
+                  <article key={audience} className="bg-surface p-5">
+                    <h3 className="text-lg font-black">{audience}</h3>
+                    <p className="mt-2 text-sm leading-6 text-ink-soft">{copy}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+      </section>
+
+      <section className="border-b-2 border-ink bg-accent py-12">
+        <ScrollReveal className="mx-auto max-w-7xl px-4 sm:px-6">
+          <SectionLabel>How an investigation works</SectionLabel>
+          <div className="mt-6 grid gap-px border-2 border-ink bg-ink md:grid-cols-3">
+            {[
+              ["01", "Inspect evidence", "Locate visual inconsistencies instead of trusting first impressions."],
+              ["02", "Question the claim", "Mark the exact language that pushes fear or faulty reasoning."],
+              ["03", "Trace the chain", "Rebuild the sequence used to move a person from hook to harm."],
+            ].map(([number, title, copy]) => (
+              <div key={number} className="bg-background p-5 sm:p-6">
+                <span className="font-mono text-sm font-black text-danger">{number}</span>
+                <h2 className="mt-3 text-xl font-black">{title}</h2>
+                <p className="mt-2 text-sm leading-6 text-ink-soft">{copy}</p>
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
+      </section>
+
+      <section className="case-grid-bg py-14 sm:py-18">
+        <ScrollReveal className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <SectionLabel>Case files</SectionLabel>
+              <h2 className="mt-3 text-3xl font-black">Start the first investigation</h2>
+            </div>
+            <ButtonLink href="/cases" tone="secondary">Browse all cases</ButtonLink>
+          </div>
+          <div className="mt-7 max-w-xl">
+            {cases.slice(0, 1).map((caseData) => <CaseFolder key={caseData.case_id} caseData={caseData} revealDetails={false} />)}
+          </div>
+        </ScrollReveal>
+      </section>
+
+      <section id="faq" className="scroll-mt-20 border-t-2 border-ink bg-background py-14 sm:py-18">
+        <ScrollReveal className="mx-auto max-w-5xl px-4 sm:px-6">
+          <SectionLabel>Questions and answers</SectionLabel>
+          <h2 className="mt-3 text-3xl font-black sm:text-4xl">Frequently asked questions</h2>
+          <p className="mt-3 max-w-2xl text-ink-soft">How case progression, evidence practice, and this independent project work.</p>
+          <FaqAccordion />
+        </ScrollReveal>
+      </section>
+    </AppShell>
   );
 }

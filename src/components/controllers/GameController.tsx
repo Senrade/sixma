@@ -4,89 +4,22 @@ import { useCallback, useEffect, useState } from "react";
 import ImageForensics from "../modules/ImageForensics";
 import SortingGame from "../modules/SortingGame";
 import TextHighlight from "../modules/TextHighlight";
+import type {
+  CaseData,
+  SocraticQuiz,
+} from "@/lib/case-types";
+
+export type { CaseData } from "@/lib/case-types";
 
 export type GameStep = 1 | 2 | 3;
-
-export interface SocraticQuiz {
-  question?: string;
-  push_question?: string;
-  options: string[];
-  correct_option?: string;
-  explanation?: string;
-}
-
-export interface ImageAnomaly {
-  anomaly_id: string;
-  name: string;
-  x_pct: number;
-  y_pct: number;
-  radius_pct: number;
-  description: string;
-  socratic_quiz?: SocraticQuiz;
-}
-
-export interface ImageForensicsModule {
-  mechanic_type: string;
-  image_url: string;
-  context_text: string;
-  image_width?: number;
-  image_height?: number;
-  target_anomalies: ImageAnomaly[];
-  socratic_quiz: SocraticQuiz;
-}
-
-export interface TextHighlightTrap {
-  trap_id: string;
-  ground_truth_start: number;
-  ground_truth_end: number;
-  matched_text: string;
-  weapon_type: string[];
-  socratic_quiz: SocraticQuiz;
-}
-
-export interface TextHighlightModule {
-  mechanic_type: string;
-  simulated_post: {
-    author: string;
-    time_posted: string;
-    content: string;
-  };
-  traps: TextHighlightTrap[];
-}
-
-export interface SortingPoolItem {
-  item_id: string;
-  text: string;
-}
-
-export interface SortingModule {
-  mechanic_type: string;
-  task_instruction: string;
-  pool_items: SortingPoolItem[];
-  correct_sequence: string[];
-  validation_feedback: {
-    success: string;
-    failure: string;
-  };
-}
-
-export interface CaseData {
-  level: string;
-  case_id: string;
-  theme: string[];
-  story_context: string;
-  modules: {
-    step_1_image_forensics: ImageForensicsModule;
-    step_2_text_highlight: TextHighlightModule;
-    step_3_sorting_game: SortingModule;
-  };
-}
 
 export type GameCaseData = CaseData;
 
 export interface GameControllerProps {
   caseData: GameCaseData;
   storageKey?: string;
+  onCaseComplete?: () => void;
+  onStepChange?: (step: GameStep) => void;
 }
 
 const FIRST_STEP: GameStep = 1;
@@ -134,6 +67,8 @@ function getQuizQuestion(quiz: SocraticQuiz): string {
 export default function GameController({
   caseData,
   storageKey,
+  onCaseComplete,
+  onStepChange,
 }: GameControllerProps) {
   const persistenceKey =
     storageKey ??
@@ -175,6 +110,12 @@ export default function GameController({
     writeStoredStep(persistenceKey, currentStep);
   }, [currentStep, hasRestoredStep, persistenceKey]);
 
+  useEffect(() => {
+    if (hasRestoredStep) {
+      onStepChange?.(currentStep);
+    }
+  }, [currentStep, hasRestoredStep, onStepChange]);
+
   const handleStepComplete = useCallback(() => {
     setCurrentStep((step) => {
       const nextStep = Math.min(step + 1, LAST_STEP) as GameStep;
@@ -213,12 +154,12 @@ export default function GameController({
                 }
               : undefined,
           }))}
-          socraticQuiz={{
+          socraticQuiz={imageModule.socratic_quiz ? {
             question: getQuizQuestion(imageModule.socratic_quiz),
             options: imageModule.socratic_quiz.options,
             correct_option: imageModule.socratic_quiz.correct_option,
             explanation: imageModule.socratic_quiz.explanation,
-          }}
+          } : undefined}
           onComplete={handleStepComplete}
           onBack={handleStepBack}
         />
@@ -246,13 +187,14 @@ export default function GameController({
 
       activeModule = (
         <SortingGame
+          taskInstruction={sortingModule.task_instruction}
           poolItems={sortingModule.pool_items.map((item) => ({
             id: item.item_id,
             text: item.text,
           }))}
           correctSequence={sortingModule.correct_sequence}
           validationFeedback={sortingModule.validation_feedback}
-          onComplete={handleStepComplete}
+          onComplete={onCaseComplete ?? handleStepComplete}
           onBack={handleStepBack}
         />
       );
@@ -262,9 +204,3 @@ export default function GameController({
 
   return activeModule;
 }
-
-
-
-
-
-// nguoi dep trai 2 was here
