@@ -54,15 +54,18 @@ export function SortingGame({
     sequence.filter((itemId): itemId is string => itemId !== null),
   );
 
-  // Sync state khi props poolItems hoac correctSequence thay doi
   useEffect(() => {
-    setSequence(Array.from({ length: poolItems.length }, () => null));
-    setSelectedId(null);
-    setDraggingId(null);
-    setDragTargetIndex(null);
-    setStatus("Ready");
-    setFeedback("");
-    completionSentRef.current = false;
+    const timer = window.setTimeout(() => {
+      setSequence(Array.from({ length: poolItems.length }, () => null));
+      setSelectedId(null);
+      setDraggingId(null);
+      setDragTargetIndex(null);
+      setStatus("Ready");
+      setFeedback("");
+      completionSentRef.current = false;
+    }, 0);
+
+    return () => window.clearTimeout(timer);
   }, [poolItems, correctSequence]);
 
   const getSlotIndexFromPoint = (

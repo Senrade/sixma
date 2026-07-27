@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { InfoPage } from "@/components/site/InfoPage";
+
+export const metadata: Metadata = { title: "FAQ" };
+export default function FaqPage() { return <InfoPage eyebrow="Common questions" title="Frequently asked questions" intro="What the current prototype does, where progress lives, and what comes next."><h2>Do I need an account?</h2><p>No. The current playable demo stores progress in your browser. Accounts are shown in the interface but are not connected yet.</p><h2>Are the cases official UNESCO content?</h2><p>No. This is an independent hackathon prototype, and its draft educational content requires review before production use.</p><h2>Why can I not redeem an event card?</h2><p>One-time redemption cannot be enforced securely in static frontend code. It will be enabled only after a server-side database, authentication, rate limiting, and audit trail are connected.</p><h2>Does the site identify every AI image?</h2><p>No. The exercises teach investigation habits. Visual anomalies can justify further verification, but a single anomaly should not be treated as universal proof.</p></InfoPage>; }

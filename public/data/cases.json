@@ -2,6 +2,15 @@
   {
     "level": "RED",
     "case_id": "R001",
+    "title": "The Classroom That Never Happened",
+    "short_summary": "A viral image claims AI is monitoring students. Verify the photo, decode the rhetoric, and expose the phishing chain.",
+    "duration_min": 15,
+    "skills": [
+      "Image forensics",
+      "Logical fallacies",
+      "Phishing patterns"
+    ],
+    "spotted_url": "/assets/images/R001/R001_spotted.jpg",
     "theme": [
       "Education",
       "Technology"
@@ -170,6 +179,15 @@
   {
     "level": "RED",
     "case_id": "R007",
+    "title": "The Canteen Extortion File",
+    "short_summary": "An anonymous sender uses a doctored food photo and reputational pressure to extort a school.",
+    "duration_min": 12,
+    "skills": [
+      "Composite detection",
+      "Coercion patterns",
+      "Extortion structure"
+    ],
+    "spotted_url": "/assets/images/R007/R007_spotted.png",
     "theme": [
       "Health",
       "Safety",
@@ -246,7 +264,7 @@
           {
             "trap_id": "R007_TRAP_02",
             "ground_truth_start": 151,
-            "ground_truth_end": 191,
+            "ground_truth_end": 187,
             "matched_text": "Give me $2000 to keep my mouth shut.",
             "weapon_type": [
               "financial_extortion",

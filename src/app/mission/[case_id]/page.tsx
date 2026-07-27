@@ -1,9 +1,22 @@
-import { readFile } from "node:fs/promises";
-import path from "node:path";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import GameController, {
-  type CaseData,
-} from "@/components/controllers/GameController";
+import { MissionExperience } from "@/components/cases/MissionExperience";
+import { getCase, getCases } from "@/lib/cases";
+
+export async function generateStaticParams() {
+  const cases = await getCases();
+  return cases.map((caseData) => ({ case_id: caseData.case_id }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ case_id: string }>;
+}): Promise<Metadata> {
+  const { case_id: caseId } = await params;
+  const caseData = await getCase(caseId);
+  return { title: caseData ? `Mission ${caseData.case_id}` : "Mission not found" };
+}
 
 export default async function MissionPage({
   params,
@@ -11,27 +24,11 @@ export default async function MissionPage({
   params: Promise<{ case_id: string }>;
 }) {
   const { case_id: caseId } = await params;
-  const filePath = path.join(process.cwd(), "public", "data", "cases.json");
+  const caseData = await getCase(caseId);
 
-  let cases: CaseData[];
-
-  try {
-    const fileContents = await readFile(filePath, "utf8");
-    cases = JSON.parse(fileContents) as CaseData[];
-  } catch (error) {
-    console.error("Failed to read case data:", error);
+  if (!caseData) {
     notFound();
   }
 
-  const currentCase = cases.find((caseData) => caseData.case_id === caseId);
-
-  if (!currentCase) {
-    notFound();
-  }
-
-  return (
-    <main className="min-h-screen w-full bg-slate-900 text-white">
-      <GameController caseData={currentCase} />
-    </main>
-  );
+  return <MissionExperience caseData={caseData} />;
 }
