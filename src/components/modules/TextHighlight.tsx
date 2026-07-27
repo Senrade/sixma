@@ -50,6 +50,7 @@ interface CharacterRange {
 }
 
 type QuizState = "idle" | "incorrect" | "correct";
+type SelectionState = "idle" | "incorrect" | "matched";
 
 function getQuizQuestion(quiz: TextHighlightQuiz): string {
   return quiz.question ?? quiz.push_question ?? "Why is this selection suspicious?";
@@ -126,6 +127,7 @@ export function TextHighlight({
   const [selectedOption, setSelectedOption] = useState("");
   const [quizState, setQuizState] = useState<QuizState>("idle");
   const [selectionFeedback, setSelectionFeedback] = useState("");
+  const [selectionState, setSelectionState] = useState<SelectionState>("idle");
   const selectionTimerRef = useRef<number | null>(null);
   const textRootRef = useRef<HTMLDivElement>(null);
 
@@ -143,6 +145,16 @@ export function TextHighlight({
     activeTrap !== undefined &&
     traps.length > 0 &&
     completedTrapIds.length === traps.length - 1;
+  const authorInitials = postAuthor
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((word) => word.charAt(0).toUpperCase())
+    .join("");
+  const authorHandle = `@${postAuthor
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_|_$/g, "")
+    .slice(0, 28)}`;
 
   const captureSelection = () => {
     if (!textRootRef.current) return;
@@ -154,6 +166,7 @@ export function TextHighlight({
       setActiveTrapId(null);
       setQuizState("idle");
       setSelectionFeedback("");
+      setSelectionState("idle");
       window.getSelection()?.removeAllRanges();
     }
   };
@@ -172,6 +185,7 @@ export function TextHighlight({
       setSelectionFeedback(
         `Selection overlap is ${Math.round((candidate?.score ?? 0) * 100)}%. Select at least ${Math.round(iouThreshold * 100)}% of one manipulation.`,
       );
+      setSelectionState("incorrect");
       setPendingRange(null);
       return;
     }
@@ -183,12 +197,15 @@ export function TextHighlight({
     setSelectionFeedback(
       `Potential manipulation selected (${Math.round(candidate.score * 100)}% overlap).`,
     );
+    setSelectionState("matched");
     onSelectionComplete?.(pendingRange.start, pendingRange.end);
     setPendingRange(null);
   };
 
   const handleCancelHighlight = () => {
     setPendingRange(null);
+    setSelectionFeedback("");
+    setSelectionState("idle");
   };
 
   const scheduleSelectionInspection = () => {
@@ -242,15 +259,20 @@ export function TextHighlight({
   return (
     <RetroWindow title="Module 02 / Language Analysis" onClose={onBack}>
       <div className={gamePanel}>
-        <div className="mb-4 flex items-center gap-3 border-b-2 border-ink pb-3">
-          <div className="grid h-10 w-10 place-items-center rounded-[5px] border-2 border-ink bg-info text-xs font-black text-info-foreground">
-            ??
+        <div className="mb-4 flex items-center justify-between gap-3 border-b-2 border-ink pb-3">
+          <span className={gameSectionBar}>Community wire</span>
+          <span className="rounded-[4px] border-2 border-danger bg-background px-2 py-1 font-mono text-[10px] font-black uppercase text-danger">Unverified</span>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full border-2 border-ink bg-info text-xs font-black text-info-foreground shadow-[3px_3px_0_0_var(--color-ink)]">
+            {authorInitials || "?"}
           </div>
-          <div className="flex-1">
-            <div className="text-sm font-black">{postAuthor}</div>
-            <div className="font-mono text-xs text-ink-soft">{postTime}</div>
+          <div className="min-w-0 flex-1">
+            <div className="truncate text-sm font-black">{postAuthor}</div>
+            <div className="truncate font-mono text-xs text-ink-soft">{authorHandle} / {postTime}</div>
           </div>
-          <div className="hidden font-mono text-xs text-ink-soft sm:block">#anonymous</div>
+          <span className="font-mono text-lg font-black text-ink-soft" aria-label="Post options">...</span>
         </div>
 
         <div
@@ -262,7 +284,8 @@ export function TextHighlight({
             }
           }}
           onTouchEnd={scheduleSelectionInspection}
-          className="select-text whitespace-pre-wrap text-base leading-8 text-ink"
+          aria-label="Social post content to analyze"
+          className="mt-5 select-text whitespace-pre-wrap border-y-2 border-ink bg-background px-1 py-5 text-base leading-8 text-ink sm:px-3"
         >
           {tokensWithOffsets.map(({ token, start }, index) => {
             const end = start + token.length;
@@ -290,6 +313,12 @@ export function TextHighlight({
           })}
         </div>
 
+        <div className="mt-3 flex flex-wrap items-center gap-2 font-mono text-[11px] font-bold uppercase text-ink-soft">
+          <span className="rounded-[4px] border-2 border-ink bg-surface-2 px-2 py-1">Public post</span>
+          <span className="rounded-[4px] border-2 border-ink bg-warn px-2 py-1 text-warn-foreground">Context pending</span>
+          <span className="ml-auto">Evidence marks {completedTrapIds.length}/{traps.length}</span>
+        </div>
+
         {pendingRange && (
           <div className="mt-4 rounded-[6px] border-2 border-ink bg-warn p-3 text-warn-foreground">
             <p className="mb-3 text-sm font-black">
@@ -315,13 +344,16 @@ export function TextHighlight({
         )}
 
         {selectionFeedback && (
-          <p className="mt-3 border-t-2 border-ink pt-3 font-mono text-xs text-ink-soft" role="status" aria-live="polite">
+          <p
+            className={
+              selectionState === "incorrect"
+                ? `mt-3 ${gameFeedbackError}`
+                : "mt-3 rounded-[6px] border-2 border-ink bg-info/15 p-3 font-mono text-sm font-bold text-ink"
+            }
+            role={selectionState === "incorrect" ? "alert" : "status"}
+            aria-live="polite"
+          >
             {selectionFeedback}
-          </p>
-        )}
-        {traps.length > 0 && (
-          <p className="mt-2 font-mono text-xs text-ink-soft">
-            Highlights found: {completedTrapIds.length} / {traps.length}
           </p>
         )}
         {allTrapsCompleted && (

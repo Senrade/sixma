@@ -457,7 +457,7 @@ export function ImageForensics({
               Evidence found: {foundAnomalyIds.length} / {targetAnomalies.length}
             </div>
             {clickMessage && (
-              <p className="mt-3 rounded-[6px] border-2 border-ink bg-warn p-3 text-xs text-warn-foreground">
+              <p className={`mt-3 ${gameFeedbackError}`} role="alert">
                 {clickMessage}
               </p>
             )}

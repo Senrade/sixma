@@ -7,10 +7,12 @@ import { Button, ButtonLink, cn } from "@/components/ui/Primitives";
 import { ThemeToggle } from "./ThemeToggle";
 
 const NAVIGATION = [
+  { href: "/", label: "Home" },
   { href: "/cases", label: "Case hub" },
   { href: "/learn", label: "Knowledge" },
   { href: "/dashboard", label: "Dashboard" },
   { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function SiteHeader() {
@@ -19,15 +21,17 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b-2 border-ink bg-background/95 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 md:px-6">
+      <div className="relative mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2 font-display text-lg font-black">
           <span className="grid h-9 w-9 place-items-center rounded-[6px] border-2 border-ink bg-accent shadow-[3px_3px_0_0_var(--color-ink)]">V</span>
           <span className="hidden min-[430px]:inline">Veritas<span className="text-danger">.Lab</span></span>
         </Link>
 
-        <nav className="ml-5 hidden items-center gap-1 lg:flex" aria-label="Primary navigation">
+        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 xl:flex" aria-label="Primary navigation">
           {NAVIGATION.map((item) => {
-            const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+            const active = item.href === "/"
+              ? pathname === "/"
+              : pathname === item.href || pathname.startsWith(`${item.href}/`);
             return (
               <Link
                 key={item.href}
@@ -47,14 +51,14 @@ export function SiteHeader() {
           <ThemeToggle />
           <ButtonLink href="/redeem" tone="secondary" className="max-sm:!hidden">Redeem</ButtonLink>
           <ButtonLink href="/auth/sign-in" className="max-sm:!hidden">Sign in</ButtonLink>
-          <Button tone="ghost" className="lg:hidden" onClick={() => setMenuOpen((open) => !open)} aria-expanded={menuOpen}>
+          <Button tone="ghost" className="xl:hidden" onClick={() => setMenuOpen((open) => !open)} aria-expanded={menuOpen}>
             Menu
           </Button>
         </div>
       </div>
 
       {menuOpen && (
-        <nav className="border-t-2 border-ink bg-surface px-4 py-3 lg:hidden" aria-label="Mobile navigation">
+        <nav className="border-t-2 border-ink bg-surface px-4 py-3 xl:hidden" aria-label="Mobile navigation">
           <div className="mx-auto grid max-w-7xl gap-2 sm:grid-cols-2">
             {NAVIGATION.map((item) => (
               <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className="rounded-[4px] border-2 border-ink bg-background px-3 py-2 font-semibold shadow-[2px_2px_0_0_var(--color-ink)]">

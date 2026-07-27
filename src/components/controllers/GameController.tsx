@@ -187,6 +187,7 @@ export default function GameController({
 
       activeModule = (
         <SortingGame
+          taskInstruction={sortingModule.task_instruction}
           poolItems={sortingModule.pool_items.map((item) => ({
             id: item.item_id,
             text: item.text,

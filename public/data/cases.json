@@ -241,8 +241,8 @@
           },
           {
             "trap_id": "R007_TRAP_02",
-            "ground_truth_start": 151,
-            "ground_truth_end": 187,
+            "ground_truth_start": 503,
+            "ground_truth_end": 646,
             "matched_text": "The school seems to never take students' food feedback into consideration anyway, saying the problem is too complicated or something like that.",
             "weapon_type": [
               "poisoning_the_well",
@@ -260,9 +260,9 @@
             }
           },
           {
-            "trap_id": "R007_TRAP_02",
-            "ground_truth_start": 151,
-            "ground_truth_end": 187,
+            "trap_id": "R007_TRAP_03",
+            "ground_truth_start": 647,
+            "ground_truth_end": 758,
             "matched_text": "At this point, I think parents deserve to know what's happening before this gets quietly swept under the rug...",
             "weapon_type": [
               "conspiracy_theory",

@@ -21,6 +21,7 @@ export interface SortingValidationFeedback {
 }
 
 export interface SortingGameProps {
+  taskInstruction: string;
   poolItems: { id: string; text: string }[];
   correctSequence?: string[];
   validationFeedback?: SortingValidationFeedback;
@@ -36,6 +37,7 @@ function isCompleteSequence(sequence: (string | null)[]): sequence is string[] {
 }
 
 export function SortingGame({
+  taskInstruction,
   poolItems,
   correctSequence,
   validationFeedback,
@@ -272,6 +274,10 @@ export function SortingGame({
 
   return (
     <RetroWindow title="Module 03 / Sequence Reconstruction" onClose={onBack}>
+      <div className="mb-4 border-l-4 border-danger bg-accent/25 px-4 py-3">
+        <p className="font-mono text-[11px] font-black uppercase text-danger">Investigation task</p>
+        <p className="mt-1 text-sm font-bold leading-6 text-ink">{taskInstruction}</p>
+      </div>
       <div className="grid gap-4 md:grid-cols-2">
         {/* EVIDENCE BANK CONTAINER */}
         <div

@@ -17,4 +17,4 @@ export const gameFeedbackSuccess =
   "rounded-[6px] border-2 border-ink bg-success p-3 text-sm text-success-foreground";
 
 export const gameFeedbackError =
-  "rounded-[6px] border-2 border-ink bg-danger p-3 text-sm text-danger-foreground";
+  "rounded-[6px] border-2 border-ink bg-danger p-4 text-base font-black leading-6 text-danger-foreground shadow-[3px_3px_0_0_var(--color-ink)]";

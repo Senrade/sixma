@@ -21,6 +21,10 @@ export function MissionExperience({ caseData }: { caseData: CaseData }) {
         `veritas-case:${caseData.case_id}:completed-at`,
         new Date().toISOString(),
       );
+      window.localStorage.setItem(
+        `unesco-mil-game:v2:${caseData.case_id}:current-step`,
+        "1",
+      );
     } catch {
       // Completion still works when storage is unavailable.
     }
