@@ -370,8 +370,18 @@ export function TextHighlight({
                 </p>
               )}
               {quizState === "correct" && (
-                <div className="mt-2 bg-[#d7ffd7] p-2 text-xs" role="status">
+                <div className="mt-2 bg-[#d7ffd7] p-3 text-xs rounded-[5px] border-2 border-ink" role="status">
                   <p className="font-bold">Correct.</p>
+
+                  <div className="rounded-[5px] border-2 border-ink bg-white p-2.5 text-xs text-black shadow-[2px_2px_0_0_var(--color-ink)]">
+                    <span className="font-mono font-black uppercase text-emerald-800 block mb-1">
+                      Correct answer:
+                    </span>
+                    <p className="font-medium italic text-black bg-emerald-50 p-2 rounded border border-ink">
+                      "{activeTrap.matched_text || content.slice(activeTrap.ground_truth_start, activeTrap.ground_truth_end)}"
+                    </p>
+                  </div>
+                  
                   {activeQuiz.explanation && <p>{activeQuiz.explanation}</p>}
                 </div>
               )}
