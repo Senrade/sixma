@@ -1,4 +1,5 @@
 import {
+  useEffect,
   useRef,
   useState,
   type FormEvent,
@@ -130,6 +131,8 @@ export function TextHighlight({
   const [selectionState, setSelectionState] = useState<SelectionState>("idle");
   const selectionTimerRef = useRef<number | null>(null);
   const textRootRef = useRef<HTMLDivElement>(null);
+  const confirmationRef = useRef<HTMLDivElement>(null);
+  const quizRef = useRef<HTMLDivElement>(null);
 
   const tokens = content.split(/(\s+)/);
   const tokensWithOffsets = tokens.map((token, index) => ({
@@ -155,6 +158,32 @@ export function TextHighlight({
     .replace(/[^a-z0-9]+/g, "_")
     .replace(/^_|_$/g, "")
     .slice(0, 28)}`;
+
+  useEffect(() => {
+    const target = pendingRange
+      ? confirmationRef.current
+      : activeTrapId
+        ? quizRef.current
+        : null;
+
+    if (!target || window.matchMedia("(min-width: 640px)").matches) {
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeTrapId, pendingRange]);
+
+  useEffect(() => {
+    return () => {
+      if (selectionTimerRef.current !== null) {
+        window.clearTimeout(selectionTimerRef.current);
+      }
+    };
+  }, []);
 
   const captureSelection = () => {
     if (!textRootRef.current) return;
@@ -208,7 +237,7 @@ export function TextHighlight({
     setSelectionState("idle");
   };
 
-  const scheduleSelectionInspection = () => {
+  const scheduleSelectionInspection = (delay = 0) => {
     if (selectionTimerRef.current !== null) {
       window.clearTimeout(selectionTimerRef.current);
     }
@@ -216,7 +245,7 @@ export function TextHighlight({
     selectionTimerRef.current = window.setTimeout(() => {
       selectionTimerRef.current = null;
       captureSelection();
-    }, 0);
+    }, delay);
   };
 
   const handleQuizSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -277,15 +306,14 @@ export function TextHighlight({
 
         <div
           ref={textRootRef}
-          onMouseUp={scheduleSelectionInspection}
+          onMouseUp={() => scheduleSelectionInspection()}
           onPointerUp={(event: PointerEvent<HTMLDivElement>) => {
             if (event.pointerType !== "mouse") {
-              scheduleSelectionInspection();
+              scheduleSelectionInspection(350);
             }
           }}
-          onTouchEnd={scheduleSelectionInspection}
           aria-label="Social post content to analyze"
-          className="mt-5 select-text whitespace-pre-wrap border-y-2 border-ink bg-background px-1 py-5 text-base leading-8 text-ink sm:px-3"
+          className="mt-5 cursor-text touch-pan-y select-text whitespace-pre-wrap border-y-2 border-ink bg-background px-2 py-5 text-base leading-8 text-ink selection:bg-accent selection:text-ink sm:px-3"
         >
           {tokensWithOffsets.map(({ token, start }, index) => {
             const end = start + token.length;
@@ -320,22 +348,22 @@ export function TextHighlight({
         </div>
 
         {pendingRange && (
-          <div className="mt-4 rounded-[6px] border-2 border-ink bg-warn p-3 text-warn-foreground">
+          <div ref={confirmationRef} className="mt-4 scroll-mt-24 rounded-[6px] border-2 border-ink bg-warn p-3 text-warn-foreground">
             <p className="mb-3 text-sm font-black">
               Confirm this selection?
             </p>
-            <div className="flex justify-end gap-2">
+            <div className="flex flex-wrap justify-end gap-2">
               <button
                 type="button"
                 onClick={handleConfirmHighlight}
-                className={gameButton}
+                className={`${gameButton} max-sm:flex-1`}
               >
                 OK
               </button>
               <button
                 type="button"
                 onClick={handleCancelHighlight}
-                className={gameButtonSecondary}
+                className={`${gameButtonSecondary} max-sm:flex-1`}
               >
                 Cancel
               </button>
@@ -364,7 +392,7 @@ export function TextHighlight({
       </div>
 
       {activeQuiz && activeTrap && (
-        <div className={`mt-5 ${gamePanel}`}>
+        <div ref={quizRef} className={`mt-5 scroll-mt-24 ${gamePanel}`}>
           <div className="flex items-start justify-between gap-3">
             <span className={gameSectionBar}>Critical thinking check</span>
             <button
@@ -380,8 +408,8 @@ export function TextHighlight({
             <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[5px] border-2 border-ink bg-accent text-xl font-black text-accent-foreground shadow-[3px_3px_0_0_var(--color-ink)]">
               ?
             </div>
-            <div className="flex-1">
-              <p className="text-xs font-bold">{getQuizQuestion(activeQuiz)}</p>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-bold leading-6">{getQuizQuestion(activeQuiz)}</p>
               <div className="mt-2 space-y-1">
                 {activeQuiz.options.map((option) => (
                   <label
@@ -416,12 +444,12 @@ export function TextHighlight({
                   {activeQuiz.explanation && <p>{activeQuiz.explanation}</p>}
                 </div>
               )}
-              <div className="mt-3 flex justify-end gap-2">
+              <div className="static mt-4 flex flex-wrap justify-end gap-2 border-t-2 border-ink pt-3">
                 {quizState === "correct" ? (
                   <button
                     type="button"
                     onClick={handleQuizContinue}
-                    className={gameButton}
+                    className={`${gameButton} max-sm:flex-1`}
                   >
                     {finalTrapSelected || allTrapsCompleted ? "Next" : "OK"}
                   </button>
@@ -429,7 +457,7 @@ export function TextHighlight({
                   <button
                     type="submit"
                     disabled={!selectedOption}
-                    className={gameButton}
+                    className={`${gameButton} max-sm:flex-1`}
                   >
                     OK
                   </button>
@@ -437,7 +465,7 @@ export function TextHighlight({
                 <button
                   type="button"
                   onClick={handleQuizCancel}
-                  className={gameButtonSecondary}
+                  className={`${gameButtonSecondary} max-sm:flex-1`}
                 >
                   Cancel
                 </button>

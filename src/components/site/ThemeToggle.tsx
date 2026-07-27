@@ -10,10 +10,14 @@ export function ThemeToggle() {
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
-      const saved = window.localStorage.getItem(STORAGE_KEY);
-      const initialDark =
-        saved === "dark" ||
-        (saved === null && window.matchMedia("(prefers-color-scheme: dark)").matches);
+      let initialDark = false;
+
+      try {
+        initialDark = window.localStorage.getItem(STORAGE_KEY) === "dark";
+      } catch {
+        // Light mode remains the default when storage is unavailable.
+      }
+
       setDark(initialDark);
       document.documentElement.classList.toggle("dark", initialDark);
     }, 0);
@@ -25,7 +29,12 @@ export function ThemeToggle() {
     const nextDark = !dark;
     setDark(nextDark);
     document.documentElement.classList.toggle("dark", nextDark);
-    window.localStorage.setItem(STORAGE_KEY, nextDark ? "dark" : "light");
+
+    try {
+      window.localStorage.setItem(STORAGE_KEY, nextDark ? "dark" : "light");
+    } catch {
+      // The current page can still switch themes without persistent storage.
+    }
   };
 
   return (
