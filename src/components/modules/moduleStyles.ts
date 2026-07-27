@@ -13,8 +13,11 @@ export const gameButton =
 export const gameButtonSecondary =
   "inline-flex min-h-10 items-center justify-center rounded-[6px] border-2 border-ink bg-surface px-4 text-sm font-black text-ink shadow-[3px_3px_0_0_var(--color-ink)] transition-[transform,box-shadow] hover:-translate-x-px hover:-translate-y-px active:translate-x-[2px] active:translate-y-[2px] active:shadow-none";
 
+const gameFeedback =
+  "rounded-[6px] border-2 border-ink p-4 text-base font-black leading-6 shadow-[3px_3px_0_0_var(--color-ink)]";
+
 export const gameFeedbackSuccess =
-  "rounded-[6px] border-2 border-ink bg-success p-3 text-sm text-success-foreground";
+  `${gameFeedback} bg-success text-success-foreground`;
 
 export const gameFeedbackError =
-  "rounded-[6px] border-2 border-ink bg-danger p-4 text-base font-black leading-6 text-danger-foreground shadow-[3px_3px_0_0_var(--color-ink)]";
+  `${gameFeedback} bg-danger text-danger-foreground`;

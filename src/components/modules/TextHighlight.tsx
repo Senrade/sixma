@@ -357,7 +357,7 @@ export function TextHighlight({
           </p>
         )}
         {allTrapsCompleted && (
-          <p className="mt-2 text-sm font-black text-success" role="status">
+          <p className={`mt-3 ${gameFeedbackSuccess}`} role="status">
             All manipulation cues are documented.
           </p>
         )}
