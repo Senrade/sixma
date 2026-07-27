@@ -38,7 +38,7 @@ export default async function CaseBriefingPage({ params }: { params: Promise<{ c
             <div className="mt-8 flex flex-wrap gap-3"><ButtonLink href={`/mission/${caseData.case_id}`} tone="accent">Begin investigation</ButtonLink><ButtonLink href="/cases" tone="secondary">Back to hub</ButtonLink></div>
           </div>
           <div className="relative aspect-[4/3] overflow-hidden rounded-[8px] border-2 border-ink bg-background shadow-[8px_8px_0_0_var(--color-ink)]">
-            <Image src={caseData.modules.step_1_image_forensics.image_url} alt={`Primary evidence for ${caseData.title}`} fill sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover" priority />
+            <Image src={caseData.modules.step_1_image_forensics.image_url} alt={`Primary evidence for ${caseData.title}`} fill sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover" preload />
             <span className="absolute right-4 top-4 -rotate-3 border-2 border-danger bg-background px-3 py-1 font-mono text-xs font-black uppercase text-danger">Unverified</span>
           </div>
         </div>

@@ -322,7 +322,7 @@ export function ImageForensics({
             onPointerUp={handlePointerUp}
             onPointerCancel={handlePointerCancel}
             style={imageStyle}
-            className={`relative w-fit max-w-full touch-none cursor-crosshair overflow-hidden rounded-[6px] border-2 border-ink bg-black shadow-[5px_5px_0_0_var(--color-ink)] ${
+            className={`relative w-full max-w-full touch-none cursor-crosshair overflow-hidden rounded-[6px] border-2 border-ink bg-black shadow-[5px_5px_0_0_var(--color-ink)] ${
               activeAnomaly
                 ? "max-h-[43dvh] md:max-h-[calc(100dvh-60px)]"
                 : "max-h-[calc(100dvh-60px)]"
@@ -333,10 +333,10 @@ export function ImageForensics({
               alt="Evidence"
               width={imageWidth}
               height={imageHeight}
-              priority
+              preload
               sizes="(min-width: 768px) calc(100vw - 380px), 100vw"
               draggable={false}
-              className={`block h-auto w-auto max-w-full object-contain ${
+              className={`block h-auto w-full max-w-full object-contain ${
                 activeAnomaly
                   ? "max-h-[43dvh] md:max-h-[calc(100dvh-60px)]"
                   : "max-h-[calc(100dvh-60px)]"
