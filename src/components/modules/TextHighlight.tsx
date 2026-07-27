@@ -386,30 +386,42 @@ export function TextHighlight({
                 </div>
               )}
               <div className="mt-3 flex justify-end gap-2">
-                {quizState === "correct" ? (
+                {quizState === "correct" && (finalTrapSelected || allTrapsCompleted) ? (
                   <button
                     type="button"
                     onClick={handleQuizContinue}
-                    className="min-w-[70px] bg-[#c0c0c0] px-3 py-1 text-xs shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff]"
+                    className="min-w-[70px] bg-[#c0c0c0] px-4 py-1 text-xs font-bold text-black shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff]"
                   >
-                    {finalTrapSelected || allTrapsCompleted ? "Next" : "OK"}
+                    Next
                   </button>
                 ) : (
-                  <button
-                    type="submit"
-                    disabled={!selectedOption}
-                    className="min-w-[70px] bg-[#c0c0c0] px-3 py-1 text-xs shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] enabled:active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff] disabled:cursor-not-allowed disabled:text-[#808080]"
-                  >
-                    OK
-                  </button>
+                  <>
+                    {quizState === "correct" ? (
+                      <button
+                        type = "button"
+                        onClick={handleQuizContinue}
+                        className="min-w-[70px] bg-[#c0c0c0] px-3 py-1 text-xs shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff]"
+                      >
+                        OK
+                      </button>
+                    ) : (
+                      <button
+                        type="submit"
+                        disabled={!selectedOption}
+                        className="min-w-[70px] bg-[#c0c0c0] px-3 py-1 text-xs shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] enabled:active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff] disabled:cursor-not-allowed disabled:text-[#808080]"
+                      >
+                        OK
+                      </button>
+                    )}
+                    <button
+                      type="button"
+                      onClick={handleQuizCancel}
+                      className="min-w-[70px] bg-[#c0c0c0] px-3 py-1 text-xs shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff]"
+                    >
+                      Cancel
+                    </button>
+                  </>
                 )}
-                <button
-                  type="button"
-                  onClick={handleQuizCancel}
-                  className="min-w-[70px] bg-[#c0c0c0] px-3 py-1 text-xs shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff]"
-                >
-                  Cancel
-                </button>
               </div>
             </div>
           </form>
