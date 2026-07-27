@@ -2,6 +2,15 @@
   {
     "level": "RED",
     "case_id": "R001",
+    "title": "The Classroom That Never Happened",
+    "short_summary": "A viral image claims AI is monitoring students. Verify the photo, decode the rhetoric, and expose the phishing chain.",
+    "duration_min": 15,
+    "skills": [
+      "Image forensics",
+      "Logical fallacies",
+      "Phishing patterns"
+    ],
+    "spotted_url": "/assets/images/R001/R001_spotted.jpg",
     "theme": [
       "Education",
       "Technology"
@@ -51,22 +60,12 @@
               "explanation": "A crowded classroom can be natural, but bodies that merge or clip through one another break the scene's physical logic. That structural inconsistency is a useful deepfake clue."
             }
           }
-        ],
-        "socratic_quiz": {
-          "question": "What visual clue exposes this image as a Deepfake created to spread panic?",
-          "options": [
-            "A. The classroom colors are dark and heavily edited to create a suffocating atmosphere.",
-            "B. The digital whiteboard displays garbled, overlapping text characters, and students in the center background clip into each other unnaturally.",
-            "C. The robot's mechanical joints are not aligned with standard industrial design templates."
-          ],
-          "correct_option": "B",
-          "explanation": "AI-generation tools often fail at maintaining consistent spatial logic (causing characters or people to clip/merge) and cannot render clean, readable text on backgrounds. These structural errors expose the image as simulated propaganda."
-        }
+        ]
       },
       "step_2_text_highlight": {
         "mechanic_type": "TEXT_HIGHLIGHT",
         "simulated_post": {
-          "author": "Anonymous Education Community",
+          "author": "Parents and Education Community",
           "time_posted": "2 hours ago",
           "content": "Just found out the Ministry of Education is piloting a new AI learning assistant in several schools next term. Honestly, this looks like a covert move to phase out real human teachers entirely. It's pretty obvious big tech is just trying to fully automate education to exploit student data for profit. Even Professor Tan stated in his latest report that 'AI is now taking full control over the classroom'. If parents don't stand up and boycott this rollout immediately, our kids will completely lose their capacity for critical thinking!"
         },
@@ -163,8 +162,161 @@
       }
     },
     "dialogue_trigger": {
-      "question": "Mom/Dad, if a message from the school asks parents to click an unfamiliar link and make an urgent payment to 'protect their child's learning data,' what key sign proves that it is a scam?",
+      "question": "Ask your Teacher/Parent: if a message from the school asks parents to click an unfamiliar link and make an urgent payment to 'protect their child's learning data,' what key sign proves that it is a scam?",
       "mil_insight": "Help parents and students compare the message against standard administrative procedures: legitimate educational institutions never use time pressure (such as a 24-hour deadline) or unofficial payment links to handle security issues."
+    }
+  },
+  {
+    "level": "RED",
+    "case_id": "R007",
+    "title": "The Canteen Extortion File",
+    "short_summary": "An anonymous sender uses a doctored food photo and reputational pressure to extort a school.",
+    "duration_min": 12,
+    "skills": [
+      "Composite detection",
+      "Coercion patterns",
+      "Extortion structure"
+    ],
+    "spotted_url": "/assets/images/R007/R007_spotted.png",
+    "theme": [
+      "Health",
+      "Safety",
+      "School"
+    ],
+    "story_context": "An anonymous extortion email claiming contaminated food in the school canteen, demanding money to prevent reputational damage.",
+    "modules": {
+      "step_1_image_forensics": {
+        "mechanic_type": "IMAGE_FORENSICS",
+        "image_url": "/assets/images/R007/R007_fake.png",
+        "image_width": 1020,
+        "image_height": 680,
+        "context_text": "The leaked image attached to the extortion email claims to show 'a disgusting cockroach served in the high school canteen food tray.' Find the visual anomaly in this photo.",
+        "target_anomalies": [
+          {
+            "anomaly_id": "R007_IMG_01",
+            "name": "fake_cockroach_insertion",
+            "x_pct": 69.5,
+            "y_pct": 73.0,
+            "radius_pct": 13.5,
+            "description": "The insect appears digitally pasted onto the rice tray, exhibiting mismatched light direction, unnatural shadows, and blurred edge artifacts.",
+            "socratic_quiz": {
+              "question": "Why does the cockroach in this photo indicate digital tampering?",
+              "options": [
+                "A. The cockroach is too large compared to standard rice grains.",
+                "B. Its shadow direction contradicts the main lighting, and its edges show artificial blurring from digital editing.",
+                "C. Cockroaches cannot land on cooked rice in a school canteen."
+              ],
+              "correct_option": "B",
+              "explanation": "In composite or digitally manipulated images, mismatched lighting angles and edge-smudging artifacts around the inserted object betray digital insertion."
+            }
+          }
+        ]
+      },
+      "step_2_text_highlight": {
+        "mechanic_type": "TEXT_HIGHLIGHT",
+        "simulated_post": {
+          "author": "Anonymous",
+          "time_posted": "5 hour ago",
+          "content": "I don't usually post stuff like this, but today's lunch honestly made me uncomfortable. While I was eating, I noticed what looked like a cockroach in my lunch tray. I don't know whether it came from the kitchen or somewhere else, maybe there's a perfectly good explanation out there, but if this really came from the cafeteria, students have a right to be worried. I'm not saying the cafeteria is unsafe. I'm just asking why this keeps happening and why nobody ever seems to explain anything afterward. The school seems to never take students' food feedback into consideration anyway, saying the problem is too complicated or something like that. At this point, I think parents deserve to know what's happening before this gets quietly swept under the rug..."
+        },
+        "traps": [
+          {
+            "trap_id": "R007_TRAP_01",
+            "ground_truth_start": 365,
+            "ground_truth_end": 502,
+            "matched_text": "I'm not saying the cafeteria is unsafe. I'm just asking why this keeps happening and why nobody ever seems to explain anything afterward.",
+            "weapon_type": [
+              "seeding_doubt"
+            ],
+            "socratic_quiz": {
+              "question": "How does the author introduce an unverified accusation while shielding themselves from accountability?",
+              "options": [
+                "A. By explicitly asserting that cafeteria workers intentionally contaminated the food.",
+                "B. By using a disclaimer ('I'm not saying...') to plant the premise that recurring incidents exist without presenting supporting data.",
+                "C. By demanding an immediate financial refund for all students enrolled in the lunch program."
+              ],
+              "correct_option": "B",
+              "explanation": "This is rhetorical innuendo. By pairing a denial of hostility ('I'm not saying...') with a loaded question ('why this keeps happening'), the author smuggles in an unproven premise of systemic negligence while maintaining plausible deniability."
+            }
+          },
+          {
+            "trap_id": "R007_TRAP_02",
+            "ground_truth_start": 503,
+            "ground_truth_end": 646,
+            "matched_text": "The school seems to never take students' food feedback into consideration anyway, saying the problem is too complicated or something like that.",
+            "weapon_type": [
+              "poisoning_the_well",
+              "overgeneralization"
+            ],
+            "socratic_quiz": {
+              "question": "What structural function does this statement serve in manipulating how the audience evaluates a future response from the school?",
+              "options": [
+                "A. It establishes a baseline of historical administrative records to ensure fair evaluation.",
+                "B. It pre-emptively discredits any potential explanation from the school by framing administrative complexity as an excuse.",
+                "C. It proves that the cafeteria's supplier operates without an active health license."
+              ],
+              "correct_option": "B",
+              "explanation": "This technique 'poisons the well.' By pre-framing institutional responses as dismissive excuses ('saying the problem is too complicated'), the author ensures the audience rejects official clarifications before the school even speaks."
+            }
+          },
+          {
+            "trap_id": "R007_TRAP_03",
+            "ground_truth_start": 647,
+            "ground_truth_end": 758,
+            "matched_text": "At this point, I think parents deserve to know what's happening before this gets quietly swept under the rug...",
+            "weapon_type": [
+              "conspiracy_theory",
+              "appeal_to_fear"
+            ],
+            "socratic_quiz": {
+              "question": "Why do you think the framing of 'before this gets quietly swept under the rug' is problematic?",
+              "options": [
+                "A. It forces immediate, emotional escalation by implying an ongoing cover-up, discouraging readers from waiting for factual verification.",
+                "B. It offers a transparent protocol for parents to submit official complaints to local health inspectors.",
+                "C. It confirms that school authorities have already deleted internal incident logs."
+              ],
+              "correct_option": "A",
+              "explanation": "Implied cover-ups trigger immediate fear and artificial urgency. Framing an ongoing situation as 'being swept under the rug' manipulates readers into sharing the claim rapidly to prevent a conspiracy rather than pausing to verify the facts."
+            }
+          }
+        ]
+      },
+      "step_3_sorting_game": {
+        "mechanic_type": "DRAG_AND_DROP_SORTING",
+        "task_instruction": "A misleading social media post about the school canteen quickly spread across the community. Arrange the events in the order that misinformation typically escalates.",
+        "pool_items": [
+          {
+            "item_id": "R007_SORT_01",
+            "text": "Other users repost the image with stronger claims, assuming the worst."
+          },
+          {
+            "item_id": "R007_SORT_02",
+            "text": "The rumor becomes accepted as 'common knowledge' even though the original claim was never confirmed."
+          },
+          {
+            "item_id": "R007_SORT_03",
+            "text": "Someone uploads a photo with a personal interpretation but without verified context."
+          },
+          {
+            "item_id": "R007_SORT_04",
+            "text": "People react emotionally and share the post before waiting for official verification."
+          }
+        ],
+        "correct_sequence": [
+          "R007_SORT_03",
+          "R007_SORT_01",
+          "R007_SORT_04",
+          "R007_SORT_02"
+        ],
+        "validation_feedback": {
+          "success": "Correct. Rumors often become believable through repetition rather than evidence. An unverified observation can evolve into 'everyone knows it's true' as people add assumptions, share emotionally, and stop checking the original source.",
+          "failure": "Not quite. False information rarely spreads because of one convincing post alone. It gains momentum as people amplify unverified claims and repeat them as facts before anyone verifies the evidence."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Ask your Teacher/Parent: If you received this message, what evidence would you need before believing the photo reflects a real food safety problem rather than a manipulated story?",
+      "mil_insight": "A single image rarely provides enough context to establish what happened. Discuss how to distinguish direct evidence from assumptions by checking the original source, verifying when and where the photo was taken, and following the school's official investigation process before drawing conclusions."
     }
   }
 ]
