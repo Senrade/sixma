@@ -26,7 +26,7 @@ const FAQS = [
 ];
 
 export function FaqAccordion() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <div className="mt-7 border-t-2 border-ink">
