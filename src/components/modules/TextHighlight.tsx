@@ -260,9 +260,14 @@ export function TextHighlight({
       if (activeTrapId) {
         setCompletedTrapIds((prev) => [...prev, activeTrapId]);
       }
-      if (selectedRange) {
-        setCompletedRanges((prev) => [...prev, selectedRange]);
-      }
+      setCompletedRanges((prev) => [
+        ...prev,
+        {
+          start: activeTrap.ground_truth_start,
+          end: activeTrap.ground_truth_end,
+        },
+      ]);
+
       setSelectedRange(null);
       return;
     }
@@ -459,26 +464,28 @@ export function TextHighlight({
                   <button
                     type="button"
                     onClick={handleQuizContinue}
-                    className={`${gameButton} max-sm:flex-1`}
+                    className={`${gameButton} w-full sm:w-auto`}
                   >
                     Next
                   </button>
                 ) : (
-                  <button
-                    type="submit"
-                    disabled={!selectedOption}
-                    className={`${gameButton} max-sm:flex-1`}
-                  >
-                    OK
-                  </button>
+                  <>
+                    <button
+                      type="submit"
+                      disabled={!selectedOption}
+                      className={`${gameButton} max-sm:flex-1`}
+                    >
+                      OK
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleQuizCancel}
+                      className={`${gameButtonSecondary} max-sm:flex-1`}
+                    >
+                      Cancel
+                    </button>
+                  </>
                 )}
-                <button
-                  type="button"
-                  onClick={handleQuizCancel}
-                  className={`${gameButtonSecondary} max-sm:flex-1`}
-                >
-                  Cancel
-                </button>
               </div>
             </div>
           </form>
