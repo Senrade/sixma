@@ -1,10 +1,20 @@
 import {
+  useEffect,
   useRef,
   useState,
   type FormEvent,
   type PointerEvent,
 } from "react";
 import { RetroWindow } from "./RetroWindow";
+import {
+  gameButton,
+  gameButtonSecondary,
+  gameFeedbackError,
+  gameFeedbackSuccess,
+  gameOption,
+  gamePanel,
+  gameSectionBar,
+} from "./moduleStyles";
 
 export interface TextHighlightQuiz {
   question?: string;
@@ -41,6 +51,7 @@ interface CharacterRange {
 }
 
 type QuizState = "idle" | "incorrect" | "correct";
+type SelectionState = "idle" | "incorrect" | "matched";
 
 function getQuizQuestion(quiz: TextHighlightQuiz): string {
   return quiz.question ?? quiz.push_question ?? "Why is this selection suspicious?";
@@ -117,8 +128,11 @@ export function TextHighlight({
   const [selectedOption, setSelectedOption] = useState("");
   const [quizState, setQuizState] = useState<QuizState>("idle");
   const [selectionFeedback, setSelectionFeedback] = useState("");
+  const [selectionState, setSelectionState] = useState<SelectionState>("idle");
   const selectionTimerRef = useRef<number | null>(null);
   const textRootRef = useRef<HTMLDivElement>(null);
+  const confirmationRef = useRef<HTMLDivElement>(null);
+  const quizRef = useRef<HTMLDivElement>(null);
 
   const tokens = content.split(/(\s+)/);
   const tokensWithOffsets = tokens.map((token, index) => ({
@@ -134,6 +148,42 @@ export function TextHighlight({
     activeTrap !== undefined &&
     traps.length > 0 &&
     completedTrapIds.length === traps.length - 1;
+  const authorInitials = postAuthor
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((word) => word.charAt(0).toUpperCase())
+    .join("");
+  const authorHandle = `@${postAuthor
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_|_$/g, "")
+    .slice(0, 28)}`;
+
+  useEffect(() => {
+    const target = pendingRange
+      ? confirmationRef.current
+      : activeTrapId
+        ? quizRef.current
+        : null;
+
+    if (!target || window.matchMedia("(min-width: 640px)").matches) {
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeTrapId, pendingRange]);
+
+  useEffect(() => {
+    return () => {
+      if (selectionTimerRef.current !== null) {
+        window.clearTimeout(selectionTimerRef.current);
+      }
+    };
+  }, []);
 
   const captureSelection = () => {
     if (!textRootRef.current) return;
@@ -145,6 +195,7 @@ export function TextHighlight({
       setActiveTrapId(null);
       setQuizState("idle");
       setSelectionFeedback("");
+      setSelectionState("idle");
       window.getSelection()?.removeAllRanges();
     }
   };
@@ -163,6 +214,7 @@ export function TextHighlight({
       setSelectionFeedback(
         `Selection overlap is ${Math.round((candidate?.score ?? 0) * 100)}%. Select at least ${Math.round(iouThreshold * 100)}% of one manipulation.`,
       );
+      setSelectionState("incorrect");
       setPendingRange(null);
       return;
     }
@@ -174,15 +226,18 @@ export function TextHighlight({
     setSelectionFeedback(
       `Potential manipulation selected (${Math.round(candidate.score * 100)}% overlap).`,
     );
+    setSelectionState("matched");
     onSelectionComplete?.(pendingRange.start, pendingRange.end);
     setPendingRange(null);
   };
 
   const handleCancelHighlight = () => {
     setPendingRange(null);
+    setSelectionFeedback("");
+    setSelectionState("idle");
   };
 
-  const scheduleSelectionInspection = () => {
+  const scheduleSelectionInspection = (delay = 0) => {
     if (selectionTimerRef.current !== null) {
       window.clearTimeout(selectionTimerRef.current);
     }
@@ -190,7 +245,7 @@ export function TextHighlight({
     selectionTimerRef.current = window.setTimeout(() => {
       selectionTimerRef.current = null;
       captureSelection();
-    }, 0);
+    }, delay);
   };
 
   const handleQuizSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -231,29 +286,34 @@ export function TextHighlight({
   };
 
   return (
-    <RetroWindow title="AnonForum.exe  |  thread://viewer" onClose={onBack}>
-      <div className="bg-white p-3 shadow-[inset_2px_2px_0_#808080,inset_-1px_-1px_0_#fff]">
-        <div className="mb-2 flex items-center gap-2 border-b border-dashed border-[#808080] pb-1">
-          <div className="h-8 w-8 bg-[#000080] text-center text-[10px] leading-8 text-white shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff]">
-            ??
+    <RetroWindow title="Module 02 / Language Analysis" onClose={onBack}>
+      <div className={gamePanel}>
+        <div className="mb-4 flex items-center justify-between gap-3 border-b-2 border-ink pb-3">
+          <span className={gameSectionBar}>Community wire</span>
+          <span className="rounded-[4px] border-2 border-danger bg-background px-2 py-1 font-mono text-[10px] font-black uppercase text-danger">Unverified</span>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full border-2 border-ink bg-info text-xs font-black text-info-foreground shadow-[3px_3px_0_0_var(--color-ink)]">
+            {authorInitials || "?"}
           </div>
-          <div className="flex-1">
-            <div className="text-xs font-bold">{postAuthor}</div>
-            <div className="text-[10px] text-[#606060]">{postTime}</div>
+          <div className="min-w-0 flex-1">
+            <div className="truncate text-sm font-black">{postAuthor}</div>
+            <div className="truncate font-mono text-xs text-ink-soft">{authorHandle} / {postTime}</div>
           </div>
-          <div className="text-[10px] text-[#606060]">#anonymous</div>
+          <span className="font-mono text-lg font-black text-ink-soft" aria-label="Post options">...</span>
         </div>
 
         <div
           ref={textRootRef}
-          onMouseUp={scheduleSelectionInspection}
+          onMouseUp={() => scheduleSelectionInspection()}
           onPointerUp={(event: PointerEvent<HTMLDivElement>) => {
             if (event.pointerType !== "mouse") {
-              scheduleSelectionInspection();
+              scheduleSelectionInspection(350);
             }
           }}
-          onTouchEnd={scheduleSelectionInspection}
-          className="select-text whitespace-pre-wrap text-sm leading-relaxed text-black"
+          aria-label="Social post content to analyze"
+          className="mt-5 cursor-text touch-pan-y select-text whitespace-pre-wrap border-y-2 border-ink bg-background px-2 py-5 text-base leading-8 text-ink selection:bg-accent selection:text-ink sm:px-3"
         >
           {tokensWithOffsets.map(({ token, start }, index) => {
             const end = start + token.length;
@@ -273,7 +333,7 @@ export function TextHighlight({
               <span
                 key={index}
                 data-index={start}
-                className={`${isCompleted ? "bg-[#d7ffd7]" : ""} ${isSelected || isPending ? "bg-[#fff2a8]" : ""} hover:bg-[#fff2a8]`}
+                className={`${isCompleted ? "bg-success/45" : ""} ${isSelected || isPending ? "bg-accent" : ""} hover:bg-accent/60`}
               >
                 {token}
               </span>
@@ -281,23 +341,29 @@ export function TextHighlight({
           })}
         </div>
 
+        <div className="mt-3 flex flex-wrap items-center gap-2 font-mono text-[11px] font-bold uppercase text-ink-soft">
+          <span className="rounded-[4px] border-2 border-ink bg-surface-2 px-2 py-1">Public post</span>
+          <span className="rounded-[4px] border-2 border-ink bg-warn px-2 py-1 text-warn-foreground">Context pending</span>
+          <span className="ml-auto">Evidence marks {completedTrapIds.length}/{traps.length}</span>
+        </div>
+
         {pendingRange && (
-          <div className="mt-3 bg-[#c0c0c0] p-3 shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#dfdfdf,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#fff]">
-            <p className="mb-2 text-xs font-bold text-black">
+          <div ref={confirmationRef} className="mt-4 scroll-mt-24 rounded-[6px] border-2 border-ink bg-warn p-3 text-warn-foreground">
+            <p className="mb-3 text-sm font-black">
               Confirm this selection?
             </p>
-            <div className="flex justify-end gap-2">
+            <div className="flex flex-wrap justify-end gap-2">
               <button
                 type="button"
                 onClick={handleConfirmHighlight}
-                className="min-w-[70px] bg-[#c0c0c0] px-3 py-1 text-xs text-black shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff]"
+                className={`${gameButton} max-sm:flex-1`}
               >
                 OK
               </button>
               <button
                 type="button"
                 onClick={handleCancelHighlight}
-                className="min-w-[70px] bg-[#c0c0c0] px-3 py-1 text-xs text-black shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff]"
+                className={`${gameButtonSecondary} max-sm:flex-1`}
               >
                 Cancel
               </button>
@@ -306,46 +372,49 @@ export function TextHighlight({
         )}
 
         {selectionFeedback && (
-          <p className="mt-2 border-t border-dashed border-[#808080] pt-2 text-[10px] text-[#404040]" role="status" aria-live="polite">
+          <p
+            className={
+              selectionState === "incorrect"
+                ? `mt-3 ${gameFeedbackError}`
+                : "mt-3 rounded-[6px] border-2 border-ink bg-info/15 p-3 font-mono text-sm font-bold text-ink"
+            }
+            role={selectionState === "incorrect" ? "alert" : "status"}
+            aria-live="polite"
+          >
             {selectionFeedback}
           </p>
         )}
-        {traps.length > 0 && (
-          <p className="mt-1 text-[10px] text-[#606060]">
-            Highlights found: {completedTrapIds.length} / {traps.length}
-          </p>
-        )}
         {allTrapsCompleted && (
-          <p className="mt-1 text-[10px] font-bold text-green-700" role="status">
+          <p className={`mt-3 ${gameFeedbackSuccess}`} role="status">
             All manipulation cues are documented.
           </p>
         )}
       </div>
 
       {activeQuiz && activeTrap && (
-        <div className="mt-3 bg-[#c0c0c0] shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#dfdfdf,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#fff]">
-          <div className="flex items-center justify-between bg-[#000080] px-1 py-0.5 text-white">
-            <span className="text-xs font-bold">System Critical Thinking</span>
+        <div ref={quizRef} className={`mt-5 scroll-mt-24 ${gamePanel}`}>
+          <div className="flex items-start justify-between gap-3">
+            <span className={gameSectionBar}>Critical thinking check</span>
             <button
               type="button"
               onClick={handleQuizCancel}
               aria-label="Close critical thinking question"
-              className="h-4 w-5 bg-[#c0c0c0] text-[10px] leading-none text-black shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff]"
+              className="grid h-8 w-8 place-items-center rounded-[5px] border-2 border-ink bg-surface text-lg font-black text-ink hover:bg-danger hover:text-danger-foreground"
             >
-              
+              &times;
             </button>
           </div>
-          <form onSubmit={handleQuizSubmit} className="flex gap-3 p-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-yellow-300 text-lg font-bold shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff]">
+          <form onSubmit={handleQuizSubmit} className="flex flex-col gap-4 sm:flex-row">
+            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[5px] border-2 border-ink bg-accent text-xl font-black text-accent-foreground shadow-[3px_3px_0_0_var(--color-ink)]">
               ?
             </div>
-            <div className="flex-1">
-              <p className="text-xs font-bold">{getQuizQuestion(activeQuiz)}</p>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-bold leading-6">{getQuizQuestion(activeQuiz)}</p>
               <div className="mt-2 space-y-1">
                 {activeQuiz.options.map((option) => (
                   <label
                     key={option}
-                    className="flex cursor-pointer items-start gap-2 bg-white px-2 py-1 text-xs shadow-[inset_1px_1px_0_#808080,inset_-1px_-1px_0_#fff]"
+                    className={gameOption}
                   >
                     <input
                       type="radio"
@@ -365,12 +434,12 @@ export function TextHighlight({
                 ))}
               </div>
               {quizState === "incorrect" && (
-                <p className="mt-2 bg-[#ffd7d7] p-2 text-xs" role="alert">
+                <p className={`mt-3 ${gameFeedbackError}`} role="alert">
                   That answer does not match the selected manipulation. Try again.
                 </p>
               )}
               {quizState === "correct" && (
-                <div className="mt-2 bg-[#d7ffd7] p-3 text-xs rounded-[5px] border-2 border-ink" role="status">
+                <div className={`mt-3 ${gameFeedbackSuccess}`} role="status">
                   <p className="font-bold">Correct.</p>
 
                   <div className="rounded-[5px] border-2 border-ink bg-white p-2.5 text-xs text-black shadow-[2px_2px_0_0_var(--color-ink)]">
@@ -385,43 +454,31 @@ export function TextHighlight({
                   {activeQuiz.explanation && <p>{activeQuiz.explanation}</p>}
                 </div>
               )}
-              <div className="mt-3 flex justify-end gap-2">
-                {quizState === "correct" && (finalTrapSelected || allTrapsCompleted) ? (
+              <div className="static mt-4 flex flex-wrap justify-end gap-2 border-t-2 border-ink pt-3">
+                {quizState === "correct" ? (
                   <button
                     type="button"
                     onClick={handleQuizContinue}
-                    className="min-w-[70px] bg-[#c0c0c0] px-4 py-1 text-xs font-bold text-black shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff]"
+                    className={`${gameButton} max-sm:flex-1`}
                   >
                     Next
                   </button>
                 ) : (
-                  <>
-                    {quizState === "correct" ? (
-                      <button
-                        type = "button"
-                        onClick={handleQuizContinue}
-                        className="min-w-[70px] bg-[#c0c0c0] px-3 py-1 text-xs shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff]"
-                      >
-                        OK
-                      </button>
-                    ) : (
-                      <button
-                        type="submit"
-                        disabled={!selectedOption}
-                        className="min-w-[70px] bg-[#c0c0c0] px-3 py-1 text-xs shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] enabled:active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff] disabled:cursor-not-allowed disabled:text-[#808080]"
-                      >
-                        OK
-                      </button>
-                    )}
-                    <button
-                      type="button"
-                      onClick={handleQuizCancel}
-                      className="min-w-[70px] bg-[#c0c0c0] px-3 py-1 text-xs shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff]"
-                    >
-                      Cancel
-                    </button>
-                  </>
+                  <button
+                    type="submit"
+                    disabled={!selectedOption}
+                    className={`${gameButton} max-sm:flex-1`}
+                  >
+                    OK
+                  </button>
                 )}
+                <button
+                  type="button"
+                  onClick={handleQuizCancel}
+                  className={`${gameButtonSecondary} max-sm:flex-1`}
+                >
+                  Cancel
+                </button>
               </div>
             </div>
           </form>

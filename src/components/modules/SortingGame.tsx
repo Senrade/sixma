@@ -1,4 +1,5 @@
 import {
+  useEffect,
   useRef,
   useState,
   type DragEvent,
@@ -6,6 +7,13 @@ import {
   type PointerEvent,
 } from "react";
 import { RetroWindow } from "./RetroWindow";
+import {
+  gameButton,
+  gameFeedbackError,
+  gameFeedbackSuccess,
+  gamePanel,
+  gameSectionBar,
+} from "./moduleStyles";
 
 export interface SortingValidationFeedback {
   success: string;
@@ -13,6 +21,7 @@ export interface SortingValidationFeedback {
 }
 
 export interface SortingGameProps {
+  taskInstruction: string;
   poolItems: { id: string; text: string }[];
   correctSequence?: string[];
   validationFeedback?: SortingValidationFeedback;
@@ -22,12 +31,14 @@ export interface SortingGameProps {
 }
 
 type SortStatus = "Ready" | "Incorrect" | "Correct";
+const POINTER_DRAG_THRESHOLD_PX = 8;
 
 function isCompleteSequence(sequence: (string | null)[]): sequence is string[] {
   return sequence.every((itemId): itemId is string => itemId !== null);
 }
 
 export function SortingGame({
+  taskInstruction,
   poolItems,
   correctSequence,
   validationFeedback,
@@ -43,14 +54,35 @@ export function SortingGame({
   const [dragTargetIndex, setDragTargetIndex] = useState<number | null>(null);
   const [status, setStatus] = useState<SortStatus>("Ready");
   const [feedback, setFeedback] = useState("");
+
   const pointerMovedRef = useRef(false);
+  const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
   const completionSentRef = useRef(false);
   const suppressNextSlotClickRef = useRef(false);
 
   const expectedSequence = correctSequence ?? poolItems.map((item) => item.id);
-  const placedIds = new Set(sequence.filter((itemId): itemId is string => itemId !== null));
+  const placedIds = new Set(
+    sequence.filter((itemId): itemId is string => itemId !== null),
+  );
 
-  const getSlotIndexFromPoint = (clientX: number, clientY: number): number | null => {
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setSequence(Array.from({ length: poolItems.length }, () => null));
+      setSelectedId(null);
+      setDraggingId(null);
+      setDragTargetIndex(null);
+      setStatus("Ready");
+      setFeedback("");
+      completionSentRef.current = false;
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, [poolItems, correctSequence]);
+
+  const getSlotIndexFromPoint = (
+    clientX: number,
+    clientY: number,
+  ): number | null => {
     const element = document.elementFromPoint(clientX, clientY);
     const slot = element?.closest<HTMLElement>("[data-slot-index]");
     const index = slot?.dataset.slotIndex;
@@ -76,10 +108,29 @@ export function SortingGame({
     );
     onSort?.(candidate);
 
-    if (correct && !completionSentRef.current) {
-      completionSentRef.current = true;
-      onComplete?.();
+  };
+
+  const handleComplete = () => {
+    if (status !== "Correct" || completionSentRef.current) {
+      return;
     }
+
+    completionSentRef.current = true;
+    onComplete?.();
+  };
+
+  const removeItem = (itemId: string) => {
+    const previousIndex = sequence.indexOf(itemId);
+    if (previousIndex !== -1) {
+      const nextSequence = [...sequence];
+      nextSequence[previousIndex] = null;
+      setSequence(nextSequence);
+      setStatus("Ready");
+      setFeedback("");
+    }
+    setSelectedId(null);
+    setDraggingId(null);
+    setDragTargetIndex(null);
   };
 
   const placeItemAt = (itemId: string, targetIndex: number) => {
@@ -87,11 +138,18 @@ export function SortingGame({
       return;
     }
 
+    const previousIndex = sequence.indexOf(itemId);
+
+    // Dropping an item onto its current slot removes it from the timeline.
+    if (previousIndex === targetIndex) {
+      removeItem(itemId);
+      return;
+    }
+
     const nextSequence = [...sequence];
-    const previousIndex = nextSequence.indexOf(itemId);
     const displacedId = nextSequence[targetIndex];
 
-    if (previousIndex !== -1 && previousIndex !== targetIndex) {
+    if (previousIndex !== -1) {
       nextSequence[previousIndex] = displacedId ?? null;
     }
 
@@ -112,29 +170,47 @@ export function SortingGame({
   const handlePointerDown = (
     itemId: string,
     event: PointerEvent<HTMLDivElement>,
-    fromTimeline = false,
   ) => {
-    setSelectedId(itemId);
+    const usingDragHandle =
+      event.target instanceof Element &&
+      event.target.closest("[data-drag-handle]") !== null;
+
+    setSelectedId((prev) =>
+      usingDragHandle ? itemId : prev === itemId ? null : itemId,
+    );
 
     if (event.pointerType === "mouse") {
       return;
     }
 
-    event.preventDefault();
-    pointerMovedRef.current = false;
-    setDraggingId(itemId);
-    event.currentTarget.setPointerCapture(event.pointerId);
-
-    if (fromTimeline) {
-      suppressNextSlotClickRef.current = false;
-    }
-  };
-
-  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
-    if (!draggingId) {
+    if (!usingDragHandle) {
       return;
     }
 
+    event.preventDefault();
+    pointerMovedRef.current = false;
+    pointerStartRef.current = { x: event.clientX, y: event.clientY };
+    setDraggingId(itemId);
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    if (!draggingId || !pointerStartRef.current) {
+      return;
+    }
+
+    if (!pointerMovedRef.current) {
+      const distance = Math.hypot(
+        event.clientX - pointerStartRef.current.x,
+        event.clientY - pointerStartRef.current.y,
+      );
+
+      if (distance < POINTER_DRAG_THRESHOLD_PX) {
+        return;
+      }
+    }
+
+    event.preventDefault();
     pointerMovedRef.current = true;
     setDragTargetIndex(getSlotIndexFromPoint(event.clientX, event.clientY));
   };
@@ -142,37 +218,57 @@ export function SortingGame({
   const handlePointerUp = (
     itemId: string,
     event: PointerEvent<HTMLDivElement>,
-    fromTimeline = false,
   ) => {
     if (event.pointerType === "mouse") {
       return;
     }
 
+    const pointerMoved = pointerMovedRef.current;
     const targetIndex = getSlotIndexFromPoint(event.clientX, event.clientY);
 
-    if (pointerMovedRef.current && targetIndex !== null) {
+    if (pointerMoved && targetIndex !== null) {
       placeItemAt(itemId, targetIndex);
-      suppressNextSlotClickRef.current = fromTimeline;
-    } else {
-      setSelectedId(itemId);
-      setDraggingId(null);
-      setDragTargetIndex(null);
-      suppressNextSlotClickRef.current = fromTimeline;
+    } else if (pointerMoved) {
+      // Dropping outside the timeline returns the item to the evidence bank.
+      removeItem(itemId);
+    }
+
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+
+    suppressNextSlotClickRef.current = pointerMoved;
+    if (pointerMoved) {
+      window.setTimeout(() => {
+        suppressNextSlotClickRef.current = false;
+      }, 0);
+    }
+    pointerMovedRef.current = false;
+    pointerStartRef.current = null;
+    setDraggingId(null);
+    setDragTargetIndex(null);
+  };
+
+  const handlePointerCancel = (event: PointerEvent<HTMLDivElement>) => {
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
     }
 
     pointerMovedRef.current = false;
+    pointerStartRef.current = null;
+    suppressNextSlotClickRef.current = false;
+    setDraggingId(null);
+    setDragTargetIndex(null);
   };
 
   const handleDragStart = (
     itemId: string,
     event: DragEvent<HTMLDivElement>,
-    fromTimeline = false,
   ) => {
     event.dataTransfer.effectAllowed = "move";
     event.dataTransfer.setData("text/plain", itemId);
     setSelectedId(itemId);
     setDraggingId(itemId);
-    suppressNextSlotClickRef.current = fromTimeline;
   };
 
   const handleDrop = (
@@ -193,7 +289,7 @@ export function SortingGame({
   ) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
-      setSelectedId(itemId);
+      setSelectedId((prev) => (prev === itemId ? null : itemId));
     }
   };
 
@@ -225,10 +321,25 @@ export function SortingGame({
   };
 
   return (
-    <RetroWindow title="Sort.exe  |  Sequence Builder" onClose={onBack}>
-      <div className="grid gap-2 md:grid-cols-2">
-        <div className="bg-[#c0c0c0] p-2 shadow-[inset_2px_2px_0_#808080,inset_-1px_-1px_0_#fff]">
-          <div className="mb-2 bg-[#000080] px-1 py-0.5 text-[10px] font-bold text-white">
+    <RetroWindow title="Module 03 / Sequence Reconstruction" onClose={onBack}>
+      <div className="mb-4 border-l-4 border-danger bg-accent/25 px-4 py-3">
+        <p className="font-mono text-[11px] font-black uppercase text-danger">Investigation task</p>
+        <p className="mt-1 text-sm font-bold leading-6 text-ink">{taskInstruction}</p>
+      </div>
+      <div className="grid gap-4 md:grid-cols-2">
+        {/* EVIDENCE BANK CONTAINER */}
+        <div
+          className={gamePanel}
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={(e) => {
+            e.preventDefault();
+            const droppedId = e.dataTransfer.getData("text/plain") || draggingId;
+            if (droppedId) {
+              removeItem(droppedId);
+            }
+          }}
+        >
+          <div className={gameSectionBar}>
             EVIDENCE BANK
           </div>
           <div className="space-y-1">
@@ -246,21 +357,27 @@ export function SortingGame({
                   onPointerDown={(event) => handlePointerDown(item.id, event)}
                   onPointerMove={handlePointerMove}
                   onPointerUp={(event) => handlePointerUp(item.id, event)}
-                  onPointerCancel={() => {
-                    setDraggingId(null);
-                    setDragTargetIndex(null);
-                  }}
+                  onPointerCancel={handlePointerCancel}
                   onDragStart={(event) => handleDragStart(item.id, event)}
                   onDragEnd={() => {
+                    pointerStartRef.current = null;
                     setDraggingId(null);
                     setDragTargetIndex(null);
                   }}
                   onKeyDown={(event) => handleItemKeyDown(item.id, event)}
-                  className={`flex cursor-grab items-center gap-2 bg-[#c0c0c0] px-2 py-1 text-xs shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:cursor-grabbing ${isPlaced ? "opacity-60" : ""} ${isSelected ? "ring-2 ring-[#000080]" : ""}`}
+                  className={`flex min-h-14 cursor-pointer touch-pan-y items-center gap-2 rounded-[6px] border-2 border-ink bg-background px-3 py-3 text-sm leading-6 text-ink shadow-[3px_3px_0_0_var(--color-ink)] transition-transform hover:-translate-y-px sm:min-h-12 sm:gap-3 sm:py-2 ${
+                    isPlaced ? "opacity-60" : ""
+                  } ${isSelected ? "bg-accent outline-2 outline-offset-2 outline-info" : ""}`}
                 >
-                  <span className="text-[10px] text-[#606060]"></span>
+                  <span
+                    data-drag-handle
+                    aria-hidden
+                    className="grid h-9 w-7 shrink-0 touch-none cursor-grab place-items-center rounded-[4px] border-2 border-ink bg-surface-2 font-mono text-xs font-black active:cursor-grabbing"
+                  >
+                    ::
+                  </span>
                   <span className="flex-1">{item.text}</span>
-                  <span className="bg-white px-1 text-[10px] text-[#606060] shadow-[inset_1px_1px_0_#808080]">
+                  <span className="hidden rounded-[4px] border-2 border-ink bg-surface-2 px-1.5 py-0.5 font-mono text-[10px] font-bold text-ink-soft sm:inline-flex">
                     {item.id}
                   </span>
                 </div>
@@ -269,8 +386,9 @@ export function SortingGame({
           </div>
         </div>
 
-        <div className="bg-[#c0c0c0] p-2 shadow-[inset_2px_2px_0_#808080,inset_-1px_-1px_0_#fff]">
-          <div className="mb-2 bg-[#000080] px-1 py-0.5 text-[10px] font-bold text-white">
+        {/* TIMELINE CONTAINER */}
+        <div className={gamePanel}>
+          <div className={gameSectionBar}>
             TIMELINE
           </div>
           <div className="space-y-1">
@@ -287,52 +405,68 @@ export function SortingGame({
                   tabIndex={0}
                   onPointerDown={
                     item
-                      ? (event) => handlePointerDown(item.id, event, true)
+                      ? (event) => handlePointerDown(item.id, event)
                       : undefined
                   }
                   onPointerMove={item ? handlePointerMove : undefined}
                   onPointerUp={
                     item
-                      ? (event) => handlePointerUp(item.id, event, true)
+                      ? (event) => handlePointerUp(item.id, event)
                       : undefined
                   }
-                  onPointerCancel={
-                    item
-                      ? () => {
-                          setDraggingId(null);
-                          setDragTargetIndex(null);
-                        }
-                      : undefined
-                  }
+                  onPointerCancel={item ? handlePointerCancel : undefined}
                   onClick={() => handleSlotClick(index)}
                   onKeyDown={(event) => handleSlotKeyDown(index, event)}
                   onDragOver={(event) => {
                     event.preventDefault();
-                    setDragTargetIndex(index);
+                  }}
+                  onDragLeave={(event) => {
+                    if (
+                      event.currentTarget.contains(
+                        event.relatedTarget as Node,
+                      )
+                    ) {
+                      return;
+                    }
+                    setDragTargetIndex((prev) =>
+                      prev === index ? null : prev,
+                    );
                   }}
                   onDrop={(event) => handleDrop(index, event)}
                   onDragStart={
                     item
-                      ? (event) => handleDragStart(item.id, event, true)
+                      ? (event) => handleDragStart(item.id, event)
                       : undefined
                   }
                   onDragEnd={
                     item
                       ? () => {
+                          pointerStartRef.current = null;
                           setDraggingId(null);
                           setDragTargetIndex(null);
                         }
                       : undefined
                   }
-                  className={`flex min-h-[34px] items-center gap-2 border-2 border-dashed border-[#808080] bg-white/50 px-2 py-2 text-xs text-[#808080] ${isDropTarget ? "ring-2 ring-[#000080]" : ""}`}
+                  className={`flex min-h-16 cursor-pointer touch-pan-y items-center gap-2 rounded-[6px] border-2 border-dashed border-ink bg-surface-2 px-3 py-3 text-sm leading-6 text-ink-soft transition-colors sm:min-h-14 sm:gap-3 sm:py-2 ${
+                    isDropTarget ? "bg-accent outline-2 outline-offset-2 outline-info" : ""
+                  }`}
                 >
-                  <span className="flex h-5 w-5 shrink-0 items-center justify-center bg-[#000080] text-[10px] font-bold text-white">
+                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-[4px] border-2 border-ink bg-info font-mono text-xs font-black text-info-foreground">
                     {index + 1}
                   </span>
                   {item ? (
-                    <span className="flex-1 text-black">{item.text}</span>
+                    <>
+                      <span
+                        data-drag-handle
+                        aria-hidden
+                        className="grid h-9 w-7 shrink-0 touch-none cursor-grab place-items-center rounded-[4px] border-2 border-ink bg-background font-mono text-xs font-black text-ink active:cursor-grabbing"
+                      >
+                        ::
+                      </span>
+                      <span className="flex-1 text-ink">{item.text}</span>
+                    </>
                   ) : (
-                    <span className="italic">”drop here”</span>
+                    <span className="italic">Drop here</span>
                   )}
                 </div>
               );
@@ -341,7 +475,7 @@ export function SortingGame({
         </div>
       </div>
 
-      <div className="mt-2 flex items-center justify-between bg-[#c0c0c0] px-2 py-1 text-[10px] shadow-[inset_1px_1px_0_#808080,inset_-1px_-1px_0_#fff]">
+      <div className="mt-4 flex items-center justify-between rounded-[6px] border-2 border-ink bg-surface-2 px-3 py-2 font-mono text-xs font-bold text-ink-soft">
         <span>Items: {poolItems.length}</span>
         <span role="status" aria-live="polite">
           Status: {status}
@@ -349,12 +483,19 @@ export function SortingGame({
       </div>
       {feedback && (
         <p
-          className={`mt-2 p-2 text-xs ${status === "Correct" ? "bg-[#d7ffd7]" : "bg-[#ffd7d7]"}`}
+          className={`mt-3 ${status === "Correct" ? gameFeedbackSuccess : gameFeedbackError}`}
           role="status"
           aria-live="polite"
         >
           {feedback}
         </p>
+      )}
+      {status === "Correct" && (
+        <div className="mt-4 flex justify-end">
+          <button type="button" onClick={handleComplete} className={gameButton}>
+            Complete investigation
+          </button>
+        </div>
       )}
     </RetroWindow>
   );

@@ -6,6 +6,14 @@ import {
 } from "react";
 import Image from "next/image";
 import { RetroWindow } from "./RetroWindow";
+import {
+  gameButton,
+  gameFeedbackError,
+  gameFeedbackSuccess,
+  gameOption,
+  gamePanel,
+  gameSectionBar,
+} from "./moduleStyles";
 
 export interface ImageForensicsQuiz {
   question: string;
@@ -44,8 +52,68 @@ interface DrawnCircle {
   result: "pending" | "incorrect" | "correct";
 }
 
+interface CircleInPixels {
+  x: number;
+  y: number;
+  radius: number;
+}
+
+const MIN_DRAWN_RADIUS_PCT = 5;
+const MIN_TARGET_COVERAGE = 0.65;
+const MAX_RADIUS_RATIO = 1.75;
+
 function getOptionKey(option: string): string {
   return option.trim().charAt(0).toUpperCase();
+}
+
+function getCircleIntersectionArea(
+  first: CircleInPixels,
+  second: CircleInPixels,
+): number {
+  const distance = Math.hypot(first.x - second.x, first.y - second.y);
+  const firstRadius = first.radius;
+  const secondRadius = second.radius;
+
+  if (distance >= firstRadius + secondRadius) {
+    return 0;
+  }
+
+  if (distance <= Math.abs(firstRadius - secondRadius)) {
+    return Math.PI * Math.min(firstRadius, secondRadius) ** 2;
+  }
+
+  const firstAngle = Math.acos(
+    (distance ** 2 + firstRadius ** 2 - secondRadius ** 2) /
+      (2 * distance * firstRadius),
+  );
+  const secondAngle = Math.acos(
+    (distance ** 2 + secondRadius ** 2 - firstRadius ** 2) /
+      (2 * distance * secondRadius),
+  );
+  const overlapTriangleArea = 0.5 * Math.sqrt(
+    (-distance + firstRadius + secondRadius) *
+      (distance + firstRadius - secondRadius) *
+      (distance - firstRadius + secondRadius) *
+      (distance + firstRadius + secondRadius),
+  );
+
+  return (
+    firstRadius ** 2 * firstAngle +
+    secondRadius ** 2 * secondAngle -
+    overlapTriangleArea
+  );
+}
+
+function toPixelCircle(
+  circle: Pick<DrawnCircle, "x_pct" | "y_pct" | "radius_pct">,
+  width: number,
+  height: number,
+): CircleInPixels {
+  return {
+    x: (circle.x_pct / 100) * width,
+    y: (circle.y_pct / 100) * height,
+    radius: (circle.radius_pct / 100) * width,
+  };
 }
 
 export function ImageForensics({
@@ -80,30 +148,59 @@ export function ImageForensics({
   const getImagePoint = (event: PointerEvent<HTMLDivElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
     return {
-      x_pct: ((event.clientX - rect.left) / rect.width) * 100,
-      y_pct: ((event.clientY - rect.top) / rect.height) * 100,
+      x_pct: Math.min(
+        100,
+        Math.max(0, ((event.clientX - rect.left) / rect.width) * 100),
+      ),
+      y_pct: Math.min(
+        100,
+        Math.max(0, ((event.clientY - rect.top) / rect.height) * 100),
+      ),
     };
   };
 
-  const evaluateDrawnCircle = (circle: DrawnCircle) => {
-    const selectedAnomaly = targetAnomalies.find((anomaly) => {
-      const distance = Math.hypot(
-        circle.x_pct - anomaly.x_pct,
-        circle.y_pct - anomaly.y_pct,
-      );
+  const evaluateDrawnCircle = (
+    circle: DrawnCircle,
+    imageBounds: DOMRect,
+  ) => {
+    const drawnCircleInPixels = toPixelCircle(
+      circle,
+      imageBounds.width,
+      imageBounds.height,
+    );
+    const selectedAnomaly = targetAnomalies
+      .filter((anomaly) => !foundAnomalyIds.includes(anomaly.anomaly_id))
+      .map((anomaly) => {
+        const anomalyCircleInPixels = toPixelCircle(
+          anomaly,
+          imageBounds.width,
+          imageBounds.height,
+        );
+        const targetArea = Math.PI * anomalyCircleInPixels.radius ** 2;
+        const targetCoverage =
+          getCircleIntersectionArea(
+            drawnCircleInPixels,
+            anomalyCircleInPixels,
+          ) / targetArea;
+        const radiusRatio =
+          drawnCircleInPixels.radius / anomalyCircleInPixels.radius;
 
-      return distance <= circle.radius_pct + anomaly.radius_pct;
-    });
+        return { anomaly, radiusRatio, targetCoverage };
+      })
+      .filter(
+        ({ radiusRatio, targetCoverage }) =>
+          targetCoverage >= MIN_TARGET_COVERAGE &&
+          radiusRatio <= MAX_RADIUS_RATIO,
+      )
+      .sort(
+        (first, second) => second.targetCoverage - first.targetCoverage,
+      )[0]?.anomaly;
 
     if (!selectedAnomaly) {
       setDrawnCircle({ ...circle, result: "incorrect" });
-      setClickMessage("No suspicious detail was found at that location.");
-      return;
-    }
-
-    if (foundAnomalyIds.includes(selectedAnomaly.anomaly_id)) {
-      setDrawnCircle({ ...circle, result: "incorrect" });
-      setClickMessage("That anomaly is already in your investigation log.");
+      setClickMessage(
+        "Circle most of one suspicious area without including large unrelated regions.",
+      );
       return;
     }
 
@@ -161,13 +258,13 @@ export function ImageForensics({
           point.x_pct - drawStartRef.current.x_pct,
           point.y_pct - drawStartRef.current.y_pct,
         ),
-        5,
+        MIN_DRAWN_RADIUS_PCT,
       ),
       result: "pending",
     };
 
     drawStartRef.current = null;
-    evaluateDrawnCircle(circle);
+    evaluateDrawnCircle(circle, event.currentTarget.getBoundingClientRect());
 
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.releasePointerCapture(event.pointerId);
@@ -215,99 +312,85 @@ export function ImageForensics({
   };
 
   return (
-    <RetroWindow title="Image Forensics Lab.exe" onClose={onBack}>
-      <div className="grid gap-2 md:grid-cols-[1fr_240px]">
-        <div
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUp}
-          onPointerCancel={handlePointerCancel}
-          style={imageStyle}
-          className="relative w-full touch-none cursor-crosshair overflow-hidden bg-black shadow-[inset_2px_2px_0_#000,inset_-2px_-2px_0_#dfdfdf,inset_4px_4px_0_#808080]"
-        >
-          <Image
-            src={imageUrl}
-            alt="Evidence"
-            fill
-            priority
-            sizes="(min-width: 768px) calc(100vw - 260px), 100vw"
-            draggable={false}
-            className="h-full w-full object-cover"
-          />
-          <div className="pointer-events-none absolute inset-0">
-            {drawnCircle && (
-              <div
-                aria-label="Current drawn evidence circle"
-                className={`absolute rounded-full border-2 ${
-                  drawnCircle.result === "incorrect"
-                    ? "border-red-500 bg-red-400/20"
-                    : drawnCircle.result === "correct"
-                      ? "border-green-500 bg-green-400/20"
-                      : "border-yellow-300 bg-yellow-300/10"
-                }`}
-                style={{
-                  left: `${drawnCircle.x_pct}%`,
-                  top: `${drawnCircle.y_pct}%`,
-                  width: `${drawnCircle.radius_pct * 2}%`,
-                  height: "auto",
-                  aspectRatio: "1",
-                  transform: "translate(-50%, -50%)",
-                }}
-              />
-            )}
-            {targetAnomalies
-              .filter((anomaly) =>
-                foundAnomalyIds.includes(anomaly.anomaly_id),
-              )
-              .map((anomaly) => (
+    <RetroWindow title="Module 01 / Image Forensics" onClose={onBack}>
+      <div className="grid min-h-0 gap-4 md:grid-cols-[minmax(0,1fr)_minmax(260px,380px)]">
+        <div className="flex min-h-0 items-center justify-center overflow-hidden">
+          <div
+            aria-label="Forensic evidence image. Draw a circle around a suspicious area."
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerCancel}
+            style={imageStyle}
+            className={`relative w-full max-w-full touch-none cursor-crosshair overflow-hidden rounded-[6px] border-2 border-ink bg-black shadow-[5px_5px_0_0_var(--color-ink)] ${
+              activeAnomaly
+                ? "max-h-[43dvh] md:max-h-[calc(100dvh-60px)]"
+                : "max-h-[calc(100dvh-60px)]"
+            }`}
+          >
+            <Image
+              src={imageUrl}
+              alt="Evidence"
+              width={imageWidth}
+              height={imageHeight}
+              preload
+              sizes="(min-width: 768px) calc(100vw - 380px), 100vw"
+              draggable={false}
+              className={`block h-auto w-full max-w-full object-contain ${
+                activeAnomaly
+                  ? "max-h-[43dvh] md:max-h-[calc(100dvh-60px)]"
+                  : "max-h-[calc(100dvh-60px)]"
+              }`}
+            />
+            <div className="pointer-events-none absolute inset-0">
+              {drawnCircle && (
                 <div
-                  key={anomaly.anomaly_id}
-                  aria-label={`${anomaly.name} found`}
-                  className="absolute rounded-full border-2 border-green-500 bg-green-400/20 shadow-[0_0_0_1px_#000]"
+                  aria-label="Current drawn evidence circle"
+                  className={`absolute rounded-full border-2 ${
+                    drawnCircle.result === "incorrect"
+                      ? "border-danger bg-danger/20"
+                      : drawnCircle.result === "correct"
+                        ? "border-success bg-success/20"
+                        : "border-accent bg-accent/15"
+                  }`}
                   style={{
-                    left: `${anomaly.x_pct}%`,
-                    top: `${anomaly.y_pct}%`,
-                    width: `${anomaly.radius_pct * 2}%`,
-                    height: `${anomaly.radius_pct * 2}%`,
+                    left: `${drawnCircle.x_pct}%`,
+                    top: `${drawnCircle.y_pct}%`,
+                    width: `${drawnCircle.radius_pct * 2}%`,
+                    aspectRatio: "1",
                     transform: "translate(-50%, -50%)",
                   }}
                 />
-              ))}
+              )}
+              {targetAnomalies
+                .filter((anomaly) =>
+                  foundAnomalyIds.includes(anomaly.anomaly_id),
+                )
+                .map((anomaly) => (
+                  <div
+                    key={anomaly.anomaly_id}
+                    aria-label={`${anomaly.name} found`}
+                    className="absolute rounded-full border-2 border-success bg-success/20 shadow-[0_0_0_1px_var(--color-ink)]"
+                    style={{
+                      left: `${anomaly.x_pct}%`,
+                      top: `${anomaly.y_pct}%`,
+                      width: `${anomaly.radius_pct * 2}%`,
+                      aspectRatio: "1",
+                      transform: "translate(-50%, -50%)",
+                    }}
+                  />
+                ))}
+            </div>
           </div>
-          <div className="pointer-events-none absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent_0,transparent_2px,rgba(0,0,0,0.15)_2px,rgba(0,0,0,0.15)_3px)]" />
         </div>
 
-        <div className="bg-[#c0c0c0] p-2 shadow-[inset_-1px_-1px_0_#fff,inset_1px_1px_0_#808080]">
-          <div className="mb-2 bg-[#000080] px-1 py-0.5 text-[10px] font-bold text-white">
-            INVESTIGATION LOG
-          </div>
-          <p className="text-xs leading-snug">{contextText}</p>
-          <div className="mt-3 border-t border-[#808080] pt-2 text-[10px] text-[#404040]">
-            Evidence found: {foundAnomalyIds.length} / {targetAnomalies.length}
-          </div>
-          {clickMessage && (
-            <p className="mt-2 bg-[#fff2a8] p-1 text-[10px] text-black">
-              {clickMessage}
-            </p>
-          )}
-          {allAnomaliesFound && !activeAnomaly && (
-            <p className="mt-2 bg-[#d7ffd7] p-1 text-[10px] text-black">
-              All visual anomalies are documented. Continue to the text investigation.
-            </p>
-          )}
-        </div>
-      </div>
-
-      {activeAnomaly && activeQuiz && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+        {activeAnomaly && activeQuiz ? (
           <form
             onSubmit={handleQuizSubmit}
-            className="w-full max-w-lg bg-[#c0c0c0] p-1 text-black shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#fff]"
-            role="dialog"
-            aria-modal="true"
+            className={`${gamePanel} max-h-[45dvh] min-h-0 overflow-y-auto md:max-h-[calc(100dvh-90px)]`}
             aria-labelledby="forensics-question"
           >
-            <div className="bg-[#000080] px-2 py-1 text-xs font-bold text-white">
+            <div className={gameSectionBar}>
               Critical Thinking Check
             </div>
             <div className="p-3">
@@ -318,7 +401,7 @@ export function ImageForensics({
                 {activeQuiz.options.map((option) => (
                   <label
                     key={option}
-                    className="flex cursor-pointer items-start gap-2 bg-white px-2 py-1 text-xs shadow-[inset_1px_1px_0_#808080,inset_-1px_-1px_0_#fff]"
+                    className={gameOption}
                   >
                     <input
                       type="radio"
@@ -333,22 +416,22 @@ export function ImageForensics({
                 ))}
               </div>
               {quizState === "incorrect" && (
-                <p className="mt-3 bg-[#ffd7d7] p-2 text-xs" role="alert">
+                <p className={`mt-3 ${gameFeedbackError}`} role="alert">
                   That explanation does not match the selected anomaly. Try again.
                 </p>
               )}
               {quizState === "correct" && (
-                <div className="mt-3 bg-[#d7ffd7] p-2 text-xs" role="status">
+                <div className={`mt-3 ${gameFeedbackSuccess}`} role="status">
                   <p className="font-bold">Correct.</p>
                   {activeQuiz.explanation && <p>{activeQuiz.explanation}</p>}
                 </div>
               )}
-              <div className="mt-3 flex justify-end gap-2">
+              <div className="sticky bottom-0 mt-3 flex justify-end gap-2 bg-surface py-2">
                 {quizState === "correct" ? (
                   <button
                     type="button"
                     onClick={handleContinue}
-                    className="min-w-[150px] bg-[#c0c0c0] px-3 py-1 text-xs shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff]"
+                    className={gameButton}
                   >
                     {allAnomaliesFound ? "Continue to Text Highlight" : "Continue"}
                   </button>
@@ -356,7 +439,7 @@ export function ImageForensics({
                   <button
                     type="submit"
                     disabled={!selectedOption}
-                    className="min-w-[90px] bg-[#c0c0c0] px-3 py-1 text-xs shadow-[inset_-1px_-1px_0_#000,inset_1px_1px_0_#fff,inset_-2px_-2px_0_#808080,inset_2px_2px_0_#dfdfdf] enabled:active:shadow-[inset_1px_1px_0_#000,inset_-1px_-1px_0_#fff] disabled:cursor-not-allowed disabled:text-[#808080]"
+                    className={gameButton}
                   >
                     Check Answer
                   </button>
@@ -364,8 +447,28 @@ export function ImageForensics({
               </div>
             </div>
           </form>
-        </div>
-      )}
+        ) : (
+          <div className={`${gamePanel} max-h-[calc(100dvh-90px)] overflow-y-auto`}>
+            <div className={gameSectionBar}>
+              INVESTIGATION LOG
+            </div>
+            <p className="text-sm leading-6">{contextText}</p>
+            <div className="mt-4 border-t-2 border-ink pt-3 font-mono text-xs font-bold text-ink-soft">
+              Evidence found: {foundAnomalyIds.length} / {targetAnomalies.length}
+            </div>
+            {clickMessage && (
+              <p className={`mt-3 ${gameFeedbackError}`} role="alert">
+                {clickMessage}
+              </p>
+            )}
+            {allAnomaliesFound && !activeAnomaly && (
+              <p className={`mt-3 ${gameFeedbackSuccess}`}>
+                All visual anomalies are documented. Continue to the text investigation.
+              </p>
+            )}
+          </div>
+        )}
+      </div>
     </RetroWindow>
   );
 }
