@@ -400,14 +400,16 @@ export function TextHighlight({
         <div ref={quizRef} className={`mt-5 scroll-mt-24 ${gamePanel}`}>
           <div className="flex items-start justify-between gap-3">
             <span className={gameSectionBar}>Critical thinking check</span>
-            <button
-              type="button"
-              onClick={handleQuizCancel}
-              aria-label="Close critical thinking question"
-              className="grid h-8 w-8 place-items-center rounded-[5px] border-2 border-ink bg-surface text-lg font-black text-ink hover:bg-danger hover:text-danger-foreground"
-            >
-              &times;
-            </button>
+            {quizState !== "correct" && (
+              <button
+                type="button"
+                onClick={handleQuizCancel}
+                aria-label="Close critical thinking question"
+                className="grid h-8 w-8 place-items-center rounded-[5px] border-2 border-ink bg-surface text-lg font-black text-ink hover:bg-danger hover:text-danger-foreground"
+              >
+                &time;
+              </button>
+            )}
           </div>
           <form onSubmit={handleQuizSubmit} className="flex flex-col gap-4 sm:flex-row">
             <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[5px] border-2 border-ink bg-accent text-xl font-black text-accent-foreground shadow-[3px_3px_0_0_var(--color-ink)]">
