@@ -330,7 +330,7 @@
       "Logical fallacies",
       "FOMO & Toxic flexing analysis"
     ],
-    "spotted_url": "/assets/images/R002/R002_spotted.jpg",
+    "spotted_url": "/assets/images/R002/R002_spotted.png",
     "theme": [
       "Social Media",
       "Peer Pressure",
@@ -340,7 +340,7 @@
     "modules": {
       "step_1_image_forensics": {
         "mechanic_type": "IMAGE_FORENSICS",
-        "image_url": "/assets/images/R002/R002_fake.jpg",
+        "image_url": "/assets/images/R002/R002_fake.png",
         "image_width": 1000,
         "image_height": 1000,
         "context_text": "A viral post claims a 20-year-old made millions overnight, featuring luxury items to humiliate young workers. Analyze the image to find the AI generation anomalies behind this fabricated wealth.",
