@@ -330,7 +330,7 @@
       "Logical fallacies",
       "FOMO & Toxic flexing analysis"
     ],
-    "spotted_url": "/assets/images/R002/R002_spotted.png",
+    "spotted_url": "/assets/images/R002/R002_spotted.jpg",
     "theme": [
       "Social Media",
       "Peer Pressure",
@@ -340,7 +340,7 @@
     "modules": {
       "step_1_image_forensics": {
         "mechanic_type": "IMAGE_FORENSICS",
-        "image_url": "/assets/images/R002/R002_fake.png",
+        "image_url": "/assets/images/R002/R002_fake.jpg",
         "image_width": 1000,
         "image_height": 1000,
         "context_text": "A viral post claims a 20-year-old made millions overnight, featuring luxury items to humiliate young workers. Analyze the image to find the AI generation anomalies behind this fabricated wealth.",
@@ -393,6 +393,8 @@
         "traps": [
           {
             "trap_id": "R002_T1",
+            "ground_truth_start": 127,
+            "ground_truth_end": 190,
             "trap_type": "Attacking Motive Fallacy (Strawman)",
             "weapon_type": [
               "attacking_motive",
@@ -412,6 +414,8 @@
           },
           {
             "trap_id": "R002_T2",
+            "ground_truth_start": 202,
+            "ground_truth_end": 325,
             "trap_type": "False Comparison",
             "weapon_type": [
               "false_comparison"
@@ -430,6 +434,8 @@
           },
           {
             "trap_id": "R002_T3",
+            "ground_truth_start": 327,
+            "ground_truth_end": 474,
             "trap_type": "Inducing FOMO (Fear Of Missing Out) Combined with Personal Attack",
             "weapon_type": [
               "inducing_fomo",
@@ -449,6 +455,8 @@
           },
           {
             "trap_id": "R002_T4",
+            "ground_truth_start": 476,
+            "ground_truth_end": 539,
             "trap_type": "Emotional Dismissal Fallacy",
             "weapon_type": [
               "emotional_dismissal"
