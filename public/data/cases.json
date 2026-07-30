@@ -318,5 +318,191 @@
       "question": "Ask your Teacher/Parent: If you received this message, what evidence would you need before believing the photo reflects a real food safety problem rather than a manipulated story?",
       "mil_insight": "A single image rarely provides enough context to establish what happened. Discuss how to distinguish direct evidence from assumptions by checking the original source, verifying when and where the photo was taken, and following the school's official investigation process before drawing conclusions."
     }
+  },
+  {
+    "level": "RED",
+    "case_id": "R002",
+    "title": "The Illusion of Success",
+    "short_summary": "A viral post flexes a 20-year-old's fake luxury lifestyle while belittling others. Uncover the AI anomalies and decode the toxic FOMO tactics.",
+    "duration_min": 15,
+    "skills": [
+      "Image forensics",
+      "Logical fallacies",
+      "FOMO & Toxic flexing analysis"
+    ],
+    "spotted_url": "/assets/images/R002/R002_spotted.jpg",
+    "theme": [
+      "Social Media",
+      "Peer Pressure",
+      "Toxic Flexing"
+    ],
+    "story_context": "An influencer posts a picture with a luxury car, high-end bag, and expensive watch alongside condescending text to induce severe FOMO and promote a scam mindset course.",
+    "modules": {
+      "step_1_image_forensics": {
+        "mechanic_type": "IMAGE_FORENSICS",
+        "image_url": "/assets/images/R002/R002_fake.jpg",
+        "image_width": 1000,
+        "image_height": 1000,
+        "context_text": "A viral post claims a 20-year-old made millions overnight, featuring luxury items to humiliate young workers. Analyze the image to find the AI generation anomalies behind this fabricated wealth.",
+        "target_anomalies": [
+          {
+            "anomaly_id": "R002_IMG_01",
+            "name": "glitched_bag_hardware",
+            "x_pct": 10.5,
+            "y_pct": 76.5,
+            "radius_pct": 9.0,
+            "description": "The leather strap and metallic clasps on the luxury bag are physically impossible, merging into random floating loops.",
+            "socratic_quiz": {
+              "question": "Why is the strap hardware on the designer bag a clear sign of AI generation?",
+              "options": [
+                "A. The luxury logo on the bag is printed sideways.",
+                "B. Metallic hooks and leather straps clip into each other and float without a realistic connection point.",
+                "C. Designer bags are never made with both black and brown materials."
+              ],
+              "correct_option": "B",
+              "explanation": "Generative AI models often fail to construct complex mechanical structures like buckles, zippers, and clasps, resulting in floating geometric glitches that violate real-world physics."
+            }
+          },
+          {
+            "anomaly_id": "R002_IMG_02",
+            "name": "inconsistent_table_reflection",
+            "x_pct": 48.0,
+            "y_pct": 89.0,
+            "radius_pct": 7.5,
+            "description": "The coffee cup fails to cast a natural reflection on the glossy tabletop, unlike the rest of the environment.",
+            "socratic_quiz": {
+              "question": "What physics anomaly occurs on the glossy table directly beneath the coffee cup?",
+              "options": [
+                "A. The table surface is reflecting light in two completely opposite directions.",
+                "B. The shadow of the coffee cup is fully illuminated by ambient room lights.",
+                "C. The highly reflective table reflects the room's background but misses the direct contact reflection of the cup sitting on it."
+              ],
+              "correct_option": "C",
+              "explanation": "AI image generators generate pixels based on statistical patterns rather than calculating light ray physics. As a result, contact reflections and shadows on glossy surfaces are frequently broken or missing."
+            }
+          }
+        ]
+      },
+      "step_2_text_highlight": {
+        "mechanic_type": "TEXT_HIGHLIGHT",
+        "simulated_post": {
+          "author": "Minh Khang",
+          "time_posted": "2 hours ago",
+          "content": "It's honestly funny how some people keep saying \"money doesn't buy happiness\" every time someone posts something nice. Like... just because you can't afford it doesn't mean it's \"showing off.\" Meanwhile, everyone I know is out here grinding, getting internships, buying what they want, and actually doing something with their lives. If you're still making excuses while everyone else is moving up, maybe stop blaming other people and ask yourself why you're getting left behind. Stay mad if you want, but don't expect the world to wait for you."
+        },
+        "traps": [
+          {
+            "trap_id": "R002_T1",
+            "trap_type": "Attacking Motive Fallacy (Strawman)",
+            "weapon_type": [
+              "attacking_motive",
+              "strawman"
+            ],
+            "matched_text": "just because you can't afford it doesn't mean it's \"showing off.\"",
+            "socratic_quiz": {
+              "question": "What is this sentence really trying to do to anyone who criticizes the flex post?",
+              "options": [
+                "A. Directly addresses why the post might be considered showing off",
+                "B. Assigns a negative motive (jealousy over money) to anyone who criticizes, instead of engaging with whether the criticism is actually valid",
+                "C. Provides an objective, neutral explanation"
+              ],
+              "correct_option": "B",
+              "explanation": "This is an attacking-the-motive fallacy: instead of responding to the actual argument (whether the post is showing off or not), the writer assumes any critic is simply 'broke and jealous' — a way to dodge the real issue while demeaning the critic."
+            }
+          },
+          {
+            "trap_id": "R002_T2",
+            "trap_type": "False Comparison",
+            "weapon_type": [
+              "false_comparison"
+            ],
+            "matched_text": "everyone I know is out here grinding, getting internships, buying what they want, and actually doing something with their lives",
+            "socratic_quiz": {
+              "question": "What is the logical problem with this comparison?",
+              "options": [
+                "A. It's a fair comparison since everyone starts from the exact same circumstances",
+                "B. It lumps together unrelated things (effort, internships, shopping) to imply that anyone who can't afford luxury goods is 'not doing anything with their life,' ignoring differences in people's actual circumstances",
+                "C. It's an accurate statistic about the writer's actual acquaintances"
+              ],
+              "correct_option": "B",
+              "explanation": "This is a false comparison: it equates 'being able to buy what you want' with 'succeeding in life,' while ignoring that people come from very different financial and family backgrounds — making this an unfair basis for comparison."
+            }
+          },
+          {
+            "trap_id": "R002_T3",
+            "trap_type": "Inducing FOMO (Fear Of Missing Out) Combined with Personal Attack",
+            "weapon_type": [
+              "inducing_fomo",
+              "personal_attack"
+            ],
+            "matched_text": "If you're still making excuses while everyone else is moving up, maybe stop blaming other people and ask yourself why you're getting left behind",
+            "socratic_quiz": {
+              "question": "How is this sentence psychologically affecting the reader?",
+              "options": [
+                "A. It offers sincere, actionable advice to help the reader grow",
+                "B. It creates a fear of being left behind (FOMO) by painting a picture of 'everyone moving up,' while implicitly blaming and belittling the reader as someone who 'makes excuses' and 'falls behind'",
+                "C. It's simply a rhetorical question with no particular purpose"
+              ],
+              "correct_option": "B",
+              "explanation": "This is a FOMO-inducing tactic combined with a personal attack: the sentence offers no real solution, but instead pressures the reader into feeling inadequate and anxious about falling behind an ambiguous, unverified standard."
+            }
+          },
+          {
+            "trap_id": "R002_T4",
+            "trap_type": "Emotional Dismissal Fallacy",
+            "weapon_type": [
+              "emotional_dismissal"
+            ],
+            "matched_text": "Stay mad if you want, but don't expect the world to wait for you",
+            "socratic_quiz": {
+              "question": "What is the purpose of this closing sentence in response to any pushback?",
+              "options": [
+                "A. It invites an open conversation to understand other people's perspectives",
+                "B. It dismisses any negative reaction or criticism by labeling it as 'being mad,' allowing the writer to avoid reflecting on their own behavior",
+                "C. It offers genuine encouragement to everyone reading"
+              ],
+              "correct_option": "B",
+              "explanation": "This is an emotional dismissal tactic: any criticism or reaction is preemptively labeled as 'staying mad,' which lets the writer avoid examining their own bragging behavior while continuing to belittle others."
+            }
+          }
+        ]
+      },
+      "step_3_sorting_game": {
+        "mechanic_type": "DRAG_AND_DROP_SORTING",
+        "task_instruction": "Toxic flexing campaigns often manipulate readers into feeling inadequate before selling them scam courses. Arrange the stages of this psychological manipulation strategy in the correct order.",
+        "pool_items": [
+          {
+            "item_id": "R002_SORT_01",
+            "text": "Readers experience intense FOMO and self-doubt, fearing they are falling behind their peers."
+          },
+          {
+            "item_id": "R002_SORT_02",
+            "text": "The influencer posts fabricated AI images of luxury items to establish fake status and authority."
+          },
+          {
+            "item_id": "R002_SORT_03",
+            "text": "The influencer pitches an expensive 'wealth mindset masterclass' as the ultimate shortcut to success."
+          },
+          {
+            "item_id": "R002_SORT_04",
+            "text": "The post uses false comparisons and condescending language to demean normal working youth as 'lazy'."
+          }
+        ],
+        "correct_sequence": [
+          "R002_SORT_02",
+          "R002_SORT_04",
+          "R002_SORT_01",
+          "R002_SORT_03"
+        ],
+        "validation_feedback": {
+          "success": "Correct! You have decoded the classic toxic flexing funnel: Fabricate status (Hook) → Belittle through false comparisons (Attack) → Trigger insecurity and FOMO (Anxiety) → Sell an expensive 'shortcut' course (Monetization).",
+          "failure": "Incorrect sequence. Toxic flexing manipulators first establish fake wealth, then attack the audience's self-esteem to create FOMO before offering their paid course as a fake solution."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Ask your Teacher/Parent: If a social media post makes you feel anxious that you are falling behind your peers who seem to afford luxury lifestyles, what steps can you take to evaluate what is real versus staged?",
+      "mil_insight": "Social media highlights rarely reflect full reality, and AI image tools make lavish lifestyles effortless to fake. Remind youth that success is not measured by material flexing or belittling others, and urgent pitches for expensive 'mindset courses' are almost always predatory scams."
+    }
   }
 ]
