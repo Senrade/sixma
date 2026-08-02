@@ -5,6 +5,8 @@ import {
   type PointerEvent,
 } from "react";
 import Image from "next/image";
+import type { ModuleGuideDefinition } from "@/lib/module-guides";
+import { ModuleGuide } from "./ModuleGuide";
 import { RetroWindow } from "./RetroWindow";
 import {
   gameButton,
@@ -33,6 +35,7 @@ export interface ImageForensicsAnomaly {
 }
 
 export interface ImageForensicsProps {
+  guide: ModuleGuideDefinition;
   imageUrl: string;
   contextText: string;
   targetAnomalies: ImageForensicsAnomaly[];
@@ -40,7 +43,6 @@ export interface ImageForensicsProps {
   imageWidth?: number;
   imageHeight?: number;
   onComplete?: () => void;
-  onBack?: () => void;
 }
 
 type QuizState = "idle" | "incorrect" | "correct";
@@ -117,6 +119,7 @@ function toPixelCircle(
 }
 
 export function ImageForensics({
+  guide,
   imageUrl,
   contextText,
   targetAnomalies,
@@ -124,7 +127,6 @@ export function ImageForensics({
   imageWidth = 16,
   imageHeight = 9,
   onComplete,
-  onBack,
 }: ImageForensicsProps) {
   const [foundAnomalyIds, setFoundAnomalyIds] = useState<string[]>([]);
   const [activeAnomalyId, setActiveAnomalyId] = useState<string | null>(null);
@@ -312,7 +314,8 @@ export function ImageForensics({
   };
 
   return (
-    <RetroWindow title="Module 01 / Image Forensics" onClose={onBack}>
+    <RetroWindow title="Module 01 / Image Forensics">
+      <ModuleGuide guide={guide} />
       <div className="grid min-h-0 gap-4 md:grid-cols-[minmax(0,1fr)_minmax(260px,380px)]">
         <div className="flex min-h-0 items-center justify-center overflow-hidden">
           <div

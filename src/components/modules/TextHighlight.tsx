@@ -5,6 +5,8 @@ import {
   type FormEvent,
   type PointerEvent,
 } from "react";
+import type { ModuleGuideDefinition } from "@/lib/module-guides";
+import { ModuleGuide } from "./ModuleGuide";
 import { RetroWindow } from "./RetroWindow";
 import {
   gameButton,
@@ -34,6 +36,7 @@ export interface TextHighlightTrap {
 }
 
 export interface TextHighlightProps {
+  guide: ModuleGuideDefinition;
   postAuthor: string;
   postTime: string;
   content: string;
@@ -41,7 +44,6 @@ export interface TextHighlightProps {
   iouThreshold?: number;
   socraticQuiz?: TextHighlightQuiz;
   onComplete?: () => void;
-  onBack?: () => void;
   onSelectionComplete?: (start: number, end: number) => void;
 }
 
@@ -110,6 +112,7 @@ function getSelectionRange(root: HTMLElement): CharacterRange | null {
 }
 
 export function TextHighlight({
+  guide,
   postAuthor,
   postTime,
   content,
@@ -117,7 +120,6 @@ export function TextHighlight({
   iouThreshold = 0.7,
   socraticQuiz,
   onComplete,
-  onBack,
   onSelectionComplete,
 }: TextHighlightProps) {
   const [activeTrapId, setActiveTrapId] = useState<string | null>(null);
@@ -144,10 +146,6 @@ export function TextHighlight({
   const activeTrap = traps.find((trap) => trap.trap_id === activeTrapId);
   const activeQuiz = activeTrap?.socratic_quiz ?? socraticQuiz;
   const allTrapsCompleted = traps.length > 0 && completedTrapIds.length === traps.length;
-  const finalTrapSelected =
-    activeTrap !== undefined &&
-    traps.length > 0 &&
-    completedTrapIds.length === traps.length - 1;
   const authorInitials = postAuthor
     .split(/\s+/)
     .slice(0, 2)
@@ -286,7 +284,8 @@ export function TextHighlight({
   };
 
   return (
-    <RetroWindow title="Module 02 / Language Analysis" onClose={onBack}>
+    <RetroWindow title="Module 02 / Language Analysis">
+      <ModuleGuide guide={guide} />
       <div className={gamePanel}>
         <div className="mb-4 flex items-center justify-between gap-3 border-b-2 border-ink pb-3">
           <span className={gameSectionBar}>Community wire</span>
@@ -393,17 +392,7 @@ export function TextHighlight({
 
       {activeQuiz && activeTrap && (
         <div ref={quizRef} className={`mt-5 scroll-mt-24 ${gamePanel}`}>
-          <div className="flex items-start justify-between gap-3">
-            <span className={gameSectionBar}>Critical thinking check</span>
-            <button
-              type="button"
-              onClick={handleQuizCancel}
-              aria-label="Close critical thinking question"
-              className="grid h-8 w-8 place-items-center rounded-[5px] border-2 border-ink bg-surface text-lg font-black text-ink hover:bg-danger hover:text-danger-foreground"
-            >
-              &times;
-            </button>
-          </div>
+          <span className={gameSectionBar}>Critical thinking check</span>
           <form onSubmit={handleQuizSubmit} className="flex flex-col gap-4 sm:flex-row">
             <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[5px] border-2 border-ink bg-accent text-xl font-black text-accent-foreground shadow-[3px_3px_0_0_var(--color-ink)]">
               ?
@@ -451,24 +440,26 @@ export function TextHighlight({
                     onClick={handleQuizContinue}
                     className={`${gameButton} max-sm:flex-1`}
                   >
-                    {finalTrapSelected || allTrapsCompleted ? "Next" : "OK"}
+                    {allTrapsCompleted ? "Next" : "OK"}
                   </button>
                 ) : (
-                  <button
-                    type="submit"
-                    disabled={!selectedOption}
-                    className={`${gameButton} max-sm:flex-1`}
-                  >
-                    OK
-                  </button>
+                  <>
+                    <button
+                      type="submit"
+                      disabled={!selectedOption}
+                      className={`${gameButton} max-sm:flex-1`}
+                    >
+                      OK
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleQuizCancel}
+                      className={`${gameButtonSecondary} max-sm:flex-1`}
+                    >
+                      Cancel
+                    </button>
+                  </>
                 )}
-                <button
-                  type="button"
-                  onClick={handleQuizCancel}
-                  className={`${gameButtonSecondary} max-sm:flex-1`}
-                >
-                  Cancel
-                </button>
               </div>
             </div>
           </form>

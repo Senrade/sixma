@@ -32,8 +32,8 @@ export function Card({
   return (
     <div
       className={cn(
-        "rounded-[8px] border-2 border-ink",
-        !flat && "shadow-[4px_4px_0_0_var(--color-ink)]",
+        "border-[3px] border-border",
+        !flat && "shadow-[4px_4px_0_0_var(--color-warn),8px_8px_0_0_color-mix(in_oklab,var(--color-accent)_35%,transparent)]",
         tones[tone],
         className,
       )}
@@ -64,7 +64,7 @@ export function Chip({
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-[4px] border-2 border-ink px-2 py-0.5 text-xs font-bold uppercase",
+        "inline-flex items-center border-[3px] border-border px-2 py-0.5 font-mono text-xs font-bold uppercase",
         tones[tone],
         className,
       )}
@@ -75,14 +75,14 @@ export function Chip({
 }
 
 const buttonBase =
-  "inline-flex min-h-10 items-center justify-center gap-2 rounded-[6px] border-2 border-ink px-4 text-sm font-bold transition-[transform,box-shadow] duration-100 hover:-translate-x-px hover:-translate-y-px active:translate-x-[2px] active:translate-y-[2px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50";
+  "inline-flex min-h-10 items-center justify-center gap-2 border-[3px] px-4 font-mono text-sm font-black uppercase transition-[transform,box-shadow,background-color,border-color,color] duration-100 hover:-translate-x-px hover:-translate-y-px active:translate-x-[2px] active:translate-y-[2px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50";
 
 const buttonTones = {
-  primary: "bg-ink text-background shadow-[4px_4px_0_0_var(--color-ink)]",
-  secondary: "bg-surface text-ink shadow-[4px_4px_0_0_var(--color-ink)]",
-  accent: "bg-accent text-accent-foreground shadow-[4px_4px_0_0_var(--color-ink)]",
-  danger: "bg-danger text-danger-foreground shadow-[4px_4px_0_0_var(--color-ink)]",
-  ghost: "border-transparent bg-transparent text-ink shadow-none hover:bg-surface-2",
+  primary: "border-info bg-info text-info-foreground shadow-[4px_4px_0_0_var(--color-accent)] hover:border-accent hover:bg-accent hover:text-accent-foreground",
+  secondary: "border-border bg-surface text-ink shadow-[4px_4px_0_0_color-mix(in_oklab,var(--color-info)_55%,transparent)] hover:border-info hover:text-info",
+  accent: "border-warn bg-warn text-warn-foreground shadow-[4px_4px_0_0_var(--color-accent)] hover:border-accent hover:bg-accent hover:text-accent-foreground",
+  danger: "border-danger bg-danger text-danger-foreground shadow-[4px_4px_0_0_var(--color-warn)]",
+  ghost: "border-border bg-transparent text-ink shadow-none hover:border-info hover:bg-surface-2 hover:text-info",
 };
 
 type ButtonTone = keyof typeof buttonTones;
@@ -129,7 +129,7 @@ export function Input(props: InputHTMLAttributes<HTMLInputElement>) {
     <input
       {...props}
       className={cn(
-        "h-11 w-full rounded-[6px] border-2 border-ink bg-surface px-3 text-sm text-ink shadow-[2px_2px_0_0_var(--color-ink)] placeholder:text-muted-foreground",
+        "h-11 w-full border-[3px] border-border bg-surface px-3 text-sm text-ink shadow-[2px_2px_0_0_var(--color-info)] placeholder:text-muted-foreground focus:border-info",
         props.className,
       )}
     />
@@ -141,7 +141,7 @@ export function Textarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>) {
     <textarea
       {...props}
       className={cn(
-        "min-h-28 w-full rounded-[6px] border-2 border-ink bg-surface px-3 py-2 text-sm text-ink shadow-[2px_2px_0_0_var(--color-ink)] placeholder:text-muted-foreground",
+        "min-h-28 w-full border-[3px] border-border bg-surface px-3 py-2 text-sm text-ink shadow-[2px_2px_0_0_var(--color-info)] placeholder:text-muted-foreground focus:border-info",
         props.className,
       )}
     />
@@ -151,7 +151,7 @@ export function Textarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>) {
 export function Progress({ value, className }: { value: number; className?: string }) {
   const percentage = Math.max(0, Math.min(100, value));
   return (
-    <div className={cn("h-3 overflow-hidden rounded-[4px] border-2 border-ink bg-surface", className)}>
+    <div className={cn("h-3 overflow-hidden border-[3px] border-border bg-surface", className)}>
       <div className="h-full bg-info" style={{ width: `${percentage}%` }} />
     </div>
   );
@@ -159,8 +159,8 @@ export function Progress({ value, className }: { value: number; className?: stri
 
 export function SectionLabel({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className={cn("flex items-center gap-3 text-xs font-bold uppercase text-muted-foreground", className)}>
-      <span className="h-0.5 w-6 bg-ink" />
+    <div className={cn("flex items-center gap-3 font-mono text-xs font-black uppercase text-muted-foreground", className)}>
+      <span className="h-[3px] w-6 bg-accent" />
       {children}
     </div>
   );

@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import GameController, {
@@ -8,12 +7,16 @@ import GameController, {
 } from "@/components/controllers/GameController";
 import { Progress } from "@/components/ui/Primitives";
 import type { CaseData } from "@/lib/case-types";
+import { MissionExitDialog } from "./MissionExitDialog";
 
 const STEP_LABELS = ["Inspect", "Analyze", "Reconstruct"] as const;
 
 export function MissionExperience({ caseData }: { caseData: CaseData }) {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState<GameStep>(1);
+  const [isExitDialogOpen, setIsExitDialogOpen] = useState(false);
+
+  const progressStorageKey = `unesco-mil-game:v2:${caseData.case_id}:current-step`;
 
   const handleComplete = useCallback(() => {
     try {
@@ -22,7 +25,7 @@ export function MissionExperience({ caseData }: { caseData: CaseData }) {
         new Date().toISOString(),
       );
       window.localStorage.setItem(
-        `unesco-mil-game:v2:${caseData.case_id}:current-step`,
+        progressStorageKey,
         "1",
       );
     } catch {
@@ -30,19 +33,30 @@ export function MissionExperience({ caseData }: { caseData: CaseData }) {
     }
 
     router.push(`/cases/${caseData.case_id}/debrief`);
-  }, [caseData.case_id, router]);
+  }, [caseData.case_id, progressStorageKey, router]);
+
+  const handleConfirmExit = useCallback(() => {
+    try {
+      window.localStorage.removeItem(progressStorageKey);
+    } catch {
+      // Navigation still works when storage is unavailable.
+    }
+
+    router.push(`/cases/${caseData.case_id}`);
+  }, [caseData.case_id, progressStorageKey, router]);
 
   return (
     <main className="case-grid-bg min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-40 border-b-2 border-ink bg-background px-3 py-3 sm:px-6">
         <div className="mx-auto flex max-w-7xl items-center gap-3">
-          <Link
-            href={`/cases/${caseData.case_id}`}
+          <button
+            type="button"
+            onClick={() => setIsExitDialogOpen(true)}
             className="inline-flex min-h-10 items-center rounded-[6px] border-2 border-ink bg-surface px-3 text-sm font-bold text-ink shadow-[3px_3px_0_0_var(--color-ink)] hover:bg-accent"
           >
             <span aria-hidden>&lt;-</span>
             <span className="ml-2 hidden sm:inline">Exit mission</span>
-          </Link>
+          </button>
           <div className="min-w-0 flex-1">
             <div className="flex items-baseline justify-between gap-3">
               <p className="truncate font-mono text-xs font-black uppercase text-danger">
@@ -67,6 +81,12 @@ export function MissionExperience({ caseData }: { caseData: CaseData }) {
           onCaseComplete={handleComplete}
         />
       </div>
+
+      <MissionExitDialog
+        open={isExitDialogOpen}
+        onCancel={() => setIsExitDialogOpen(false)}
+        onConfirm={handleConfirmExit}
+      />
     </main>
   );
 }
