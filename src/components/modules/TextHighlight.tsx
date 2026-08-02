@@ -412,13 +412,17 @@ export function TextHighlight({
           </div>
           <span className={gameSectionBar}>Critical thinking check</span>
           
-          <form onSubmit={handleQuizSubmit} className="flex flex-col gap-4 sm:flex-row">
-            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[5px] border-2 border-ink bg-accent text-xl font-black text-accent-foreground shadow-[3px_3px_0_0_var(--color-ink)]">
-              ?
+          <form onSubmit={handleQuizSubmit} className="flex flex-col gap-3">
+            <div className="flex items-start gap-3 rounded-[6px] border-2 border-ink bg-surface-2 p-3 shadow-[2px_2px_0_0_var(--color-ink)]">
+              <div className="grid h-9 w-9 shrink-0 place-items-center rounded-[5px] border-2 border-ink bg-accent text-lg font-black text-accent-foreground shadow-[2px_2px_0_0_var(--color-ink)]">
+                ?
+              </div>
+              <p className="flex-1 pt-1 text-sm font-bold leading-relaxed text-ink sm:text-base">
+                {getQuizQuestion(activeQuiz)}
+              </p>
             </div>
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-bold leading-6">{getQuizQuestion(activeQuiz)}</p>
-              <div className="mt-2 space-y-1">
+
+              <div className="space-y-2">
                 {activeQuiz.options.map((option) => (
                   <label
                     key={option}
