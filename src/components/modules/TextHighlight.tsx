@@ -258,9 +258,14 @@ export function TextHighlight({
       if (activeTrapId) {
         setCompletedTrapIds((prev) => [...prev, activeTrapId]);
       }
-      if (selectedRange) {
-        setCompletedRanges((prev) => [...prev, selectedRange]);
-      }
+      setCompletedRanges((prev) => [
+        ...prev,
+        {
+          start: activeTrap.ground_truth_start,
+          end: activeTrap.ground_truth_end,
+        },
+      ]);
+
       setSelectedRange(null);
       return;
     }
@@ -430,6 +435,16 @@ export function TextHighlight({
               {quizState === "correct" && (
                 <div className={`mt-3 ${gameFeedbackSuccess}`} role="status">
                   <p className="font-bold">Correct.</p>
+
+                  <div className="rounded-[5px] border-2 border-ink bg-white p-2.5 text-xs text-black shadow-[2px_2px_0_0_var(--color-ink)]">
+                    <span className="font-mono font-black uppercase text-emerald-800 block mb-1">
+                      Correct answer:
+                    </span>
+                    <p className="font-medium italic text-black bg-emerald-50 p-2 rounded border border-ink">
+                      "{activeTrap.matched_text || content.slice(activeTrap.ground_truth_start, activeTrap.ground_truth_end)}"
+                    </p>
+                  </div>
+                  
                   {activeQuiz.explanation && <p>{activeQuiz.explanation}</p>}
                 </div>
               )}
@@ -438,7 +453,7 @@ export function TextHighlight({
                   <button
                     type="button"
                     onClick={handleQuizContinue}
-                    className={`${gameButton} max-sm:flex-1`}
+                    className={`${gameButton} w-full sm:w-auto`}
                   >
                     {allTrapsCompleted ? "Next" : "OK"}
                   </button>
