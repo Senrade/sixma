@@ -336,49 +336,49 @@
       "Peer Pressure",
       "Toxic Flexing"
     ],
-    "story_context": "An influencer posts a picture with a luxury car, high-end bag, and expensive watch alongside condescending text to induce severe FOMO and promote a scam mindset course.",
+    "story_context": "A viral post by a 'Minh Khang' persona about early financial wisdom, with a photo that seems suspect to careful eyes.",
     "modules": {
       "step_1_image_forensics": {
         "mechanic_type": "IMAGE_FORENSICS",
         "image_url": "/assets/images/R002/R002_fake.png",
         "image_width": 1000,
         "image_height": 1000,
-        "context_text": "A viral post claims a 20-year-old made millions overnight, featuring luxury items to humiliate young workers. Analyze the image to find the AI generation anomalies behind this fabricated wealth.",
+        "context_text": "The profile picture for 'Minh Khang' features this photo from his 'wealth mindset' post. Find one clear visual anomaly that proves this photo is AI-generated.",
         "target_anomalies": [
           {
             "anomaly_id": "R002_IMG_01",
-            "name": "glitched_bag_hardware",
-            "x_pct": 10.5,
-            "y_pct": 76.5,
-            "radius_pct": 9.0,
-            "description": "The leather strap and metallic clasps on the luxury bag are physically impossible, merging into random floating loops.",
+            "name": "mutated_hand",
+            "x_pct": 45.0,
+            "y_pct": 55.0,
+            "radius_pct": 12.0,
+            "description": "The man's right hand holding the phone has an incorrect number of fingers and severe joint distortion.",
             "socratic_quiz": {
-              "question": "Why is the strap hardware on the designer bag a clear sign of AI generation?",
+              "question": "Why is the structure of this hand a clear indicator of AI generation?",
               "options": [
-                "A. The luxury logo on the bag is printed sideways.",
-                "B. Metallic hooks and leather straps clip into each other and float without a realistic connection point.",
-                "C. Designer bags are never made with both black and brown materials."
+                "A. It is holding the phone at a strange angle.",
+                "B. The fingers are impossibly numerous, distorted, and merged, breaking anatomical logic.",
+                "C. The hand is wearing a watch that matches the other hand."
               ],
               "correct_option": "B",
-              "explanation": "Generative AI models often fail to construct complex mechanical structures like buckles, zippers, and clasps, resulting in floating geometric glitches that violate real-world physics."
+              "explanation": "Image generators often fail to render human hands accurately, frequently creating merged, missing, or extra digits. This extreme anatomical distortion is a classic sign."
             }
           },
           {
             "anomaly_id": "R002_IMG_02",
-            "name": "inconsistent_table_reflection",
-            "x_pct": 48.0,
-            "y_pct": 89.0,
-            "radius_pct": 7.5,
-            "description": "The coffee cup fails to cast a natural reflection on the glossy tabletop, unlike the rest of the environment.",
+            "name": "distorted_frame",
+            "x_pct": 20.0,
+            "y_pct": 45.0,
+            "radius_pct": 15.0,
+            "description": "The metal window handle is severely warped and distorted, and the frame shows unnatural curvature.",
             "socratic_quiz": {
-              "question": "What physics anomaly occurs on the glossy table directly beneath the coffee cup?",
+              "question": "Why is the distortion on the window handle a significant red flag?",
               "options": [
-                "A. The table surface is reflecting light in two completely opposite directions.",
-                "B. The shadow of the coffee cup is fully illuminated by ambient room lights.",
-                "C. The highly reflective table reflects the room's background but misses the direct contact reflection of the cup sitting on it."
+                "A. It is a modern, artistic window design.",
+                "B. Rigid metal objects do not have fluid, warped, and distorted structures like this in reality.",
+                "C. The handle is out of focus due to the camera's shallow depth of field."
               ],
-              "correct_option": "C",
-              "explanation": "AI image generators generate pixels based on statistical patterns rather than calculating light ray physics. As a result, contact reflections and shadows on glossy surfaces are frequently broken or missing."
+              "correct_option": "B",
+              "explanation": "Current AI generation techniques often struggle with rigid objects, creating severe physical warp and unnatural fluid forms. This type of distortion on a standard window handle is a typical structural failure."
             }
           }
         ]
