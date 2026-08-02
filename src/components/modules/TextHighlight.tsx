@@ -380,7 +380,7 @@ export function TextHighlight({
             className={
               selectionState === "incorrect"
                 ? `mt-3 ${gameFeedbackError}`
-                : "mt-3 rounded-[6px] border-2 border-ink bg-info/15 p-3 font-mono text-sm font-bold text-ink"
+                : "mt-3 rounded-[6px] border-2 border-ink bg-info text-info-foreground p-3.5 font-mono text-base sm:text-lg font-black shadow-[3px_3px_0_0_var(--color-ink)]"
             }
             role={selectionState === "incorrect" ? "alert" : "status"}
             aria-live="polite"
