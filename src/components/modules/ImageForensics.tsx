@@ -58,9 +58,11 @@ interface CircleInPixels {
   radius: number;
 }
 
-const MIN_DRAWN_RADIUS_PCT = 5;
-const MIN_TARGET_COVERAGE = 0.65;
-const MAX_RADIUS_RATIO = 1.75;
+// Chỉnh sửa thông số giúp khoanh dễ trúng hơn
+const MIN_DRAWN_RADIUS_PCT = 3;
+const DEFAULT_CLICK_RADIUS_PCT = 8; // Bán kính tự động tạo khi người dùng chỉ CLICK
+const MIN_TARGET_COVERAGE = 0.35;    // Giảm xuống 35% diện tích giao nhau
+const MAX_RADIUS_RATIO = 2.5;        // Cho phép khoanh to gấp 2.5 lần
 
 function getOptionKey(option: string): string {
   return option.trim().charAt(0).toUpperCase();
@@ -251,15 +253,20 @@ export function ImageForensics({
     }
 
     const point = getImagePoint(event);
+    const distance = Math.hypot(
+      point.x_pct - drawStartRef.current.x_pct,
+      point.y_pct - drawStartRef.current.y_pct,
+    );
+
+    // Hỗ trợ Click đơn: Nếu kéo < 1%, tự động gán bán kính DEFAULT_CLICK_RADIUS_PCT
+    const finalRadius =
+      distance < 1
+        ? DEFAULT_CLICK_RADIUS_PCT
+        : Math.max(distance, MIN_DRAWN_RADIUS_PCT);
+
     const circle: DrawnCircle = {
       ...drawStartRef.current,
-      radius_pct: Math.max(
-        Math.hypot(
-          point.x_pct - drawStartRef.current.x_pct,
-          point.y_pct - drawStartRef.current.y_pct,
-        ),
-        MIN_DRAWN_RADIUS_PCT,
-      ),
+      radius_pct: finalRadius,
       result: "pending",
     };
 
@@ -351,7 +358,7 @@ export function ImageForensics({
                       ? "border-danger bg-danger/20"
                       : drawnCircle.result === "correct"
                         ? "border-success bg-success/20"
-                        : "border-accent bg-accent/15"
+                        : "border-dashed border-accent bg-accent/15"
                   }`}
                   style={{
                     left: `${drawnCircle.x_pct}%`,
