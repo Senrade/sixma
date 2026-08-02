@@ -6,6 +6,8 @@ import {
   type KeyboardEvent,
   type PointerEvent,
 } from "react";
+import type { ModuleGuideDefinition } from "@/lib/module-guides";
+import { ModuleGuide } from "./ModuleGuide";
 import { RetroWindow } from "./RetroWindow";
 import {
   gameButton,
@@ -21,13 +23,13 @@ export interface SortingValidationFeedback {
 }
 
 export interface SortingGameProps {
-  taskInstruction: string;
+  guide: ModuleGuideDefinition;
+  contextText: string;
   poolItems: { id: string; text: string }[];
   correctSequence?: string[];
   validationFeedback?: SortingValidationFeedback;
   onSort?: (sequence: string[]) => void;
   onComplete?: () => void;
-  onBack?: () => void;
 }
 
 type SortStatus = "Ready" | "Incorrect" | "Correct";
@@ -38,13 +40,13 @@ function isCompleteSequence(sequence: (string | null)[]): sequence is string[] {
 }
 
 export function SortingGame({
-  taskInstruction,
+  guide,
+  contextText,
   poolItems,
   correctSequence,
   validationFeedback,
   onSort,
   onComplete,
-  onBack,
 }: SortingGameProps) {
   const [sequence, setSequence] = useState<(string | null)[]>(() =>
     Array.from({ length: poolItems.length }, () => null),
@@ -321,10 +323,11 @@ export function SortingGame({
   };
 
   return (
-    <RetroWindow title="Module 03 / Sequence Reconstruction" onClose={onBack}>
+    <RetroWindow title="Module 03 / Sequence Reconstruction">
+      <ModuleGuide guide={guide} />
       <div className="mb-4 border-l-4 border-danger bg-accent/25 px-4 py-3">
-        <p className="font-mono text-[11px] font-black uppercase text-danger">Investigation task</p>
-        <p className="mt-1 text-sm font-bold leading-6 text-ink">{taskInstruction}</p>
+        <p className="font-mono text-[11px] font-black uppercase text-danger">Case context</p>
+        <p className="mt-1 text-sm font-bold leading-6 text-ink">{contextText}</p>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
         {/* EVIDENCE BANK CONTAINER */}

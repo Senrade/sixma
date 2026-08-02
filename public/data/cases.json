@@ -1,5 +1,119 @@
 [
   {
+    "level": "GREEN",
+    "case_id": "D001",
+    "title": "The Rescue Photo That Never Happened",
+    "short_summary": "A crying child, a puppy, and a flooded town became powerful evidence online.",
+    "duration_min": 6,
+    "skills": [
+      "Synthetic image detection",
+      "Emotional manipulation",
+      "Source tracing"
+    ],
+    "spotted_url": "/assets/images/D001/D001_spotted.png",
+    "theme": [
+      "Demo",
+      "Disaster response",
+      "Photojournalism"
+    ],
+    "story_context": "After Hurricane Helene, an emotionally powerful image of a crying girl holding a puppy in floodwater spread online as if it documented a real rescue. The synthetic image was used to shape public judgment about the disaster response, even though the child and the photographed moment never existed.",
+    "source": {
+      "title": "Seeing is no longer believing: Artificial Intelligence's impact on photojournalism",
+      "url": "https://jsk.stanford.edu/news/seeing-no-longer-believing-artificial-intelligences-impact-photojournalism",
+      "note": "Scenario adapted from David Carson's discussion of an AI-generated girl-and-puppy flood image that circulated during Hurricane Helene."
+    },
+    "modules": {
+      "step_1_image_forensics": {
+        "mechanic_type": "IMAGE_FORENSICS",
+        "image_url": "/assets/images/D001/D001_fake.webp",
+        "image_width": 1024,
+        "image_height": 1024,
+        "context_text": "This image was shared as documentary proof of a child's rescue during catastrophic flooding after Hurricane Helene.",
+        "target_anomalies": [
+          {
+            "anomaly_id": "D001_IMG_01",
+            "name": "synthetic_facial_features",
+            "x_pct": 49.8,
+            "y_pct": 30.1,
+            "radius_pct": 25.5,
+            "description": "The girl's face has an unnaturally smooth, synthetic quality, with inconsistent detail around the eyes, mouth, and expression.",
+            "socratic_quiz": {
+              "question": "Why is the girl's face a meaningful warning sign that the image may be synthetic?",
+              "options": [
+                "A. A real child could never be photographed while crying.",
+                "B. The skin and expression look unnaturally smooth while details around the eyes and mouth lack the consistency of a real photograph.",
+                "C. The girl's face is near the center of the composition."
+              ],
+              "correct_option": "B",
+              "explanation": "Overly smooth skin, unstable facial details, and an exaggerated synthetic expression are useful clues. They are not proof by themselves, so the next step is to investigate the image's source and provenance."
+            }
+          }
+        ]
+      },
+      "step_2_text_highlight": {
+        "mechanic_type": "TEXT_HIGHLIGHT",
+        "simulated_post": {
+          "author": "Storm Truth Network",
+          "time_posted": "18 minutes ago",
+          "content": "Look at this little girl clinging to her puppy in the flood. The media will never show you what is really happening after the hurricane. This photo proves rescue teams abandoned families like hers while officials staged press conferences. Share it now before they delete the evidence."
+        },
+        "traps": [
+          {
+            "trap_id": "D001_TRAP_01",
+            "ground_truth_start": 137,
+            "ground_truth_end": 238,
+            "matched_text": "This photo proves rescue teams abandoned families like hers while officials staged press conferences.",
+            "weapon_type": [
+              "appeal_to_emotion",
+              "unsupported_inference"
+            ],
+            "socratic_quiz": {
+              "question": "What unsupported leap does the post make from the image to its accusation?",
+              "options": [
+                "A. It verifies when and where the image was captured before discussing the response.",
+                "B. It treats an unverified emotional image as direct proof that rescue teams abandoned families.",
+                "C. It compares reports from several independent journalists covering the disaster."
+              ],
+              "correct_option": "B",
+              "explanation": "Even an authentic photograph would document only one moment. It could not, by itself, prove a broad claim about the entire disaster response. Here the image was synthetic, making the leap even more misleading."
+            }
+          }
+        ]
+      },
+      "step_3_sorting_game": {
+        "mechanic_type": "DRAG_AND_DROP_SORTING",
+        "context_text": "The synthetic rescue image enters a fast-moving news cycle during a real disaster and begins influencing how people judge the response.",
+        "pool_items": [
+          {
+            "item_id": "D001_SORT_02",
+            "text": "Viewers react to the child's distress and repost the image as evidence that rescue teams failed families."
+          },
+          {
+            "item_id": "D001_SORT_03",
+            "text": "Repetition separates the image from its unknown origin, and the false story competes with verified reporting from the disaster."
+          },
+          {
+            "item_id": "D001_SORT_01",
+            "text": "An account posts a synthetic rescue image with a real-disaster caption but provides no photographer, location, or original source."
+          }
+        ],
+        "correct_sequence": [
+          "D001_SORT_01",
+          "D001_SORT_02",
+          "D001_SORT_03"
+        ],
+        "validation_feedback": {
+          "success": "Correct. The synthetic image gains power through a real disaster, an emotional interpretation, and repeated sharing. As its origin disappears, the invented story can distract from verified reporting about real people.",
+          "failure": "Not quite. Begin with the unsourced image, then follow the emotional interpretation, and finish with what repeated sharing does to its origin and credibility."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "If an image creates a strong emotional reaction and appears to confirm what you already believe, what should you verify before sharing it?",
+      "mil_insight": "Trace the earliest available upload, identify the photographer or creator, confirm the date and location through independent reporting, and look for provenance such as Content Credentials. Visual artifacts are clues, not a final verdict: authentic images can also be falsely accused of being AI-generated."
+    }
+  },
+  {
     "level": "RED",
     "case_id": "R001",
     "title": "The Classroom That Never Happened",
@@ -22,7 +136,7 @@
         "image_url": "/assets/images/R001/R001_fake.jpg",
         "image_width": 1000,
         "image_height": 1000,
-        "context_text": "The leaked image attached to the controversy post is claimed to be 'evidence that AI is monitoring and evaluating students during class.' Find one visual anomaly in this photo.",
+        "context_text": "The leaked image attached to the controversy post is claimed to be 'evidence that AI is monitoring and evaluating students during class.'",
         "target_anomalies": [
           {
             "anomaly_id": "R001_IMG_01",
@@ -135,7 +249,7 @@
       },
       "step_3_sorting_game": {
         "mechanic_type": "DRAG_AND_DROP_SORTING",
-        "task_instruction": "Based on the panic spread by the post above, the attacker has targeted parents with a phishing email. Arrange the steps to uncover the manipulation strategy behind the scam.",
+        "context_text": "The panic spread by the post has led to a phishing email targeting parents.",
         "pool_items": [
           {
             "item_id": "R001_SORT_01",
@@ -166,6 +280,7 @@
       "mil_insight": "Help parents and students compare the message against standard administrative procedures: legitimate educational institutions never use time pressure (such as a 24-hour deadline) or unofficial payment links to handle security issues."
     }
   },
+
   {
     "level": "RED",
     "case_id": "R007",
@@ -190,7 +305,7 @@
         "image_url": "/assets/images/R007/R007_fake.png",
         "image_width": 1020,
         "image_height": 680,
-        "context_text": "The leaked image attached to the extortion email claims to show 'a disgusting cockroach served in the high school canteen food tray.' Find the visual anomaly in this photo.",
+        "context_text": "The leaked image attached to the extortion email claims to show 'a disgusting cockroach served in the high school canteen food tray.'",
         "target_anomalies": [
           {
             "anomaly_id": "R007_IMG_01",
@@ -283,7 +398,7 @@
       },
       "step_3_sorting_game": {
         "mechanic_type": "DRAG_AND_DROP_SORTING",
-        "task_instruction": "A misleading social media post about the school canteen quickly spread across the community. Arrange the events in the order that misinformation typically escalates.",
+        "context_text": "A misleading social media post about the school canteen has spread across the community.",
         "pool_items": [
           {
             "item_id": "R007_SORT_01",
