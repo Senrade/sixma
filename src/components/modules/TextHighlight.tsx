@@ -422,78 +422,77 @@ export function TextHighlight({
               </p>
             </div>
 
-              <div className="space-y-2">
-                {activeQuiz.options.map((option) => (
-                  <label
-                    key={option}
-                    className={gameOption}
-                  >
-                    <input
-                      type="radio"
-                      name={`socratic-${activeTrap.trap_id}`}
-                      value={option}
-                      checked={selectedOption === option}
-                      onChange={(event) => {
-                        setSelectedOption(event.target.value);
-                        if (quizState === "incorrect") {
-                          setQuizState("idle");
-                        }
-                      }}
-                      className="mt-0.5"
-                    />
-                    <span>{option}</span>
-                  </label>
-                ))}
-              </div>
-              {quizState === "incorrect" && (
-                <p className={`mt-3 ${gameFeedbackError}`} role="alert">
-                  That answer does not match the selected manipulation. Try again.
-                </p>
-              )}
-              {quizState === "correct" && (
-                <div className={`mt-3 ${gameFeedbackSuccess}`} role="status">
-                  <p className="font-bold">Correct.</p>
+            <div className="space-y-2">
+              {activeQuiz.options.map((option) => (
+                <label key={option} className={gameOption}>
+                  <input
+                    type="radio"
+                    name={`socratic-${activeTrap.trap_id}`}
+                    value={option}
+                    checked={selectedOption === option}
+                    onChange={(event) => {
+                      setSelectedOption(event.target.value);
+                      if (quizState === "incorrect") {
+                        setQuizState("idle");
+                      }
+                    }}
+                    className="mt-0.5"
+                  />
+                  <span>{option}</span>
+                </label>
+              ))}
+            </div>
 
-                  <div className="rounded-[5px] border-2 border-ink bg-white p-2.5 text-xs text-black shadow-[2px_2px_0_0_var(--color-ink)]">
-                    <span className="font-mono font-black uppercase text-emerald-800 block mb-1">
-                      Correct answer:
-                    </span>
-                    <p className="font-medium italic text-black bg-emerald-50 p-2 rounded border border-ink">
-                      "{activeTrap.matched_text || content.slice(activeTrap.ground_truth_start, activeTrap.ground_truth_end)}"
-                    </p>
-                  </div>
-                  
-                  {activeQuiz.explanation && <p>{activeQuiz.explanation}</p>}
+            {quizState === "incorrect" && (
+              <p className={`mt-3 ${gameFeedbackError}`} role="alert">
+                That answer does not match the selected manipulation. Try again.
+              </p>
+            )}
+
+            {quizState === "correct" && (
+              <div className={`mt-3 ${gameFeedbackSuccess}`} role="status">
+                <p className="font-bold">Correct.</p>
+
+                <div className="rounded-[5px] border-2 border-ink bg-white p-2.5 text-xs text-black shadow-[2px_2px_0_0_var(--color-ink)]">
+                  <span className="mb-1 block font-mono font-black uppercase text-emerald-800">
+                    Correct answer:
+                  </span>
+                  <p className="rounded border border-ink bg-emerald-50 p-2 font-medium italic text-black">
+                    "{activeTrap.matched_text || content.slice(activeTrap.ground_truth_start, activeTrap.ground_truth_end)}"
+                  </p>
                 </div>
-              )}
-              <div className="static mt-4 flex flex-wrap justify-end gap-2 border-t-2 border-ink pt-3">
-                {quizState === "correct" ? (
+                
+                {activeQuiz.explanation && <p>{activeQuiz.explanation}</p>}
+              </div>
+            )}
+
+            <div className="mt-4 flex flex-wrap justify-end gap-2 border-t-2 border-ink pt-3">
+              {quizState === "correct" ? (
+                <button
+                  type="button"
+                  onClick={handleQuizContinue}
+                  className={`${gameButton} w-full sm:w-auto`}
+                >
+                  {allTrapsCompleted ? "Next" : "OK"}
+                </button>
+              ) : (
+                <>
+                  <button
+                    type="submit"
+                    disabled={!selectedOption}
+                    className={`${gameButton} max-sm:flex-1`}
+                  >
+                    OK
+                  </button>
                   <button
                     type="button"
-                    onClick={handleQuizContinue}
-                    className={`${gameButton} w-full sm:w-auto`}
+                    onClick={handleQuizCancel}
+                    className={`${gameButtonSecondary} max-sm:flex-1`}
                   >
-                    {allTrapsCompleted ? "Next" : "OK"}
+                    Cancel
                   </button>
-                ) : (
-                  <>
-                    <button
-                      type="submit"
-                      disabled={!selectedOption}
-                      className={`${gameButton} max-sm:flex-1`}
-                    >
-                      OK
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleQuizCancel}
-                      className={`${gameButtonSecondary} max-sm:flex-1`}
-                    >
-                      Cancel
-                    </button>
-                  </>
-                )}
-              </div>
+                </>
+              )}
             </div>
           </form>
         </div>
