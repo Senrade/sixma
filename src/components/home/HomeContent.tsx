@@ -10,6 +10,7 @@ import { useI18n } from "@/i18n/I18nProvider";
 import type { MessageKey } from "@/i18n/messages/types";
 import type { CaseData } from "@/lib/case-types";
 import { FEATURED_DEMO_CASE_ID } from "@/lib/demo-case";
+import { WelcomeGateway } from "./WelcomeGateway";
 
 const AUDIENCES: Array<{ number: string; title: MessageKey; text: MessageKey }> = [
   { number: "01", title: "home.students", text: "home.studentsText" },
@@ -29,6 +30,7 @@ export function HomeContent({ cases }: { cases: CaseData[] }) {
 
   return (
     <AppShell>
+      <WelcomeGateway />
       <section className="relative h-[calc(100svh-10rem)] min-h-[400px] max-h-[700px] overflow-hidden border-b-[3px] border-border bg-background">
         <Image
           src="/assets/hero-pixel.jpg"
@@ -63,7 +65,7 @@ export function HomeContent({ cases }: { cases: CaseData[] }) {
         </div>
       </section>
 
-      <section className="border-b-[3px] border-border bg-background py-14 sm:py-20">
+      <section id="vision" className="scroll-mt-20 border-b-[3px] border-border bg-background py-14 sm:py-20">
         <ScrollReveal className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
             <div>

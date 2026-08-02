@@ -166,6 +166,28 @@ select {
   animation: signal-pulse 1.4s steps(2, end) infinite;
 }
 
+@keyframes story-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.story-reveal {
+  animation: story-reveal 420ms ease-out both;
+}
+
+.welcome-terminal {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--info) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--info) 7%, transparent) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
