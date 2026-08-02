@@ -410,7 +410,6 @@ export function TextHighlight({
               </button>
             )}
           </div>
-          <span className={gameSectionBar}>Critical thinking check</span>
           
           <form onSubmit={handleQuizSubmit} className="flex flex-col gap-3">
             <div className="flex items-start gap-3 rounded-[6px] border-2 border-ink bg-surface-2 p-3 shadow-[2px_2px_0_0_var(--color-ink)]">
