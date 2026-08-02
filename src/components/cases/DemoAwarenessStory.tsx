@@ -95,7 +95,7 @@ export function DemoAwarenessStory({ caseData }: { caseData: CaseData }) {
             {t("demoStory.back")}
           </Button>
           {isFinalScene ? (
-            <Link href="/#vision" className="inline-flex min-h-12 items-center justify-center border-[3px] border-info bg-info px-5 font-mono text-sm font-black uppercase text-info-foreground shadow-[4px_4px_0_0_var(--color-accent)] transition-transform hover:-translate-y-px">
+            <Link href="/" className="inline-flex min-h-12 items-center justify-center border-[3px] border-info bg-info px-5 font-mono text-sm font-black uppercase text-info-foreground shadow-[4px_4px_0_0_var(--color-accent)] transition-transform hover:-translate-y-px">
               {t("demoStory.join")}
             </Link>
           ) : (

@@ -429,7 +429,7 @@ export function ImageForensics({
                   {activeQuiz.explanation && <p>{activeQuiz.explanation}</p>}
                 </div>
               )}
-              <div className="sticky bottom-0 mt-3 flex justify-end gap-2 bg-surface py-2">
+              <div className="mt-3 flex justify-end gap-2 border-t-2 border-ink bg-surface pt-3 max-sm:[&>button]:w-full">
                 {quizState === "correct" ? (
                   <button
                     type="button"

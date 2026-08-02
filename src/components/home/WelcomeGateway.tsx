@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { LanguageSwitch } from "@/components/site/SiteHeader";
 import { Button } from "@/components/ui/Primitives";
 import { useI18n } from "@/i18n/I18nProvider";
 import { FEATURED_DEMO_CASE_ID, WELCOME_SESSION_KEY } from "@/lib/demo-case";
@@ -12,6 +13,7 @@ export function WelcomeGateway() {
   const router = useRouter();
   const { t } = useI18n();
   const [state, setState] = useState<GatewayState>("checking");
+  const [pendingDestination, setPendingDestination] = useState<string | null>(null);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -36,12 +38,14 @@ export function WelcomeGateway() {
   }, [state]);
 
   const navigate = (href: string) => {
+    if (pendingDestination) return;
+
     try {
       window.sessionStorage.setItem(WELCOME_SESSION_KEY, "true");
     } catch {
       // Navigation remains available when session storage is unavailable.
     }
-    setState("closed");
+    setPendingDestination(href);
     router.push(href);
   };
 
@@ -67,9 +71,12 @@ export function WelcomeGateway() {
           <header className="flex min-h-12 items-center justify-between gap-4 border-b-[3px] border-info bg-surface-2 px-4 py-2">
             <div className="flex items-center gap-3">
               <span className="grid size-7 place-items-center border-2 border-info bg-info text-sm font-black text-info-foreground" aria-hidden>S</span>
-              <span className="font-mono text-xs font-black uppercase text-info">SIXMA / INITIAL SIGNAL</span>
+              <span className="font-mono text-xs font-black uppercase text-info">SIXMA</span>
             </div>
-            <span className="font-mono text-xs font-bold text-success">● ONLINE</span>
+            <div className="flex items-center gap-2">
+              <span className="hidden font-mono text-xs font-bold text-success sm:inline">● ONLINE</span>
+              <LanguageSwitch className="[&_select]:h-9 [&_select]:min-w-28 [&_select]:border-2" />
+            </div>
           </header>
 
           <div className="relative px-5 py-9 sm:px-10 sm:py-12 lg:px-14 lg:py-14">
@@ -85,14 +92,14 @@ export function WelcomeGateway() {
             </p>
 
             <div className="mt-9 grid gap-3 sm:grid-cols-3">
-              <Button autoFocus tone="primary" className="min-h-14 w-full px-5 text-base" onClick={() => navigate(`/mission/${FEATURED_DEMO_CASE_ID}`)}>
-                {t("welcome.play")}
+              <Button autoFocus disabled={Boolean(pendingDestination)} tone="primary" className="min-h-14 w-full px-5 text-base" onClick={() => navigate(`/mission/${FEATURED_DEMO_CASE_ID}`)}>
+                {pendingDestination === `/mission/${FEATURED_DEMO_CASE_ID}` ? t("welcome.opening") : t("welcome.play")}
               </Button>
-              <Button tone="secondary" className="min-h-14 w-full px-5" onClick={() => navigate("/redeem")}>
-                {t("welcome.redeem")}
+              <Button disabled={Boolean(pendingDestination)} tone="secondary" className="min-h-14 w-full px-5" onClick={() => navigate("/redeem")}>
+                {pendingDestination === "/redeem" ? t("welcome.opening") : t("welcome.redeem")}
               </Button>
-              <Button tone="ghost" className="min-h-14 w-full px-5" onClick={() => navigate("/about")}>
-                {t("welcome.about")}
+              <Button disabled={Boolean(pendingDestination)} tone="ghost" className="min-h-14 w-full px-5" onClick={() => navigate("/about")}>
+                {pendingDestination === "/about" ? t("welcome.opening") : t("welcome.about")}
               </Button>
             </div>
 

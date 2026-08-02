@@ -31,7 +31,7 @@ export function HomeContent({ cases }: { cases: CaseData[] }) {
   return (
     <AppShell>
       <WelcomeGateway />
-      <section className="relative h-[calc(100svh-10rem)] min-h-[400px] max-h-[700px] overflow-hidden border-b-[3px] border-border bg-background">
+      <section className="relative h-[calc(100svh-4rem)] min-h-[520px] overflow-hidden border-b-[3px] border-border bg-background">
         <Image
           src="/assets/hero-pixel.jpg"
           alt="A cyber investigator reviewing digital evidence"
