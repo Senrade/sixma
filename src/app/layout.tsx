@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { I18nProvider } from "@/i18n/I18nProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Veritas.Lab | Interactive media literacy",
-    template: "%s | Veritas.Lab",
+    default: "SIXMA | Interactive media literacy",
+    template: "%s | SIXMA",
   },
   description:
     "Playable investigations that teach students and families to identify manipulated images, coercive rhetoric, and phishing patterns.",
@@ -17,11 +18,13 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="vi"
       suppressHydrationWarning
       className="h-full antialiased"
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <I18nProvider>{children}</I18nProvider>
+      </body>
     </html>
   );
 }

@@ -23,76 +23,69 @@
   --color-success-foreground: var(--success-foreground);
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
+  --color-border: var(--border);
   --color-ring: var(--ring);
-  --font-sans: Arial, Helvetica, sans-serif;
-  --font-display: "Arial Black", Arial, Helvetica, sans-serif;
-  --font-mono: Consolas, "Courier New", monospace;
+  --font-sans: "Segoe UI", "Noto Sans", Arial, Helvetica, sans-serif;
+  --font-display: "Segoe UI", "Noto Sans", Arial, Helvetica, sans-serif;
+  --font-mono: "Cascadia Mono", Consolas, "Courier New", monospace;
 }
 
-:root {
-  --background: oklch(0.985 0.005 85);
-  --foreground: oklch(0.18 0.02 260);
-  --surface: oklch(1 0 0);
-  --surface-2: oklch(0.955 0.01 85);
-  --ink: oklch(0.16 0.02 260);
-  --ink-soft: oklch(0.34 0.02 260);
-  --muted: oklch(0.94 0.008 85);
-  --muted-foreground: oklch(0.45 0.02 260);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.02 260);
-  --accent: oklch(0.9 0.14 95);
-  --accent-foreground: oklch(0.18 0.02 260);
-  --danger: oklch(0.62 0.22 27);
-  --danger-foreground: oklch(0.99 0 0);
-  --warn: oklch(0.82 0.16 80);
-  --warn-foreground: oklch(0.18 0.02 260);
-  --success: oklch(0.68 0.17 150);
-  --success-foreground: oklch(0.14 0.02 260);
-  --info: oklch(0.62 0.16 250);
-  --info-foreground: oklch(0.99 0 0);
-  --ring: oklch(0.55 0.18 250);
-}
-
+:root,
 .dark {
-  --background: oklch(0.16 0.02 260);
-  --foreground: oklch(0.97 0.005 85);
-  --surface: oklch(0.22 0.02 260);
-  --surface-2: oklch(0.26 0.02 260);
-  --ink: oklch(0.97 0.005 85);
-  --ink-soft: oklch(0.82 0.01 85);
-  --muted: oklch(0.28 0.02 260);
-  --muted-foreground: oklch(0.72 0.01 260);
-  --card: oklch(0.22 0.02 260);
-  --card-foreground: oklch(0.97 0.005 85);
-  --accent: oklch(0.82 0.16 90);
-  --accent-foreground: oklch(0.16 0.02 260);
-  --danger: oklch(0.68 0.2 27);
-  --danger-foreground: oklch(0.14 0.02 260);
-  --warn: oklch(0.85 0.16 85);
-  --warn-foreground: oklch(0.14 0.02 260);
-  --success: oklch(0.75 0.17 150);
-  --success-foreground: oklch(0.14 0.02 260);
-  --info: oklch(0.72 0.16 250);
-  --info-foreground: oklch(0.14 0.02 260);
-  --ring: oklch(0.7 0.17 250);
+  color-scheme: dark;
+  --background: oklch(0.19 0.065 279);
+  --foreground: oklch(0.975 0.01 250);
+  --surface: oklch(0.255 0.075 280);
+  --surface-2: oklch(0.315 0.082 283);
+  --ink: oklch(0.975 0.01 250);
+  --ink-soft: oklch(0.82 0.035 270);
+  --muted: oklch(0.29 0.065 282);
+  --muted-foreground: oklch(0.76 0.04 270);
+  --card: oklch(0.255 0.075 280);
+  --card-foreground: oklch(0.975 0.01 250);
+  --accent: oklch(0.73 0.25 340);
+  --accent-foreground: oklch(0.16 0.06 280);
+  --danger: oklch(0.68 0.24 20);
+  --danger-foreground: oklch(0.99 0.01 250);
+  --warn: oklch(0.88 0.18 90);
+  --warn-foreground: oklch(0.18 0.06 280);
+  --success: oklch(0.86 0.2 135);
+  --success-foreground: oklch(0.17 0.06 280);
+  --info: oklch(0.86 0.17 195);
+  --info-foreground: oklch(0.17 0.06 280);
+  --border: oklch(0.53 0.11 285);
+  --ring: oklch(0.86 0.17 195);
 }
 
 * {
   box-sizing: border-box;
-  border-color: var(--ink);
+  border-color: var(--border);
 }
 
 html {
-  min-width: 320px;
+  min-width: 0;
   background: var(--background);
   text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
-  background: var(--background);
+  background-color: var(--background);
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--info) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--info) 7%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Segoe UI", "Noto Sans", Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Segoe UI", "Noto Sans", Arial, Helvetica, sans-serif;
+  letter-spacing: 0;
 }
 
 button,
@@ -104,9 +97,8 @@ select {
 }
 
 :focus-visible {
-  border-radius: 4px;
   outline: 3px solid var(--ring);
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 
 ::selection {
@@ -115,13 +107,85 @@ select {
 }
 
 .font-display {
-  font-family: "Arial Black", Arial, Helvetica, sans-serif;
+  font-family: "Segoe UI", "Noto Sans", Arial, Helvetica, sans-serif;
 }
 
-.case-grid-bg {
-  background-image: linear-gradient(var(--muted) 1px, transparent 1px),
-    linear-gradient(90deg, var(--muted) 1px, transparent 1px);
-  background-size: 24px 24px;
+.font-mono {
+  font-family: "Segoe UI", "Noto Sans", Arial, Helvetica, sans-serif;
+}
+
+.case-grid-bg,
+.pixel-grid {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--info) 14%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--info) 14%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--background) 42%, transparent) 0,
+    color-mix(in oklab, var(--background) 42%, transparent) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+}
+
+.cyber-panel {
+  border: 3px solid var(--border);
+  background: var(--surface);
+  box-shadow:
+    4px 4px 0 0 color-mix(in oklab, var(--warn) 70%, transparent),
+    8px 8px 0 0 color-mix(in oklab, var(--accent) 35%, transparent);
+}
+
+.text-glow {
+  text-shadow: 0 0 14px color-mix(in oklab, var(--info) 72%, transparent);
+}
+
+.text-glow-accent {
+  text-shadow: 0 0 14px color-mix(in oklab, var(--accent) 75%, transparent);
+}
+
+.pixelated {
+  image-rendering: pixelated;
+}
+
+@keyframes signal-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.signal-pulse {
+  animation: signal-pulse 1.4s steps(2, end) infinite;
+}
+
+@keyframes story-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.story-reveal {
+  animation: story-reveal 420ms ease-out both;
+}
+
+.welcome-terminal {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--info) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--info) 7%, transparent) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
 @media (prefers-reduced-motion: reduce) {

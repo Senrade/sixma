@@ -1,0 +1,30 @@
+"use client";
+
+import { useI18n } from "@/i18n/I18nProvider";
+import type { MessageKey } from "@/i18n/messages/types";
+import { SectionLabel } from "@/components/ui/Primitives";
+
+export function LocalizedText({ messageKey }: { messageKey: MessageKey }) {
+  const { t } = useI18n();
+  return t(messageKey);
+}
+
+export function LocalizedPageIntro({
+  kicker,
+  title,
+  description,
+}: {
+  kicker: MessageKey;
+  title: MessageKey;
+  description: MessageKey;
+}) {
+  const { t } = useI18n();
+
+  return (
+    <>
+      <SectionLabel>{t(kicker)}</SectionLabel>
+      <h1 className="text-glow mt-3 text-4xl font-black sm:text-5xl">{t(title)}</h1>
+      <p className="mt-3 max-w-2xl text-lg text-ink-soft">{t(description)}</p>
+    </>
+  );
+}
