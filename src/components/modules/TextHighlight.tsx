@@ -6,6 +6,7 @@ import {
   type PointerEvent,
 } from "react";
 import type { ModuleGuideDefinition } from "@/lib/module-guides";
+import { useI18n } from "@/i18n/I18nProvider";
 import { ModuleGuide } from "./ModuleGuide";
 import { RetroWindow } from "./RetroWindow";
 import {
@@ -55,8 +56,8 @@ interface CharacterRange {
 type QuizState = "idle" | "incorrect" | "correct";
 type SelectionState = "idle" | "incorrect" | "matched";
 
-function getQuizQuestion(quiz: TextHighlightQuiz): string {
-  return quiz.question ?? quiz.push_question ?? "Why is this selection suspicious?";
+function getQuizQuestion(quiz: TextHighlightQuiz, fallback: string): string {
+  return quiz.question ?? quiz.push_question ?? fallback;
 }
 
 function getOptionKey(option: string): string {
@@ -122,6 +123,7 @@ export function TextHighlight({
   onComplete,
   onSelectionComplete,
 }: TextHighlightProps) {
+  const { t } = useI18n();
   const [activeTrapId, setActiveTrapId] = useState<string | null>(null);
   const [completedTrapIds, setCompletedTrapIds] = useState<string[]>([]);
   const [completedRanges, setCompletedRanges] = useState<CharacterRange[]>([]);
@@ -209,9 +211,10 @@ export function TextHighlight({
     if (!candidate || candidate.score < iouThreshold) {
       setSelectedRange(pendingRange);
       setActiveTrapId(null);
-      setSelectionFeedback(
-        `Selection overlap is ${Math.round((candidate?.score ?? 0) * 100)}%. Select at least ${Math.round(iouThreshold * 100)}% of one manipulation.`,
-      );
+      setSelectionFeedback(t("module.text.overlapError", {
+        overlap: Math.round((candidate?.score ?? 0) * 100),
+        required: Math.round(iouThreshold * 100),
+      }));
       setSelectionState("incorrect");
       setPendingRange(null);
       return;
@@ -221,9 +224,9 @@ export function TextHighlight({
     setActiveTrapId(candidate.trap.trap_id);
     setSelectedOption("");
     setQuizState("idle");
-    setSelectionFeedback(
-      `Potential manipulation selected (${Math.round(candidate.score * 100)}% overlap).`,
-    );
+    setSelectionFeedback(t("module.text.overlapSuccess", {
+      overlap: Math.round(candidate.score * 100),
+    }));
     setSelectionState("matched");
     onSelectionComplete?.(pendingRange.start, pendingRange.end);
     setPendingRange(null);
@@ -289,12 +292,12 @@ export function TextHighlight({
   };
 
   return (
-    <RetroWindow title="Module 02 / Language Analysis">
+    <RetroWindow title={t("module.text.windowTitle")}>
       <ModuleGuide guide={guide} />
       <div className={gamePanel}>
         <div className="mb-4 flex items-center justify-between gap-3 border-b-2 border-ink pb-3">
-          <span className={gameSectionBar}>Community wire</span>
-          <span className="rounded-[4px] border-2 border-danger bg-background px-2 py-1 font-mono text-[10px] font-black uppercase text-danger">Unverified</span>
+          <span className={gameSectionBar}>{t("module.text.communityWire")}</span>
+          <span className="rounded-[4px] border-2 border-danger bg-background px-2 py-1 font-mono text-[10px] font-black uppercase text-danger">{t("module.text.unverified")}</span>
         </div>
 
         <div className="flex items-center gap-3">
@@ -305,7 +308,7 @@ export function TextHighlight({
             <div className="truncate text-sm font-black">{postAuthor}</div>
             <div className="truncate font-mono text-xs text-ink-soft">{authorHandle} / {postTime}</div>
           </div>
-          <span className="font-mono text-lg font-black text-ink-soft" aria-label="Post options">...</span>
+          <span className="font-mono text-lg font-black text-ink-soft" aria-label={t("module.text.postOptionsAria")}>...</span>
         </div>
 
         <div
@@ -316,7 +319,7 @@ export function TextHighlight({
               scheduleSelectionInspection(350);
             }
           }}
-          aria-label="Social post content to analyze"
+          aria-label={t("module.text.contentAria")}
           className="mt-5 cursor-text touch-pan-y select-text whitespace-pre-wrap border-y-2 border-ink bg-background px-2 py-5 text-base leading-8 text-ink selection:bg-accent selection:text-ink sm:px-3"
         >
           {tokensWithOffsets.map(({ token, start }, index) => {
@@ -346,15 +349,15 @@ export function TextHighlight({
         </div>
 
         <div className="mt-3 flex flex-wrap items-center gap-2 font-mono text-[11px] font-bold uppercase text-ink-soft">
-          <span className="rounded-[4px] border-2 border-ink bg-surface-2 px-2 py-1">Public post</span>
-          <span className="rounded-[4px] border-2 border-ink bg-warn px-2 py-1 text-warn-foreground">Context pending</span>
-          <span className="ml-auto">Evidence marks {completedTrapIds.length}/{traps.length}</span>
+          <span className="rounded-[4px] border-2 border-ink bg-surface-2 px-2 py-1">{t("module.text.publicPost")}</span>
+          <span className="rounded-[4px] border-2 border-ink bg-warn px-2 py-1 text-warn-foreground">{t("module.text.contextPending")}</span>
+          <span className="ml-auto">{t("module.text.evidenceMarks", { completed: completedTrapIds.length, total: traps.length })}</span>
         </div>
 
         {pendingRange && (
           <div ref={confirmationRef} className="mt-4 scroll-mt-24 rounded-[6px] border-2 border-ink bg-warn p-3 text-warn-foreground">
             <p className="mb-3 text-sm font-black">
-              Confirm this selection?
+              {t("module.text.confirmSelection")}
             </p>
             <div className="flex flex-wrap justify-end gap-2">
               <button
@@ -362,14 +365,14 @@ export function TextHighlight({
                 onClick={handleConfirmHighlight}
                 className={`${gameButton} max-sm:flex-1`}
               >
-                OK
+                {t("module.common.ok")}
               </button>
               <button
                 type="button"
                 onClick={handleCancelHighlight}
                 className={`${gameButtonSecondary} max-sm:flex-1`}
               >
-                Cancel
+                {t("module.common.cancel")}
               </button>
             </div>
           </div>
@@ -390,20 +393,20 @@ export function TextHighlight({
         )}
         {allTrapsCompleted && (
           <p className={`mt-3 ${gameFeedbackSuccess}`} role="status">
-            All manipulation cues are documented.
+            {t("module.text.allFound")}
           </p>
         )}
       </div>
 
       {activeQuiz && activeTrap && (
         <div ref={quizRef} className={`mt-5 scroll-mt-24 ${gamePanel}`}>
-          <span className={gameSectionBar}>Critical thinking check</span>
+          <span className={gameSectionBar}>{t("module.common.criticalThinking")}</span>
           <form onSubmit={handleQuizSubmit} className="flex flex-col gap-4 sm:flex-row">
             <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[5px] border-2 border-ink bg-accent text-xl font-black text-accent-foreground shadow-[3px_3px_0_0_var(--color-ink)]">
               ?
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-sm font-bold leading-6">{getQuizQuestion(activeQuiz)}</p>
+              <p className="text-sm font-bold leading-6">{getQuizQuestion(activeQuiz, t("module.text.defaultQuestion"))}</p>
               <div className="mt-2 space-y-1">
                 {activeQuiz.options.map((option) => (
                   <label
@@ -429,19 +432,19 @@ export function TextHighlight({
               </div>
               {quizState === "incorrect" && (
                 <p className={`mt-3 ${gameFeedbackError}`} role="alert">
-                  That answer does not match the selected manipulation. Try again.
+                  {t("module.text.quizError")}
                 </p>
               )}
               {quizState === "correct" && (
                 <div className={`mt-3 ${gameFeedbackSuccess}`} role="status">
-                  <p className="font-bold">Correct.</p>
+                  <p className="font-bold">{t("module.common.correct")}</p>
 
                   <div className="rounded-[5px] border-2 border-ink bg-white p-2.5 text-xs text-black shadow-[2px_2px_0_0_var(--color-ink)]">
                     <span className="font-mono font-black uppercase text-emerald-800 block mb-1">
-                      Correct answer:
+                      {t("module.text.correctAnswer")}
                     </span>
                     <p className="font-medium italic text-black bg-emerald-50 p-2 rounded border border-ink">
-                      "{activeTrap.matched_text || content.slice(activeTrap.ground_truth_start, activeTrap.ground_truth_end)}"
+                      &quot;{activeTrap.matched_text || content.slice(activeTrap.ground_truth_start, activeTrap.ground_truth_end)}&quot;
                     </p>
                   </div>
                   
@@ -455,7 +458,7 @@ export function TextHighlight({
                     onClick={handleQuizContinue}
                     className={`${gameButton} w-full sm:w-auto`}
                   >
-                    {allTrapsCompleted ? "Next" : "OK"}
+                    {allTrapsCompleted ? t("module.common.next") : t("module.common.ok")}
                   </button>
                 ) : (
                   <>
@@ -464,14 +467,14 @@ export function TextHighlight({
                       disabled={!selectedOption}
                       className={`${gameButton} max-sm:flex-1`}
                     >
-                      OK
+                      {t("module.common.ok")}
                     </button>
                     <button
                       type="button"
                       onClick={handleQuizCancel}
                       className={`${gameButtonSecondary} max-sm:flex-1`}
                     >
-                      Cancel
+                      {t("module.common.cancel")}
                     </button>
                   </>
                 )}

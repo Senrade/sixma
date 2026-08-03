@@ -18,7 +18,7 @@ export type Locale = "vi" | "en";
 const STORAGE_KEY = "veritas-lang";
 const LANGUAGE_EVENT = "veritas-language-change";
 const DEFAULT_LOCALE: Locale = "vi";
-const messages: Record<Locale, Messages> = { vi, en };
+const messages: Record<Locale, Partial<Messages>> = { vi, en };
 let fallbackLocale: Locale = DEFAULT_LOCALE;
 
 type Replacements = Record<string, string | number>;
@@ -76,7 +76,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   const t = useCallback(
     (key: MessageKey, replacements?: Replacements) => {
-      const message = messages[locale][key];
+      const message = messages[locale][key] ?? en[key];
       if (!replacements) return message;
 
       return Object.entries(replacements).reduce(

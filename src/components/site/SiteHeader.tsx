@@ -31,8 +31,8 @@ export function LanguageSwitch({ className }: { className?: string }) {
         aria-label={t("language.label")}
         className="h-10 min-w-28 cursor-pointer border-[3px] border-info bg-surface-2 px-3 text-sm font-extrabold text-foreground outline-none hover:bg-surface focus:border-accent"
       >
-        <option value="vi">Tiếng Việt</option>
-        <option value="en">English</option>
+        <option value="vi">{t("language.vi")}</option>
+        <option value="en">{t("language.en")}</option>
       </select>
     </label>
   );
@@ -51,7 +51,7 @@ export function SiteHeader() {
           <span className="hidden min-[390px]:inline">SIX<span className="text-accent">MA</span></span>
         </Link>
 
-        <nav className="ml-auto hidden items-center gap-1 xl:flex" aria-label="Primary navigation">
+        <nav className="ml-auto hidden items-center gap-1 xl:flex" aria-label={t("nav.primaryAria")}>
           {NAVIGATION.map((item) => {
             const active = item.href === "/"
               ? pathname === "/"
@@ -84,7 +84,7 @@ export function SiteHeader() {
       </div>
 
       {menuOpen && (
-        <nav id="mobile-navigation" className="border-t-[3px] border-border bg-surface px-4 py-3 xl:hidden" aria-label="Mobile navigation">
+        <nav id="mobile-navigation" className="border-t-[3px] border-border bg-surface px-4 py-3 xl:hidden" aria-label={t("nav.mobileAria")}>
           <div className="mx-auto grid max-w-7xl gap-2 sm:grid-cols-2">
             {NAVIGATION.map((item) => (
               <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className="border-[3px] border-border bg-background px-3 py-2 text-sm font-extrabold uppercase text-foreground hover:border-info hover:bg-surface-2 hover:text-info">

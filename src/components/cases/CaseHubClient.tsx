@@ -11,6 +11,12 @@ type Filter = "ALL" | CaseLevel;
 type GameMode = "full-case" | "module-practice";
 
 const FILTERS: Filter[] = ["ALL", "RED", "AMBER", "GREEN"];
+const FILTER_LABELS = {
+  ALL: "cases.filterAll",
+  RED: "cases.filterRed",
+  AMBER: "cases.filterAmber",
+  GREEN: "cases.filterGreen",
+} as const;
 
 export function CaseHubClient({ cases }: { cases: CaseData[] }) {
   const [query, setQuery] = useState("");
@@ -68,7 +74,7 @@ export function CaseHubClient({ cases }: { cases: CaseData[] }) {
           </div>
           <div className="md:justify-self-end">
             <p className="mb-1.5 text-xs font-black uppercase">{t("cases.gameMode")}</p>
-            <div className="inline-grid w-full grid-cols-2 rounded-[6px] border-2 border-ink bg-surface p-1 sm:w-auto" aria-label="Select game mode">
+            <div className="inline-grid w-full grid-cols-2 rounded-[6px] border-2 border-ink bg-surface p-1 sm:w-auto" aria-label={t("cases.gameModeAria")}>
               <button type="button" onClick={() => setGameMode("full-case")} aria-pressed={gameMode === "full-case"} className={`min-h-10 px-4 text-sm font-black ${gameMode === "full-case" ? "bg-info text-info-foreground" : "text-ink-soft"}`}>{t("cases.fullCase")}</button>
               <button type="button" onClick={() => setGameMode("module-practice")} aria-pressed={gameMode === "module-practice"} className={`min-h-10 px-4 text-sm font-black ${gameMode === "module-practice" ? "bg-info text-info-foreground" : "text-ink-soft"}`}>{t("cases.practice")}</button>
             </div>
@@ -77,7 +83,7 @@ export function CaseHubClient({ cases }: { cases: CaseData[] }) {
         <div className="mt-4 flex flex-wrap gap-2" aria-label={t("cases.filter")}>
           {FILTERS.map((value) => (
             <button key={value} type="button" onClick={() => setFilter(value)} aria-pressed={filter === value} className={`min-h-10 rounded-[4px] border-2 border-ink px-3 text-xs font-black ${filter === value ? "bg-accent text-accent-foreground shadow-[2px_2px_0_0_var(--color-ink)]" : "bg-surface"}`}>
-              {value}
+              {t(FILTER_LABELS[value])}
             </button>
           ))}
         </div>
