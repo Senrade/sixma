@@ -74,7 +74,7 @@ export function WelcomeGateway() {
               <span className="font-mono text-xs font-black uppercase text-info">SIXMA</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="hidden font-mono text-xs font-bold text-success sm:inline">● ONLINE</span>
+              <span className="hidden font-mono text-xs font-bold text-success sm:inline">● {t("welcome.online")}</span>
               <LanguageSwitch className="[&_select]:h-9 [&_select]:min-w-28 [&_select]:border-2" />
             </div>
           </header>

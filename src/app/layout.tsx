@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { I18nProvider } from "@/i18n/I18nProvider";
+import { en } from "@/i18n/messages/en";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "SIXMA | Interactive media literacy",
-    template: "%s | SIXMA",
+    default: en["metadata.siteTitle"],
+    template: en["metadata.siteTitleTemplate"],
   },
   description:
-    "Playable investigations that teach students and families to identify manipulated images, coercive rhetoric, and phishing patterns.",
+    en["metadata.siteDescription"],
 };
 
 export default function RootLayout({

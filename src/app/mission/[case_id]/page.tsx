@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MissionExperience } from "@/components/cases/MissionExperience";
 import { getCase, getCases } from "@/lib/cases";
+import { en } from "@/i18n/messages/en";
 
 export async function generateStaticParams() {
   const cases = await getCases();
@@ -15,7 +16,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { case_id: caseId } = await params;
   const caseData = await getCase(caseId);
-  return { title: caseData ? `Mission ${caseData.case_id}` : "Mission not found" };
+  return { title: caseData ? en["metadata.title.mission"].replace("{{caseId}}", caseData.case_id) : en["metadata.notFound.mission"] };
 }
 
 export default async function MissionPage({
