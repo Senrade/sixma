@@ -24,7 +24,7 @@ export const en = {
   "footer.faq": "FAQ",
   "footer.privacy": "Privacy",
   "footer.terms": "Terms",
-  "footer.disclaimer": "Prototype built for a UNESCO MIL hackathon. Not affiliated with or endorsed by UNESCO.",
+  "footer.disclaimer": "SIXMA is a submission for the 2026 UNESCO Youth Hackathon. It is an independent project, not affiliated with or sponsored by UNESCO.",
   "home.kicker": "Media literacy, learned by doing",
   "home.description": "An interactive media-literacy game for students, families, and educators. Work through realistic cases before the same pressure appears in real life.",
   "home.playDemo": "Play demo",
