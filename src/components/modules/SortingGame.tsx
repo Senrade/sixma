@@ -6,6 +6,10 @@ import {
   type KeyboardEvent,
   type PointerEvent,
 } from "react";
+import type { ModuleGuideDefinition } from "@/lib/module-guides";
+import { useI18n } from "@/i18n/I18nProvider";
+import type { MessageKey } from "@/i18n/messages/types";
+import { ModuleGuide } from "./ModuleGuide";
 import { RetroWindow } from "./RetroWindow";
 import {
   gameButton,
@@ -21,30 +25,37 @@ export interface SortingValidationFeedback {
 }
 
 export interface SortingGameProps {
-  taskInstruction: string;
+  guide: ModuleGuideDefinition;
+  contextText: string;
   poolItems: { id: string; text: string }[];
   correctSequence?: string[];
   validationFeedback?: SortingValidationFeedback;
   onSort?: (sequence: string[]) => void;
   onComplete?: () => void;
-  onBack?: () => void;
 }
 
 type SortStatus = "Ready" | "Incorrect" | "Correct";
+const SORT_STATUS_KEYS: Record<SortStatus, MessageKey> = {
+  Ready: "module.sort.status.ready",
+  Incorrect: "module.sort.status.incorrect",
+  Correct: "module.sort.status.correct",
+};
+const POINTER_DRAG_THRESHOLD_PX = 8;
 
 function isCompleteSequence(sequence: (string | null)[]): sequence is string[] {
   return sequence.every((itemId): itemId is string => itemId !== null);
 }
 
 export function SortingGame({
-  taskInstruction,
+  guide,
+  contextText,
   poolItems,
   correctSequence,
   validationFeedback,
   onSort,
   onComplete,
-  onBack,
 }: SortingGameProps) {
+  const { t } = useI18n();
   const [sequence, setSequence] = useState<(string | null)[]>(() =>
     Array.from({ length: poolItems.length }, () => null),
   );
@@ -55,6 +66,7 @@ export function SortingGame({
   const [feedback, setFeedback] = useState("");
 
   const pointerMovedRef = useRef(false);
+  const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
   const completionSentRef = useRef(false);
   const suppressNextSlotClickRef = useRef(false);
 
@@ -101,8 +113,8 @@ export function SortingGame({
     setStatus(correct ? "Correct" : "Incorrect");
     setFeedback(
       correct
-        ? validationFeedback?.success ?? "Correct sequence."
-        : validationFeedback?.failure ?? "That sequence is not correct yet.",
+        ? validationFeedback?.success ?? t("module.sort.defaultSuccess")
+        : validationFeedback?.failure ?? t("module.sort.defaultFailure"),
     );
     onSort?.(candidate);
 
@@ -169,23 +181,46 @@ export function SortingGame({
     itemId: string,
     event: PointerEvent<HTMLDivElement>,
   ) => {
-    setSelectedId((prev) => (prev === itemId ? null : itemId));
+    const usingDragHandle =
+      event.target instanceof Element &&
+      event.target.closest("[data-drag-handle]") !== null;
+
+    setSelectedId((prev) =>
+      usingDragHandle ? itemId : prev === itemId ? null : itemId,
+    );
 
     if (event.pointerType === "mouse") {
       return;
     }
 
+    if (!usingDragHandle) {
+      return;
+    }
+
     event.preventDefault();
     pointerMovedRef.current = false;
+    pointerStartRef.current = { x: event.clientX, y: event.clientY };
     setDraggingId(itemId);
     event.currentTarget.setPointerCapture(event.pointerId);
   };
 
   const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
-    if (!draggingId) {
+    if (!draggingId || !pointerStartRef.current) {
       return;
     }
 
+    if (!pointerMovedRef.current) {
+      const distance = Math.hypot(
+        event.clientX - pointerStartRef.current.x,
+        event.clientY - pointerStartRef.current.y,
+      );
+
+      if (distance < POINTER_DRAG_THRESHOLD_PX) {
+        return;
+      }
+    }
+
+    event.preventDefault();
     pointerMovedRef.current = true;
     setDragTargetIndex(getSlotIndexFromPoint(event.clientX, event.clientY));
   };
@@ -198,17 +233,40 @@ export function SortingGame({
       return;
     }
 
+    const pointerMoved = pointerMovedRef.current;
     const targetIndex = getSlotIndexFromPoint(event.clientX, event.clientY);
 
-    if (pointerMovedRef.current && targetIndex !== null) {
+    if (pointerMoved && targetIndex !== null) {
       placeItemAt(itemId, targetIndex);
-    } else if (pointerMovedRef.current) {
+    } else if (pointerMoved) {
       // Dropping outside the timeline returns the item to the evidence bank.
       removeItem(itemId);
     }
 
-    suppressNextSlotClickRef.current = true;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+
+    suppressNextSlotClickRef.current = pointerMoved;
+    if (pointerMoved) {
+      window.setTimeout(() => {
+        suppressNextSlotClickRef.current = false;
+      }, 0);
+    }
     pointerMovedRef.current = false;
+    pointerStartRef.current = null;
+    setDraggingId(null);
+    setDragTargetIndex(null);
+  };
+
+  const handlePointerCancel = (event: PointerEvent<HTMLDivElement>) => {
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+
+    pointerMovedRef.current = false;
+    pointerStartRef.current = null;
+    suppressNextSlotClickRef.current = false;
     setDraggingId(null);
     setDragTargetIndex(null);
   };
@@ -273,10 +331,11 @@ export function SortingGame({
   };
 
   return (
-    <RetroWindow title="Module 03 / Sequence Reconstruction" onClose={onBack}>
+    <RetroWindow title={t("module.sort.windowTitle")}>
+      <ModuleGuide guide={guide} />
       <div className="mb-4 border-l-4 border-danger bg-accent/25 px-4 py-3">
-        <p className="font-mono text-[11px] font-black uppercase text-danger">Investigation task</p>
-        <p className="mt-1 text-sm font-bold leading-6 text-ink">{taskInstruction}</p>
+        <p className="font-mono text-[11px] font-black uppercase text-danger">{t("module.sort.caseContext")}</p>
+        <p className="mt-1 text-sm font-bold leading-6 text-ink">{contextText}</p>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
         {/* EVIDENCE BANK CONTAINER */}
@@ -292,7 +351,7 @@ export function SortingGame({
           }}
         >
           <div className={gameSectionBar}>
-            EVIDENCE BANK
+            {t("module.sort.evidenceBank")}
           </div>
           <div className="space-y-1">
             {poolItems.map((item) => {
@@ -309,22 +368,27 @@ export function SortingGame({
                   onPointerDown={(event) => handlePointerDown(item.id, event)}
                   onPointerMove={handlePointerMove}
                   onPointerUp={(event) => handlePointerUp(item.id, event)}
-                  onPointerCancel={() => {
-                    setDraggingId(null);
-                    setDragTargetIndex(null);
-                  }}
+                  onPointerCancel={handlePointerCancel}
                   onDragStart={(event) => handleDragStart(item.id, event)}
                   onDragEnd={() => {
+                    pointerStartRef.current = null;
                     setDraggingId(null);
                     setDragTargetIndex(null);
                   }}
                   onKeyDown={(event) => handleItemKeyDown(item.id, event)}
-                  className={`flex min-h-12 cursor-grab items-center gap-3 rounded-[6px] border-2 border-ink bg-background px-3 py-2 text-sm text-ink shadow-[3px_3px_0_0_var(--color-ink)] transition-transform hover:-translate-y-px active:cursor-grabbing ${
+                  className={`flex min-h-14 cursor-pointer touch-pan-y items-center gap-2 rounded-[6px] border-2 border-ink bg-background px-3 py-3 text-sm leading-6 text-ink shadow-[3px_3px_0_0_var(--color-ink)] transition-transform hover:-translate-y-px sm:min-h-12 sm:gap-3 sm:py-2 ${
                     isPlaced ? "opacity-60" : ""
                   } ${isSelected ? "bg-accent outline-2 outline-offset-2 outline-info" : ""}`}
                 >
+                  <span
+                    data-drag-handle
+                    aria-hidden
+                    className="grid h-9 w-7 shrink-0 touch-none cursor-grab place-items-center rounded-[4px] border-2 border-ink bg-surface-2 font-mono text-xs font-black active:cursor-grabbing"
+                  >
+                    ::
+                  </span>
                   <span className="flex-1">{item.text}</span>
-                  <span className="rounded-[4px] border-2 border-ink bg-surface-2 px-1.5 py-0.5 font-mono text-[10px] font-bold text-ink-soft">
+                  <span className="hidden rounded-[4px] border-2 border-ink bg-surface-2 px-1.5 py-0.5 font-mono text-[10px] font-bold text-ink-soft sm:inline-flex">
                     {item.id}
                   </span>
                 </div>
@@ -336,7 +400,7 @@ export function SortingGame({
         {/* TIMELINE CONTAINER */}
         <div className={gamePanel}>
           <div className={gameSectionBar}>
-            TIMELINE
+            {t("module.sort.timeline")}
           </div>
           <div className="space-y-1">
             {sequence.map((itemId, index) => {
@@ -361,19 +425,11 @@ export function SortingGame({
                       ? (event) => handlePointerUp(item.id, event)
                       : undefined
                   }
-                  onPointerCancel={
-                    item
-                      ? () => {
-                          setDraggingId(null);
-                          setDragTargetIndex(null);
-                        }
-                      : undefined
-                  }
+                  onPointerCancel={item ? handlePointerCancel : undefined}
                   onClick={() => handleSlotClick(index)}
                   onKeyDown={(event) => handleSlotKeyDown(index, event)}
                   onDragOver={(event) => {
                     event.preventDefault();
-                    setDragTargetIndex(index);
                   }}
                   onDragLeave={(event) => {
                     if (
@@ -396,12 +452,13 @@ export function SortingGame({
                   onDragEnd={
                     item
                       ? () => {
+                          pointerStartRef.current = null;
                           setDraggingId(null);
                           setDragTargetIndex(null);
                         }
                       : undefined
                   }
-                  className={`flex min-h-14 items-center gap-3 rounded-[6px] border-2 border-dashed border-ink bg-surface-2 px-3 py-2 text-sm text-ink-soft transition-colors ${
+                  className={`flex min-h-16 cursor-pointer touch-pan-y items-center gap-2 rounded-[6px] border-2 border-dashed border-ink bg-surface-2 px-3 py-3 text-sm leading-6 text-ink-soft transition-colors sm:min-h-14 sm:gap-3 sm:py-2 ${
                     isDropTarget ? "bg-accent outline-2 outline-offset-2 outline-info" : ""
                   }`}
                 >
@@ -409,9 +466,18 @@ export function SortingGame({
                     {index + 1}
                   </span>
                   {item ? (
-                    <span className="flex-1 text-ink">{item.text}</span>
+                    <>
+                      <span
+                        data-drag-handle
+                        aria-hidden
+                        className="grid h-9 w-7 shrink-0 touch-none cursor-grab place-items-center rounded-[4px] border-2 border-ink bg-background font-mono text-xs font-black text-ink active:cursor-grabbing"
+                      >
+                        ::
+                      </span>
+                      <span className="flex-1 text-ink">{item.text}</span>
+                    </>
                   ) : (
-                    <span className="italic">Drop here</span>
+                    <span className="italic">{t("module.sort.dropHere")}</span>
                   )}
                 </div>
               );
@@ -421,9 +487,9 @@ export function SortingGame({
       </div>
 
       <div className="mt-4 flex items-center justify-between rounded-[6px] border-2 border-ink bg-surface-2 px-3 py-2 font-mono text-xs font-bold text-ink-soft">
-        <span>Items: {poolItems.length}</span>
+        <span>{t("module.sort.items", { count: poolItems.length })}</span>
         <span role="status" aria-live="polite">
-          Status: {status}
+          {t("module.sort.status", { status: t(SORT_STATUS_KEYS[status]) })}
         </span>
       </div>
       {feedback && (
@@ -438,7 +504,7 @@ export function SortingGame({
       {status === "Correct" && (
         <div className="mt-4 flex justify-end">
           <button type="button" onClick={handleComplete} className={gameButton}>
-            Complete investigation
+            {t("module.sort.complete")}
           </button>
         </div>
       )}
