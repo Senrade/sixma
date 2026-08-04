@@ -6,6 +6,10 @@ import {
   type KeyboardEvent,
   type PointerEvent,
 } from "react";
+import type { ModuleGuideDefinition } from "@/lib/module-guides";
+import { useI18n } from "@/i18n/I18nProvider";
+import type { MessageKey } from "@/i18n/messages/types";
+import { ModuleGuide } from "./ModuleGuide";
 import { RetroWindow } from "./RetroWindow";
 import {
   gameButton,
@@ -21,16 +25,21 @@ export interface SortingValidationFeedback {
 }
 
 export interface SortingGameProps {
-  taskInstruction: string;
+  guide: ModuleGuideDefinition;
+  contextText: string;
   poolItems: { id: string; text: string }[];
   correctSequence?: string[];
   validationFeedback?: SortingValidationFeedback;
   onSort?: (sequence: string[]) => void;
   onComplete?: () => void;
-  onBack?: () => void;
 }
 
 type SortStatus = "Ready" | "Incorrect" | "Correct";
+const SORT_STATUS_KEYS: Record<SortStatus, MessageKey> = {
+  Ready: "module.sort.status.ready",
+  Incorrect: "module.sort.status.incorrect",
+  Correct: "module.sort.status.correct",
+};
 const POINTER_DRAG_THRESHOLD_PX = 8;
 
 function isCompleteSequence(sequence: (string | null)[]): sequence is string[] {
@@ -38,14 +47,15 @@ function isCompleteSequence(sequence: (string | null)[]): sequence is string[] {
 }
 
 export function SortingGame({
-  taskInstruction,
+  guide,
+  contextText,
   poolItems,
   correctSequence,
   validationFeedback,
   onSort,
   onComplete,
-  onBack,
 }: SortingGameProps) {
+  const { t } = useI18n();
   const [sequence, setSequence] = useState<(string | null)[]>(() =>
     Array.from({ length: poolItems.length }, () => null),
   );
@@ -103,8 +113,8 @@ export function SortingGame({
     setStatus(correct ? "Correct" : "Incorrect");
     setFeedback(
       correct
-        ? validationFeedback?.success ?? "Correct sequence."
-        : validationFeedback?.failure ?? "That sequence is not correct yet.",
+        ? validationFeedback?.success ?? t("module.sort.defaultSuccess")
+        : validationFeedback?.failure ?? t("module.sort.defaultFailure"),
     );
     onSort?.(candidate);
 
@@ -321,10 +331,11 @@ export function SortingGame({
   };
 
   return (
-    <RetroWindow title="Module 03 / Sequence Reconstruction" onClose={onBack}>
+    <RetroWindow title={t("module.sort.windowTitle")}>
+      <ModuleGuide guide={guide} />
       <div className="mb-4 border-l-4 border-danger bg-accent/25 px-4 py-3">
-        <p className="font-mono text-[11px] font-black uppercase text-danger">Investigation task</p>
-        <p className="mt-1 text-sm font-bold leading-6 text-ink">{taskInstruction}</p>
+        <p className="font-mono text-[11px] font-black uppercase text-danger">{t("module.sort.caseContext")}</p>
+        <p className="mt-1 text-sm font-bold leading-6 text-ink">{contextText}</p>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
         {/* EVIDENCE BANK CONTAINER */}
@@ -340,7 +351,7 @@ export function SortingGame({
           }}
         >
           <div className={gameSectionBar}>
-            EVIDENCE BANK
+            {t("module.sort.evidenceBank")}
           </div>
           <div className="space-y-1">
             {poolItems.map((item) => {
@@ -389,7 +400,7 @@ export function SortingGame({
         {/* TIMELINE CONTAINER */}
         <div className={gamePanel}>
           <div className={gameSectionBar}>
-            TIMELINE
+            {t("module.sort.timeline")}
           </div>
           <div className="space-y-1">
             {sequence.map((itemId, index) => {
@@ -466,7 +477,7 @@ export function SortingGame({
                       <span className="flex-1 text-ink">{item.text}</span>
                     </>
                   ) : (
-                    <span className="italic">Drop here</span>
+                    <span className="italic">{t("module.sort.dropHere")}</span>
                   )}
                 </div>
               );
@@ -476,9 +487,9 @@ export function SortingGame({
       </div>
 
       <div className="mt-4 flex items-center justify-between rounded-[6px] border-2 border-ink bg-surface-2 px-3 py-2 font-mono text-xs font-bold text-ink-soft">
-        <span>Items: {poolItems.length}</span>
+        <span>{t("module.sort.items", { count: poolItems.length })}</span>
         <span role="status" aria-live="polite">
-          Status: {status}
+          {t("module.sort.status", { status: t(SORT_STATUS_KEYS[status]) })}
         </span>
       </div>
       {feedback && (
@@ -493,7 +504,7 @@ export function SortingGame({
       {status === "Correct" && (
         <div className="mt-4 flex justify-end">
           <button type="button" onClick={handleComplete} className={gameButton}>
-            Complete investigation
+            {t("module.sort.complete")}
           </button>
         </div>
       )}

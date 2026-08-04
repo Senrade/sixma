@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Primitives";
+import { useI18n } from "@/i18n/I18nProvider";
 
 const STORAGE_KEY = "veritas-theme";
 
 export function ThemeToggle() {
+  const { t } = useI18n();
   const [dark, setDark] = useState(false);
 
   useEffect(() => {
@@ -39,7 +41,7 @@ export function ThemeToggle() {
 
   return (
     <Button tone="ghost" className="min-h-9 px-2.5" onClick={toggleTheme} aria-pressed={dark}>
-      {dark ? "Light" : "Dark"}
+      {dark ? t("theme.light") : t("theme.dark")}
     </Button>
   );
 }

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { CaseFolder } from "@/components/cases/CaseFolder";
 import { Card, Progress } from "@/components/ui/Primitives";
 import type { CaseData } from "@/lib/case-types";
+import { useI18n } from "@/i18n/I18nProvider";
 
 interface CaseProgress {
   step: number;
@@ -11,6 +12,7 @@ interface CaseProgress {
 }
 
 export function DashboardClient({ cases }: { cases: CaseData[] }) {
+  const { t } = useI18n();
   const [progress, setProgress] = useState<Record<string, CaseProgress> | null>(null);
 
   useEffect(() => {
@@ -31,7 +33,7 @@ export function DashboardClient({ cases }: { cases: CaseData[] }) {
     return () => window.clearTimeout(timer);
   }, [cases]);
 
-  if (!progress) return <p className="mt-8 font-mono text-sm">Loading progress from this device...</p>;
+  if (!progress) return <p className="mt-8 font-mono text-sm">{t("dashboard.loading")}</p>;
 
   const started = Object.values(progress).filter((item) => item.step > 0).length;
   const completed = Object.values(progress).filter((item) => item.completedAt).length;
@@ -39,9 +41,9 @@ export function DashboardClient({ cases }: { cases: CaseData[] }) {
   return (
     <>
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
-        <Card className="p-5"><p className="text-sm font-bold text-ink-soft">Available cases</p><p className="mt-2 text-4xl font-black">{cases.length}</p></Card>
-        <Card tone="warn" className="p-5"><p className="text-sm font-bold">Started</p><p className="mt-2 text-4xl font-black">{started}</p></Card>
-        <Card tone="success" className="p-5"><p className="text-sm font-bold">Completed</p><p className="mt-2 text-4xl font-black">{completed}</p></Card>
+        <Card className="p-5"><p className="text-sm font-bold text-ink-soft">{t("dashboard.availableCases")}</p><p className="mt-2 text-4xl font-black">{cases.length}</p></Card>
+        <Card tone="warn" className="p-5"><p className="text-sm font-bold">{t("dashboard.started")}</p><p className="mt-2 text-4xl font-black">{started}</p></Card>
+        <Card tone="success" className="p-5"><p className="text-sm font-bold">{t("dashboard.completed")}</p><p className="mt-2 text-4xl font-black">{completed}</p></Card>
       </div>
       <div className="mt-10 grid gap-8 md:grid-cols-2">
         {cases.map((caseData, caseIndex) => {
@@ -54,9 +56,9 @@ export function DashboardClient({ cases }: { cases: CaseData[] }) {
         })}
       </div>
       <div className="mt-12 border-t-2 border-ink pt-8">
-        <h2 className="text-2xl font-black">Achievement progress</h2>
-        <div className="mt-4 max-w-xl"><div className="flex justify-between text-sm font-bold"><span>Case investigator</span><span>{completed}/{cases.length}</span></div><Progress value={(completed / Math.max(cases.length, 1)) * 100} className="mt-2" /></div>
-        <p className="mt-3 text-sm text-ink-soft">Complete every available investigation to earn this device-based achievement.</p>
+        <h2 className="text-2xl font-black">{t("dashboard.achievementProgress")}</h2>
+        <div className="mt-4 max-w-xl"><div className="flex justify-between text-sm font-bold"><span>{t("dashboard.caseInvestigator")}</span><span>{completed}/{cases.length}</span></div><Progress value={(completed / Math.max(cases.length, 1)) * 100} className="mt-2" /></div>
+        <p className="mt-3 text-sm text-ink-soft">{t("dashboard.achievementHint")}</p>
       </div>
     </>
   );
