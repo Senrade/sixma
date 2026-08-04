@@ -57,11 +57,11 @@ export function DemoAwarenessStory({ caseData }: { caseData: CaseData }) {
 
       <header className="relative z-10 flex min-h-16 items-center justify-between gap-4 border-b-2 border-border bg-background/95 px-4 sm:px-8">
         <Link href="/" className="font-display text-lg font-black">SIX<span className="text-accent">MA</span></Link>
-        <span className="font-mono text-xs font-black uppercase text-info">D001 / Debrief</span>
+        <span className="font-mono text-xs font-black uppercase text-info">{t("demoStory.debrief")}</span>
       </header>
 
       <section className="relative z-10 mx-auto flex min-h-[calc(100svh-4rem)] max-w-6xl flex-col px-4 py-8 sm:px-8 sm:py-12">
-        <div className="flex items-center gap-2" aria-label={`${activeScene + 1} of ${STORY_SCENES.length}`}>
+        <div className="flex items-center gap-2" aria-label={t("demoStory.progressAria", { current: activeScene + 1, total: STORY_SCENES.length })}>
           {STORY_SCENES.map((_, index) => (
             <span key={index} className={cn("h-1.5 flex-1 border border-border", index <= activeScene ? "bg-info" : "bg-surface-2")} />
           ))}

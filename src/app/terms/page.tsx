@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { InfoPage } from "@/components/site/InfoPage";
+import { LocalizedText } from "@/components/site/LocalizedCopy";
+import { en } from "@/i18n/messages/en";
 
-export const metadata: Metadata = { title: "Terms" };
-export default function TermsPage() { return <InfoPage eyebrow="Prototype terms" title="Terms of use" intro="These plain-language terms apply to the current educational demonstration only."><h2>Educational prototype</h2><p>SIXMA provides practice activities and general media-literacy information. It does not certify whether every image, post, or person is authentic.</p><h2>Draft content</h2><p>Cases may contain fictional scenarios and test questions that are not final. Do not present the prototype as official UNESCO material or as a substitute for professional safety advice.</p><h2>Acceptable use</h2><p>Do not attempt to enter another person&apos;s private information, disrupt the service, or represent prototype achievements as formal accreditation.</p><h2>Production review</h2><p>A public account-enabled launch requires formal legal review, a support process, age-appropriate consent decisions, and complete operator details.</p></InfoPage>; }
+export const metadata: Metadata = { title: en["metadata.title.terms"] };
+export default function TermsPage() { return <InfoPage eyebrow="terms.eyebrow" title="terms.title" intro="terms.intro"><h2><LocalizedText messageKey="terms.section1.title" /></h2><p><LocalizedText messageKey="terms.section1.body" /></p><h2><LocalizedText messageKey="terms.section2.title" /></h2><p><LocalizedText messageKey="terms.section2.body" /></p><h2><LocalizedText messageKey="terms.section3.title" /></h2><p><LocalizedText messageKey="terms.section3.body" /></p><h2><LocalizedText messageKey="terms.section4.title" /></h2><p><LocalizedText messageKey="terms.section4.body" /></p></InfoPage>; }

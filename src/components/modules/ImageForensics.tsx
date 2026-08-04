@@ -5,6 +5,7 @@ import {
   type PointerEvent,
 } from "react";
 import Image from "next/image";
+import { useI18n } from "@/i18n/I18nProvider";
 import type { ModuleGuideDefinition } from "@/lib/module-guides";
 import { ModuleGuide } from "./ModuleGuide";
 import { RetroWindow } from "./RetroWindow";
@@ -60,9 +61,11 @@ interface CircleInPixels {
   radius: number;
 }
 
-const MIN_DRAWN_RADIUS_PCT = 5;
-const MIN_TARGET_COVERAGE = 0.65;
-const MAX_RADIUS_RATIO = 1.75;
+// Chỉnh sửa thông số giúp khoanh dễ trúng hơn
+const MIN_DRAWN_RADIUS_PCT = 3;
+const DEFAULT_CLICK_RADIUS_PCT = 8; // Bán kính tự động tạo khi người dùng chỉ CLICK
+const MIN_TARGET_COVERAGE = 0.35;    // Giảm xuống 35% diện tích giao nhau
+const MAX_RADIUS_RATIO = 2.5;        // Cho phép khoanh to gấp 2.5 lần
 
 function getOptionKey(option: string): string {
   return option.trim().charAt(0).toUpperCase();
@@ -128,6 +131,7 @@ export function ImageForensics({
   imageHeight = 9,
   onComplete,
 }: ImageForensicsProps) {
+  const { t } = useI18n();
   const [foundAnomalyIds, setFoundAnomalyIds] = useState<string[]>([]);
   const [activeAnomalyId, setActiveAnomalyId] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState("");
@@ -200,9 +204,7 @@ export function ImageForensics({
 
     if (!selectedAnomaly) {
       setDrawnCircle({ ...circle, result: "incorrect" });
-      setClickMessage(
-        "Circle most of one suspicious area without including large unrelated regions.",
-      );
+      setClickMessage(t("module.image.drawError"));
       return;
     }
 
@@ -253,15 +255,20 @@ export function ImageForensics({
     }
 
     const point = getImagePoint(event);
+    const distance = Math.hypot(
+      point.x_pct - drawStartRef.current.x_pct,
+      point.y_pct - drawStartRef.current.y_pct,
+    );
+
+    // Hỗ trợ Click đơn: Nếu kéo < 1%, tự động gán bán kính DEFAULT_CLICK_RADIUS_PCT
+    const finalRadius =
+      distance < 1
+        ? DEFAULT_CLICK_RADIUS_PCT
+        : Math.max(distance, MIN_DRAWN_RADIUS_PCT);
+
     const circle: DrawnCircle = {
       ...drawStartRef.current,
-      radius_pct: Math.max(
-        Math.hypot(
-          point.x_pct - drawStartRef.current.x_pct,
-          point.y_pct - drawStartRef.current.y_pct,
-        ),
-        MIN_DRAWN_RADIUS_PCT,
-      ),
+      radius_pct: finalRadius,
       result: "pending",
     };
 
@@ -314,12 +321,12 @@ export function ImageForensics({
   };
 
   return (
-    <RetroWindow title="Module 01 / Image Forensics">
+    <RetroWindow title={t("module.image.windowTitle")}>
       <ModuleGuide guide={guide} />
       <div className="grid min-h-0 gap-4 md:grid-cols-[minmax(0,1fr)_minmax(260px,380px)]">
         <div className="flex min-h-0 items-center justify-center overflow-hidden">
           <div
-            aria-label="Forensic evidence image. Draw a circle around a suspicious area."
+            aria-label={t("module.image.canvasAria")}
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
@@ -333,7 +340,7 @@ export function ImageForensics({
           >
             <Image
               src={imageUrl}
-              alt="Evidence"
+              alt={t("module.image.evidenceAlt")}
               width={imageWidth}
               height={imageHeight}
               preload
@@ -348,13 +355,13 @@ export function ImageForensics({
             <div className="pointer-events-none absolute inset-0">
               {drawnCircle && (
                 <div
-                  aria-label="Current drawn evidence circle"
+                  aria-label={t("module.image.circleAria")}
                   className={`absolute rounded-full border-2 ${
                     drawnCircle.result === "incorrect"
                       ? "border-danger bg-danger/20"
                       : drawnCircle.result === "correct"
                         ? "border-success bg-success/20"
-                        : "border-accent bg-accent/15"
+                        : "border-dashed border-accent bg-accent/15"
                   }`}
                   style={{
                     left: `${drawnCircle.x_pct}%`,
@@ -372,7 +379,7 @@ export function ImageForensics({
                 .map((anomaly) => (
                   <div
                     key={anomaly.anomaly_id}
-                    aria-label={`${anomaly.name} found`}
+                    aria-label={t("module.image.anomalyFoundAria", { name: anomaly.name })}
                     className="absolute rounded-full border-2 border-success bg-success/20 shadow-[0_0_0_1px_var(--color-ink)]"
                     style={{
                       left: `${anomaly.x_pct}%`,
@@ -394,7 +401,7 @@ export function ImageForensics({
             aria-labelledby="forensics-question"
           >
             <div className={gameSectionBar}>
-              Critical Thinking Check
+              {t("module.common.criticalThinking")}
             </div>
             <div className="p-3">
               <p className="text-xs font-bold" id="forensics-question">
@@ -420,12 +427,12 @@ export function ImageForensics({
               </div>
               {quizState === "incorrect" && (
                 <p className={`mt-3 ${gameFeedbackError}`} role="alert">
-                  That explanation does not match the selected anomaly. Try again.
+                  {t("module.image.quizError")}
                 </p>
               )}
               {quizState === "correct" && (
                 <div className={`mt-3 ${gameFeedbackSuccess}`} role="status">
-                  <p className="font-bold">Correct.</p>
+                  <p className="font-bold">{t("module.common.correct")}</p>
                   {activeQuiz.explanation && <p>{activeQuiz.explanation}</p>}
                 </div>
               )}
@@ -436,7 +443,7 @@ export function ImageForensics({
                     onClick={handleContinue}
                     className={gameButton}
                   >
-                    {allAnomaliesFound ? "Continue to Text Highlight" : "Continue"}
+                    {allAnomaliesFound ? t("module.image.continueToText") : t("module.common.continue")}
                   </button>
                 ) : (
                   <button
@@ -444,7 +451,7 @@ export function ImageForensics({
                     disabled={!selectedOption}
                     className={gameButton}
                   >
-                    Check Answer
+                    {t("module.common.checkAnswer")}
                   </button>
                 )}
               </div>
@@ -453,11 +460,11 @@ export function ImageForensics({
         ) : (
           <div className={`${gamePanel} max-h-[calc(100dvh-90px)] overflow-y-auto`}>
             <div className={gameSectionBar}>
-              INVESTIGATION LOG
+              {t("module.image.log")}
             </div>
             <p className="text-sm leading-6">{contextText}</p>
             <div className="mt-4 border-t-2 border-ink pt-3 font-mono text-xs font-bold text-ink-soft">
-              Evidence found: {foundAnomalyIds.length} / {targetAnomalies.length}
+              {t("module.image.evidenceFound", { found: foundAnomalyIds.length, total: targetAnomalies.length })}
             </div>
             {clickMessage && (
               <p className={`mt-3 ${gameFeedbackError}`} role="alert">
@@ -466,7 +473,7 @@ export function ImageForensics({
             )}
             {allAnomaliesFound && !activeAnomaly && (
               <p className={`mt-3 ${gameFeedbackSuccess}`}>
-                All visual anomalies are documented. Continue to the text investigation.
+                {t("module.image.allFound")}
               </p>
             )}
           </div>

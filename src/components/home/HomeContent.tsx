@@ -34,7 +34,7 @@ export function HomeContent({ cases }: { cases: CaseData[] }) {
       <section className="relative h-[calc(100svh-4rem)] min-h-[520px] overflow-hidden border-b-[3px] border-border bg-background">
         <Image
           src="/assets/hero-pixel.jpg"
-          alt="A cyber investigator reviewing digital evidence"
+          alt={t("home.heroImageAlt")}
           fill
           priority
           sizes="100vw"

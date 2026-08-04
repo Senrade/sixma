@@ -303,6 +303,9 @@
       "step_1_image_forensics": {
         "mechanic_type": "IMAGE_FORENSICS",
         "image_url": "/assets/images/R007/R007_fake.png",
+        "image_width": 1000,
+        "image_height": 1000,
+        "context_text": "The leaked image attached to the extortion email claims to show 'a disgusting cockroach served in the high school canteen food tray.' Find the visual anomaly in this photo.",
         "image_width": 1020,
         "image_height": 680,
         "context_text": "The leaked image attached to the extortion email claims to show 'a disgusting cockroach served in the high school canteen food tray.'",
@@ -433,5 +436,422 @@
       "question": "Ask your Teacher/Parent: If you received this message, what evidence would you need before believing the photo reflects a real food safety problem rather than a manipulated story?",
       "mil_insight": "A single image rarely provides enough context to establish what happened. Discuss how to distinguish direct evidence from assumptions by checking the original source, verifying when and where the photo was taken, and following the school's official investigation process before drawing conclusions."
     }
+  },
+  {
+    "level": "RED",
+    "case_id": "R002",
+    "title": "The Illusion of Success",
+    "short_summary": "A viral post flexes a 20-year-old's fake luxury lifestyle while belittling others. Uncover the AI anomalies and decode the toxic FOMO tactics.",
+    "duration_min": 15,
+    "skills": [
+      "Image forensics",
+      "Logical fallacies",
+      "FOMO & Toxic flexing analysis"
+    ],
+    "spotted_url": "/assets/images/R002/R002_spotted.png",
+    "theme": [
+      "Social Media",
+      "Peer Pressure",
+      "Toxic Flexing"
+    ],
+    "story_context": "A viral post by a 'Minh Khang' persona about early financial wisdom, with a photo that seems suspect to careful eyes.",
+    "modules": {
+      "step_1_image_forensics": {
+        "mechanic_type": "IMAGE_FORENSICS",
+        "image_url": "/assets/images/R002/R002_fake.png",
+        "image_width": 1000,
+        "image_height": 1000,
+        "context_text": "The profile picture for 'Minh Khang' features this photo from his 'wealth mindset' post. Find one clear visual anomaly that proves this photo is AI-generated.",
+        "target_anomalies": [
+          {
+            "anomaly_id": "R002_IMG_01",
+            "name": "mutated_hand",
+            "x_pct": 45.0,
+            "y_pct": 55.0,
+            "radius_pct": 12.0,
+            "description": "The man's right hand holding the phone has an incorrect number of fingers and severe joint distortion.",
+            "socratic_quiz": {
+              "question": "Why is the structure of this hand a clear indicator of AI generation?",
+              "options": [
+                "A. It is holding the phone at a strange angle.",
+                "B. The fingers are impossibly numerous, distorted, and merged, breaking anatomical logic.",
+                "C. The hand is wearing a watch that matches the other hand."
+              ],
+              "correct_option": "B",
+              "explanation": "Image generators often fail to render human hands accurately, frequently creating merged, missing, or extra digits. This extreme anatomical distortion is a classic sign."
+            }
+          },
+          {
+            "anomaly_id": "R002_IMG_02",
+            "name": "distorted_frame",
+            "x_pct": 20.0,
+            "y_pct": 45.0,
+            "radius_pct": 15.0,
+            "description": "The metal window handle is severely warped and distorted, and the frame shows unnatural curvature.",
+            "socratic_quiz": {
+              "question": "Why is the distortion on the window handle a significant red flag?",
+              "options": [
+                "A. It is a modern, artistic window design.",
+                "B. Rigid metal objects do not have fluid, warped, and distorted structures like this in reality.",
+                "C. The handle is out of focus due to the camera's shallow depth of field."
+              ],
+              "correct_option": "B",
+              "explanation": "Current AI generation techniques often struggle with rigid objects, creating severe physical warp and unnatural fluid forms. This type of distortion on a standard window handle is a typical structural failure."
+            }
+          }
+        ]
+      },
+      "step_2_text_highlight": {
+        "mechanic_type": "TEXT_HIGHLIGHT",
+        "simulated_post": {
+          "author": "Minh Khang",
+          "time_posted": "2 hours ago",
+          "content": "It's honestly funny how some people keep saying \"money doesn't buy happiness\" every time someone posts something nice. Like... just because you can't afford it doesn't mean it's \"showing off.\" Meanwhile, everyone I know is out here grinding, getting internships, buying what they want, and actually doing something with their lives. If you're still making excuses while everyone else is moving up, maybe stop blaming other people and ask yourself why you're getting left behind. Stay mad if you want, but don't expect the world to wait for you."
+        },
+        "traps": [
+          {
+            "trap_id": "R002_T1",
+            "ground_truth_start": 127,
+            "ground_truth_end": 190,
+            "trap_type": "Attacking Motive Fallacy (Strawman)",
+            "weapon_type": [
+              "attacking_motive",
+              "strawman"
+            ],
+            "matched_text": "just because you can't afford it doesn't mean it's \"showing off.\"",
+            "socratic_quiz": {
+              "question": "What is this sentence really trying to do to anyone who criticizes the flex post?",
+              "options": [
+                "A. Directly addresses why the post might be considered showing off",
+                "B. Assigns a negative motive (jealousy over money) to anyone who criticizes, instead of engaging with whether the criticism is actually valid",
+                "C. Provides an objective, neutral explanation"
+              ],
+              "correct_option": "B",
+              "explanation": "This is an attacking-the-motive fallacy: instead of responding to the actual argument (whether the post is showing off or not), the writer assumes any critic is simply 'broke and jealous' — a way to dodge the real issue while demeaning the critic."
+            }
+          },
+          {
+            "trap_id": "R002_T2",
+            "ground_truth_start": 202,
+            "ground_truth_end": 325,
+            "trap_type": "False Comparison",
+            "weapon_type": [
+              "false_comparison"
+            ],
+            "matched_text": "everyone I know is out here grinding, getting internships, buying what they want, and actually doing something with their lives",
+            "socratic_quiz": {
+              "question": "What is the logical problem with this comparison?",
+              "options": [
+                "A. It's a fair comparison since everyone starts from the exact same circumstances",
+                "B. It lumps together unrelated things (effort, internships, shopping) to imply that anyone who can't afford luxury goods is 'not doing anything with their life,' ignoring differences in people's actual circumstances",
+                "C. It's an accurate statistic about the writer's actual acquaintances"
+              ],
+              "correct_option": "B",
+              "explanation": "This is a false comparison: it equates 'being able to buy what you want' with 'succeeding in life,' while ignoring that people come from very different financial and family backgrounds — making this an unfair basis for comparison."
+            }
+          },
+          {
+            "trap_id": "R002_T3",
+            "ground_truth_start": 327,
+            "ground_truth_end": 474,
+            "trap_type": "Inducing FOMO (Fear Of Missing Out) Combined with Personal Attack",
+            "weapon_type": [
+              "inducing_fomo",
+              "personal_attack"
+            ],
+            "matched_text": "If you're still making excuses while everyone else is moving up, maybe stop blaming other people and ask yourself why you're getting left behind",
+            "socratic_quiz": {
+              "question": "How is this sentence psychologically affecting the reader?",
+              "options": [
+                "A. It offers sincere, actionable advice to help the reader grow",
+                "B. It creates a fear of being left behind (FOMO) by painting a picture of 'everyone moving up,' while implicitly blaming and belittling the reader as someone who 'makes excuses' and 'falls behind'",
+                "C. It's simply a rhetorical question with no particular purpose"
+              ],
+              "correct_option": "B",
+              "explanation": "This is a FOMO-inducing tactic combined with a personal attack: the sentence offers no real solution, but instead pressures the reader into feeling inadequate and anxious about falling behind an ambiguous, unverified standard."
+            }
+          },
+          {
+            "trap_id": "R002_T4",
+            "ground_truth_start": 476,
+            "ground_truth_end": 539,
+            "trap_type": "Emotional Dismissal Fallacy",
+            "weapon_type": [
+              "emotional_dismissal"
+            ],
+            "matched_text": "Stay mad if you want, but don't expect the world to wait for you",
+            "socratic_quiz": {
+              "question": "What is the purpose of this closing sentence in response to any pushback?",
+              "options": [
+                "A. It invites an open conversation to understand other people's perspectives",
+                "B. It dismisses any negative reaction or criticism by labeling it as 'being mad,' allowing the writer to avoid reflecting on their own behavior",
+                "C. It offers genuine encouragement to everyone reading"
+              ],
+              "correct_option": "B",
+              "explanation": "This is an emotional dismissal tactic: any criticism or reaction is preemptively labeled as 'staying mad,' which lets the writer avoid examining their own bragging behavior while continuing to belittle others."
+            }
+          }
+        ]
+      },
+      "step_3_sorting_game": {
+        "mechanic_type": "DRAG_AND_DROP_SORTING",
+        "task_instruction": "Toxic flexing campaigns often manipulate readers into feeling inadequate before selling them scam courses. Arrange the stages of this psychological manipulation strategy in the correct order.",
+        "pool_items": [
+          {
+            "item_id": "R002_SORT_01",
+            "text": "Readers experience intense FOMO and self-doubt, fearing they are falling behind their peers."
+          },
+          {
+            "item_id": "R002_SORT_02",
+            "text": "The influencer posts fabricated AI images of luxury items to establish fake status and authority."
+          },
+          {
+            "item_id": "R002_SORT_03",
+            "text": "The influencer pitches an expensive 'wealth mindset masterclass' as the ultimate shortcut to success."
+          },
+          {
+            "item_id": "R002_SORT_04",
+            "text": "The post uses false comparisons and condescending language to demean normal working youth as 'lazy'."
+          }
+        ],
+        "correct_sequence": [
+          "R002_SORT_02",
+          "R002_SORT_04",
+          "R002_SORT_01",
+          "R002_SORT_03"
+        ],
+        "validation_feedback": {
+          "success": "Correct! You have decoded the classic toxic flexing funnel: Fabricate status (Hook) → Belittle through false comparisons (Attack) → Trigger insecurity and FOMO (Anxiety) → Sell an expensive 'shortcut' course (Monetization).",
+          "failure": "Incorrect sequence. Toxic flexing manipulators first establish fake wealth, then attack the audience's self-esteem to create FOMO before offering their paid course as a fake solution."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Ask your Teacher/Parent: If a social media post makes you feel anxious that you are falling behind your peers who seem to afford luxury lifestyles, what steps can you take to evaluate what is real versus staged?",
+      "mil_insight": "Social media highlights rarely reflect full reality, and AI image tools make lavish lifestyles effortless to fake. Remind youth that success is not measured by material flexing or belittling others, and urgent pitches for expensive 'mindset courses' are almost always predatory scams."
+    }
+  },
+  {
+  "level": "RED",
+  "case_id": "R003",
+  "title": "The Scholarship Deadline Scam",
+  "short_summary": "An urgent email claiming a student won a scholarship uses fake deadlines and a phishing website to steal school credentials and a verification fee.",
+  "duration_min": 15,
+  "skills": [
+    "Phishing detection",
+    "URL verification",
+    "Social engineering (urgency + authority)",
+    "Credential theft"
+  ],
+  "spotted_url": "/assets/images/R003/R003_fakeimg_spotted.png",
+  "theme": [
+    "Education",
+    "Identity Theft",
+    "Financial Scam"
+  ],
+  "story_context": "About a week before the school officially announces the scholarship list, a student receives an email claiming they have been selected for the 'Student Excellence Scholarship' but must verify their identity and pay a fee within 2 hours.",
+  "modules": {
+    "step_1_image_forensics": {
+      "mechanic_type": "IMAGE_FORENSICS",
+      "image_url": "/assets/images/R003/R003_fakeimg.png",
+      "image_width": 1000,
+      "image_height": 1000,
+      "context_text": "The student clicked the 'Verify Scholarship' link and was taken to a login portal. Find the 3 suspicious visual anomalies and manipulative texts that indicate this is a phishing website.",
+      "target_anomalies": [
+        {
+          "anomaly_id": "R003_IMG_03",
+          "name": "urgency_text",
+          "x_pct": 40.5,
+          "y_pct": 45.8,
+          "radius_pct": 5.5,
+          "description": "The urgent text in the blue info box: 'ONLY 2 HOURS REMAINING! Your scholarship will be forfeited.' creates artificial panic.",
+          "socratic_quiz": {
+            "question": "Why does the website display a countdown or short deadline?",
+            "options": [
+              "A. To create artificial urgency, inducing panic to prevent the victim from thinking critically or verifying the claim.",
+              "B. To ensure the school's servers are not overloaded with too many logins at once.",
+              "C. To help students manage their time better during the exam season."
+            ],
+            "correct_option": "A",
+            "explanation": "Artificial urgency is a cornerstone of social engineering. By forcing a 2-hour deadline, the scammer deprives the victim of the time needed to consult with parents, teachers, or IT staff."
+          }
+        },
+        {
+          "anomaly_id": "R003_IMG_04",
+          "name": "advance_fee_text",
+          "x_pct": 49.0,
+          "y_pct": 71.2,
+          "radius_pct": 5.5,
+          "description": "The site button text explicitely links verification with a 'PAY FEE (49,000 VND)'.",
+          "socratic_quiz": {
+            "question": "Why is the request for a small 'verification fee' on the login button highly suspicious in this context?",
+            "options": [
+              "A. Legitimate scholarships provide funds to students; they do not require recipients to pay money to receive money.",
+              "B. The amount is too small; real schools would charge at least 500,000 VND for administrative verification.",
+              "C. It indicates the school is trying to raise funds for the end-of-year party."
+            ],
+            "correct_option": "A",
+            "explanation": "This is a classic advance-fee scam mechanism. Scammers keep the fee intentionally small (like 49,000 VND) so it seems insignificant compared to the 'scholarship', increasing the likelihood the victim will pay without thinking."
+          }
+        },
+        {
+          "anomaly_id": "R003_IMG_05",
+          "name": "isolation_text",
+          "x_pct": 47.0,
+          "y_pct": 85.0,
+          "radius_pct": 4.5,
+          "description": "The instruction 'Do not contact the main school office directly' in the FAQ isolates the victim from verifying the truth.",
+          "socratic_quiz": {
+            "question": "What is the primary purpose of telling the student NOT to contact the school office?",
+            "options": [
+              "A. To reduce the workload of the school's administrative staff.",
+              "B. To isolate the victim from authoritative sources that would immediately expose the scam.",
+              "C. To comply with third-party privacy regulations regarding educational scholarships."
+            ],
+            "correct_option": "B",
+            "explanation": "Isolation tactics are used to cut victims off from a 'reality check'. The scammer knows that a single phone call to the school office would instantly reveal the scholarship portal is fake."
+          }
+        }
+      ]
+    },
+    "step_2_text_highlight": {
+      "mechanic_type": "TEXT_HIGHLIGHT",
+      "simulated_post": {
+        "author": "Scholarship Selection Committee",
+        "time_posted": "Just now",
+        "content": "Congratulations! You have already been selected for the Student Excellence Scholarship. Only 50 students have been selected. If you fail to verify within 2 hours, your place will be offered to another student. Please log in to pay your verification fee of 49,000 VND. Do not contact the school office because verification is handled by our scholarship partner."
+      },
+      "traps": [
+        {
+          "trap_id": "R003_TRAP_01",
+          "ground_truth_start": 17,
+          "ground_truth_end": 87,
+          "matched_text": "You have already been selected for the Student Excellence Scholarship.",
+          "weapon_type": [
+            "authority_bias",
+            "reward_bait"
+          ],
+          "socratic_quiz": {
+            "question": "Why do scammers start the message by confirming the reward rather than asking you to apply?",
+            "options": [
+              "A. To trigger excitement and greed, making the victim drop their guard and become more willing to comply with subsequent demands.",
+              "B. To inform the student so they can celebrate with their family immediately.",
+              "C. To prove they have access to the school's confidential grading systems."
+            ],
+            "correct_option": "A",
+            "explanation": "This technique exploits 'reward baiting'. When people believe they have already won something valuable, their critical thinking decreases and they focus on claiming the prize rather than questioning its legitimacy."
+          }
+        },
+        {
+          "trap_id": "R003_TRAP_02",
+          "ground_truth_start": 125,
+          "ground_truth_end": 211,
+          "matched_text": "If you fail to verify within 2 hours, your place will be offered to another student.",
+          "weapon_type": [
+            "artificial_urgency"
+          ],
+          "socratic_quiz": {
+            "question": "How does the email use the concept of time to manipulate the recipient?",
+            "options": [
+              "A. It establishes a reasonable administrative processing window for scholarship funds.",
+              "B. It creates artificial urgency, inducing panic to prevent the victim from thinking critically or verifying the claim.",
+              "C. It ensures the scholarship funds are distributed fairly among applicants."
+            ],
+            "correct_option": "B",
+            "explanation": "Artificial urgency is a cornerstone of social engineering. By forcing a 2-hour deadline, the scammer deprives the victim of the time needed to consult with parents, teachers, or IT staff."
+          }
+        },
+        {
+          "trap_id": "R003_TRAP_03",
+          "ground_truth_start": 238,
+          "ground_truth_end": 268,
+          "matched_text": "verification fee of 49,000 VND",
+          "weapon_type": [
+            "advance_fee_scam"
+          ],
+          "socratic_quiz": {
+            "question": "Why is the request for a small 'verification fee' highly suspicious in this context?",
+            "options": [
+              "A. Legitimate scholarships provide funds to students; they do not require recipients to pay money to receive money.",
+              "B. The amount is too small; real schools would charge at least 500,000 VND for administrative verification.",
+              "C. It indicates the school is trying to raise funds for the end-of-year party."
+            ],
+            "correct_option": "A",
+            "explanation": "This is a classic advance-fee scam mechanism. Scammers keep the fee intentionally small (like 49,000 VND) so it seems insignificant compared to the 'scholarship', increasing the likelihood the victim will pay."
+          }
+        },
+        {
+          "trap_id": "R003_TRAP_04",
+          "ground_truth_start": 270,
+          "ground_truth_end": 362,
+          "matched_text": "Do not contact the school office because verification is handled by our scholarship partner.",
+          "weapon_type": [
+            "isolation_tactic"
+          ],
+          "socratic_quiz": {
+            "question": "What is the primary purpose of telling the student NOT to contact the school office?",
+            "options": [
+              "A. To reduce the workload of the school's administrative staff.",
+              "B. To isolate the victim from authoritative sources that would immediately expose the scam.",
+              "C. To comply with third-party privacy regulations regarding educational scholarships."
+            ],
+            "correct_option": "B",
+            "explanation": "Isolation tactics are used to cut victims off from a 'reality check'. The scammer knows that a single phone call to the school office would instantly reveal the scholarship is fake."
+          }
+        }
+      ]
+    },
+    "step_3_sorting_game": {
+      "mechanic_type": "DRAG_AND_DROP_SORTING",
+      "task_instruction": "Arrange the steps in the chronological order of how this phishing scam unfolds to understand the full scope of the danger.",
+      "pool_items": [
+        {
+          "item_id": "R003_SORT_01",
+          "text": "Student receives an urgent scholarship email."
+        },
+        {
+          "item_id": "R003_SORT_02",
+          "text": "Student clicks the fake verification link."
+        },
+        {
+          "item_id": "R003_SORT_03",
+          "text": "Student enters their official school account username and password."
+        },
+        {
+          "item_id": "R003_SORT_04",
+          "text": "The scammer's database silently captures the credentials."
+        },
+        {
+          "item_id": "R003_SORT_05",
+          "text": "The fake website prompts the student for an OTP or payment detail."
+        },
+        {
+          "item_id": "R003_SORT_06",
+          "text": "The attacker actively logs into the student's real school account in the background."
+        },
+        {
+          "item_id": "R003_SORT_07",
+          "text": "The student loses access to their account before they even realize the money was a trick."
+        }
+      ],
+      "correct_sequence": [
+        "R003_SORT_01",
+        "R003_SORT_02",
+        "R003_SORT_03",
+        "R003_SORT_04",
+        "R003_SORT_05",
+        "R003_SORT_06",
+        "R003_SORT_07"
+      ],
+      "validation_feedback": {
+        "success": "Correct! Scammers don't just want your money directly; stealing your school account credentials gives them access to internal systems and allows them to scam others using your identity. The actual theft happens before you even pay the fee.",
+        "failure": "Not quite. Remember that phishing attacks often steal your information *before* asking for money. Simply typing in your password is the critical point where the attacker takes control."
+      }
+    }
+  },
+  "dialogue_trigger": {
+    "question": "Ask your Teacher/Parent: If you really received a scholarship notification, how could you verify it independently without clicking the provided link?",
+    "mil_insight": "Understand that urgency and unexpected rewards are common manipulation tactics. Always verify official communications by navigating directly to the school's known official portal or contacting the administration office in person, rather than relying on provided links."
   }
+}
 ]

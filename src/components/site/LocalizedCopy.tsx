@@ -4,9 +4,9 @@ import { useI18n } from "@/i18n/I18nProvider";
 import type { MessageKey } from "@/i18n/messages/types";
 import { SectionLabel } from "@/components/ui/Primitives";
 
-export function LocalizedText({ messageKey }: { messageKey: MessageKey }) {
+export function LocalizedText({ messageKey, replacements }: { messageKey: MessageKey; replacements?: Record<string, string | number> }) {
   const { t } = useI18n();
-  return t(messageKey);
+  return t(messageKey, replacements);
 }
 
 export function LocalizedPageIntro({

@@ -3,8 +3,9 @@ import { CaseHubClient } from "@/components/cases/CaseHubClient";
 import { AppShell } from "@/components/site/AppShell";
 import { LocalizedPageIntro } from "@/components/site/LocalizedCopy";
 import { getCases } from "@/lib/cases";
+import { en } from "@/i18n/messages/en";
 
-export const metadata: Metadata = { title: "Case Hub" };
+export const metadata: Metadata = { title: en["metadata.title.caseHub"] };
 
 export default async function CasesPage() {
   const cases = await getCases();
