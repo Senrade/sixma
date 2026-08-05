@@ -8,6 +8,7 @@ import type {
   CaseData,
   SocraticQuiz,
 } from "@/lib/case-types";
+import { MODULE_GUIDES } from "@/lib/module-guides";
 
 export type { CaseData } from "@/lib/case-types";
 
@@ -124,14 +125,6 @@ export default function GameController({
     });
   }, [persistenceKey]);
 
-  const handleStepBack = useCallback(() => {
-    setCurrentStep((step) => {
-      const previousStep = Math.max(step - 1, FIRST_STEP) as GameStep;
-      writeStoredStep(persistenceKey, previousStep);
-      return previousStep;
-    });
-  }, [persistenceKey]);
-
   let activeModule: React.ReactNode;
 
   switch (currentStep) {
@@ -139,6 +132,7 @@ export default function GameController({
       const imageModule = caseData.modules.step_1_image_forensics;
       activeModule = (
         <ImageForensics
+          guide={MODULE_GUIDES.imageForensics}
           imageUrl={imageModule.image_url}
           contextText={imageModule.context_text}
           imageWidth={imageModule.image_width}
@@ -161,7 +155,6 @@ export default function GameController({
             explanation: imageModule.socratic_quiz.explanation,
           } : undefined}
           onComplete={handleStepComplete}
-          onBack={handleStepBack}
         />
       );
       break;
@@ -171,13 +164,13 @@ export default function GameController({
 
       activeModule = (
         <TextHighlight
+          guide={MODULE_GUIDES.textHighlight}
           postAuthor={textModule.simulated_post.author}
           postTime={textModule.simulated_post.time_posted}
           content={textModule.simulated_post.content}
           traps={textModule.traps}
           iouThreshold={0.7}
           onComplete={handleStepComplete}
-          onBack={handleStepBack}
         />
       );
       break;
@@ -187,7 +180,8 @@ export default function GameController({
 
       activeModule = (
         <SortingGame
-          taskInstruction={sortingModule.task_instruction}
+          guide={MODULE_GUIDES.sortingGame}
+          contextText={sortingModule.context_text}
           poolItems={sortingModule.pool_items.map((item) => ({
             id: item.item_id,
             text: item.text,
@@ -195,7 +189,6 @@ export default function GameController({
           correctSequence={sortingModule.correct_sequence}
           validationFeedback={sortingModule.validation_feedback}
           onComplete={onCaseComplete ?? handleStepComplete}
-          onBack={handleStepBack}
         />
       );
       break;

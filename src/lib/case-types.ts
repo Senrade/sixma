@@ -54,7 +54,7 @@ export interface SortingPoolItem {
 
 export interface SortingModule {
   mechanic_type: "DRAG_AND_DROP_SORTING";
-  task_instruction: string;
+  context_text: string;
   pool_items: SortingPoolItem[];
   correct_sequence: string[];
   validation_feedback: {
@@ -73,6 +73,11 @@ export interface CaseData {
   spotted_url: string;
   theme: string[];
   story_context: string;
+  source?: {
+    title: string;
+    url: string;
+    note: string;
+  };
   modules: {
     step_1_image_forensics: ImageForensicsModule;
     step_2_text_highlight: TextHighlightModule;

@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import { Card, Chip } from "@/components/ui/Primitives";
 import type { CaseData } from "@/lib/case-types";
+import { useI18n } from "@/i18n/I18nProvider";
 
 export function AchievementsClient({ cases }: { cases: CaseData[] }) {
+  const { t } = useI18n();
   const [completed, setCompleted] = useState<number | null>(null);
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -20,10 +22,10 @@ export function AchievementsClient({ cases }: { cases: CaseData[] }) {
 
   const count = completed ?? 0;
   const achievements = [
-    { title: "First investigation", description: "Complete one full case.", earned: count >= 1 },
-    { title: "Case investigator", description: "Complete every currently available case.", earned: count >= cases.length && cases.length > 0 },
-    { title: "Evidence habit", description: "Return to the knowledge hub after an investigation.", earned: false },
+    { id: "first", title: t("achievements.first.title"), description: t("achievements.first.description"), earned: count >= 1 },
+    { id: "investigator", title: t("achievements.investigator.title"), description: t("achievements.investigator.description"), earned: count >= cases.length && cases.length > 0 },
+    { id: "evidence", title: t("achievements.evidence.title"), description: t("achievements.evidence.description"), earned: false },
   ];
 
-  return <div className="mt-8 grid gap-5 md:grid-cols-3">{achievements.map((achievement) => <Card key={achievement.title} tone={achievement.earned ? "success" : "muted"} className="p-5"><Chip tone={achievement.earned ? "green" : "neutral"}>{achievement.earned ? "Earned" : "Locked"}</Chip><h2 className="mt-4 text-xl font-black">{achievement.title}</h2><p className="mt-2 text-sm leading-6">{achievement.description}</p></Card>)}</div>;
+  return <div className="mt-8 grid gap-5 md:grid-cols-3">{achievements.map((achievement) => <Card key={achievement.id} tone={achievement.earned ? "success" : "muted"} className="p-5"><Chip tone={achievement.earned ? "green" : "neutral"}>{achievement.earned ? t("achievements.earned") : t("achievements.locked")}</Chip><h2 className="mt-4 text-xl font-black">{achievement.title}</h2><p className="mt-2 text-sm leading-6">{achievement.description}</p></Card>)}</div>;
 }
