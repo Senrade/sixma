@@ -6,7 +6,7 @@ import { localizePath } from "@/i18n/routing";
 import { getArticles } from "@/lib/articles";
 import { getLocalizedMetadata, type LocalePageProps } from "@/i18n/metadata";
 
-export function generateMetadata({ params }: LocalePageProps) { return getLocalizedMetadata(params, "metadata.title.learn"); }
+export function generateMetadata({ params }: LocalePageProps) { return getLocalizedMetadata(params, "metadata.title.knowledgeHub"); }
 
 export default async function LearnPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: localeParam } = await params;

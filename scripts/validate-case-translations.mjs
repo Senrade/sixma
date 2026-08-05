@@ -1,7 +1,8 @@
-import { readFile, readdir } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import path from "node:path";
 
-const dataDirectory = path.join(process.cwd(), "public", "data");
+const caseDirectory = path.join(process.cwd(), "src", "content", "cases");
+const articleDirectory = path.join(process.cwd(), "src", "content", "articles");
 
 function fail(message) {
   throw new Error(message);
@@ -56,8 +57,7 @@ function validateCaseTranslation(translation, label) {
   assertOptionalStringArray(translation.theme, `${label}.theme`);
 
   if (translation.source !== undefined) {
-    assertAllowedKeys(translation.source, new Set(["title", "note"]), `${label}.source`);
-    assertOptionalString(translation.source.title, `${label}.source.title`);
+    assertAllowedKeys(translation.source, new Set(["note"]), `${label}.source`);
     assertOptionalString(translation.source.note, `${label}.source.note`);
   }
 
@@ -145,61 +145,124 @@ function assertUniqueMatchedText(content, matchedText, label) {
   }
 }
 
-const baseCases = JSON.parse(await readFile(path.join(dataDirectory, "cases.json"), "utf8"));
-if (!Array.isArray(baseCases)) fail("cases.json must be an array.");
+function assertSameShape(reference, candidate, label) {
+  if (Array.isArray(reference)) {
+    if (!Array.isArray(candidate) || candidate.length !== reference.length) {
+      fail(`${label} must contain ${reference.length} entries.`);
+    }
+    reference.forEach((item, index) => assertSameShape(item, candidate[index], `${label}[${index}]`));
+    return;
+  }
+  if (typeof reference === "object" && reference !== null) {
+    assertRecord(candidate, label);
+    for (const key of Object.keys(reference)) {
+      if (!(key in candidate)) fail(`${label}.${key} is missing.`);
+      assertSameShape(reference[key], candidate[key], `${label}.${key}`);
+    }
+    return;
+  }
+  if (typeof candidate !== typeof reference) fail(`${label} has the wrong value type.`);
+}
 
-const baseById = new Map(baseCases.map((caseData) => [caseData.case_id, caseData]));
-for (const caseData of baseCases) {
-  for (const trap of caseData.modules.step_2_text_highlight.traps) {
-    assertUniqueMatchedText(
-      caseData.modules.step_2_text_highlight.simulated_post.content,
-      trap.matched_text,
-      `cases.json:${caseData.case_id}:${trap.trap_id}`,
-    );
+function validateArticle(article, label) {
+  assertAllowedKeys(article, new Set(["category", "title", "summary", "sections"]), label);
+  for (const key of ["category", "title", "summary"]) {
+    if (typeof article[key] !== "string" || article[key].length === 0) fail(`${label}.${key} is required.`);
+  }
+  if (!Array.isArray(article.sections) || article.sections.length === 0) fail(`${label}.sections must not be empty.`);
+  for (const [index, section] of article.sections.entries()) {
+    const sectionLabel = `${label}.sections[${index}]`;
+    assertAllowedKeys(section, new Set(["heading", "body"]), sectionLabel);
+    if (typeof section.heading !== "string" || typeof section.body !== "string") {
+      fail(`${sectionLabel} requires heading and body strings.`);
+    }
   }
 }
 
-const translationFiles = (await readdir(dataDirectory))
-  .filter((fileName) => /^cases\.[^.]+\.json$/.test(fileName))
-  .sort();
+const { LOCALES } = await import("../src/i18n/registry.ts");
+const mechanicsCatalog = JSON.parse(await readFile(path.join(caseDirectory, "mechanics.json"), "utf8"));
+if (mechanicsCatalog.schema_version !== 1 || !Array.isArray(mechanicsCatalog.cases)) {
+  fail("cases/mechanics.json must use schema_version 1 and contain a cases array.");
+}
+const mechanicsById = new Map(mechanicsCatalog.cases.map((caseData) => [caseData.case_id, caseData]));
+const knownCaseIds = new Set(mechanicsById.keys());
+const englishCases = JSON.parse(await readFile(path.join(caseDirectory, "locales", "en.json"), "utf8"));
+const articleIndex = JSON.parse(await readFile(path.join(articleDirectory, "index.json"), "utf8"));
+const knownArticleSlugs = new Set(articleIndex.articles.map((article) => article.slug));
+const englishMessageSource = await readFile(path.join(process.cwd(), "src", "i18n", "messages", "en.ts"), "utf8");
+const messageKeyPattern = /^\s*"([^"]+)":/gm;
+const englishMessageKeys = new Set([...englishMessageSource.matchAll(messageKeyPattern)].map((match) => match[1]));
 
-for (const fileName of translationFiles) {
-  const catalog = JSON.parse(await readFile(path.join(dataDirectory, fileName), "utf8"));
-  assertRecord(catalog, fileName);
-  assertKnownIds(catalog, new Set(baseById.keys()), fileName);
+for (const caseData of mechanicsCatalog.cases) {
+  const urls = [caseData.spotted_url, caseData.modules.step_1_image_forensics.image_url];
+  for (const url of urls) {
+    try {
+      await access(path.join(process.cwd(), "public", url.replace(/^\/+/, "")));
+    } catch {
+      fail(`Case ${caseData.case_id} references missing public asset ${url}.`);
+    }
+  }
+}
 
-  for (const [caseId, translation] of Object.entries(catalog)) {
-    validateCaseTranslation(translation, `${fileName}:${caseId}`);
-    const base = baseById.get(caseId);
-    const imageTranslation = translation.modules?.step_1_image_forensics;
-    const textTranslation = translation.modules?.step_2_text_highlight;
-    const sortingTranslation = translation.modules?.step_3_sorting_game;
+for (const [locale, definition] of Object.entries(LOCALES)) {
+  const caseFile = `cases/locales/${locale}.json`;
+  const cases = JSON.parse(await readFile(path.join(caseDirectory, "locales", `${locale}.json`), "utf8"));
+  assertRecord(cases, caseFile);
+  assertKnownIds(cases, knownCaseIds, caseFile);
+
+  const missingCases = [...knownCaseIds].filter((caseId) => !(caseId in cases));
+  if (definition.status === "complete" && missingCases.length > 0) {
+    fail(`${locale} is complete but is missing cases: ${missingCases.join(", ")}.`);
+  }
+
+  for (const [caseId, translation] of Object.entries(cases)) {
+    const label = `${caseFile}:${caseId}`;
+    validateCaseTranslation(translation, label);
+    assertSameShape(englishCases[caseId], translation, label);
+    const mechanics = mechanicsById.get(caseId);
+    const imageTranslation = translation.modules.step_1_image_forensics;
+    const textTranslation = translation.modules.step_2_text_highlight;
+    const sortingTranslation = translation.modules.step_3_sorting_game;
 
     assertKnownIds(
-      imageTranslation?.target_anomalies,
-      new Set(base.modules.step_1_image_forensics.target_anomalies.map((item) => item.anomaly_id)),
-      `${fileName}:${caseId}:target_anomalies`,
+      imageTranslation.target_anomalies,
+      new Set(mechanics.modules.step_1_image_forensics.target_anomalies.map((item) => item.anomaly_id)),
+      `${label}:target_anomalies`,
     );
     assertKnownIds(
-      textTranslation?.traps,
-      new Set(base.modules.step_2_text_highlight.traps.map((item) => item.trap_id)),
-      `${fileName}:${caseId}:traps`,
+      textTranslation.traps,
+      new Set(mechanics.modules.step_2_text_highlight.traps.map((item) => item.trap_id)),
+      `${label}:traps`,
     );
     assertKnownIds(
-      sortingTranslation?.pool_items,
-      new Set(base.modules.step_3_sorting_game.pool_items.map((item) => item.item_id)),
-      `${fileName}:${caseId}:pool_items`,
+      sortingTranslation.pool_items,
+      new Set(mechanics.modules.step_3_sorting_game.pool_item_ids),
+      `${label}:pool_items`,
     );
-
-    const content = textTranslation?.simulated_post?.content
-      ?? base.modules.step_2_text_highlight.simulated_post.content;
-    for (const trap of base.modules.step_2_text_highlight.traps) {
-      const matchedText = textTranslation?.traps?.[trap.trap_id]?.matched_text ?? trap.matched_text;
-      assertUniqueMatchedText(content, matchedText, `${fileName}:${caseId}:${trap.trap_id}`);
+    for (const trap of Object.values(textTranslation.traps)) {
+      assertUniqueMatchedText(textTranslation.simulated_post.content, trap.matched_text, label);
     }
   }
 
-  console.log(`Validated ${fileName}`);
-}
+  const articleFile = `articles/locales/${locale}.json`;
+  const articles = JSON.parse(await readFile(path.join(articleDirectory, "locales", `${locale}.json`), "utf8"));
+  assertRecord(articles, articleFile);
+  assertKnownIds(articles, knownArticleSlugs, articleFile);
+  const missingArticles = [...knownArticleSlugs].filter((slug) => !(slug in articles));
+  if (missingArticles.length > 0) fail(`${articleFile} is missing: ${missingArticles.join(", ")}.`);
+  for (const [slug, article] of Object.entries(articles)) validateArticle(article, `${articleFile}:${slug}`);
 
-if (translationFiles.length === 0) console.log("No case translation files found.");
+  const messageSource = await readFile(
+    path.join(process.cwd(), "src", "i18n", "messages", `${locale}.ts`),
+    "utf8",
+  );
+  const messageKeys = new Set([...messageSource.matchAll(messageKeyPattern)].map((match) => match[1]));
+  const missingMessages = [...englishMessageKeys].filter((key) => !messageKeys.has(key));
+  if (definition.status === "complete" && missingMessages.length > 0) {
+    fail(`${locale} is complete but is missing interface messages: ${missingMessages.join(", ")}.`);
+  }
+
+  console.log(
+    `Validated ${locale}: ${knownCaseIds.size - missingCases.length}/${knownCaseIds.size} cases, ${knownArticleSlugs.size}/${knownArticleSlugs.size} articles, ${englishMessageKeys.size - missingMessages.length}/${englishMessageKeys.size} interface messages${missingCases.length || missingMessages.length ? ` (fallback: ${[...missingCases, ...missingMessages].join(", ")})` : ""}.`,
+  );
+}

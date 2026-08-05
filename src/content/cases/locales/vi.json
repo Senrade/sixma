@@ -179,7 +179,7 @@
       "mil_insight": "Hãy giúp phụ huynh và học sinh đối chiếu tin nhắn với quy trình hành chính chuẩn: các cơ sở giáo dục hợp pháp không dùng áp lực thời gian như thời hạn 24 giờ hoặc liên kết thanh toán không chính thức để xử lý vấn đề bảo mật."
     }
   },
-  "R007": {
+  "R002": {
     "title": "Hồ sơ tống tiền căng tin",
     "short_summary": "Một người gửi ẩn danh dùng ảnh thực phẩm bị chỉnh sửa và áp lực danh tiếng để tống tiền nhà trường.",
     "skills": [
@@ -197,7 +197,7 @@
       "step_1_image_forensics": {
         "context_text": "Bức ảnh rò rỉ đính kèm email tống tiền được cho là chụp 'một con gián ghê tởm trong khay thức ăn của căng tin trường trung học'.",
         "target_anomalies": {
-          "R007_IMG_01": {
+          "R002_IMG_01": {
             "description": "Con côn trùng có vẻ được ghép kỹ thuật số lên khay cơm, với hướng sáng không khớp, bóng đổ thiếu tự nhiên và đường viền bị nhòe.",
             "socratic_quiz": {
               "question": "Vì sao con gián trong ảnh cho thấy dấu hiệu chỉnh sửa kỹ thuật số?",
@@ -218,7 +218,7 @@
           "content": "Tôi thường không đăng những chuyện thế này, nhưng bữa trưa hôm nay thật sự khiến tôi khó chịu. Trong lúc ăn, tôi thấy một thứ trông giống con gián trong khay cơm. Tôi không biết nó đến từ nhà bếp hay từ đâu khác, có lẽ vẫn có một lời giải thích hoàn toàn hợp lý, nhưng nếu nó thực sự đến từ căng tin thì học sinh có quyền lo lắng. Tôi không nói căng tin không an toàn. Tôi chỉ hỏi tại sao chuyện này cứ xảy ra và tại sao sau đó dường như chẳng ai giải thích gì. Dù sao nhà trường có vẻ không bao giờ xem xét phản hồi của học sinh về đồ ăn, cứ nói vấn đề quá phức tạp hay đại loại vậy. Đến lúc này, tôi nghĩ phụ huynh xứng đáng biết chuyện gì đang xảy ra trước khi mọi thứ bị âm thầm che giấu..."
         },
         "traps": {
-          "R007_TRAP_01": {
+          "R002_TRAP_01": {
             "matched_text": "Tôi không nói căng tin không an toàn. Tôi chỉ hỏi tại sao chuyện này cứ xảy ra và tại sao sau đó dường như chẳng ai giải thích gì.",
             "socratic_quiz": {
               "question": "Tác giả đưa ra một cáo buộc chưa được xác minh nhưng né tránh trách nhiệm bằng cách nào?",
@@ -230,7 +230,7 @@
               "explanation": "Đây là lối nói bóng gió. Bằng cách ghép lời phủ nhận thái độ thù địch ('Tôi không nói...') với câu hỏi có cài sẵn giả định ('tại sao chuyện này cứ xảy ra'), tác giả lén đưa vào một tiền đề chưa được chứng minh về sự tắc trách có hệ thống nhưng vẫn có thể chối bỏ trách nhiệm."
             }
           },
-          "R007_TRAP_02": {
+          "R002_TRAP_02": {
             "matched_text": "Dù sao nhà trường có vẻ không bao giờ xem xét phản hồi của học sinh về đồ ăn, cứ nói vấn đề quá phức tạp hay đại loại vậy.",
             "socratic_quiz": {
               "question": "Phát biểu này có chức năng gì trong việc thao túng cách người đọc đánh giá phản hồi sau này của nhà trường?",
@@ -242,7 +242,7 @@
               "explanation": "Kỹ thuật này được gọi là 'đầu độc nguồn tin'. Bằng cách đóng khung trước mọi phản hồi của tổ chức như lời ngụy biện né tránh, tác giả khiến người đọc bác bỏ lời giải thích chính thức ngay cả trước khi nhà trường lên tiếng."
             }
           },
-          "R007_TRAP_03": {
+          "R002_TRAP_03": {
             "matched_text": "Đến lúc này, tôi nghĩ phụ huynh xứng đáng biết chuyện gì đang xảy ra trước khi mọi thứ bị âm thầm che giấu...",
             "socratic_quiz": {
               "question": "Vì sao cách diễn đạt 'trước khi mọi thứ bị âm thầm che giấu' có vấn đề?",
@@ -259,10 +259,10 @@
       "step_3_sorting_game": {
         "context_text": "Một bài đăng gây hiểu lầm về căng tin trường học đã lan rộng trong cộng đồng.",
         "pool_items": {
-          "R007_SORT_01": "Những người dùng khác đăng lại ảnh với cáo buộc nặng nề hơn và mặc định tình huống xấu nhất.",
-          "R007_SORT_02": "Tin đồn được chấp nhận như 'điều ai cũng biết' dù tuyên bố ban đầu chưa từng được xác nhận.",
-          "R007_SORT_03": "Một người đăng ảnh kèm cách diễn giải cá nhân nhưng không có bối cảnh đã được xác minh.",
-          "R007_SORT_04": "Mọi người phản ứng theo cảm xúc và chia sẻ bài đăng trước khi chờ xác minh chính thức."
+          "R002_SORT_01": "Những người dùng khác đăng lại ảnh với cáo buộc nặng nề hơn và mặc định tình huống xấu nhất.",
+          "R002_SORT_02": "Tin đồn được chấp nhận như 'điều ai cũng biết' dù tuyên bố ban đầu chưa từng được xác nhận.",
+          "R002_SORT_03": "Một người đăng ảnh kèm cách diễn giải cá nhân nhưng không có bối cảnh đã được xác minh.",
+          "R002_SORT_04": "Mọi người phản ứng theo cảm xúc và chia sẻ bài đăng trước khi chờ xác minh chính thức."
         },
         "validation_feedback": {
           "success": "Chính xác. Tin đồn thường trở nên đáng tin do được lặp lại chứ không phải nhờ bằng chứng. Một quan sát chưa kiểm chứng có thể biến thành 'ai cũng biết là thật' khi mọi người thêm suy đoán, chia sẻ theo cảm xúc và ngừng kiểm tra nguồn ban đầu.",
@@ -275,7 +275,7 @@
       "mil_insight": "Một hình ảnh đơn lẻ hiếm khi cung cấp đủ bối cảnh để xác định chuyện gì đã xảy ra. Hãy thảo luận cách phân biệt bằng chứng trực tiếp với giả định bằng việc kiểm tra nguồn ban đầu, xác minh ảnh được chụp ở đâu và khi nào, đồng thời theo dõi quy trình điều tra chính thức của nhà trường trước khi kết luận."
     }
   },
-  "R002": {
+  "R003": {
     "title": "Ảo tưởng thành công",
     "short_summary": "Một bài đăng lan truyền khoe lối sống xa hoa giả tạo của người trẻ 20 tuổi và hạ thấp người khác. Hãy tìm dị thường AI và giải mã chiến thuật FOMO độc hại.",
     "skills": [
@@ -293,7 +293,7 @@
       "step_1_image_forensics": {
         "context_text": "Ảnh đại diện của 'Minh Khang' lấy từ bài đăng về 'tư duy làm giàu'. Hãy tìm một dị thường thị giác rõ ràng chứng minh bức ảnh do AI tạo ra.",
         "target_anomalies": {
-          "R002_IMG_01": {
+          "R003_IMG_01": {
             "description": "Dây da và khóa kim loại trên túi hàng hiệu có cấu trúc bất khả thi, hòa vào các vòng lơ lửng ngẫu nhiên.",
             "socratic_quiz": {
               "question": "Vì sao cấu trúc bàn tay này là dấu hiệu rõ ràng của ảnh do AI tạo ra?",
@@ -305,7 +305,7 @@
               "explanation": "Các trình tạo ảnh thường không thể tái hiện bàn tay chính xác, dễ tạo ra ngón tay dính liền, bị thiếu hoặc thừa. Biến dạng giải phẫu nghiêm trọng này là một dấu hiệu điển hình."
             }
           },
-          "R002_IMG_02": {
+          "R003_IMG_02": {
             "description": "Cốc cà phê không tạo ra phản chiếu tự nhiên trên mặt bàn bóng, trái với các vật thể còn lại trong môi trường.",
             "socratic_quiz": {
               "question": "Vì sao sự biến dạng ở tay nắm cửa sổ là một dấu hiệu cảnh báo đáng kể?",
@@ -326,7 +326,7 @@
           "content": "Thật buồn cười khi có người cứ nói 'tiền không mua được hạnh phúc' mỗi khi ai đó đăng món đồ đẹp. Kiểu như... chỉ vì bạn không đủ tiền mua không có nghĩa đó là 'khoe khoang'. Trong khi đó, tất cả những người tôi biết đều đang cày cuốc, kiếm chỗ thực tập, mua thứ họ muốn và thực sự làm được điều gì đó với cuộc đời. Nếu bạn vẫn viện cớ trong khi tất cả mọi người đều tiến lên, có lẽ hãy ngừng đổ lỗi cho người khác và tự hỏi tại sao mình đang bị bỏ lại phía sau. Cứ tức giận nếu bạn muốn, nhưng đừng mong thế giới chờ bạn."
         },
         "traps": {
-          "R002_T1": {
+          "R003_T1": {
             "matched_text": "chỉ vì bạn không đủ tiền mua không có nghĩa đó là 'khoe khoang'.",
             "socratic_quiz": {
               "question": "Câu này thực chất muốn làm gì với bất kỳ ai chỉ trích bài đăng khoe của?",
@@ -338,7 +338,7 @@
               "explanation": "Đây là ngụy biện công kích động cơ: thay vì phản hồi lập luận thực tế về việc bài đăng có khoe khoang hay không, người viết cho rằng mọi người phản đối chỉ vì 'nghèo và ghen tị'. Đây là cách né vấn đề thật đồng thời hạ thấp người chỉ trích."
             }
           },
-          "R002_T2": {
+          "R003_T2": {
             "matched_text": "tất cả những người tôi biết đều đang cày cuốc, kiếm chỗ thực tập, mua thứ họ muốn và thực sự làm được điều gì đó với cuộc đời",
             "socratic_quiz": {
               "question": "Vấn đề logic trong phép so sánh này là gì?",
@@ -350,7 +350,7 @@
               "explanation": "Đây là phép so sánh sai: nó đánh đồng 'có thể mua thứ mình muốn' với 'thành công trong cuộc sống', đồng thời bỏ qua sự khác biệt lớn về hoàn cảnh tài chính và gia đình, khiến tiêu chí so sánh trở nên bất công."
             }
           },
-          "R002_T3": {
+          "R003_T3": {
             "matched_text": "Nếu bạn vẫn viện cớ trong khi tất cả mọi người đều tiến lên, có lẽ hãy ngừng đổ lỗi cho người khác và tự hỏi tại sao mình đang bị bỏ lại phía sau",
             "socratic_quiz": {
               "question": "Câu này tác động tâm lý đến người đọc như thế nào?",
@@ -362,7 +362,7 @@
               "explanation": "Đây là chiến thuật kích hoạt FOMO kết hợp công kích cá nhân: câu nói không đưa ra giải pháp thật mà gây áp lực khiến người đọc cảm thấy kém cỏi và lo lắng vì không đạt một chuẩn mơ hồ, chưa được xác minh."
             }
           },
-          "R002_T4": {
+          "R003_T4": {
             "matched_text": "Cứ tức giận nếu bạn muốn, nhưng đừng mong thế giới chờ bạn.",
             "socratic_quiz": {
               "question": "Câu kết này nhằm mục đích gì khi đối diện với phản đối?",
@@ -379,10 +379,10 @@
       "step_3_sorting_game": {
         "context_text": "Các chiến dịch khoe khoang độc hại thường khiến người đọc cảm thấy kém cỏi trước khi bán cho họ những khóa học lừa đảo. Hãy sắp xếp các giai đoạn của chiến lược thao túng tâm lý này theo đúng thứ tự.",
         "pool_items": {
-          "R002_SORT_01": "Người đọc trải qua FOMO và sự hoài nghi bản thân mạnh mẽ, lo sợ mình đang tụt lại sau bạn bè.",
-          "R002_SORT_02": "Người có ảnh hưởng đăng ảnh đồ xa xỉ giả do AI tạo ra để xây dựng địa vị và uy tín giả tạo.",
-          "R002_SORT_03": "Người có ảnh hưởng chào bán một 'lớp học tư duy làm giàu' đắt tiền như con đường tắt tối ưu đến thành công.",
-          "R002_SORT_04": "Bài đăng dùng so sánh sai và ngôn ngữ trịch thượng để hạ thấp những người trẻ lao động bình thường là 'lười biếng'."
+          "R003_SORT_01": "Người đọc trải qua FOMO và sự hoài nghi bản thân mạnh mẽ, lo sợ mình đang tụt lại sau bạn bè.",
+          "R003_SORT_02": "Người có ảnh hưởng đăng ảnh đồ xa xỉ giả do AI tạo ra để xây dựng địa vị và uy tín giả tạo.",
+          "R003_SORT_03": "Người có ảnh hưởng chào bán một 'lớp học tư duy làm giàu' đắt tiền như con đường tắt tối ưu đến thành công.",
+          "R003_SORT_04": "Bài đăng dùng so sánh sai và ngôn ngữ trịch thượng để hạ thấp những người trẻ lao động bình thường là 'lười biếng'."
         },
         "validation_feedback": {
           "success": "Chính xác! Bạn đã giải mã phễu khoe khoang độc hại kinh điển: bịa đặt địa vị (Mồi nhử) -> hạ thấp bằng so sánh sai (Công kích) -> kích hoạt bất an và FOMO (Lo âu) -> bán khóa học 'đường tắt' đắt tiền (Kiếm tiền).",
@@ -393,6 +393,252 @@
     "dialogue_trigger": {
       "question": "Hãy hỏi Giáo viên/Phụ huynh: nếu một bài đăng mạng xã hội khiến bạn lo mình đang tụt lại sau những người bạn có vẻ đủ tiền sống xa hoa, bạn có thể làm gì để đánh giá đâu là thật và đâu là dàn dựng?",
       "mil_insight": "Những khoảnh khắc nổi bật trên mạng xã hội hiếm khi phản ánh toàn bộ thực tế, còn công cụ tạo ảnh AI giúp việc làm giả lối sống xa hoa trở nên dễ dàng. Hãy nhắc người trẻ rằng thành công không được đo bằng khoe vật chất hay hạ thấp người khác, và lời chào bán cấp bách cho các 'khóa học tư duy' đắt tiền hầu như luôn là lừa đảo trục lợi."
+    }
+  },
+  "R004": {
+    "title": "Lộ Đề Thi Quốc Gia",
+    "short_summary": "Ảnh chụp màn hình Discord lan truyền tin đồn lộ đề thi quốc gia. Hãy tìm điểm bất thường AI, bóc gỡ chiêu trò tâm lý và vạch trần bẫy lừa đảo (phishing) đứng sau!",
+    "skills": [
+      "Nhận diện Lừa đảo",
+      "Kiểm tra URL",
+      "Thao túng tâm lý",
+      "Đánh cắp danh tính"
+    ],
+    "theme": [
+      "Học đường",
+      "Đánh cắp tài khoản",
+      "Lừa đảo tài chính"
+    ],
+    "story_context": "Một chiến dịch tin giả về việc rò rỉ đề thi quốc gia đang bùng nổ trên máy chủ Discord dành cho học sinh. Kẻ gian lợi dụng sự hoảng loạn và tâm lý ham lợi để tung bẫy lừa đảo (phishing), hòng đánh cắp tài khoản trường học và tiền của nạn nhân.",
+    "modules": {
+      "step_1_image_forensics": {
+        "context_text": "Ảnh chụp màn hình kênh Discord này đang lan truyền với lời khẳng định '100% đề thi chính thức từ Bộ Giáo dục'. Hãy ra tay soi kỹ các dấu vết AI kỳ quặc trên giao diện này!",
+        "target_anomalies": {
+          "R004_IMG_03": {
+            "description": "Các icon GIF và công cụ trò chuyện ở góc dưới bên phải khung chat bị méo mó, biến dạng bất thường.",
+            "socratic_quiz": {
+              "question": "Tại sao các biểu tượng giao diện bị biến dạng lại là 'bằng chứng thép' cho thấy ảnh được tạo bằng AI?",
+              "options": [
+                "A. Discord vừa cập nhật bộ icon mới theo phong cách trừu tượng.",
+                "B. Các mô hình AI tạo ảnh rất kém trong việc tái tạo biểu tượng chuẩn, làm nút GIF và tiện ích bị méo mó, biến dạng.",
+                "C. Do bộ lọc chế độ tối (Dark Mode) làm nhòe biểu tượng."
+              ],
+              "explanation": "Các công cụ AI tạo ảnh thường gặp khó khăn khi vẽ lại giao diện phần mềm (UI). Những nút bấm quen thuộc như GIF sẽ bị méo, nhòe hoặc biến dạng hoàn toàn so với giao diện thực tế."
+            }
+          },
+          "R004_IMG_04": {
+            "description": "Một khối hình học nhọn và dị thường nhô ra ngoài viền của khung nhập tin nhắn.",
+            "socratic_quiz": {
+              "question": "Điều gì khiến vệt nhọn lạ kỳ ở viền khung chat tố cáo đây là sản phẩm của AI?",
+              "options": [
+                "A. Đây là tính năng mở rộng tin nhắn dài của Discord.",
+                "B. Đây là lỗi vẽ hình học đặc trưng khi AI không thể tái tạo chính xác đường viền thẳng, gọn gàng của giao diện ứng dụng.",
+                "C. Do người dùng cài đặt giao diện tùy chỉnh (Custom Theme)."
+              ],
+              "explanation": "Giao diện ứng dụng chuẩn luôn sắc nét và thẳng hàng. Những chi tiết kỳ quái, sắc nhọn nhô ra bất thường là hạt nhân lỗi (artifact) kinh điển của thuật toán AI tạo ảnh."
+            }
+          }
+        }
+      },
+      "step_2_text_highlight": {
+        "simulated_post": {
+          "author": "Hội đồng tuyển chọn học bổng",
+          "time_posted": "Ngay bây giờ",
+          "content": "Chúc mừng! Bạn đã được chọn nhận Học bổng Sinh viên Xuất sắc. Chỉ có 50 sinh viên được lựa chọn. Nếu bạn không hoàn tất xác minh trong vòng 2 giờ, suất học bổng của bạn sẽ được chuyển cho một sinh viên khác. Vui lòng đăng nhập để thanh toán phí xác minh 49.000 VNĐ. Không liên hệ với văn phòng nhà trường vì quá trình xác minh được thực hiện bởi đối tác học bổng của chúng tôi."
+        },
+        "traps": {
+          "R004_TRAP_01": {
+            "matched_text": "Bạn đã được chọn nhận Học bổng Sinh viên Xuất sắc.",
+            "socratic_quiz": {
+              "question": "Vì sao kẻ lừa đảo lại mở đầu bằng việc 'trao quà khẩn cấp' thay vì yêu cầu nộp hồ sơ xét duyệt?",
+              "options": [
+                "A. Tung 'mồi nhử phần thưởng' để kích thích sự phấn hưng và tâm lý ham lợi, khiến nạn nhân mất cảnh giác và dễ sập bẫy tiếp theo.",
+                "B. Để sinh viên kịp thông báo tin vui cho gia đình.",
+                "C. Để chứng minh chúng đã truy cập vào hệ thống điểm của nhà trường."
+              ],
+              "explanation": "Đây là thủ đoạn 'Mồi nhử phần thưởng' (Reward Baiting). Khi tin rằng mình vừa nhận được một phần thưởng hời, não bộ sẽ giảm bớt sự nghi ngờ, khiến bạn nhanh chóng làm theo các chỉ dẫn tiếp theo mà không suy xét."
+            }
+          },
+          "R004_TRAP_02": {
+            "matched_text": "Nếu bạn không hoàn tất xác minh trong vòng 2 giờ, suất học bổng của bạn sẽ được chuyển cho một sinh viên khác.",
+            "socratic_quiz": {
+              "question": "Thủ thuật 'dồn ép thời gian 2 giờ' gây ra tác động tâm lý gì cho người đọc?",
+              "options": [
+                "A. Thiết lập quy trình xử lý hành chính nhanh gọn.",
+                "B. Tạo ra cảm giác khẩn cấp giả tạo (Artificial Urgency), khiến nạn nhân hoảng sợ và không kịp dừng lại kiểm chứng hay hỏi ý kiến ai.",
+                "C. Đảm bảo suất học bổng được trao công bằng."
+              ],
+              "explanation": "Tạo cảm giác khẩn cấp giả tạo là đòn tâm lý cốt lõi của Social Engineering. Áp đặt mốc thời hạn cực ngắn ép nạn nhân hành động theo bản năng hoảng sợ trước khi kịp hỏi thầy cô, bố mẹ hay bạn bè."
+            }
+          },
+          "R004_TRAP_03": {
+            "matched_text": "phí xác minh 49.000 VNĐ",
+            "socratic_quiz": {
+              "question": "Tại sao yêu cầu nộp một khoản 'phí xác minh' nhỏ lại là dấu hiệu lừa đảo kinh điển?",
+              "options": [
+                "A. Học bổng thật là để trao tiền cho sinh viên, tuyệt đối không bao giờ bắt sinh viên phải đóng tiền để được nhận tiền.",
+                "B. Phí này quá rẻ; nhà trường thật sẽ thu ít nhất 500.000 VNĐ phí hành chính.",
+                "C. Để nhà trường gây quỹ tổ chức sự kiện."
+              ],
+              "explanation": "Đây là cú lừa 'Trách nhiệm đóng phí trước' (Advance-Fee Scam). Kẻ gian cố tình đưa ra con số rất nhỏ (49.000 VNĐ) để nạn nhân thấy 'không đáng bao nhiêu' so với giá trị học bổng, từ đó dễ dàng chuyển tiền."
+            }
+          },
+          "R004_TRAP_04": {
+            "matched_text": "Không liên hệ với văn phòng nhà trường vì quá trình xác minh được thực hiện bởi đối tác học bổng của chúng tôi.",
+            "socratic_quiz": {
+              "question": "Chiêu trò 'cấm liên hệ với nhà trường' nhằm mục đích đen tối gì?",
+              "options": [
+                "A. Giảm tải công việc cho bộ phận hành chính của trường.",
+                "B. Cô lập nạn nhân khỏi các nguồn tin chính thống có thể lập tức vạch trần vụ lừa đảo.",
+                "C. Tuân thủ quy định bảo mật thông tin của bên thứ ba."
+              ],
+              "explanation": "Chiến thuật cô lập (Isolation Tactic) ngăn bạn tìm đến nguồn kiểm chứng. Kẻ lừa đảo biết rất rõ chỉ cần bạn nhấc máy gọi cho nhà trường, kế hoạch lừa đảo của chúng sẽ đổ bể ngay lập tức."
+            }
+          }
+        }
+      },
+      "step_3_sorting_game": {
+        "context_text": "Hãy sắp xếp các bước theo đúng trình tự thời gian của đợt tấn công Phishing này để thấy rõ cách kẻ gian chiếm đoạt tài khoản và tiền bạc!",
+        "pool_items": {
+          "R004_SORT_01": "Sinh viên nhận được tin nhắn khẩn cấp thông báo trúng học bổng bất ngờ.",
+          "R004_SORT_02": "Sinh viên bấm vào đường link xác minh giả mạo đi kèm.",
+          "R004_SORT_03": "Sinh viên nhập tên đăng nhập và mật khẩu tài khoản trường học vào trang giả.",
+          "R004_SORT_04": "Hệ thống của kẻ lừa đảo âm thầm thu thập và lưu trữ thông tin đăng nhập.",
+          "R004_SORT_05": "Trang web giả tiếp tục yêu cầu nhập mã OTP hoặc nộp khoản phí xác minh.",
+          "R004_SORT_06": "Kẻ tấn công chạy ngầm việc đăng nhập và chiếm quyền điều khiển tài khoản trường học thật.",
+          "R004_SORT_07": "Sinh viên bị mất hoàn toàn tài khoản trước cả khi nhận ra học bổng chỉ là một cú lừa."
+        },
+        "validation_feedback": {
+          "success": "Xuất sắc! Kẻ lừa đảo không chỉ nhắm vào 49.000 VNĐ. Việc chiếm đoạt tài khoản trường học giúp chúng xâm nhập hệ thống nội bộ và tiếp tục mạo danh bạn để đi lừa những người khác.",
+          "failure": "Chưa chính xác. Hãy nhớ rằng các đòn Phishing luôn âm thầm đánh cắp thông tin tài khoản ngay khi bạn vừa bấm đăng nhập, trước cả khi bạn thực hiện bước chuyển tiền!"
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Nếu nhận được thông báo trúng học bổng hay quà tặng bất ngờ, quy trình kiểm chứng an toàn mà không bấm vào link lạ của bạn là gì?",
+      "mil_insight": "1. Bắt bài tâm lý: Học bổng thật không bao giờ bắt bạn đóng phí xác minh hay ép thời gian tính bằng giờ.\n2. Cảnh giác link lạ: Không truy cập vào các đường link đính kèm trong tin nhắn/email lạ.\n3. Kiểm chứng trực tiếp: Vào thẳng trang web chính thức của nhà trường hoặc liên hệ phòng Công tác sinh viên để xác minh."
+    }
+  },
+  "R005": {
+    "title": "Virus Corona bùng phát trở lại năm 2026 tại Times Square",
+    "short_summary": "Một bức ảnh Quảng trường Thời đại vắng tanh đi kèm tin đồn dịch bệnh năm 2026 khiến New York phong tỏa. Sự thật phía sau bức ảnh là gì?",
+    "skills": [
+      "Phát hiện ảnh deepfake",
+      "Xác minh bối cảnh",
+      "Kiểm soát cảm xúc"
+    ],
+    "theme": [
+      "Thông tin sai lệch về sức khỏe",
+      "Ảnh chỉnh sửa bằng AI"
+    ],
+    "story_context": "Một bài đăng mạng xã hội lan truyền bức ảnh Quảng trường Thời đại hoàn toàn vắng người, tuyên bố đợt bùng phát dịch virus Corona nghiêm trọng năm 2026 buộc chính quyền phong tỏa thành phố. Thực tế đây là ảnh thật được chụp trong đợt phong tỏa năm 2020, nhưng kẻ lừa đảo dùng AI thay đổi mốc thời gian và biển quảng cáo để đánh lừa công chúng.",
+    "source": {
+      "note": "Tình huống dựa trên thủ đoạn có thật: chỉnh sửa kỹ thuật số tư liệu xác thực từ các cuộc khủng hoảng trong quá khứ để tạo ra nỗi hoảng loạn ở hiện tại."
+    },
+    "modules": {
+      "step_1_image_forensics": {
+        "context_text": "Các bài đăng mạng xã hội đang chia sẻ bức ảnh này như bằng chứng tuyệt đối về lệnh phong tỏa khẩn cấp do virus Corona tại Quảng trường Thời đại năm 2026.",
+        "target_anomalies": {
+          "R005_IMG_01": {
+            "description": "Chữ số '2' đầu tiên trong '2026' bị lật dọc, hoàn toàn phi logic so với phông chữ gốc.",
+            "socratic_quiz": {
+              "question": "Vì sao bạn chọn chi tiết '2026' trên đỉnh tòa nhà?",
+              "options": [
+                "A. Chữ số '2' đầu tiên bị lật dọc, chứng minh số 2020 ban đầu đã bị can thiệp và ghi đè.",
+                "B. Các tòa nhà ở New York bị nghiêm cấm hiển thị năm trên biển quảng cáo.",
+                "C. Con số nằm quá cao so với tầm mắt người đi bộ nên không thể nhìn rõ."
+              ],
+              "explanation": "Quan sát kỹ hình dạng ký tự giúp phát hiện thao tác thủ công hoặc lỗi kết xuất. Chữ số '2' bị lật là bằng chứng cho thấy năm 2026 đã được chèn lên một bức ảnh cũ."
+            }
+          },
+          "R005_IMG_02": {
+            "description": "Dòng chữ có những lỗi chính tả kỳ quái, với các ký tự méo mó trong 'STAYIE' và 'SSJCK'.",
+            "socratic_quiz": {
+              "question": "Vì sao bạn nhấp vào bảng thông báo màu xanh bên phải?",
+              "options": [
+                "A. Bảng quá sáng so với ánh sáng chung của khung cảnh.",
+                "B. Dòng chữ chứa các từ vô nghĩa như 'STAYIE' và 'SSJCK', một lỗi tạo văn bản đặc trưng của công cụ AI.",
+                "C. Vì thông điệp khuyên mọi người ở nhà hoàn toàn sai."
+              ],
+              "explanation": "Biển quảng cáo chính thức không có những lỗi chính tả sơ đẳng như vậy. Phát hiện chữ bị méo giúp xác nhận biển quảng cáo đã bị can thiệp kỹ thuật."
+            }
+          },
+          "R005_IMG_03": {
+            "description": "Vũng nước phản chiếu ánh sáng đỏ rực nhưng không có nguồn sáng đỏ tương ứng từ các biển quảng cáo xung quanh.",
+            "socratic_quiz": {
+              "question": "Vì sao bạn chọn phần nước phản chiếu trên đường?",
+              "options": [
+                "A. Vũng nước phản chiếu ánh đỏ rực trong khi các biển quảng cáo xung quanh không có nguồn sáng đỏ tương ứng.",
+                "B. Vì mặt đường ướt chứng minh trời vừa mưa, trái với dự báo thời tiết năm 2026.",
+                "C. Màu sắc bất thường trên mặt đường cho thấy có hóa chất hoặc máu bị đổ."
+              ],
+              "explanation": "Nhận diện sự thiếu nhất quán vật lý như phản chiếu không khớp nguồn sáng giúp bạn nhận ra màu sắc của ảnh đã bị thay đổi để tạo cảm giác nguy hiểm."
+            }
+          }
+        }
+      },
+      "step_2_text_highlight": {
+        "simulated_post": {
+          "author": "NYC Daily Không Kiểm Duyệt",
+          "time_posted": "15 phút trước",
+          "content": "Tình hình ở New York đã rơi vào hỗn loạn hoàn toàn. Một đợt bùng phát nghiêm trọng của biến thể Corona mới đã khiến toàn bộ Quảng trường Thời đại bị phong tỏa khẩn cấp vào sáng nay. Các cơ quan chính phủ đang cố tình che giấu thông tin này, nhưng bức ảnh đã phơi bày toàn bộ sự thật. Nếu không hành động ngay lập tức, gia đình bạn có thể bị cuốn vào làn sóng đại dịch tiếp theo. Mọi người cần chia sẻ bài đăng này ngay vào các nhóm để cảnh báo cộng đồng. Hãy liên hệ ngay với người thân ở Mỹ và bảo họ tích trữ thực phẩm cùng tiền mặt trước khi quá muộn."
+        },
+        "traps": {
+          "R005_TRAP_01": {
+            "matched_text": "Các cơ quan chính phủ đang cố tình che giấu thông tin này, nhưng bức ảnh đã phơi bày toàn bộ sự thật.",
+            "socratic_quiz": {
+              "question": "Bài đăng muốn đạt mục đích gì khi tuyên bố 'chính phủ đang che giấu thông tin'?",
+              "options": [
+                "A. Cung cấp bằng chứng đã được chuyên gia y tế thẩm định.",
+                "B. Làm suy yếu độ tin cậy của nguồn chính thức để người đọc chỉ tin bài đăng này.",
+                "C. Hướng dẫn người dân cách liên hệ chính quyền địa phương."
+              ],
+              "explanation": "Người phát tán thông tin sai thường bác bỏ nguồn chính thức để định vị bài đăng của họ là 'sự thật duy nhất', làm mất khả năng tự kiểm chứng thông tin của người đọc."
+            }
+          },
+          "R005_TRAP_02": {
+            "matched_text": "Nếu không hành động ngay lập tức, gia đình bạn có thể bị cuốn vào làn sóng đại dịch tiếp theo.",
+            "socratic_quiz": {
+              "question": "Kỹ thuật 'kêu gọi nỗi sợ' trong câu này ảnh hưởng tâm lý người đọc như thế nào?",
+              "options": [
+                "A. Giúp người đọc đưa ra quyết định sáng suốt và bình tĩnh hơn.",
+                "B. Đẩy não bộ vào trạng thái hoảng loạn, làm giảm khả năng tư duy phản biện.",
+                "C. Khuyên người đọc khám sức khỏe định kỳ tại bệnh viện."
+              ],
+              "explanation": "Nỗi sợ kích hoạt phản ứng chiến đấu hoặc bỏ chạy của não bộ, khiến người dùng vội tin và chia sẻ tin tức trước khi dành thời gian suy nghĩ logic."
+            }
+          },
+          "R005_TRAP_03": {
+            "matched_text": "Hãy liên hệ ngay với người thân ở Mỹ và bảo họ tích trữ thực phẩm cùng tiền mặt trước khi quá muộn.",
+            "socratic_quiz": {
+              "question": "Câu này dùng chiến thuật thao túng cảm xúc nào để thúc ép hành động ngay?",
+              "options": [
+                "A. Tạo hoảng loạn giả tạo và nỗi sợ bỏ lỡ, ép người đọc phản ứng theo bản năng thay vì dừng lại kiểm chứng.",
+                "B. Trình bày lập luận logic dựa trên số liệu kinh tế minh bạch.",
+                "C. Khuyến khích tình cảm và tinh thần đoàn kết trong cộng đồng."
+              ],
+              "explanation": "Lời kêu gọi hành động khẩn cấp nhắm vào cảm xúc sợ hãi và vội vàng, khiến người đọc bỏ qua việc kiểm chứng và lập tức lan truyền hoảng loạn."
+            }
+          }
+        }
+      },
+      "step_3_sorting_game": {
+        "context_text": "Quá trình kẻ lừa đảo kết hợp tư liệu cũ, công nghệ AI và tâm lý học để tạo ra một chiến dịch thông tin sai lệch hoàn chỉnh.",
+        "pool_items": {
+          "R005_SORT_01": "Thu thập một bức ảnh thật về Quảng trường Thời đại vắng người được chụp trong đợt phong tỏa năm 2020.",
+          "R005_SORT_02": "Dùng công cụ AI tạo sinh để đổi năm 2020 thành 2026 và sửa chi tiết trên biển quảng cáo nhằm làm mới bức ảnh.",
+          "R005_SORT_03": "Soạn bài đăng chứa từ ngữ giật gân, gieo thuyết âm mưu và đính kèm ảnh đã chỉnh sửa bằng AI.",
+          "R005_SORT_04": "Phát tán bài đăng vào các nhóm mạng xã hội để kích động mọi người tích trữ hàng hóa và tăng tương tác."
+        },
+        "validation_feedback": {
+          "success": "Chính xác! Bạn đã vạch trần hoàn toàn vòng đời của một vụ lừa đảo lai: tìm tư liệu cũ -> chỉnh sửa bằng AI -> cài bẫy tâm lý -> phát tán hoảng loạn.",
+          "failure": "Thứ tự chưa đúng. Hãy bắt đầu bằng việc chọn ảnh gốc, sau đó chỉnh sửa bằng AI, tiếp theo viết nội dung thao túng và cuối cùng là phát tán."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Nếu thấy một bức ảnh gây hoảng loạn về tình hình toàn cầu, quy trình xác minh ba bước của bạn là gì?",
+      "mil_insight": "1. Giám định kỹ thuật (Giám định AI): phóng to để tìm dị thường như chữ méo, chữ số bị lật và phản chiếu phi logic.\n2. Xác minh bối cảnh (Tìm kiếm hình ảnh ngược): dùng công cụ tìm kiếm hình ảnh để xác định ảnh gốc được chụp ở đâu và khi nào.\n3. Đối chiếu (Nguồn chính thức): kiểm tra thông báo của cơ quan có thẩm quyền hoặc cơ quan báo chí uy tín trước khi chia sẻ."
     }
   }
 }

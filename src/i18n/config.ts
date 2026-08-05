@@ -1,8 +1,3 @@
-export {
-  DEFAULT_LOCALE,
-  isLocale,
-  LOCALE_COOKIE,
-  SUPPORTED_LOCALES,
-  type Locale,
-  type LocaleOption,
-} from "./registry";
+export const LOCALE_COOKIE = "veritas-lang";
+
+export type { Locale, LocaleOption } from "./registry";

@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "validate:translations": "node scripts/validate-case-translations.mjs"
+    "validate:translations": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/validate-case-translations.mjs"
   },
   "dependencies": {
     "next": "^16.2.11",

@@ -195,7 +195,8 @@ function assembleCase(
       step_3_sorting_game: {
         mechanic_type: sortingMechanics.mechanic_type,
         context_text: requiredString(
-          localizedValue(sortingLocalized?.context_text, sortingEnglish?.context_text),
+          localizedValue(sortingLocalized?.context_text, sortingEnglish?.context_text)
+            ?? localizedValue(localized?.story_context, english.story_context),
           `${mechanics.case_id}.sorting.context_text`,
         ),
         pool_items: sortingMechanics.pool_item_ids.map((itemId) => ({

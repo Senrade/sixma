@@ -3,10 +3,10 @@ import { NextResponse } from "next/server";
 import {
   DEFAULT_LOCALE,
   isLocale,
-  LOCALE_COOKIE,
   SUPPORTED_LOCALES,
   type Locale,
 } from "@/i18n/registry";
+import { LOCALE_COOKIE } from "@/i18n/config";
 
 function preferredLocale(request: NextRequest): Locale {
   const cookieLocale = request.cookies.get(LOCALE_COOKIE)?.value;

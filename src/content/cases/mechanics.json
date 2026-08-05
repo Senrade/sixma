@@ -146,18 +146,18 @@
     },
     {
       "level": "RED",
-      "case_id": "R007",
+      "case_id": "R002",
       "duration_min": 12,
-      "spotted_url": "/assets/images/R007/R007_spotted.png",
+      "spotted_url": "/assets/images/R002/R002_spotted.png",
       "modules": {
         "step_1_image_forensics": {
           "mechanic_type": "IMAGE_FORENSICS",
-          "image_url": "/assets/images/R007/R007_fake.png",
+          "image_url": "/assets/images/R002/R002_fake.png",
           "image_width": 1020,
           "image_height": 680,
           "target_anomalies": [
             {
-              "anomaly_id": "R007_IMG_01",
+              "anomaly_id": "R002_IMG_01",
               "name": "fake_cockroach_insertion",
               "x_pct": 69.5,
               "y_pct": 73,
@@ -172,7 +172,7 @@
           "mechanic_type": "TEXT_HIGHLIGHT",
           "traps": [
             {
-              "trap_id": "R007_TRAP_01",
+              "trap_id": "R002_TRAP_01",
               "weapon_type": [
                 "seeding_doubt"
               ],
@@ -181,7 +181,7 @@
               }
             },
             {
-              "trap_id": "R007_TRAP_02",
+              "trap_id": "R002_TRAP_02",
               "weapon_type": [
                 "poisoning_the_well",
                 "overgeneralization"
@@ -191,7 +191,7 @@
               }
             },
             {
-              "trap_id": "R007_TRAP_03",
+              "trap_id": "R002_TRAP_03",
               "weapon_type": [
                 "conspiracy_theory",
                 "appeal_to_fear"
@@ -205,48 +205,48 @@
         "step_3_sorting_game": {
           "mechanic_type": "DRAG_AND_DROP_SORTING",
           "pool_item_ids": [
-            "R007_SORT_01",
-            "R007_SORT_02",
-            "R007_SORT_03",
-            "R007_SORT_04"
+            "R002_SORT_01",
+            "R002_SORT_02",
+            "R002_SORT_03",
+            "R002_SORT_04"
           ],
           "correct_sequence": [
-            "R007_SORT_03",
-            "R007_SORT_01",
-            "R007_SORT_04",
-            "R007_SORT_02"
+            "R002_SORT_03",
+            "R002_SORT_01",
+            "R002_SORT_04",
+            "R002_SORT_02"
           ]
         }
       }
     },
     {
       "level": "RED",
-      "case_id": "R002",
+      "case_id": "R003",
       "duration_min": 15,
-      "spotted_url": "/assets/images/R002/R002_spotted.png",
+      "spotted_url": "/assets/images/R003/R003_spotted.png",
       "modules": {
         "step_1_image_forensics": {
           "mechanic_type": "IMAGE_FORENSICS",
-          "image_url": "/assets/images/R002/R002_fake.png",
+          "image_url": "/assets/images/R003/R003_fake.png",
           "image_width": 1000,
           "image_height": 1000,
           "target_anomalies": [
             {
-              "anomaly_id": "R002_IMG_01",
-              "name": "mutated_hand",
-              "x_pct": 45,
-              "y_pct": 55,
-              "radius_pct": 12,
+              "anomaly_id": "R003_IMG_01",
+              "name": "glitched_bag_hardware",
+              "x_pct": 10.5,
+              "y_pct": 76.5,
+              "radius_pct": 9,
               "socratic_quiz": {
                 "correct_option": "B"
               }
             },
             {
-              "anomaly_id": "R002_IMG_02",
-              "name": "distorted_frame",
-              "x_pct": 20,
-              "y_pct": 45,
-              "radius_pct": 15,
+              "anomaly_id": "R003_IMG_02",
+              "name": "inconsistent_table_reflection",
+              "x_pct": 48,
+              "y_pct": 89,
+              "radius_pct": 7.5,
               "socratic_quiz": {
                 "correct_option": "B"
               }
@@ -257,7 +257,7 @@
           "mechanic_type": "TEXT_HIGHLIGHT",
           "traps": [
             {
-              "trap_id": "R002_T1",
+              "trap_id": "R003_T1",
               "weapon_type": [
                 "attacking_motive",
                 "strawman"
@@ -267,7 +267,7 @@
               }
             },
             {
-              "trap_id": "R002_T2",
+              "trap_id": "R003_T2",
               "weapon_type": [
                 "false_comparison"
               ],
@@ -276,7 +276,7 @@
               }
             },
             {
-              "trap_id": "R002_T3",
+              "trap_id": "R003_T3",
               "weapon_type": [
                 "inducing_fomo",
                 "personal_attack"
@@ -286,7 +286,7 @@
               }
             },
             {
-              "trap_id": "R002_T4",
+              "trap_id": "R003_T4",
               "weapon_type": [
                 "emotional_dismissal"
               ],
@@ -299,58 +299,48 @@
         "step_3_sorting_game": {
           "mechanic_type": "DRAG_AND_DROP_SORTING",
           "pool_item_ids": [
-            "R002_SORT_01",
-            "R002_SORT_02",
-            "R002_SORT_03",
-            "R002_SORT_04"
+            "R003_SORT_01",
+            "R003_SORT_02",
+            "R003_SORT_03",
+            "R003_SORT_04"
           ],
           "correct_sequence": [
-            "R002_SORT_02",
-            "R002_SORT_04",
-            "R002_SORT_01",
-            "R002_SORT_03"
+            "R003_SORT_02",
+            "R003_SORT_04",
+            "R003_SORT_01",
+            "R003_SORT_03"
           ]
         }
       }
     },
     {
       "level": "RED",
-      "case_id": "R003",
+      "case_id": "R004",
       "duration_min": 15,
-      "spotted_url": "/assets/images/R003/R003_fakeimg_spotted.png",
+      "spotted_url": "/assets/images/R004/R004_spotted.jpg",
       "modules": {
         "step_1_image_forensics": {
           "mechanic_type": "IMAGE_FORENSICS",
-          "image_url": "/assets/images/R003/R003_fakeimg.png",
-          "image_width": 1000,
-          "image_height": 1000,
+          "image_url": "/assets/images/R004/R004_fake.jpg",
+          "image_width": 853,
+          "image_height": 548,
           "target_anomalies": [
             {
-              "anomaly_id": "R003_IMG_03",
-              "name": "urgency_text",
-              "x_pct": 40.5,
-              "y_pct": 45.8,
-              "radius_pct": 5.5,
+              "anomaly_id": "R004_IMG_03",
+              "name": "distorted_ui_icon",
+              "x_pct": 89.4,
+              "y_pct": 94.6,
+              "radius_pct": 8,
               "socratic_quiz": {
-                "correct_option": "A"
+                "correct_option": "B"
               }
             },
             {
-              "anomaly_id": "R003_IMG_04",
-              "name": "advance_fee_text",
-              "x_pct": 49,
-              "y_pct": 71.2,
-              "radius_pct": 5.5,
-              "socratic_quiz": {
-                "correct_option": "A"
-              }
-            },
-            {
-              "anomaly_id": "R003_IMG_05",
-              "name": "isolation_text",
-              "x_pct": 47,
-              "y_pct": 85,
-              "radius_pct": 4.5,
+              "anomaly_id": "R004_IMG_04",
+              "name": "artifact_edge_shape",
+              "x_pct": 95.3,
+              "y_pct": 36.8,
+              "radius_pct": 8,
               "socratic_quiz": {
                 "correct_option": "B"
               }
@@ -361,7 +351,7 @@
           "mechanic_type": "TEXT_HIGHLIGHT",
           "traps": [
             {
-              "trap_id": "R003_TRAP_01",
+              "trap_id": "R004_TRAP_01",
               "weapon_type": [
                 "authority_bias",
                 "reward_bait"
@@ -371,7 +361,7 @@
               }
             },
             {
-              "trap_id": "R003_TRAP_02",
+              "trap_id": "R004_TRAP_02",
               "weapon_type": [
                 "artificial_urgency"
               ],
@@ -380,7 +370,7 @@
               }
             },
             {
-              "trap_id": "R003_TRAP_03",
+              "trap_id": "R004_TRAP_03",
               "weapon_type": [
                 "advance_fee_scam"
               ],
@@ -389,7 +379,7 @@
               }
             },
             {
-              "trap_id": "R003_TRAP_04",
+              "trap_id": "R004_TRAP_04",
               "weapon_type": [
                 "isolation_tactic"
               ],
@@ -402,22 +392,122 @@
         "step_3_sorting_game": {
           "mechanic_type": "DRAG_AND_DROP_SORTING",
           "pool_item_ids": [
-            "R003_SORT_01",
-            "R003_SORT_02",
-            "R003_SORT_03",
-            "R003_SORT_04",
-            "R003_SORT_05",
-            "R003_SORT_06",
-            "R003_SORT_07"
+            "R004_SORT_01",
+            "R004_SORT_02",
+            "R004_SORT_03",
+            "R004_SORT_04",
+            "R004_SORT_05",
+            "R004_SORT_06",
+            "R004_SORT_07"
           ],
           "correct_sequence": [
-            "R003_SORT_01",
-            "R003_SORT_02",
-            "R003_SORT_03",
-            "R003_SORT_04",
-            "R003_SORT_05",
-            "R003_SORT_06",
-            "R003_SORT_07"
+            "R004_SORT_01",
+            "R004_SORT_02",
+            "R004_SORT_03",
+            "R004_SORT_04",
+            "R004_SORT_05",
+            "R004_SORT_06",
+            "R004_SORT_07"
+          ]
+        }
+      }
+    },
+    {
+      "level": "RED",
+      "case_id": "R005",
+      "duration_min": 6,
+      "spotted_url": "/assets/images/R005/R005_spotted.jpg",
+      "source": {
+        "title": "Context Collapse and Hybrid AI Misinformation",
+        "url": ""
+      },
+      "modules": {
+        "step_1_image_forensics": {
+          "mechanic_type": "IMAGE_FORENSICS",
+          "image_url": "/assets/images/R005/R005_fake.jpg",
+          "image_width": 1536,
+          "image_height": 1024,
+          "target_anomalies": [
+            {
+              "anomaly_id": "R005_IMG_01",
+              "name": "flipped_digit_in_year",
+              "x_pct": 48.5,
+              "y_pct": 6.5,
+              "radius_pct": 6,
+              "socratic_quiz": {
+                "correct_option": "A"
+              }
+            },
+            {
+              "anomaly_id": "R005_IMG_02",
+              "name": "corrupted_billboard_text",
+              "x_pct": 76,
+              "y_pct": 26.4,
+              "radius_pct": 15,
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            },
+            {
+              "anomaly_id": "R005_IMG_03",
+              "name": "illogical_light_reflection",
+              "x_pct": 49.5,
+              "y_pct": 82.1,
+              "radius_pct": 15,
+              "socratic_quiz": {
+                "correct_option": "A"
+              }
+            }
+          ]
+        },
+        "step_2_text_highlight": {
+          "mechanic_type": "TEXT_HIGHLIGHT",
+          "traps": [
+            {
+              "trap_id": "R005_TRAP_01",
+              "weapon_type": [
+                "conspiracy_theory",
+                "authority_undermining"
+              ],
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            },
+            {
+              "trap_id": "R005_TRAP_02",
+              "weapon_type": [
+                "appeal_to_fear",
+                "emotional_manipulation"
+              ],
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            },
+            {
+              "trap_id": "R005_TRAP_03",
+              "weapon_type": [
+                "manufactured_urgency",
+                "panic_inducing_action"
+              ],
+              "socratic_quiz": {
+                "correct_option": "A"
+              }
+            }
+          ]
+        },
+        "step_3_sorting_game": {
+          "mechanic_type": "DRAG_AND_DROP_SORTING",
+          "pool_item_ids": [
+            "R005_SORT_03",
+            "R005_SORT_01",
+            "R005_SORT_04",
+            "R005_SORT_02"
+          ],
+          "correct_sequence": [
+            "R005_SORT_01",
+            "R005_SORT_02",
+            "R005_SORT_03",
+            "R005_SORT_04"
           ]
         }
       }

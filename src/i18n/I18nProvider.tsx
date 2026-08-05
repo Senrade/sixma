@@ -7,7 +7,7 @@ import {
   useMemo,
   type ReactNode,
 } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { LOCALE_COOKIE, type Locale, type LocaleOption } from "./config";
 import type { MessageKey, Messages } from "./messages/types";
 import { localizePath, replaceLocalePrefix } from "./routing";
@@ -39,7 +39,6 @@ export function I18nProvider({
 }) {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const locale = initialLocale;
 
   const setLocale = useCallback((nextLocale: Locale) => {
@@ -49,10 +48,10 @@ export function I18nProvider({
     } catch {
       // The cookie and in-memory selection remain the sources of truth.
     }
-    const query = searchParams.toString();
+    const query = window.location.search;
     const hash = window.location.hash;
-    router.push(`${replaceLocalePrefix(pathname, nextLocale)}${query ? `?${query}` : ""}${hash}`);
-  }, [pathname, router, searchParams]);
+    router.push(`${replaceLocalePrefix(pathname, nextLocale)}${query}${hash}`);
+  }, [pathname, router]);
 
   const getLocalizedPath = useCallback(
     (href: string) => localizePath(locale, href),

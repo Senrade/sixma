@@ -9,7 +9,7 @@ export const LOCALES = {
   vi: {
     label: "Tiếng Việt",
     htmlLang: "vi",
-    status: "partial",
+    status: "complete",
     fallback: "en",
     load: () => import("./locales/vi").then((module) => module.default),
   },
@@ -19,7 +19,6 @@ export type Locale = keyof typeof LOCALES;
 export type LocaleStatus = (typeof LOCALES)[Locale]["status"];
 
 export const DEFAULT_LOCALE: Locale = "vi";
-export const LOCALE_COOKIE = "veritas-lang";
 export const SUPPORTED_LOCALES = Object.keys(LOCALES) as Locale[];
 
 export interface LocaleOption {

@@ -8,5 +8,5 @@ export async function getMessages(locale: Locale): Promise<Messages> {
     loadLocale("en"),
     loadLocale(locale),
   ]);
-  return { ...english.messages, ...localized.messages };
+  return { ...english.messages, ...localized.messages } as Messages;
 }
