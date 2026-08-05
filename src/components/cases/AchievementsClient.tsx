@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { Card, Chip } from "@/components/ui/Primitives";
-import type { CaseData } from "@/lib/case-types";
+import type { LocalizableCaseData } from "@/lib/case-types";
 import { useI18n } from "@/i18n/I18nProvider";
 
-export function AchievementsClient({ cases }: { cases: CaseData[] }) {
+export function AchievementsClient({ cases }: { cases: LocalizableCaseData[] }) {
   const { t } = useI18n();
   const [completed, setCompleted] = useState<number | null>(null);
   useEffect(() => {

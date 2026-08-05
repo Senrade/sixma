@@ -2,9 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Chip, Input } from "@/components/ui/Primitives";
-import type { CaseData, CaseLevel } from "@/lib/case-types";
+import type { CaseData, CaseLevel, LocalizableCaseData } from "@/lib/case-types";
 import { useI18n } from "@/i18n/I18nProvider";
 import { FEATURED_DEMO_CASE_ID } from "@/lib/demo-case";
+import { useLocalizedCases } from "@/lib/use-localized-cases";
 import { CaseFolder, type CaseAccess } from "./CaseFolder";
 
 type Filter = "ALL" | CaseLevel;
@@ -18,12 +19,13 @@ const FILTER_LABELS = {
   GREEN: "cases.filterGreen",
 } as const;
 
-export function CaseHubClient({ cases }: { cases: CaseData[] }) {
+export function CaseHubClient({ cases: rawCases }: { cases: LocalizableCaseData[] }) {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<Filter>("ALL");
   const [gameMode, setGameMode] = useState<GameMode>("full-case");
   const [completedCaseIds, setCompletedCaseIds] = useState<string[] | null>(null);
   const { t } = useI18n();
+  const cases = useLocalizedCases(rawCases);
   const regularCases = useMemo(
     () => cases.filter((caseData) => caseData.case_id !== FEATURED_DEMO_CASE_ID),
     [cases],

@@ -8,8 +8,9 @@ import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { ButtonLink, SectionLabel } from "@/components/ui/Primitives";
 import { useI18n } from "@/i18n/I18nProvider";
 import type { MessageKey } from "@/i18n/messages/types";
-import type { CaseData } from "@/lib/case-types";
+import type { LocalizableCaseData } from "@/lib/case-types";
 import { FEATURED_DEMO_CASE_ID } from "@/lib/demo-case";
+import { useLocalizedCases } from "@/lib/use-localized-cases";
 import { WelcomeGateway } from "./WelcomeGateway";
 
 const AUDIENCES: Array<{ number: string; title: MessageKey; text: MessageKey }> = [
@@ -24,8 +25,9 @@ const INVESTIGATION_STEPS: Array<{ number: string; title: MessageKey; text: Mess
   { number: "03", title: "home.step3", text: "home.step3Text" },
 ];
 
-export function HomeContent({ cases }: { cases: CaseData[] }) {
+export function HomeContent({ cases: rawCases }: { cases: LocalizableCaseData[] }) {
   const { t } = useI18n();
+  const cases = useLocalizedCases(rawCases);
   const featuredCase = cases.find((caseData) => caseData.case_id === FEATURED_DEMO_CASE_ID) ?? cases[0];
 
   return (

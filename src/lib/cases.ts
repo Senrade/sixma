@@ -2,9 +2,14 @@ import "server-only";
 
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import type { CaseData } from "./case-types";
+import type {
+  CaseData,
+  CaseTranslationMap,
+  LocalizableCaseData,
+} from "./case-types";
+import { validateCaseTranslations } from "./localize-case";
 
-let casesPromise: Promise<CaseData[]> | undefined;
+let casesPromise: Promise<LocalizableCaseData[]> | undefined;
 
 function hasValidCaseShape(value: unknown): value is CaseData {
   if (typeof value !== "object" || value === null) {
@@ -24,24 +29,60 @@ function hasValidCaseShape(value: unknown): value is CaseData {
   );
 }
 
-async function readCases(): Promise<CaseData[]> {
-  const filePath = path.join(process.cwd(), "public", "data", "cases.json");
-  const fileContents = await readFile(filePath, "utf8");
-  const parsed: unknown = JSON.parse(fileContents);
+function hasValidTranslationMap(value: unknown): value is CaseTranslationMap {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
 
-  if (!Array.isArray(parsed) || !parsed.every(hasValidCaseShape)) {
+async function readCases(): Promise<LocalizableCaseData[]> {
+  const dataDirectory = path.join(process.cwd(), "public", "data");
+  const [caseContents, vietnameseContents] = await Promise.all([
+    readFile(path.join(dataDirectory, "cases.json"), "utf8"),
+    readFile(path.join(dataDirectory, "cases.vi.json"), "utf8"),
+  ]);
+  const parsedCases: unknown = JSON.parse(caseContents);
+  const parsedVietnamese: unknown = JSON.parse(vietnameseContents);
+
+  if (!Array.isArray(parsedCases) || !parsedCases.every(hasValidCaseShape)) {
     throw new Error("Case data does not match the expected schema.");
   }
 
-  return parsed;
+  if (!hasValidTranslationMap(parsedVietnamese)) {
+    throw new Error("Vietnamese case translations must be keyed by case ID.");
+  }
+
+  const caseIds = new Set(parsedCases.map((caseData) => caseData.case_id));
+  const translationIds = Object.keys(parsedVietnamese);
+  const unknownTranslationId = translationIds.find((caseId) => !caseIds.has(caseId));
+
+  if (unknownTranslationId) {
+    throw new Error(`Vietnamese translation has no matching case: ${unknownTranslationId}.`);
+  }
+
+  const localizedCases = parsedCases.map((caseData) => {
+    const translation = parsedVietnamese[caseData.case_id];
+    if (!translation) {
+      throw new Error(`Missing Vietnamese translation for case ${caseData.case_id}.`);
+    }
+
+    return {
+      ...caseData,
+      translations: { vi: translation },
+    };
+  });
+
+  localizedCases.forEach(validateCaseTranslations);
+
+  return localizedCases;
 }
 
-export function getCases(): Promise<CaseData[]> {
+export function getCases(): Promise<LocalizableCaseData[]> {
   casesPromise ??= readCases();
   return casesPromise;
 }
 
-export async function getCase(caseId: string): Promise<CaseData | undefined> {
+export async function getCase(
+  caseId: string,
+): Promise<LocalizableCaseData | undefined> {
   const cases = await getCases();
   return cases.find((caseData) => caseData.case_id === caseId);
 }

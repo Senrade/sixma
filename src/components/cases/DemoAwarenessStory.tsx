@@ -5,8 +5,9 @@ import { useEffect, useState } from "react";
 import { Button, cn } from "@/components/ui/Primitives";
 import { useI18n } from "@/i18n/I18nProvider";
 import type { MessageKey } from "@/i18n/messages/types";
-import type { CaseData } from "@/lib/case-types";
+import type { LocalizableCaseData } from "@/lib/case-types";
 import { WELCOME_SESSION_KEY } from "@/lib/demo-case";
+import { useLocalizedCase } from "@/lib/use-localized-cases";
 
 type StoryScene = {
   signal: MessageKey;
@@ -22,8 +23,9 @@ const STORY_SCENES: readonly StoryScene[] = [
   { signal: "demoStory.signal4", title: "demoStory.title4", body: "demoStory.body4" },
 ];
 
-export function DemoAwarenessStory({ caseData }: { caseData: CaseData }) {
+export function DemoAwarenessStory({ caseData: rawCaseData }: { caseData: LocalizableCaseData }) {
   const { t } = useI18n();
+  const caseData = useLocalizedCase(rawCaseData);
   const [activeScene, setActiveScene] = useState(0);
   const scene = STORY_SCENES[activeScene];
   const isFinalScene = activeScene === STORY_SCENES.length - 1;

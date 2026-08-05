@@ -6,16 +6,18 @@ import GameController, {
   type GameStep,
 } from "@/components/controllers/GameController";
 import { Progress } from "@/components/ui/Primitives";
-import type { CaseData } from "@/lib/case-types";
+import type { LocalizableCaseData } from "@/lib/case-types";
 import { useI18n } from "@/i18n/I18nProvider";
 import type { MessageKey } from "@/i18n/messages/types";
+import { useLocalizedCase } from "@/lib/use-localized-cases";
 import { MissionExitDialog } from "./MissionExitDialog";
 
 const STEP_LABELS: readonly MessageKey[] = ["mission.step.inspect", "mission.step.analyze", "mission.step.reconstruct"];
 
-export function MissionExperience({ caseData }: { caseData: CaseData }) {
+export function MissionExperience({ caseData: rawCaseData }: { caseData: LocalizableCaseData }) {
   const router = useRouter();
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
+  const caseData = useLocalizedCase(rawCaseData);
   const [currentStep, setCurrentStep] = useState<GameStep>(1);
   const [isExitDialogOpen, setIsExitDialogOpen] = useState(false);
 
@@ -79,6 +81,7 @@ export function MissionExperience({ caseData }: { caseData: CaseData }) {
 
       <div className="mx-auto w-full max-w-7xl px-2 py-4 sm:px-4 sm:py-6">
         <GameController
+          key={locale}
           caseData={caseData}
           onStepChange={setCurrentStep}
           onCaseComplete={handleComplete}

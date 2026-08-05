@@ -3,16 +3,18 @@
 import { useEffect, useState } from "react";
 import { CaseFolder } from "@/components/cases/CaseFolder";
 import { Card, Progress } from "@/components/ui/Primitives";
-import type { CaseData } from "@/lib/case-types";
+import type { LocalizableCaseData } from "@/lib/case-types";
 import { useI18n } from "@/i18n/I18nProvider";
+import { useLocalizedCases } from "@/lib/use-localized-cases";
 
 interface CaseProgress {
   step: number;
   completedAt?: string;
 }
 
-export function DashboardClient({ cases }: { cases: CaseData[] }) {
+export function DashboardClient({ cases: rawCases }: { cases: LocalizableCaseData[] }) {
   const { t } = useI18n();
+  const cases = useLocalizedCases(rawCases);
   const [progress, setProgress] = useState<Record<string, CaseProgress> | null>(null);
 
   useEffect(() => {
