@@ -633,7 +633,7 @@
   },
   {
   "level": "RED",
-  "case_id": "R003",
+  "case_id": "R005",
   "title": "The Empty Square Myth",
   "short_summary": "An image of a deserted Times Square with rumors of a 2026 pandemic outbreak causing a lockdown in New York. What is the truth behind this photo?",
   "duration_min": 6,
@@ -642,7 +642,7 @@
     "Context verification",
     "Emotion control"
   ],
-  "spotted_url": "/assets/images/R003/R003_spotted.png",
+  "spotted_url": "/assets/images/R005/R005_spotted.png",
   "theme": [
     "Health misinformation",
     "AI-edited photo"
@@ -656,13 +656,13 @@
   "modules": {
     "step_1_image_forensics": {
       "mechanic_type": "IMAGE_FORENSICS",
-      "image_url": "/assets/images/R003/R003_img.png",
+      "image_url": "/assets/images/R005/R005_img.png",
       "image_width": 1024,
       "image_height": 683,
       "context_text": "Social media posts are sharing this photo as absolute proof of a 2026 Coronavirus emergency lockdown in Times Square.",
       "target_anomalies": [
         {
-          "anomaly_id": "R003_IMG_01",
+          "anomaly_id": "R005_IMG_01",
           "name": "flipped_digit_in_year",
           "x_pct": 48.5,
           "y_pct": 6.5,
@@ -680,7 +680,7 @@
           }
         },
         {
-          "anomaly_id": "R003_IMG_02",
+          "anomaly_id": "R005_IMG_02",
           "name": "corrupted_billboard_text",
           "x_pct": 76,
           "y_pct": 26.4,
@@ -698,7 +698,7 @@
           }
         },
         {
-          "anomaly_id": "R003_IMG_03",
+          "anomaly_id": "R005_IMG_03",
           "name": "illogical_light_reflection",
           "x_pct": 49.5,
           "y_pct": 82.1,
@@ -726,7 +726,7 @@
       },
       "traps": [
         {
-          "trap_id": "R003_TRAP_01",
+          "trap_id": "R005_TRAP_01",
           "ground_truth_start": 189,
           "ground_truth_end": 293,
           "matched_text": "Government agencies are deliberately keeping this information hidden, but this photo reveals the full truth.",
@@ -746,7 +746,7 @@
           }
         },
         {
-          "trap_id": "R003_TRAP_02",
+          "trap_id": "R005_TRAP_02",
           "ground_truth_start": 295,
           "ground_truth_end": 394,
           "matched_text": "If you don't take action immediately, your family could be caught in the next wave of the pandemic.",
@@ -766,7 +766,7 @@
           }
         },
         {
-          "trap_id": "R003_TRAP_03",
+          "trap_id": "R005_TRAP_03",
           "ground_truth_start": 482,
           "ground_truth_end": 590,
           "matched_text": "Contact your relatives in the US immediately and tell them to stock up on food and cash before it's too late.",
@@ -792,27 +792,27 @@
       "context_text": "The process by which scammers combine old footage, AI technology, and psychology to create a complete disinformation campaign.",
       "pool_items": [
         {
-          "item_id": "R003_SORT_03",
+          "item_id": "R005_SORT_03",
           "text": "Draft a post containing sensational words, sow conspiracy theories, and attach the AI-edited photo."
         },
         {
-          "item_id": "R003_SORT_01",
+          "item_id": "R005_SORT_01",
           "text": "Collect a genuine photo of a deserted Times Square taken during the 2020 lockdown."
         },
         {
-          "item_id": "R003_SORT_04",
+          "item_id": "R005_SORT_04",
           "text": "Distribute the post into social media groups to incite people to hoard goods and drive engagement."
         },
         {
-          "item_id": "R003_SORT_02",
+          "item_id": "R005_SORT_02",
           "text": "Use Generative AI tools to change the year from 2020 to 2026 and alter details on the billboards to refresh the image."
         }
       ],
       "correct_sequence": [
-        "R003_SORT_01",
-        "R003_SORT_02",
-        "R003_SORT_03",
-        "R003_SORT_04"
+        "R005_SORT_01",
+        "R005_SORT_02",
+        "R005_SORT_03",
+        "R005_SORT_04"
       ],
       "validation_feedback": {
         "success": "Correct! You have completely uncovered the lifecycle of a hybrid scam: Find old footage -> Edit with AI -> Embed psychological traps -> Spread panic.",
