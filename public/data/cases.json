@@ -633,83 +633,86 @@
   },
   {
   "level": "RED",
-  "case_id": "R004",
-  "title": "The Scholarship Deadline Scam",
-  "short_summary": "An urgent email claiming a student won a scholarship uses fake deadlines and a phishing website to steal school credentials and a verification fee.",
-  "duration_min": 15,
+  "case_id": "R005",
+  "title": "The Empty Square Myth",
+  "short_summary": "An image of a deserted Times Square with rumors of a 2026 pandemic outbreak causing a lockdown in New York. What is the truth behind this photo?",
+  "duration_min": 6,
   "skills": [
-    "Phishing detection",
-    "URL verification",
-    "Social engineering (urgency + authority)",
-    "Credential theft"
+    "Synthetic image detection",
+    "Context verification",
+    "Emotion control"
   ],
-  "spotted_url": "/assets/images/R004/R004_fakeimg_spotted.png",
+  "spotted_url": "/assets/images/R005/R005_spotted.png",
   "theme": [
-    "Education",
-    "Identity Theft",
-    "Financial Scam"
+    "Health misinformation",
+    "AI-edited photo"
   ],
-  "story_context": "About a week before the school officially announces the scholarship list, a student receives an email claiming they have been selected for the 'Student Excellence Scholarship' but must verify their identity and pay a fee within 2 hours.",
+  "story_context": "A social media post went viral featuring a completely deserted Times Square, claiming a severe pandemic outbreak in 2026 forced authorities to lock down the city. In reality, this is a genuine photo taken during the 2020 lockdown, but scammers used AI to alter timestamps and billboards to deceive the public.",
+  "source": {
+    "title": "Context Collapse and Hybrid AI Misinformation",
+    "url": "",
+    "note": "Scenario based on real-world tactics where authentic past crisis footage is digitally altered to manufacture modern panic."
+  },
   "modules": {
     "step_1_image_forensics": {
       "mechanic_type": "IMAGE_FORENSICS",
-      "image_url": "/assets/images/R004/R004_fakeimg.png",
-      "image_width": 1000,
-      "image_height": 1000,
-      "context_text": "The student clicked the 'Verify Scholarship' link and was taken to a login portal. Find the 3 suspicious visual anomalies and manipulative texts that indicate this is a phishing website.",
+      "image_url": "/assets/images/R005/R005_img.png",
+      "image_width": 1024,
+      "image_height": 683,
+      "context_text": "Social media posts are sharing this photo as absolute proof of a 2026 Coronavirus emergency lockdown in Times Square.",
       "target_anomalies": [
         {
-          "anomaly_id": "R004_IMG_03",
-          "name": "urgency_text",
-          "x_pct": 40.5,
-          "y_pct": 45.8,
-          "radius_pct": 5.5,
-          "description": "The urgent text in the blue info box: 'ONLY 2 HOURS REMAINING! Your scholarship will be forfeited.' creates artificial panic.",
+          "anomaly_id": "R005_IMG_01",
+          "name": "flipped_digit_in_year",
+          "x_pct": 48.5,
+          "y_pct": 6.5,
+          "radius_pct": 6,
+          "description": "The first digit '2' in '2026' is flipped vertically, which is highly illogical compared to the original font.",
           "socratic_quiz": {
-            "question": "Why does the website display a countdown or short deadline?",
+            "question": "Why did you select the '2026' detail on top of the building?",
             "options": [
-              "A. To create artificial urgency, inducing panic to prevent the victim from thinking critically or verifying the claim.",
-              "B. To ensure the school's servers are not overloaded with too many logins at once.",
-              "C. To help students manage their time better during the exam season."
+              "A. The first '2' is flipped vertically, proving the original 2020 number was tampered with and overwritten.",
+              "B. Because buildings in New York are strictly prohibited from displaying the year on billboards.",
+              "C. This number is located too high above the eye level of pedestrians to be seen clearly."
             ],
             "correct_option": "A",
-            "explanation": "Artificial urgency is a cornerstone of social engineering. By forcing a 2-hour deadline, the scammer deprives the victim of the time needed to consult with parents, teachers, or IT staff."
+            "explanation": "Carefully observing character shapes helps detect manual manipulation or render errors. The flipped '2' is evidence that the year 2026 was overlaid onto an old photo."
           }
         },
         {
-          "anomaly_id": "R004_IMG_04",
-          "name": "advance_fee_text",
-          "x_pct": 49.0,
-          "y_pct": 71.2,
-          "radius_pct": 5.5,
-          "description": "The site button text explicitely links verification with a 'PAY FEE (49,000 VND)'.",
+          "anomaly_id": "R005_IMG_02",
+          "name": "corrupted_billboard_text",
+          "x_pct": 76,
+          "y_pct": 26.4,
+          "radius_pct": 15.0,
+          "description": "The text contains bizarre spelling errors, with distorted characters in 'STAYIE' and 'SSJCK'.",
           "socratic_quiz": {
-            "question": "Why is the request for a small 'verification fee' on the login button highly suspicious in this context?",
+            "question": "Why did you click on the green notification board on the right?",
             "options": [
-              "A. Legitimate scholarships provide funds to students; they do not require recipients to pay money to receive money.",
-              "B. The amount is too small; real schools would charge at least 500,000 VND for administrative verification.",
-              "C. It indicates the school is trying to raise funds for the end-of-year party."
-            ],
-            "correct_option": "A",
-            "explanation": "This is a classic advance-fee scam mechanism. Scammers keep the fee intentionally small (like 49,000 VND) so it seems insignificant compared to the 'scholarship', increasing the likelihood the victim will pay without thinking."
-          }
-        },
-        {
-          "anomaly_id": "R004_IMG_05",
-          "name": "isolation_text",
-          "x_pct": 47.0,
-          "y_pct": 85.0,
-          "radius_pct": 4.5,
-          "description": "The instruction 'Do not contact the main school office directly' in the FAQ isolates the victim from verifying the truth.",
-          "socratic_quiz": {
-            "question": "What is the primary purpose of telling the student NOT to contact the school office?",
-            "options": [
-              "A. To reduce the workload of the school's administrative staff.",
-              "B. To isolate the victim from authoritative sources that would immediately expose the scam.",
-              "C. To comply with third-party privacy regulations regarding educational scholarships."
+              "A. The board is too bright compared to the overall ambient lighting.",
+              "B. The text features nonsensical words like 'STAYIE' and 'SSJCK' - a hallmark text generation error of AI tools.",
+              "C. Because the message advising people to stay home is completely false."
             ],
             "correct_option": "B",
-            "explanation": "Isolation tactics are used to cut victims off from a 'reality check'. The scammer knows that a single phone call to the school office would instantly reveal the scholarship portal is fake."
+            "explanation": "Official billboards never contain such rudimentary spelling mistakes. Spotting distorted text helps confirm that the billboard was technically manipulated."
+          }
+        },
+        {
+          "anomaly_id": "R005_IMG_03",
+          "name": "illogical_light_reflection",
+          "x_pct": 49.5,
+          "y_pct": 82.1,
+          "radius_pct": 15.0,
+          "description": "The puddle reflects a bright red light, yet there is no corresponding red light source from the surrounding billboards.",
+          "socratic_quiz": {
+            "question": "Why did you select the water reflection on the street?",
+            "options": [
+              "A. The puddle reflects a vibrant red light while the surrounding billboards have no corresponding red light source.",
+              "B. Because the wet street proves it just rained, which contradicts the 2026 weather forecast.",
+              "C. The discolored pavement indicates spilled chemicals or blood on the street."
+            ],
+            "correct_option": "A",
+            "explanation": "Identifying physical inconsistencies (reflections not matching light sources) helps you realize the image had its colors altered to create a sense of danger."
           }
         }
       ]
@@ -717,141 +720,109 @@
     "step_2_text_highlight": {
       "mechanic_type": "TEXT_HIGHLIGHT",
       "simulated_post": {
-        "author": "Scholarship Selection Committee",
-        "time_posted": "Just now",
-        "content": "Congratulations! You have already been selected for the Student Excellence Scholarship. Only 50 students have been selected. If you fail to verify within 2 hours, your place will be offered to another student. Please log in to pay your verification fee of 49,000 VND. Do not contact the school office because verification is handled by our scholarship partner."
+        "author": "NYC Daily Uncensored",
+        "time_posted": "15 minutes ago",
+        "content": "The situation in New York has spiraled into complete chaos. A severe outbreak of a new Corona variant triggered an emergency lockdown across the entire Times Square earlier this morning. Government agencies are deliberately keeping this information hidden, but this photo reveals the full truth. If you don't take action immediately, your family could be caught in the next wave of the pandemic. Everyone needs to share this post with their groups right away to warn the community. Contact your relatives in the US immediately and tell them to stock up on food and cash before it's too late."
       },
       "traps": [
         {
-          "trap_id": "R004_TRAP_01",
-          "ground_truth_start": 17,
-          "ground_truth_end": 87,
-          "matched_text": "You have already been selected for the Student Excellence Scholarship.",
+          "trap_id": "R005_TRAP_01",
+          "ground_truth_start": 189,
+          "ground_truth_end": 293,
+          "matched_text": "Government agencies are deliberately keeping this information hidden, but this photo reveals the full truth.",
           "weapon_type": [
-            "authority_bias",
-            "reward_bait"
+            "conspiracy_theory",
+            "authority_undermining"
           ],
           "socratic_quiz": {
-            "question": "Why do scammers start the message by confirming the reward rather than asking you to apply?",
+            "question": "What is the post's objective when claiming the 'government is hiding information'?",
             "options": [
-              "A. To trigger excitement and greed, making the victim drop their guard and become more willing to comply with subsequent demands.",
-              "B. To inform the student so they can celebrate with their family immediately.",
-              "C. To prove they have access to the school's confidential grading systems."
-            ],
-            "correct_option": "A",
-            "explanation": "This technique exploits 'reward baiting'. When people believe they have already won something valuable, their critical thinking decreases and they focus on claiming the prize rather than questioning its legitimacy."
-          }
-        },
-        {
-          "trap_id": "R004_TRAP_02",
-          "ground_truth_start": 125,
-          "ground_truth_end": 211,
-          "matched_text": "If you fail to verify within 2 hours, your place will be offered to another student.",
-          "weapon_type": [
-            "artificial_urgency"
-          ],
-          "socratic_quiz": {
-            "question": "How does the email use the concept of time to manipulate the recipient?",
-            "options": [
-              "A. It establishes a reasonable administrative processing window for scholarship funds.",
-              "B. It creates artificial urgency, inducing panic to prevent the victim from thinking critically or verifying the claim.",
-              "C. It ensures the scholarship funds are distributed fairly among applicants."
+              "A. To provide evidence that has been vetted by medical experts.",
+              "B. To undermine the credibility of official sources so readers only trust this post.",
+              "C. To guide citizens on how to contact local authorities."
             ],
             "correct_option": "B",
-            "explanation": "Artificial urgency is a cornerstone of social engineering. By forcing a 2-hour deadline, the scammer deprives the victim of the time needed to consult with parents, teachers, or IT staff."
+            "explanation": "Disinformation spreaders often dismiss official sources to position their post as the 'only truth', depriving readers of their ability to independently verify facts."
           }
         },
         {
-          "trap_id": "R004_TRAP_03",
-          "ground_truth_start": 238,
-          "ground_truth_end": 268,
-          "matched_text": "verification fee of 49,000 VND",
+          "trap_id": "R005_TRAP_02",
+          "ground_truth_start": 295,
+          "ground_truth_end": 394,
+          "matched_text": "If you don't take action immediately, your family could be caught in the next wave of the pandemic.",
           "weapon_type": [
-            "advance_fee_scam"
+            "appeal_to_fear",
+            "emotional_manipulation"
           ],
           "socratic_quiz": {
-            "question": "Why is the request for a small 'verification fee' highly suspicious in this context?",
+            "question": "How does the 'Appeal to fear' technique in this sentence affect the reader's psychology?",
             "options": [
-              "A. Legitimate scholarships provide funds to students; they do not require recipients to pay money to receive money.",
-              "B. The amount is too small; real schools would charge at least 500,000 VND for administrative verification.",
-              "C. It indicates the school is trying to raise funds for the end-of-year party."
-            ],
-            "correct_option": "A",
-            "explanation": "This is a classic advance-fee scam mechanism. Scammers keep the fee intentionally small (like 49,000 VND) so it seems insignificant compared to the 'scholarship', increasing the likelihood the victim will pay."
-          }
-        },
-        {
-          "trap_id": "R004_TRAP_04",
-          "ground_truth_start": 270,
-          "ground_truth_end": 362,
-          "matched_text": "Do not contact the school office because verification is handled by our scholarship partner.",
-          "weapon_type": [
-            "isolation_tactic"
-          ],
-          "socratic_quiz": {
-            "question": "What is the primary purpose of telling the student NOT to contact the school office?",
-            "options": [
-              "A. To reduce the workload of the school's administrative staff.",
-              "B. To isolate the victim from authoritative sources that would immediately expose the scam.",
-              "C. To comply with third-party privacy regulations regarding educational scholarships."
+              "A. It helps the reader make a wiser and calmer decision.",
+              "B. It forces the brain into a state of panic, reducing critical thinking capabilities.",
+              "C. It advises the reader to get a regular health checkup at the hospital."
             ],
             "correct_option": "B",
-            "explanation": "Isolation tactics are used to cut victims off from a 'reality check'. The scammer knows that a single phone call to the school office would instantly reveal the scholarship is fake."
+            "explanation": "Fear triggers the brain's fight-or-flight response, causing users to hastily believe and share news before taking a moment to think logically."
+          }
+        },
+        {
+          "trap_id": "R005_TRAP_03",
+          "ground_truth_start": 482,
+          "ground_truth_end": 590,
+          "matched_text": "Contact your relatives in the US immediately and tell them to stock up on food and cash before it's too late.",
+          "weapon_type": [
+            "manufactured_urgency",
+            "panic_inducing_action"
+          ],
+          "socratic_quiz": {
+            "question": "Which emotional manipulation tactic does this sentence use to compel immediate action?",
+            "options": [
+              "A. It creates artificial panic and a fear of missing out (FOMO), forcing readers to react on instinct instead of pausing to verify.",
+              "B. It presents a logical argument based on transparent economic statistics.",
+              "C. It encourages a spirit of mutual affection and solidarity within the community."
+            ],
+            "correct_option": "A",
+            "explanation": "Urgent calls to action target the emotions of fear and haste, leading readers to bypass fact-checking and immediately spread panic."
           }
         }
       ]
     },
     "step_3_sorting_game": {
       "mechanic_type": "DRAG_AND_DROP_SORTING",
-      "task_instruction": "Arrange the steps in the chronological order of how this phishing scam unfolds to understand the full scope of the danger.",
+      "context_text": "The process by which scammers combine old footage, AI technology, and psychology to create a complete disinformation campaign.",
       "pool_items": [
         {
-          "item_id": "R004_SORT_01",
-          "text": "Student receives an urgent scholarship email."
+          "item_id": "R005_SORT_03",
+          "text": "Draft a post containing sensational words, sow conspiracy theories, and attach the AI-edited photo."
         },
         {
-          "item_id": "R004_SORT_02",
-          "text": "Student clicks the fake verification link."
+          "item_id": "R005_SORT_01",
+          "text": "Collect a genuine photo of a deserted Times Square taken during the 2020 lockdown."
         },
         {
-          "item_id": "R004_SORT_03",
-          "text": "Student enters their official school account username and password."
+          "item_id": "R005_SORT_04",
+          "text": "Distribute the post into social media groups to incite people to hoard goods and drive engagement."
         },
         {
-          "item_id": "R004_SORT_04",
-          "text": "The scammer's database silently captures the credentials."
-        },
-        {
-          "item_id": "R004_SORT_05",
-          "text": "The fake website prompts the student for an OTP or payment detail."
-        },
-        {
-          "item_id": "R004_SORT_06",
-          "text": "The attacker actively logs into the student's real school account in the background."
-        },
-        {
-          "item_id": "R004_SORT_07",
-          "text": "The student loses access to their account before they even realize the money was a trick."
+          "item_id": "R005_SORT_02",
+          "text": "Use Generative AI tools to change the year from 2020 to 2026 and alter details on the billboards to refresh the image."
         }
       ],
       "correct_sequence": [
-        "R004_SORT_01",
-        "R004_SORT_02",
-        "R004_SORT_03",
-        "R004_SORT_04",
-        "R004_SORT_05",
-        "R004_SORT_06",
-        "R004_SORT_07"
+        "R005_SORT_01",
+        "R005_SORT_02",
+        "R005_SORT_03",
+        "R005_SORT_04"
       ],
       "validation_feedback": {
-        "success": "Correct! Scammers don't just want your money directly; stealing your school account credentials gives them access to internal systems and allows them to scam others using your identity. The actual theft happens before you even pay the fee.",
-        "failure": "Not quite. Remember that phishing attacks often steal your information *before* asking for money. Simply typing in your password is the critical point where the attacker takes control."
+        "success": "Correct! You have completely uncovered the lifecycle of a hybrid scam: Find old footage -> Edit with AI -> Embed psychological traps -> Spread panic.",
+        "failure": "Not quite the right order. Start with selecting the original photo, then move to AI editing, followed by writing manipulative content, and finally, distribution."
       }
     }
   },
   "dialogue_trigger": {
-    "question": "Ask your Teacher/Parent: If you really received a scholarship notification, how could you verify it independently without clicking the provided link?",
-    "mil_insight": "Understand that urgency and unexpected rewards are common manipulation tactics. Always verify official communications by navigating directly to the school's known official portal or contacting the administration office in person, rather than relying on provided links."
+    "question": "If you see a panic-inducing photo about a global situation, what is your 3-step verification process?",
+    "mil_insight": "1. Technical Forensics (AI Forensics): Zoom in to find anomalies like distorted text, flipped digits, and illogical reflections.\n2. Context Verification (Reverse Image Search): Use image search tools to determine when and where the original photo was taken.\n3. Cross-checking (Official Sources): Verify through statements from authorities or reputable news outlets before sharing."
   }
 }
 ]
