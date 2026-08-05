@@ -283,7 +283,7 @@
 
   {
     "level": "RED",
-    "case_id": "R007",
+    "case_id": "R002",
     "title": "The Canteen Extortion File",
     "short_summary": "An anonymous sender uses a doctored food photo and reputational pressure to extort a school.",
     "duration_min": 12,
@@ -292,7 +292,7 @@
       "Coercion patterns",
       "Extortion structure"
     ],
-    "spotted_url": "/assets/images/R007/R007_spotted.png",
+    "spotted_url": "/assets/images/R002/R002_spotted.png",
     "theme": [
       "Health",
       "Safety",
@@ -302,7 +302,7 @@
     "modules": {
       "step_1_image_forensics": {
         "mechanic_type": "IMAGE_FORENSICS",
-        "image_url": "/assets/images/R007/R007_fake.png",
+        "image_url": "/assets/images/R002/R002_fake.png",
         "image_width": 1000,
         "image_height": 1000,
         "context_text": "The leaked image attached to the extortion email claims to show 'a disgusting cockroach served in the high school canteen food tray.' Find the visual anomaly in this photo.",
@@ -311,7 +311,7 @@
         "context_text": "The leaked image attached to the extortion email claims to show 'a disgusting cockroach served in the high school canteen food tray.'",
         "target_anomalies": [
           {
-            "anomaly_id": "R007_IMG_01",
+            "anomaly_id": "R002_IMG_01",
             "name": "fake_cockroach_insertion",
             "x_pct": 69.5,
             "y_pct": 73.0,
@@ -339,7 +339,7 @@
         },
         "traps": [
           {
-            "trap_id": "R007_TRAP_01",
+            "trap_id": "R002_TRAP_01",
             "ground_truth_start": 365,
             "ground_truth_end": 502,
             "matched_text": "I'm not saying the cafeteria is unsafe. I'm just asking why this keeps happening and why nobody ever seems to explain anything afterward.",
@@ -358,7 +358,7 @@
             }
           },
           {
-            "trap_id": "R007_TRAP_02",
+            "trap_id": "R002_TRAP_02",
             "ground_truth_start": 503,
             "ground_truth_end": 646,
             "matched_text": "The school seems to never take students' food feedback into consideration anyway, saying the problem is too complicated or something like that.",
@@ -378,7 +378,7 @@
             }
           },
           {
-            "trap_id": "R007_TRAP_03",
+            "trap_id": "R002_TRAP_03",
             "ground_truth_start": 647,
             "ground_truth_end": 758,
             "matched_text": "At this point, I think parents deserve to know what's happening before this gets quietly swept under the rug...",
@@ -404,27 +404,27 @@
         "context_text": "A misleading social media post about the school canteen has spread across the community.",
         "pool_items": [
           {
-            "item_id": "R007_SORT_01",
+            "item_id": "R002_SORT_01",
             "text": "Other users repost the image with stronger claims, assuming the worst."
           },
           {
-            "item_id": "R007_SORT_02",
+            "item_id": "R002_SORT_02",
             "text": "The rumor becomes accepted as 'common knowledge' even though the original claim was never confirmed."
           },
           {
-            "item_id": "R007_SORT_03",
+            "item_id": "R002_SORT_03",
             "text": "Someone uploads a photo with a personal interpretation but without verified context."
           },
           {
-            "item_id": "R007_SORT_04",
+            "item_id": "R002_SORT_04",
             "text": "People react emotionally and share the post before waiting for official verification."
           }
         ],
         "correct_sequence": [
-          "R007_SORT_03",
-          "R007_SORT_01",
-          "R007_SORT_04",
-          "R007_SORT_02"
+          "R002_SORT_03",
+          "R002_SORT_01",
+          "R002_SORT_04",
+          "R002_SORT_02"
         ],
         "validation_feedback": {
           "success": "Correct. Rumors often become believable through repetition rather than evidence. An unverified observation can evolve into 'everyone knows it's true' as people add assumptions, share emotionally, and stop checking the original source.",
@@ -439,7 +439,7 @@
   },
   {
     "level": "RED",
-    "case_id": "R002",
+    "case_id": "R003",
     "title": "The Illusion of Success",
     "short_summary": "A viral post flexes a 20-year-old's fake luxury lifestyle while belittling others. Uncover the AI anomalies and decode the toxic FOMO tactics.",
     "duration_min": 15,
@@ -448,7 +448,7 @@
       "Logical fallacies",
       "FOMO & Toxic flexing analysis"
     ],
-    "spotted_url": "/assets/images/R002/R002_spotted.png",
+    "spotted_url": "/assets/images/R003/R003_spotted.png",
     "theme": [
       "Social Media",
       "Peer Pressure",
@@ -458,18 +458,18 @@
     "modules": {
       "step_1_image_forensics": {
         "mechanic_type": "IMAGE_FORENSICS",
-        "image_url": "/assets/images/R002/R002_fake.png",
+        "image_url": "/assets/images/R003/R003_fake.png",
         "image_width": 1000,
         "image_height": 1000,
         "context_text": "The profile picture for 'Minh Khang' features this photo from his 'wealth mindset' post. Find one clear visual anomaly that proves this photo is AI-generated.",
         "target_anomalies": [
           {
-            "anomaly_id": "R002_IMG_01",
-            "name": "mutated_hand",
-            "x_pct": 45.0,
-            "y_pct": 55.0,
-            "radius_pct": 12.0,
-            "description": "The man's right hand holding the phone has an incorrect number of fingers and severe joint distortion.",
+            "anomaly_id": "R003_IMG_01",
+            "name": "glitched_bag_hardware",
+            "x_pct": 10.5,
+            "y_pct": 76.5,
+            "radius_pct": 9.0,
+            "description": "The leather strap and metallic clasps on the luxury bag are physically impossible, merging into random floating loops.",
             "socratic_quiz": {
               "question": "Why is the structure of this hand a clear indicator of AI generation?",
               "options": [
@@ -482,12 +482,12 @@
             }
           },
           {
-            "anomaly_id": "R002_IMG_02",
-            "name": "distorted_frame",
-            "x_pct": 20.0,
-            "y_pct": 45.0,
-            "radius_pct": 15.0,
-            "description": "The metal window handle is severely warped and distorted, and the frame shows unnatural curvature.",
+            "anomaly_id": "R003_IMG_02",
+            "name": "inconsistent_table_reflection",
+            "x_pct": 48.0,
+            "y_pct": 89.0,
+            "radius_pct": 7.5,
+            "description": "The coffee cup fails to cast a natural reflection on the glossy tabletop, unlike the rest of the environment.",
             "socratic_quiz": {
               "question": "Why is the distortion on the window handle a significant red flag?",
               "options": [
@@ -510,7 +510,7 @@
         },
         "traps": [
           {
-            "trap_id": "R002_T1",
+            "trap_id": "R003_T1",
             "ground_truth_start": 127,
             "ground_truth_end": 190,
             "trap_type": "Attacking Motive Fallacy (Strawman)",
@@ -531,7 +531,7 @@
             }
           },
           {
-            "trap_id": "R002_T2",
+            "trap_id": "R003_T2",
             "ground_truth_start": 202,
             "ground_truth_end": 325,
             "trap_type": "False Comparison",
@@ -551,7 +551,7 @@
             }
           },
           {
-            "trap_id": "R002_T3",
+            "trap_id": "R003_T3",
             "ground_truth_start": 327,
             "ground_truth_end": 474,
             "trap_type": "Inducing FOMO (Fear Of Missing Out) Combined with Personal Attack",
@@ -572,7 +572,7 @@
             }
           },
           {
-            "trap_id": "R002_T4",
+            "trap_id": "R003_T4",
             "ground_truth_start": 476,
             "ground_truth_end": 539,
             "trap_type": "Emotional Dismissal Fallacy",
@@ -598,27 +598,27 @@
         "task_instruction": "Toxic flexing campaigns often manipulate readers into feeling inadequate before selling them scam courses. Arrange the stages of this psychological manipulation strategy in the correct order.",
         "pool_items": [
           {
-            "item_id": "R002_SORT_01",
+            "item_id": "R003_SORT_01",
             "text": "Readers experience intense FOMO and self-doubt, fearing they are falling behind their peers."
           },
           {
-            "item_id": "R002_SORT_02",
+            "item_id": "R003_SORT_02",
             "text": "The influencer posts fabricated AI images of luxury items to establish fake status and authority."
           },
           {
-            "item_id": "R002_SORT_03",
+            "item_id": "R003_SORT_03",
             "text": "The influencer pitches an expensive 'wealth mindset masterclass' as the ultimate shortcut to success."
           },
           {
-            "item_id": "R002_SORT_04",
+            "item_id": "R003_SORT_04",
             "text": "The post uses false comparisons and condescending language to demean normal working youth as 'lazy'."
           }
         ],
         "correct_sequence": [
-          "R002_SORT_02",
-          "R002_SORT_04",
-          "R002_SORT_01",
-          "R002_SORT_03"
+          "R003_SORT_02",
+          "R003_SORT_04",
+          "R003_SORT_01",
+          "R003_SORT_03"
         ],
         "validation_feedback": {
           "success": "Correct! You have decoded the classic toxic flexing funnel: Fabricate status (Hook) → Belittle through false comparisons (Attack) → Trigger insecurity and FOMO (Anxiety) → Sell an expensive 'shortcut' course (Monetization).",
@@ -633,7 +633,7 @@
   },
   {
   "level": "RED",
-  "case_id": "R003",
+  "case_id": "R004",
   "title": "The Scholarship Deadline Scam",
   "short_summary": "An urgent email claiming a student won a scholarship uses fake deadlines and a phishing website to steal school credentials and a verification fee.",
   "duration_min": 15,
@@ -643,7 +643,7 @@
     "Social engineering (urgency + authority)",
     "Credential theft"
   ],
-  "spotted_url": "/assets/images/R003/R003_fakeimg_spotted.png",
+  "spotted_url": "/assets/images/R004/R004_fakeimg_spotted.png",
   "theme": [
     "Education",
     "Identity Theft",
@@ -653,13 +653,13 @@
   "modules": {
     "step_1_image_forensics": {
       "mechanic_type": "IMAGE_FORENSICS",
-      "image_url": "/assets/images/R003/R003_fakeimg.png",
+      "image_url": "/assets/images/R004/R004_fakeimg.png",
       "image_width": 1000,
       "image_height": 1000,
       "context_text": "The student clicked the 'Verify Scholarship' link and was taken to a login portal. Find the 3 suspicious visual anomalies and manipulative texts that indicate this is a phishing website.",
       "target_anomalies": [
         {
-          "anomaly_id": "R003_IMG_03",
+          "anomaly_id": "R004_IMG_03",
           "name": "urgency_text",
           "x_pct": 40.5,
           "y_pct": 45.8,
@@ -677,7 +677,7 @@
           }
         },
         {
-          "anomaly_id": "R003_IMG_04",
+          "anomaly_id": "R004_IMG_04",
           "name": "advance_fee_text",
           "x_pct": 49.0,
           "y_pct": 71.2,
@@ -695,7 +695,7 @@
           }
         },
         {
-          "anomaly_id": "R003_IMG_05",
+          "anomaly_id": "R004_IMG_05",
           "name": "isolation_text",
           "x_pct": 47.0,
           "y_pct": 85.0,
@@ -723,7 +723,7 @@
       },
       "traps": [
         {
-          "trap_id": "R003_TRAP_01",
+          "trap_id": "R004_TRAP_01",
           "ground_truth_start": 17,
           "ground_truth_end": 87,
           "matched_text": "You have already been selected for the Student Excellence Scholarship.",
@@ -743,7 +743,7 @@
           }
         },
         {
-          "trap_id": "R003_TRAP_02",
+          "trap_id": "R004_TRAP_02",
           "ground_truth_start": 125,
           "ground_truth_end": 211,
           "matched_text": "If you fail to verify within 2 hours, your place will be offered to another student.",
@@ -762,7 +762,7 @@
           }
         },
         {
-          "trap_id": "R003_TRAP_03",
+          "trap_id": "R004_TRAP_03",
           "ground_truth_start": 238,
           "ground_truth_end": 268,
           "matched_text": "verification fee of 49,000 VND",
@@ -781,7 +781,7 @@
           }
         },
         {
-          "trap_id": "R003_TRAP_04",
+          "trap_id": "R004_TRAP_04",
           "ground_truth_start": 270,
           "ground_truth_end": 362,
           "matched_text": "Do not contact the school office because verification is handled by our scholarship partner.",
@@ -806,42 +806,42 @@
       "task_instruction": "Arrange the steps in the chronological order of how this phishing scam unfolds to understand the full scope of the danger.",
       "pool_items": [
         {
-          "item_id": "R003_SORT_01",
+          "item_id": "R004_SORT_01",
           "text": "Student receives an urgent scholarship email."
         },
         {
-          "item_id": "R003_SORT_02",
+          "item_id": "R004_SORT_02",
           "text": "Student clicks the fake verification link."
         },
         {
-          "item_id": "R003_SORT_03",
+          "item_id": "R004_SORT_03",
           "text": "Student enters their official school account username and password."
         },
         {
-          "item_id": "R003_SORT_04",
+          "item_id": "R004_SORT_04",
           "text": "The scammer's database silently captures the credentials."
         },
         {
-          "item_id": "R003_SORT_05",
+          "item_id": "R004_SORT_05",
           "text": "The fake website prompts the student for an OTP or payment detail."
         },
         {
-          "item_id": "R003_SORT_06",
+          "item_id": "R004_SORT_06",
           "text": "The attacker actively logs into the student's real school account in the background."
         },
         {
-          "item_id": "R003_SORT_07",
+          "item_id": "R004_SORT_07",
           "text": "The student loses access to their account before they even realize the money was a trick."
         }
       ],
       "correct_sequence": [
-        "R003_SORT_01",
-        "R003_SORT_02",
-        "R003_SORT_03",
-        "R003_SORT_04",
-        "R003_SORT_05",
-        "R003_SORT_06",
-        "R003_SORT_07"
+        "R004_SORT_01",
+        "R004_SORT_02",
+        "R004_SORT_03",
+        "R004_SORT_04",
+        "R004_SORT_05",
+        "R004_SORT_06",
+        "R004_SORT_07"
       ],
       "validation_feedback": {
         "success": "Correct! Scammers don't just want your money directly; stealing your school account credentials gives them access to internal systems and allows them to scam others using your identity. The actual theft happens before you even pay the fee.",

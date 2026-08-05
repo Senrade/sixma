@@ -74,7 +74,7 @@ export function WelcomeGateway() {
               <span className="font-mono text-xs font-black uppercase text-info">SIXMA</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="hidden font-mono text-xs font-bold text-success sm:inline">● {t("welcome.online")}</span>
+              <span className="hidden font-mono text-sm font-bold text-success sm:inline">● {t("welcome.online")}</span>
               <LanguageSwitch className="[&_select]:h-9 [&_select]:min-w-28 [&_select]:border-2" />
             </div>
           </header>
@@ -103,7 +103,7 @@ export function WelcomeGateway() {
               </Button>
             </div>
 
-            <p className="mt-5 font-mono text-xs leading-5 text-muted-foreground">{t("welcome.cardPrompt")}</p>
+            <p className="mt-5 font-mono text-lg leading-5 text-muted-foreground">{t("welcome.cardPrompt")}</p>
           </div>
         </section>
       </div>
