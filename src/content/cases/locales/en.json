@@ -1,0 +1,532 @@
+{
+  "D001": {
+    "title": "The Rescue Photo That Never Happened",
+    "short_summary": "A crying child, a puppy, and a flooded town became powerful evidence online.",
+    "skills": [
+      "Synthetic image detection",
+      "Emotional manipulation",
+      "Source tracing"
+    ],
+    "theme": [
+      "Demo",
+      "Disaster response",
+      "Photojournalism"
+    ],
+    "story_context": "After Hurricane Helene, an emotionally powerful image of a crying girl holding a puppy in floodwater spread online as if it documented a real rescue. The synthetic image was used to shape public judgment about the disaster response, even though the child and the photographed moment never existed.",
+    "source": {
+      "note": "Scenario adapted from David Carson's discussion of an AI-generated girl-and-puppy flood image that circulated during Hurricane Helene."
+    },
+    "modules": {
+      "step_1_image_forensics": {
+        "context_text": "This image was shared as documentary proof of a child's rescue during catastrophic flooding after Hurricane Helene.",
+        "target_anomalies": {
+          "D001_IMG_01": {
+            "description": "The girl's face has an unnaturally smooth, synthetic quality, with inconsistent detail around the eyes, mouth, and expression.",
+            "socratic_quiz": {
+              "question": "Why is the girl's face a meaningful warning sign that the image may be synthetic?",
+              "options": [
+                "A. A real child could never be photographed while crying.",
+                "B. The skin and expression look unnaturally smooth while details around the eyes and mouth lack the consistency of a real photograph.",
+                "C. The girl's face is near the center of the composition."
+              ],
+              "explanation": "Overly smooth skin, unstable facial details, and an exaggerated synthetic expression are useful clues. They are not proof by themselves, so the next step is to investigate the image's source and provenance."
+            }
+          }
+        }
+      },
+      "step_2_text_highlight": {
+        "simulated_post": {
+          "author": "Storm Truth Network",
+          "time_posted": "18 minutes ago",
+          "content": "Look at this little girl clinging to her puppy in the flood. The media will never show you what is really happening after the hurricane. This photo proves rescue teams abandoned families like hers while officials staged press conferences. Share it now before they delete the evidence."
+        },
+        "traps": {
+          "D001_TRAP_01": {
+            "matched_text": "This photo proves rescue teams abandoned families like hers while officials staged press conferences.",
+            "socratic_quiz": {
+              "question": "What unsupported leap does the post make from the image to its accusation?",
+              "options": [
+                "A. It verifies when and where the image was captured before discussing the response.",
+                "B. It treats an unverified emotional image as direct proof that rescue teams abandoned families.",
+                "C. It compares reports from several independent journalists covering the disaster."
+              ],
+              "explanation": "Even an authentic photograph would document only one moment. It could not, by itself, prove a broad claim about the entire disaster response. Here the image was synthetic, making the leap even more misleading."
+            }
+          }
+        }
+      },
+      "step_3_sorting_game": {
+        "context_text": "The synthetic rescue image enters a fast-moving news cycle during a real disaster and begins influencing how people judge the response.",
+        "pool_items": {
+          "D001_SORT_02": "Viewers react to the child's distress and repost the image as evidence that rescue teams failed families.",
+          "D001_SORT_03": "Repetition separates the image from its unknown origin, and the false story competes with verified reporting from the disaster.",
+          "D001_SORT_01": "An account posts a synthetic rescue image with a real-disaster caption but provides no photographer, location, or original source."
+        },
+        "validation_feedback": {
+          "success": "Correct. The synthetic image gains power through a real disaster, an emotional interpretation, and repeated sharing. As its origin disappears, the invented story can distract from verified reporting about real people.",
+          "failure": "Not quite. Begin with the unsourced image, then follow the emotional interpretation, and finish with what repeated sharing does to its origin and credibility."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "If an image creates a strong emotional reaction and appears to confirm what you already believe, what should you verify before sharing it?",
+      "mil_insight": "Trace the earliest available upload, identify the photographer or creator, confirm the date and location through independent reporting, and look for provenance such as Content Credentials. Visual artifacts are clues, not a final verdict: authentic images can also be falsely accused of being AI-generated."
+    }
+  },
+  "R001": {
+    "title": "The Classroom That Never Happened",
+    "short_summary": "A viral image claims AI is monitoring students. Verify the photo, decode the rhetoric, and expose the phishing chain.",
+    "skills": [
+      "Image forensics",
+      "Logical fallacies",
+      "Phishing patterns"
+    ],
+    "theme": [
+      "Education",
+      "Technology"
+    ],
+    "story_context": "A misinformation campaign based on the rumor that AI will replace teachers",
+    "modules": {
+      "step_1_image_forensics": {
+        "context_text": "The leaked image attached to the controversy post is claimed to be 'evidence that AI is monitoring and evaluating students during class.'",
+        "target_anomalies": {
+          "R001_IMG_01": {
+            "description": "Distorted, unreadable gibberish text rendered on the digital whiteboard screen.",
+            "socratic_quiz": {
+              "question": "Why is the writing on the classroom screen a strong warning sign?",
+              "options": [
+                "A. The screen is too bright for a classroom.",
+                "B. The writing is garbled and overlaps instead of forming readable words.",
+                "C. The screen is mounted above the teacher's desk."
+              ],
+              "explanation": "Image generators often produce plausible shapes but fail to keep text legible and consistent. Gibberish text is stronger evidence of manipulation than the screen's brightness or location."
+            }
+          },
+          "R001_IMG_02": {
+            "description": "Students in the center foreground are abnormally overlapping and clipping into each other.",
+            "socratic_quiz": {
+              "question": "What makes the students in this area a likely AI-generation error?",
+              "options": [
+                "A. Several students are seated close together.",
+                "B. The students overlap and merge in ways that do not match their bodies or seats.",
+                "C. The group is facing away from the camera."
+              ],
+              "explanation": "A crowded classroom can be natural, but bodies that merge or clip through one another break the scene's physical logic. That structural inconsistency is a useful deepfake clue."
+            }
+          }
+        }
+      },
+      "step_2_text_highlight": {
+        "simulated_post": {
+          "author": "Parents and Education Community",
+          "time_posted": "2 hours ago",
+          "content": "Just found out the Ministry of Education is piloting a new AI learning assistant in several schools next term. Honestly, this looks like a covert move to phase out real human teachers entirely. It's pretty obvious big tech is just trying to fully automate education to exploit student data for profit. Even Professor Tan stated in his latest report that 'AI is now taking full control over the classroom'. If parents don't stand up and boycott this rollout immediately, our kids will completely lose their capacity for critical thinking!"
+        },
+        "traps": {
+          "R001_TRAP_01": {
+            "matched_text": "Honestly, this looks like a covert move to phase out real human teachers entirely.",
+            "socratic_quiz": {
+              "question": "What primary logical flaw is the author relying on to convince you that teachers are being replaced?",
+              "options": [
+                "A. Relying on verified strategic documents published openly by the Ministry of Education.",
+                "B. Analyzing the statistical decline of employment numbers in the education sector over the last decade.",
+                "C. Attributing a sinister, hidden motive to a standard technology pilot without presenting concrete evidence."
+              ],
+              "explanation": "The author jumps straight to a hidden conspiracy theory, presenting a pilot program as a malicious plot without any verifiable proof."
+            }
+          },
+          "R001_TRAP_02": {
+            "matched_text": "It's pretty obvious big tech is just trying to fully automate education to exploit student data for profit.",
+            "socratic_quiz": {
+              "question": "How does the phrase 'It's pretty obvious' serve to manipulate the reader's analytical thinking?",
+              "options": [
+                "A. It indicates that the statement is backed by a broad consensus of peer-reviewed research.",
+                "B. It invites the reader to review the privacy terms and conditions of the software independently.",
+                "C. It bypasses the need for factual proof by presenting a complex assumption as an undeniable truth."
+              ],
+              "explanation": "Phrases like 'it's pretty obvious' are rhetorical tricks used to smuggle in major, unproven assertions as if they are unquestionable facts."
+            }
+          },
+          "R001_TRAP_03": {
+            "matched_text": "If parents don't stand up and boycott this rollout immediately, our kids will completely lose their capacity for critical thinking!",
+            "socratic_quiz": {
+              "push_question": "What psychological trap does the author force the reader into with how this closing statement is framed?",
+              "options": [
+                "A. Providing a clear, step-by-step roadmap to solve the issue.",
+                "B. Forcing a choice between an immediate boycott or facing absolute disaster, eliminating any moderate solutions.",
+                "C. Encouraging parents to conduct independent research before making a final decision."
+              ],
+              "explanation": "The author uses a false dilemma fallacy to strip away your ability to make a neutral, analytical choice."
+            }
+          }
+        }
+      },
+      "step_3_sorting_game": {
+        "context_text": "The panic spread by the post has led to a phishing email targeting parents.",
+        "pool_items": {
+          "R001_SORT_01": "Click the security link below to pay a processing fee (50,000 VND) and verify your right to opt out.",
+          "R001_SORT_02": "WARNING: Your child's personal data is currently scheduled to be synchronized with the Ministry's AI system.",
+          "R001_SORT_03": "To protect privacy and remove your child's name from the project, parents must complete the 'Opt-Out Form' within 24 hours."
+        },
+        "validation_feedback": {
+          "success": "Correct. You have decoded the classic psychological manipulation chain: Create fear and urgency (Hook) → Introduce an urgent solution (Pivot) → Insert a trap to collect money or personal data (Trap).",
+          "failure": "Incorrect logic. Phishing attacks rarely ask for money immediately. They usually begin by creating a fake crisis to overwhelm the victim's critical thinking."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Ask your Teacher/Parent: if a message from the school asks parents to click an unfamiliar link and make an urgent payment to 'protect their child's learning data,' what key sign proves that it is a scam?",
+      "mil_insight": "Help parents and students compare the message against standard administrative procedures: legitimate educational institutions never use time pressure (such as a 24-hour deadline) or unofficial payment links to handle security issues."
+    }
+  },
+  "R007": {
+    "title": "The Canteen Extortion File",
+    "short_summary": "An anonymous sender uses a doctored food photo and reputational pressure to extort a school.",
+    "skills": [
+      "Composite detection",
+      "Coercion patterns",
+      "Extortion structure"
+    ],
+    "theme": [
+      "Health",
+      "Safety",
+      "School"
+    ],
+    "story_context": "An anonymous extortion email claiming contaminated food in the school canteen, demanding money to prevent reputational damage.",
+    "modules": {
+      "step_1_image_forensics": {
+        "context_text": "The leaked image attached to the extortion email claims to show 'a disgusting cockroach served in the high school canteen food tray.'",
+        "target_anomalies": {
+          "R007_IMG_01": {
+            "description": "The insect appears digitally pasted onto the rice tray, exhibiting mismatched light direction, unnatural shadows, and blurred edge artifacts.",
+            "socratic_quiz": {
+              "question": "Why does the cockroach in this photo indicate digital tampering?",
+              "options": [
+                "A. The cockroach is too large compared to standard rice grains.",
+                "B. Its shadow direction contradicts the main lighting, and its edges show artificial blurring from digital editing.",
+                "C. Cockroaches cannot land on cooked rice in a school canteen."
+              ],
+              "explanation": "In composite or digitally manipulated images, mismatched lighting angles and edge-smudging artifacts around the inserted object betray digital insertion."
+            }
+          }
+        }
+      },
+      "step_2_text_highlight": {
+        "simulated_post": {
+          "author": "Anonymous",
+          "time_posted": "5 hour ago",
+          "content": "I don't usually post stuff like this, but today's lunch honestly made me uncomfortable. While I was eating, I noticed what looked like a cockroach in my lunch tray. I don't know whether it came from the kitchen or somewhere else, maybe there's a perfectly good explanation out there, but if this really came from the cafeteria, students have a right to be worried. I'm not saying the cafeteria is unsafe. I'm just asking why this keeps happening and why nobody ever seems to explain anything afterward. The school seems to never take students' food feedback into consideration anyway, saying the problem is too complicated or something like that. At this point, I think parents deserve to know what's happening before this gets quietly swept under the rug..."
+        },
+        "traps": {
+          "R007_TRAP_01": {
+            "matched_text": "I'm not saying the cafeteria is unsafe. I'm just asking why this keeps happening and why nobody ever seems to explain anything afterward.",
+            "socratic_quiz": {
+              "question": "How does the author introduce an unverified accusation while shielding themselves from accountability?",
+              "options": [
+                "A. By explicitly asserting that cafeteria workers intentionally contaminated the food.",
+                "B. By using a disclaimer ('I'm not saying...') to plant the premise that recurring incidents exist without presenting supporting data.",
+                "C. By demanding an immediate financial refund for all students enrolled in the lunch program."
+              ],
+              "explanation": "This is rhetorical innuendo. By pairing a denial of hostility ('I'm not saying...') with a loaded question ('why this keeps happening'), the author smuggles in an unproven premise of systemic negligence while maintaining plausible deniability."
+            }
+          },
+          "R007_TRAP_02": {
+            "matched_text": "The school seems to never take students' food feedback into consideration anyway, saying the problem is too complicated or something like that.",
+            "socratic_quiz": {
+              "question": "What structural function does this statement serve in manipulating how the audience evaluates a future response from the school?",
+              "options": [
+                "A. It establishes a baseline of historical administrative records to ensure fair evaluation.",
+                "B. It pre-emptively discredits any potential explanation from the school by framing administrative complexity as an excuse.",
+                "C. It proves that the cafeteria's supplier operates without an active health license."
+              ],
+              "explanation": "This technique 'poisons the well.' By pre-framing institutional responses as dismissive excuses ('saying the problem is too complicated'), the author ensures the audience rejects official clarifications before the school even speaks."
+            }
+          },
+          "R007_TRAP_03": {
+            "matched_text": "At this point, I think parents deserve to know what's happening before this gets quietly swept under the rug...",
+            "socratic_quiz": {
+              "question": "Why do you think the framing of 'before this gets quietly swept under the rug' is problematic?",
+              "options": [
+                "A. It forces immediate, emotional escalation by implying an ongoing cover-up, discouraging readers from waiting for factual verification.",
+                "B. It offers a transparent protocol for parents to submit official complaints to local health inspectors.",
+                "C. It confirms that school authorities have already deleted internal incident logs."
+              ],
+              "explanation": "Implied cover-ups trigger immediate fear and artificial urgency. Framing an ongoing situation as 'being swept under the rug' manipulates readers into sharing the claim rapidly to prevent a conspiracy rather than pausing to verify the facts."
+            }
+          }
+        }
+      },
+      "step_3_sorting_game": {
+        "context_text": "A misleading social media post about the school canteen has spread across the community.",
+        "pool_items": {
+          "R007_SORT_01": "Other users repost the image with stronger claims, assuming the worst.",
+          "R007_SORT_02": "The rumor becomes accepted as 'common knowledge' even though the original claim was never confirmed.",
+          "R007_SORT_03": "Someone uploads a photo with a personal interpretation but without verified context.",
+          "R007_SORT_04": "People react emotionally and share the post before waiting for official verification."
+        },
+        "validation_feedback": {
+          "success": "Correct. Rumors often become believable through repetition rather than evidence. An unverified observation can evolve into 'everyone knows it's true' as people add assumptions, share emotionally, and stop checking the original source.",
+          "failure": "Not quite. False information rarely spreads because of one convincing post alone. It gains momentum as people amplify unverified claims and repeat them as facts before anyone verifies the evidence."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Ask your Teacher/Parent: If you received this message, what evidence would you need before believing the photo reflects a real food safety problem rather than a manipulated story?",
+      "mil_insight": "A single image rarely provides enough context to establish what happened. Discuss how to distinguish direct evidence from assumptions by checking the original source, verifying when and where the photo was taken, and following the school's official investigation process before drawing conclusions."
+    }
+  },
+  "R002": {
+    "title": "The Illusion of Success",
+    "short_summary": "A viral post flexes a 20-year-old's fake luxury lifestyle while belittling others. Uncover the AI anomalies and decode the toxic FOMO tactics.",
+    "skills": [
+      "Image forensics",
+      "Logical fallacies",
+      "FOMO & Toxic flexing analysis"
+    ],
+    "theme": [
+      "Social Media",
+      "Peer Pressure",
+      "Toxic Flexing"
+    ],
+    "story_context": "A viral post by a 'Minh Khang' persona about early financial wisdom, with a photo that seems suspect to careful eyes.",
+    "modules": {
+      "step_1_image_forensics": {
+        "context_text": "The profile picture for 'Minh Khang' features this photo from his 'wealth mindset' post. Find one clear visual anomaly that proves this photo is AI-generated.",
+        "target_anomalies": {
+          "R002_IMG_01": {
+            "description": "The man's right hand holding the phone has an incorrect number of fingers and severe joint distortion.",
+            "socratic_quiz": {
+              "question": "Why is the structure of this hand a clear indicator of AI generation?",
+              "options": [
+                "A. It is holding the phone at a strange angle.",
+                "B. The fingers are impossibly numerous, distorted, and merged, breaking anatomical logic.",
+                "C. The hand is wearing a watch that matches the other hand."
+              ],
+              "explanation": "Image generators often fail to render human hands accurately, frequently creating merged, missing, or extra digits. This extreme anatomical distortion is a classic sign."
+            }
+          },
+          "R002_IMG_02": {
+            "description": "The metal window handle is severely warped and distorted, and the frame shows unnatural curvature.",
+            "socratic_quiz": {
+              "question": "Why is the distortion on the window handle a significant red flag?",
+              "options": [
+                "A. It is a modern, artistic window design.",
+                "B. Rigid metal objects do not have fluid, warped, and distorted structures like this in reality.",
+                "C. The handle is out of focus due to the camera's shallow depth of field."
+              ],
+              "explanation": "Current AI generation techniques often struggle with rigid objects, creating severe physical warp and unnatural fluid forms. This type of distortion on a standard window handle is a typical structural failure."
+            }
+          }
+        }
+      },
+      "step_2_text_highlight": {
+        "simulated_post": {
+          "author": "Minh Khang",
+          "time_posted": "2 hours ago",
+          "content": "It's honestly funny how some people keep saying \"money doesn't buy happiness\" every time someone posts something nice. Like... just because you can't afford it doesn't mean it's \"showing off.\" Meanwhile, everyone I know is out here grinding, getting internships, buying what they want, and actually doing something with their lives. If you're still making excuses while everyone else is moving up, maybe stop blaming other people and ask yourself why you're getting left behind. Stay mad if you want, but don't expect the world to wait for you."
+        },
+        "traps": {
+          "R002_T1": {
+            "matched_text": "just because you can't afford it doesn't mean it's \"showing off.\"",
+            "socratic_quiz": {
+              "question": "What is this sentence really trying to do to anyone who criticizes the flex post?",
+              "options": [
+                "A. Directly addresses why the post might be considered showing off",
+                "B. Assigns a negative motive (jealousy over money) to anyone who criticizes, instead of engaging with whether the criticism is actually valid",
+                "C. Provides an objective, neutral explanation"
+              ],
+              "explanation": "This is an attacking-the-motive fallacy: instead of responding to the actual argument (whether the post is showing off or not), the writer assumes any critic is simply 'broke and jealous' — a way to dodge the real issue while demeaning the critic."
+            }
+          },
+          "R002_T2": {
+            "matched_text": "everyone I know is out here grinding, getting internships, buying what they want, and actually doing something with their lives",
+            "socratic_quiz": {
+              "question": "What is the logical problem with this comparison?",
+              "options": [
+                "A. It's a fair comparison since everyone starts from the exact same circumstances",
+                "B. It lumps together unrelated things (effort, internships, shopping) to imply that anyone who can't afford luxury goods is 'not doing anything with their life,' ignoring differences in people's actual circumstances",
+                "C. It's an accurate statistic about the writer's actual acquaintances"
+              ],
+              "explanation": "This is a false comparison: it equates 'being able to buy what you want' with 'succeeding in life,' while ignoring that people come from very different financial and family backgrounds — making this an unfair basis for comparison."
+            }
+          },
+          "R002_T3": {
+            "matched_text": "If you're still making excuses while everyone else is moving up, maybe stop blaming other people and ask yourself why you're getting left behind",
+            "socratic_quiz": {
+              "question": "How is this sentence psychologically affecting the reader?",
+              "options": [
+                "A. It offers sincere, actionable advice to help the reader grow",
+                "B. It creates a fear of being left behind (FOMO) by painting a picture of 'everyone moving up,' while implicitly blaming and belittling the reader as someone who 'makes excuses' and 'falls behind'",
+                "C. It's simply a rhetorical question with no particular purpose"
+              ],
+              "explanation": "This is a FOMO-inducing tactic combined with a personal attack: the sentence offers no real solution, but instead pressures the reader into feeling inadequate and anxious about falling behind an ambiguous, unverified standard."
+            }
+          },
+          "R002_T4": {
+            "matched_text": "Stay mad if you want, but don't expect the world to wait for you",
+            "socratic_quiz": {
+              "question": "What is the purpose of this closing sentence in response to any pushback?",
+              "options": [
+                "A. It invites an open conversation to understand other people's perspectives",
+                "B. It dismisses any negative reaction or criticism by labeling it as 'being mad,' allowing the writer to avoid reflecting on their own behavior",
+                "C. It offers genuine encouragement to everyone reading"
+              ],
+              "explanation": "This is an emotional dismissal tactic: any criticism or reaction is preemptively labeled as 'staying mad,' which lets the writer avoid examining their own bragging behavior while continuing to belittle others."
+            }
+          }
+        }
+      },
+      "step_3_sorting_game": {
+        "pool_items": {
+          "R002_SORT_01": "Readers experience intense FOMO and self-doubt, fearing they are falling behind their peers.",
+          "R002_SORT_02": "The influencer posts fabricated AI images of luxury items to establish fake status and authority.",
+          "R002_SORT_03": "The influencer pitches an expensive 'wealth mindset masterclass' as the ultimate shortcut to success.",
+          "R002_SORT_04": "The post uses false comparisons and condescending language to demean normal working youth as 'lazy'."
+        },
+        "validation_feedback": {
+          "success": "Correct! You have decoded the classic toxic flexing funnel: Fabricate status (Hook) → Belittle through false comparisons (Attack) → Trigger insecurity and FOMO (Anxiety) → Sell an expensive 'shortcut' course (Monetization).",
+          "failure": "Incorrect sequence. Toxic flexing manipulators first establish fake wealth, then attack the audience's self-esteem to create FOMO before offering their paid course as a fake solution."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Ask your Teacher/Parent: If a social media post makes you feel anxious that you are falling behind your peers who seem to afford luxury lifestyles, what steps can you take to evaluate what is real versus staged?",
+      "mil_insight": "Social media highlights rarely reflect full reality, and AI image tools make lavish lifestyles effortless to fake. Remind youth that success is not measured by material flexing or belittling others, and urgent pitches for expensive 'mindset courses' are almost always predatory scams."
+    }
+  },
+  "R003": {
+    "title": "The Scholarship Deadline Scam",
+    "short_summary": "An urgent email claiming a student won a scholarship uses fake deadlines and a phishing website to steal school credentials and a verification fee.",
+    "skills": [
+      "Phishing detection",
+      "URL verification",
+      "Social engineering (urgency + authority)",
+      "Credential theft"
+    ],
+    "theme": [
+      "Education",
+      "Identity Theft",
+      "Financial Scam"
+    ],
+    "story_context": "About a week before the school officially announces the scholarship list, a student receives an email claiming they have been selected for the 'Student Excellence Scholarship' but must verify their identity and pay a fee within 2 hours.",
+    "modules": {
+      "step_1_image_forensics": {
+        "context_text": "The student clicked the 'Verify Scholarship' link and was taken to a login portal. Find the 3 suspicious visual anomalies and manipulative texts that indicate this is a phishing website.",
+        "target_anomalies": {
+          "R003_IMG_03": {
+            "description": "The urgent text in the blue info box: 'ONLY 2 HOURS REMAINING! Your scholarship will be forfeited.' creates artificial panic.",
+            "socratic_quiz": {
+              "question": "Why does the website display a countdown or short deadline?",
+              "options": [
+                "A. To create artificial urgency, inducing panic to prevent the victim from thinking critically or verifying the claim.",
+                "B. To ensure the school's servers are not overloaded with too many logins at once.",
+                "C. To help students manage their time better during the exam season."
+              ],
+              "explanation": "Artificial urgency is a cornerstone of social engineering. By forcing a 2-hour deadline, the scammer deprives the victim of the time needed to consult with parents, teachers, or IT staff."
+            }
+          },
+          "R003_IMG_04": {
+            "description": "The site button text explicitely links verification with a 'PAY FEE (49,000 VND)'.",
+            "socratic_quiz": {
+              "question": "Why is the request for a small 'verification fee' on the login button highly suspicious in this context?",
+              "options": [
+                "A. Legitimate scholarships provide funds to students; they do not require recipients to pay money to receive money.",
+                "B. The amount is too small; real schools would charge at least 500,000 VND for administrative verification.",
+                "C. It indicates the school is trying to raise funds for the end-of-year party."
+              ],
+              "explanation": "This is a classic advance-fee scam mechanism. Scammers keep the fee intentionally small (like 49,000 VND) so it seems insignificant compared to the 'scholarship', increasing the likelihood the victim will pay without thinking."
+            }
+          },
+          "R003_IMG_05": {
+            "description": "The instruction 'Do not contact the main school office directly' in the FAQ isolates the victim from verifying the truth.",
+            "socratic_quiz": {
+              "question": "What is the primary purpose of telling the student NOT to contact the school office?",
+              "options": [
+                "A. To reduce the workload of the school's administrative staff.",
+                "B. To isolate the victim from authoritative sources that would immediately expose the scam.",
+                "C. To comply with third-party privacy regulations regarding educational scholarships."
+              ],
+              "explanation": "Isolation tactics are used to cut victims off from a 'reality check'. The scammer knows that a single phone call to the school office would instantly reveal the scholarship portal is fake."
+            }
+          }
+        }
+      },
+      "step_2_text_highlight": {
+        "simulated_post": {
+          "author": "Scholarship Selection Committee",
+          "time_posted": "Just now",
+          "content": "Congratulations! You have already been selected for the Student Excellence Scholarship. Only 50 students have been selected. If you fail to verify within 2 hours, your place will be offered to another student. Please log in to pay your verification fee of 49,000 VND. Do not contact the school office because verification is handled by our scholarship partner."
+        },
+        "traps": {
+          "R003_TRAP_01": {
+            "matched_text": "You have already been selected for the Student Excellence Scholarship.",
+            "socratic_quiz": {
+              "question": "Why do scammers start the message by confirming the reward rather than asking you to apply?",
+              "options": [
+                "A. To trigger excitement and greed, making the victim drop their guard and become more willing to comply with subsequent demands.",
+                "B. To inform the student so they can celebrate with their family immediately.",
+                "C. To prove they have access to the school's confidential grading systems."
+              ],
+              "explanation": "This technique exploits 'reward baiting'. When people believe they have already won something valuable, their critical thinking decreases and they focus on claiming the prize rather than questioning its legitimacy."
+            }
+          },
+          "R003_TRAP_02": {
+            "matched_text": "If you fail to verify within 2 hours, your place will be offered to another student.",
+            "socratic_quiz": {
+              "question": "How does the email use the concept of time to manipulate the recipient?",
+              "options": [
+                "A. It establishes a reasonable administrative processing window for scholarship funds.",
+                "B. It creates artificial urgency, inducing panic to prevent the victim from thinking critically or verifying the claim.",
+                "C. It ensures the scholarship funds are distributed fairly among applicants."
+              ],
+              "explanation": "Artificial urgency is a cornerstone of social engineering. By forcing a 2-hour deadline, the scammer deprives the victim of the time needed to consult with parents, teachers, or IT staff."
+            }
+          },
+          "R003_TRAP_03": {
+            "matched_text": "verification fee of 49,000 VND",
+            "socratic_quiz": {
+              "question": "Why is the request for a small 'verification fee' highly suspicious in this context?",
+              "options": [
+                "A. Legitimate scholarships provide funds to students; they do not require recipients to pay money to receive money.",
+                "B. The amount is too small; real schools would charge at least 500,000 VND for administrative verification.",
+                "C. It indicates the school is trying to raise funds for the end-of-year party."
+              ],
+              "explanation": "This is a classic advance-fee scam mechanism. Scammers keep the fee intentionally small (like 49,000 VND) so it seems insignificant compared to the 'scholarship', increasing the likelihood the victim will pay."
+            }
+          },
+          "R003_TRAP_04": {
+            "matched_text": "Do not contact the school office because verification is handled by our scholarship partner.",
+            "socratic_quiz": {
+              "question": "What is the primary purpose of telling the student NOT to contact the school office?",
+              "options": [
+                "A. To reduce the workload of the school's administrative staff.",
+                "B. To isolate the victim from authoritative sources that would immediately expose the scam.",
+                "C. To comply with third-party privacy regulations regarding educational scholarships."
+              ],
+              "explanation": "Isolation tactics are used to cut victims off from a 'reality check'. The scammer knows that a single phone call to the school office would instantly reveal the scholarship is fake."
+            }
+          }
+        }
+      },
+      "step_3_sorting_game": {
+        "pool_items": {
+          "R003_SORT_01": "Student receives an urgent scholarship email.",
+          "R003_SORT_02": "Student clicks the fake verification link.",
+          "R003_SORT_03": "Student enters their official school account username and password.",
+          "R003_SORT_04": "The scammer's database silently captures the credentials.",
+          "R003_SORT_05": "The fake website prompts the student for an OTP or payment detail.",
+          "R003_SORT_06": "The attacker actively logs into the student's real school account in the background.",
+          "R003_SORT_07": "The student loses access to their account before they even realize the money was a trick."
+        },
+        "validation_feedback": {
+          "success": "Correct! Scammers don't just want your money directly; stealing your school account credentials gives them access to internal systems and allows them to scam others using your identity. The actual theft happens before you even pay the fee.",
+          "failure": "Not quite. Remember that phishing attacks often steal your information *before* asking for money. Simply typing in your password is the critical point where the attacker takes control."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Ask your Teacher/Parent: If you really received a scholarship notification, how could you verify it independently without clicking the provided link?",
+      "mil_insight": "Understand that urgency and unexpected rewards are common manipulation tactics. Always verify official communications by navigating directly to the school's known official portal or contacting the administration office in person, rather than relying on provided links."
+    }
+  }
+}

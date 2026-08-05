@@ -1,0 +1,59 @@
+{
+  "spotting-ai-images": {
+    "category": "Xác minh hình ảnh",
+    "title": "Kiểm tra một hình ảnh đáng ngờ",
+    "summary": "Soi kỹ chi tiết, kiểm tra bối cảnh và tìm lại nguồn gốc trước khi vội tin một bức ảnh.",
+    "sections": [
+      {
+        "heading": "Bắt đầu từ những gì người đăng tuyên bố",
+        "body": "Hình ảnh chỉ mang tính bằng chứng nếu nó đi kèm với một lời khẳng định. Hãy viết lại bài đăng nói về sự việc gì, ở đâu và khi nào. Điều này sẽ giúp bạn dễ dàng nhận ra nếu bức ảnh bị đưa ra khỏi bối cảnh."
+      },
+      {
+        "heading": "Kiểm tra tính logic về vật lý",
+        "body": "Tìm kiếm các hình khối bị gãy nát, đồ vật bị dính vào nhau, hình phản chiếu không khớp, chữ viết nhòe nhoẹt vô nghĩa và ánh sáng bị sai lệch trong khung cảnh. Tuy nhiên, một chi tiết kỳ lạ chỉ là lý do để điều tra thêm chứ không phải là bằng chứng tuyệt đối."
+      },
+      {
+        "heading": "Xác minh các yếu tố ngoài bức ảnh",
+        "body": "Tìm kiếm phiên bản đầu tiên của bức ảnh, so sánh với các báo cáo từ những nguồn độc lập khác và kiểm tra xem tổ chức được nhắc đến có công bố tài liệu tương tự trên các kênh chính thức của họ không."
+      }
+    ]
+  },
+  "emotional-manipulation": {
+    "category": "Tư duy phản biện",
+    "title": "Nhận diện chiêu trò thao túng cảm xúc",
+    "summary": "Bắt bài các chiêu trò thúc ép, đánh vào nỗi sợ hay mượn danh uy tín khiến bạn mất tỉnh táo.",
+    "sections": [
+      {
+        "heading": "Nhận biết áp lực",
+        "body": "Các bài đăng mang tính thao túng thường ép bạn phải phản ứng ngay. Hãy chậm lại một nhịp khi thông điệp đó nói rằng bạn không có thời gian để kiểm chứng, chỉ có một cách giải quyết duy nhất, hoặc sẽ gây ra hậu quả thảm khốc nếu chần chừ."
+      },
+      {
+        "heading": "Tách bằng chứng khỏi cảm xúc",
+        "body": "Việc gây ra cảm xúc mạnh không đồng nghĩa với việc tuyên bố đó là sai, nhưng nó có thể làm lu mờ những bằng chứng yếu kém. Hãy thử diễn đạt lại thông tin mà không dùng những từ ngữ kích động và tự hỏi xem còn điều gì chống đỡ cho tuyên bố đó."
+      },
+      {
+        "heading": "Kiểm tra những tổ chức, cá nhân được trích dẫn",
+        "body": "Một cái tên thật hay một cơ quan uy tín hoàn toàn có thể bị trích dẫn sai. Hãy tìm kiếm phát ngôn gốc và kiểm tra xem bối cảnh thực tế có khớp với cách họ được diễn giải trong bài viết hay không."
+      }
+    ]
+  },
+  "phishing-chain": {
+    "category": "An toàn kỹ thuật số",
+    "title": "Cấu trúc của một chuỗi lừa đảo (Phishing)",
+    "summary": "Hiểu cách một mồi nhử vô hại dẫn bạn vào bẫy mất tài khoản hoặc mất tiền.",
+    "sections": [
+      {
+        "heading": "Mồi nhử",
+        "body": "Một nỗ lực lừa đảo thường bắt đầu bằng những thứ có liên quan đến bạn: một phần thưởng, một cảnh báo, một hạn chót, hay một tin nhắn có vẻ như đến từ người quen."
+      },
+      {
+        "heading": "Điều hướng",
+        "body": "Nạn nhân sẽ bị lôi kéo rời khỏi các kênh an toàn để nhấp vào một đường link, tải tệp tin đính kèm, điền biểu mẫu, hay chuyển sang một cuộc trò chuyện riêng do kẻ tấn công thao túng."
+      },
+      {
+        "heading": "Cạm bẫy",
+        "body": "Bước cuối cùng là yêu cầu thông tin đăng nhập, thanh toán, dữ liệu cá nhân, hoặc cài đặt phần mềm. Hãy luôn xác minh yêu cầu thông qua một kênh đáng tin cậy khác trước khi thực hiện hành động."
+      }
+    ]
+  }
+}

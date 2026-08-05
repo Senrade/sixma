@@ -1,30 +1,76 @@
-import type { MessageKey } from "@/i18n/messages/types";
+import "server-only";
+
+import articleIndex from "@/content/articles/index.json";
+import { loadLocale, type Locale } from "@/i18n/registry";
+
+export interface ArticleSection {
+  heading: string;
+  body: string;
+}
 
 export interface Article {
   slug: string;
-  category: MessageKey;
-  title: MessageKey;
-  summary: MessageKey;
+  category: string;
+  title: string;
+  summary: string;
   readTime: number;
-  sections: Array<{ heading: MessageKey; body: MessageKey }>;
+  sections: ArticleSection[];
 }
 
-export const articles: Article[] = [
-  { slug: "spotting-ai-images", category: "article.spotting.category", title: "article.spotting.title", summary: "article.spotting.summary", readTime: 6, sections: [
-    { heading: "article.spotting.section1.title", body: "article.spotting.section1.body" },
-    { heading: "article.spotting.section2.title", body: "article.spotting.section2.body" },
-    { heading: "article.spotting.section3.title", body: "article.spotting.section3.body" },
-  ] },
-  { slug: "emotional-manipulation", category: "article.emotion.category", title: "article.emotion.title", summary: "article.emotion.summary", readTime: 5, sections: [
-    { heading: "article.emotion.section1.title", body: "article.emotion.section1.body" },
-    { heading: "article.emotion.section2.title", body: "article.emotion.section2.body" },
-    { heading: "article.emotion.section3.title", body: "article.emotion.section3.body" },
-  ] },
-  { slug: "phishing-chain", category: "article.phishing.category", title: "article.phishing.title", summary: "article.phishing.summary", readTime: 7, sections: [
-    { heading: "article.phishing.section1.title", body: "article.phishing.section1.body" },
-    { heading: "article.phishing.section2.title", body: "article.phishing.section2.body" },
-    { heading: "article.phishing.section3.title", body: "article.phishing.section3.body" },
-  ] },
-];
+interface ArticleTranslation {
+  category: string;
+  title: string;
+  summary: string;
+  sections: ArticleSection[];
+}
 
-export function getArticle(slug: string) { return articles.find((article) => article.slug === slug); }
+type ArticleCatalog = Record<string, ArticleTranslation>;
+
+const articlePromises = new Map<Locale, Promise<Article[]>>();
+
+function isArticleTranslation(value: unknown): value is ArticleTranslation {
+  if (typeof value !== "object" || value === null) return false;
+  const article = value as Partial<ArticleTranslation>;
+  return (
+    typeof article.category === "string"
+    && typeof article.title === "string"
+    && typeof article.summary === "string"
+    && Array.isArray(article.sections)
+    && article.sections.every(
+      (section) => typeof section.heading === "string" && typeof section.body === "string",
+    )
+  );
+}
+
+async function readArticles(locale: Locale): Promise<Article[]> {
+  const [englishResources, localizedResources] = await Promise.all([
+    loadLocale("en"),
+    loadLocale(locale),
+  ]);
+  const english = englishResources.articles as ArticleCatalog;
+  const localized = localizedResources.articles as ArticleCatalog;
+
+  return articleIndex.articles.map((entry) => {
+    const translation = localized[entry.slug] ?? english[entry.slug];
+    if (!isArticleTranslation(translation)) {
+      throw new Error(`Missing article translation for ${locale}:${entry.slug}.`);
+    }
+    return {
+      slug: entry.slug,
+      readTime: entry.read_time,
+      ...translation,
+    };
+  });
+}
+
+export function getArticles(locale: Locale): Promise<Article[]> {
+  const cached = articlePromises.get(locale);
+  if (cached) return cached;
+  const articles = readArticles(locale);
+  articlePromises.set(locale, articles);
+  return articles;
+}
+
+export async function getArticle(slug: string, locale: Locale): Promise<Article | undefined> {
+  return (await getArticles(locale)).find((article) => article.slug === slug);
+}
