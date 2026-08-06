@@ -193,7 +193,7 @@
     "story_context": "Một tin nhắn ẩn danh đính kèm ảnh từ căng tin và cảnh báo sẽ công khai sự việc nếu nhà trường không phản hồi trước hạn. Nhà trường cần xác định hình ảnh và ngôn từ thực sự chứng minh được điều gì trước khi hành động.",
     "modules": {
       "step_1_image_forensics": {
-        "context_text": "Bức ảnh rò rỉ đính kèm email tống tiền được cho là chụp 'một con gián ghê tởm trong khay thức ăn của căng tin trường trung học'.",
+        "context_text": "Bức ảnh rò rỉ đính kèm email tống tiền được cho là chụp \"một con gián ghê tởm trong khay thức ăn của căng tin trường trung học\".",
         "target_anomalies": {
           "R002_IMG_01": {
             "description": "Con gián có màu quá rực, bề mặt bóng và giống đồ chơi, không phản ứng với ánh sáng giống cơm và khay kim loại xung quanh.",
