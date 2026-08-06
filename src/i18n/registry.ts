@@ -16,6 +16,13 @@ export const LOCALES = {
     fallback: "en",
     load: async () => viResources,
   },
+  es: {
+  label: "Español",
+  htmlLang: "es",
+  status: "partial",
+  fallback: "en",
+  load: () => import("./locales/es").then((module) => module.default),
+},
 } as const;
 
 export type Locale = keyof typeof LOCALES;

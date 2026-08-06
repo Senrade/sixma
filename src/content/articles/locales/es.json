@@ -1,0 +1,47 @@
+{
+  "common-media-fallacies": {
+    "category": "Razonamiento crítico",
+    "title": "Guía sobre falacias comunes en los medios actuales",
+    "summary": "Cinco trampas de razonamiento aparecen una y otra vez en las redes sociales. Aprende a reconocerlas antes de que moldeen lo que crees o compartes.",
+    "sections": [
+      {
+        "heading": "Por qué las falacias prosperan en línea",
+        "body": "Las falacias lógicas son errores de razonamiento que hacen que un argumento no sea sólido, incluso cuando su conclusión sea cierta. Las publicaciones en redes sociales premian la velocidad, la brevedad y la certeza, por lo que los argumentos simplificados en exceso pueden llegar más lejos que las explicaciones detalladas. Aprender sus patrones te brinda una pausa práctica antes de reaccionar o compartir."
+      },
+      {
+        "heading": "1. Atacar al mensajero (Ad Hominem)",
+        "body": "Un ataque ad hominem se dirige a la persona que hace una afirmación en lugar de poner a prueba la afirmación en sí. Alguien podría descartar una propuesta sólida solo porque quien la presenta cometió un error años atrás. El historial de una persona puede afectar su credibilidad, pero no determina si la evidencia actual es válida. Pregúntate: ¿qué parte del argumento se respondió realmente?"
+      },
+      {
+        "heading": "2. La táctica de la distorsión (Hombre de paja)",
+        "body": "La falacia del hombre de paja reemplaza la postura real de alguien con una versión más débil o extrema que resulta más fácil de atacar. Por ejemplo, una petición de restricciones sensatas puede presentarse como la exigencia de una prohibición total. Compara la respuesta con las palabras originales: si no coinciden, el argumento real sigue en pie."
+      },
+      {
+        "heading": "3. Confundir coincidencia con causa",
+        "body": "Cuando dos eventos suceden al mismo tiempo, es tentador asumir que uno causó el otro. Esta es la falacia post hoc: después de esto, por lo tanto a causa de esto. La correlación puede ser una pista útil, pero otro factor podría explicar ambos eventos. Busca un mecanismo plausible, explicaciones alternativas y evidencia que las descarte."
+      },
+      {
+        "heading": "4. La trampa del todo o nada (Falso dilema)",
+        "body": "Un falso dilema presenta solo dos opciones cuando existen más alternativas. La opción no deseada se hace parecer imposible o peligrosa, empujándote hacia la respuesta preferida del emisor. Antes de aceptar la elección, pregúntate qué punto medio, alternativa o combinación se ha dejado fuera."
+      },
+      {
+        "heading": "5. La reacción en cadena (Pendiente resbaladiza)",
+        "body": "Un argumento de pendiente resbaladiza afirma que un pequeño paso desencadenará inevitablemente una cadena de consecuencias cada vez más extremas. A veces los riesgos realmente se acumulan, pero cada eslabón requiere evidencia. Pregúntate dónde podría detenerse la cadena, qué salvaguardas existen y si el resultado predicho realmente ha ocurrido en casos comparables."
+      },
+      {
+        "heading": "Cómo elevar tu nivel de pensamiento",
+        "body": "El pensamiento crítico no consiste en encontrar instantáneamente la respuesta correcta, sino en examinar qué tan bien fundamentada está esa respuesta. Cuando una publicación te haga reaccionar, detente y reformula su afirmación con un lenguaje neutral. Luego pregúntate: ¿cuál es la evidencia?, ¿respalda exactamente esta afirmación?, ¿qué alternativas se ignoraron? y ¿qué haría cambiar mi opinión?"
+      },
+      {
+        "heading": "Referencias",
+        "items": [
+          "Zarvana. \"8 Fallacies You're Likely Falling For on Social Media.\"",
+          "Western Technical College. \"Fallacies: Illogical Arguments - Fake News and Fake Facts.\"",
+          "Wikipedia. \"List of fallacies.\"",
+          "University of Iowa. \"Logical Fallacies - Evaluating Online Information.\"",
+          "Owen M. Williamson, University of Texas at El Paso. \"Master List of Logical Fallacies.\""
+        ]
+      }
+    ]
+  }
+}

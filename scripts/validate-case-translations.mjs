@@ -179,9 +179,13 @@ function validateArticle(article, label) {
   if (!Array.isArray(article.sections) || article.sections.length === 0) fail(`${label}.sections must not be empty.`);
   for (const [index, section] of article.sections.entries()) {
     const sectionLabel = `${label}.sections[${index}]`;
-    assertAllowedKeys(section, new Set(["heading", "body"]), sectionLabel);
-    if (typeof section.heading !== "string" || typeof section.body !== "string") {
-      fail(`${sectionLabel} requires heading and body strings.`);
+    assertAllowedKeys(section, new Set(["heading", "body", "items"]), sectionLabel);
+    const hasBody = typeof section.body === "string" && section.body.length > 0;
+    const hasItems = Array.isArray(section.items)
+      && section.items.length > 0
+      && section.items.every((item) => typeof item === "string" && item.length > 0);
+    if (typeof section.heading !== "string" || section.heading.length === 0 || hasBody === hasItems) {
+      fail(`${sectionLabel} requires a heading and exactly one of a body string or non-empty items list.`);
     }
   }
 }
