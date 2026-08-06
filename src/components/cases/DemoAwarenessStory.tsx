@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button, cn } from "@/components/ui/Primitives";
@@ -58,7 +59,10 @@ export function DemoAwarenessStory({ caseData }: { caseData: CaseData }) {
       <div className="absolute inset-x-0 top-0 h-1 bg-info" aria-hidden />
 
       <header className="relative z-10 flex min-h-16 items-center justify-between gap-4 border-b-2 border-border bg-background/95 px-4 sm:px-8">
-        <Link href={localizePath("/")} className="font-display text-lg font-black">SIX<span className="text-accent">MA</span></Link>
+        <Link href={localizePath("/")} className="flex items-center gap-2 font-display text-lg font-black">
+          <Image src="/assets/brand/logo.svg" alt="" width={36} height={36} className="size-9 object-contain" preload />
+          <span>SIX<span className="text-accent">MA</span></span>
+        </Link>
         <span className="font-mono text-xs font-black uppercase text-info">{t("demoStory.debrief")}</span>
       </header>
 

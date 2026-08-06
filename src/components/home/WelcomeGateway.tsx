@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { LanguageSwitch } from "@/components/site/SiteHeader";
@@ -70,7 +71,7 @@ export function WelcomeGateway() {
         >
           <header className="flex min-h-12 items-center justify-between gap-4 border-b-[3px] border-info bg-surface-2 px-4 py-2">
             <div className="flex items-center gap-3">
-              <span className="grid size-7 place-items-center border-2 border-info bg-info text-sm font-black text-info-foreground" aria-hidden>S</span>
+              <Image src="/assets/brand/logo.svg" alt="" width={32} height={32} className="size-8 object-contain" preload />
               <span className="font-mono text-xs font-black uppercase text-info">SIXMA</span>
             </div>
             <div className="flex items-center gap-2">

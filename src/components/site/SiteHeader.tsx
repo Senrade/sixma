@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -49,7 +50,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b-[3px] border-border bg-background/95 backdrop-blur">
       <div className="relative mx-auto flex min-h-16 max-w-7xl items-center gap-3 px-4 py-2 md:px-6">
         <Link href={localizePath("/")} className="flex shrink-0 items-center gap-2 font-display text-base font-black tracking-[0.08em] sm:text-lg">
-          <span className="grid size-9 place-items-center border-[3px] border-info bg-info text-background shadow-[3px_3px_0_0_var(--color-accent)]">S</span>
+          <Image src="/assets/brand/logo.svg" alt="" width={40} height={40} className="size-10 shrink-0 object-contain" preload />
           <span className="hidden min-[390px]:inline">SIX<span className="text-accent">MA</span></span>
         </Link>
 
