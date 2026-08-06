@@ -1,6 +1,6 @@
 {
   "D001": {
-    "title": "An urgent cry for help from Hurricane Helene",
+    "title": "A cry for help from Hurricane Helene",
     "short_summary": "Amid the devastation of Hurricane Helene in 2024, a photo of a young girl weeping while clutching her puppy in floodwaters went viral, garnering millions of shares and igniting a fierce debate over rescue operations.",
     "skills": [
       "Synthetic image detection",
@@ -8,7 +8,6 @@
       "Source tracing"
     ],
     "theme": [
-      "Demo",
       "Disaster response",
       "Photojournalism"
     ],
@@ -206,7 +205,7 @@
                 "B. Compare its color transitions, surface texture, and highlights with the nearby food and metal under the same light.",
                 "C. Count how many separate food items appear in the tray around it."
               ],
-              "explanation": "Size alone is unreliable because cockroach species vary. Here, the insect's overly saturated color and polished, toy-like surface respond differently to light than the rice and tray. Some generative AI models or compositing processes can create this kind of material mismatch, so it should be checked alongside source and context evidence."
+              "explanation": "Size alone is unreliable because cockroach species vary. Here, the insect's overly saturated color and polished, toy-like surface respond differently to light than the rice and tray. Some generative AI models can create this kind of material mismatch, so it should be checked alongside source and context evidence."
             }
           }
         }
