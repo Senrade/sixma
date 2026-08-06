@@ -9,6 +9,8 @@ import { Progress } from "@/components/ui/Primitives";
 import type { CaseData } from "@/lib/case-types";
 import { useI18n } from "@/i18n/I18nProvider";
 import type { MessageKey } from "@/i18n/messages/types";
+import { SPECIAL_EVENT_CASE_ID } from "@/lib/demo-event";
+import { awardDemoEventBadge } from "@/lib/demo-event-storage";
 import { MissionExitDialog } from "./MissionExitDialog";
 
 const STEP_LABELS: readonly MessageKey[] = ["mission.step.inspect", "mission.step.analyze", "mission.step.reconstruct"];
@@ -31,6 +33,9 @@ export function MissionExperience({ caseData }: { caseData: CaseData }) {
         progressStorageKey,
         "1",
       );
+      if (caseData.case_id === SPECIAL_EVENT_CASE_ID) {
+        awardDemoEventBadge();
+      }
     } catch {
       // Completion still works when storage is unavailable.
     }

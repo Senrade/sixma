@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { Button, Input, Label, Textarea } from "@/components/ui/Primitives";
+import { DemoRedemptionController } from "@/components/redeem/DemoRedemptionController";
 import { useI18n } from "@/i18n/I18nProvider";
 import type { MessageKey } from "@/i18n/messages/types";
 
@@ -23,7 +24,7 @@ export function ServiceForm({ kind }: { kind: FormKind }) {
   };
 
   if (kind === "redeem") {
-    return <form onSubmit={submit} className="mt-6"><Label htmlFor="redeem-code">{t("form.eventCode")}</Label><Input id="redeem-code" name="code" required minLength={6} maxLength={32} autoComplete="off" placeholder={t("form.codePlaceholder")} className="font-mono uppercase" /><Button type="submit" tone="accent" className="mt-4 w-full">{t("form.checkCode")}</Button>{message && <Status>{message}</Status>}</form>;
+    return <DemoRedemptionController />;
   }
 
   if (kind === "contact") {
