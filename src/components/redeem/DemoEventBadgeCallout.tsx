@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import { ButtonLink, Chip } from "@/components/ui/Primitives";
 import { useI18n } from "@/i18n/I18nProvider";
 import { readDemoEventBadge } from "@/lib/demo-event-storage";
+import { getActiveDemoEventCard } from "@/lib/demo-event";
 
 export function DemoEventBadgeCallout() {
   const [earned, setEarned] = useState(false);
   const { localizePath, t } = useI18n();
+  const activeCard = getActiveDemoEventCard();
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -24,10 +26,11 @@ export function DemoEventBadgeCallout() {
     <section className="mt-8 grid gap-5 border-[3px] border-success bg-success p-5 text-success-foreground shadow-[6px_6px_0_0_var(--color-ink)] sm:grid-cols-[7rem_1fr] sm:items-center sm:p-6">
       <div className="relative mx-auto aspect-[5/7] w-24 overflow-hidden border-[3px] border-ink bg-surface sm:w-28">
         <Image
-          src="/assets/cards/card-5.svg"
-          alt=""
+          src={activeCard.artworkUrl}
+          alt={t("redeem.cardArtAlt", { cardName: activeCard.name })}
           fill
           sizes="112px"
+          unoptimized
           className="object-cover object-top"
         />
       </div>

@@ -1,5 +1,6 @@
 export const SPECIAL_EVENT_CASE_ID = "S005";
 export const DEMO_EVENT_BADGE_ID = "signal-breaker";
+export const ACTIVE_DEMO_EVENT_CARD_ID = "fear-appeal";
 
 export const DEMO_EVENT_ACCESS_STORAGE_KEY =
   "sixma-demo-event:v1:access:S005";
@@ -59,11 +60,19 @@ export function normalizeDemoEventCode(value: string): string {
   return characters.match(/.{1,3}/g)?.join("-") ?? "";
 }
 
-export function findDemoEventCard(value: string): DemoEventCard | undefined {
+export function findRedeemableDemoEventCard(value: string): DemoEventCard | undefined {
   const code = normalizeDemoEventCode(value);
-  return DEMO_EVENT_CARDS.find((card) => card.code === code);
+  return DEMO_EVENT_CARDS.find(
+    (card) => card.id === ACTIVE_DEMO_EVENT_CARD_ID && card.code === code,
+  );
 }
 
 export function getDemoEventCard(cardId: string): DemoEventCard | undefined {
   return DEMO_EVENT_CARDS.find((card) => card.id === cardId);
+}
+
+export function getActiveDemoEventCard(): DemoEventCard {
+  const card = getDemoEventCard(ACTIVE_DEMO_EVENT_CARD_ID);
+  if (!card) throw new Error("The active demo event card is missing from the catalog.");
+  return card;
 }

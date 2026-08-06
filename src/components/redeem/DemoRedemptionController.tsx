@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import {
-  findDemoEventCard,
+  findRedeemableDemoEventCard,
   getDemoEventCard,
   normalizeDemoEventCode,
 } from "@/lib/demo-event";
@@ -38,7 +38,7 @@ export function DemoRedemptionController() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const card = findDemoEventCard(code);
+    const card = findRedeemableDemoEventCard(code);
     if (!card) {
       setViewState({ kind: "invalid" });
       return;

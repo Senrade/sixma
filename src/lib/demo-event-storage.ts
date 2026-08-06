@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  ACTIVE_DEMO_EVENT_CARD_ID,
   DEMO_EVENT_ACCESS_STORAGE_KEY,
   DEMO_EVENT_BADGE_ID,
   DEMO_EVENT_BADGE_STORAGE_KEY,
@@ -42,7 +43,7 @@ function parseAccessRecord(value: string | null): DemoEventAccessRecord | null {
       "caseId" in record &&
       record.caseId === SPECIAL_EVENT_CASE_ID &&
       "cardId" in record &&
-      typeof record.cardId === "string" &&
+      record.cardId === ACTIVE_DEMO_EVENT_CARD_ID &&
       getDemoEventCard(record.cardId) &&
       "redeemedAt" in record &&
       typeof record.redeemedAt === "string"
