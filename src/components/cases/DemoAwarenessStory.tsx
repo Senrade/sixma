@@ -23,7 +23,7 @@ const STORY_SCENES: readonly StoryScene[] = [
 ];
 
 export function DemoAwarenessStory({ caseData }: { caseData: CaseData }) {
-  const { t } = useI18n();
+  const { localizePath, t } = useI18n();
   const [activeScene, setActiveScene] = useState(0);
   const scene = STORY_SCENES[activeScene];
   const isFinalScene = activeScene === STORY_SCENES.length - 1;
@@ -56,7 +56,7 @@ export function DemoAwarenessStory({ caseData }: { caseData: CaseData }) {
       <div className="absolute inset-x-0 top-0 h-1 bg-info" aria-hidden />
 
       <header className="relative z-10 flex min-h-16 items-center justify-between gap-4 border-b-2 border-border bg-background/95 px-4 sm:px-8">
-        <Link href="/" className="font-display text-lg font-black">SIX<span className="text-accent">MA</span></Link>
+        <Link href={localizePath("/")} className="font-display text-lg font-black">SIX<span className="text-accent">MA</span></Link>
         <span className="font-mono text-xs font-black uppercase text-info">{t("demoStory.debrief")}</span>
       </header>
 
@@ -95,7 +95,7 @@ export function DemoAwarenessStory({ caseData }: { caseData: CaseData }) {
             {t("demoStory.back")}
           </Button>
           {isFinalScene ? (
-            <Link href="/" className="inline-flex min-h-12 items-center justify-center border-[3px] border-info bg-info px-5 font-mono text-sm font-black uppercase text-info-foreground shadow-[4px_4px_0_0_var(--color-accent)] transition-transform hover:-translate-y-px">
+            <Link href={localizePath("/")} className="inline-flex min-h-12 items-center justify-center border-[3px] border-info bg-info px-5 font-mono text-sm font-black uppercase text-info-foreground shadow-[4px_4px_0_0_var(--color-accent)] transition-transform hover:-translate-y-px">
               {t("demoStory.join")}
             </Link>
           ) : (

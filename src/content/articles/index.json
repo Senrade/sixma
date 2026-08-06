@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "articles": [
+    { "slug": "spotting-ai-images", "read_time": 6 },
+    { "slug": "emotional-manipulation", "read_time": 5 },
+    { "slug": "phishing-chain", "read_time": 7 }
+  ]
+}

@@ -1,0 +1,643 @@
+{
+  "D001": {
+    "title": "An urgent cry for help from Hurricane Helene",
+    "short_summary": "Amid the devastation of Hurricane Helene in 2024, a photo of a young girl weeping while clutching her puppy in floodwaters went viral, garnering millions of shares and igniting a fierce debate over rescue operations.",
+    "skills": [
+      "Synthetic image detection",
+      "Emotional manipulation",
+      "Source tracing"
+    ],
+    "theme": [
+      "Demo",
+      "Disaster response",
+      "Photojournalism"
+    ],
+    "story_context": "After Hurricane Helene, an emotionally powerful image of a crying girl holding a puppy in floodwater spread online as if it documented a real rescue. The synthetic image was used to shape public judgment about the disaster response, even though the child and the photographed moment never existed.",
+    "source": {
+      "note": "Scenario adapted from David Carson's discussion of an AI-generated girl-and-puppy flood image that circulated during Hurricane Helene."
+    },
+    "modules": {
+      "step_1_image_forensics": {
+        "context_text": "This image was shared as documentary proof of a child's rescue during catastrophic flooding after Hurricane Helene.",
+        "target_anomalies": {
+          "D001_IMG_01": {
+            "description": "The girl's face has an unnaturally smooth, synthetic quality, with inconsistent detail around the eyes, mouth, and expression.",
+            "socratic_quiz": {
+              "question": "Why is the girl's face a meaningful warning sign that the image may be synthetic?",
+              "options": [
+                "A. A real child could never be photographed while crying.",
+                "B. The skin and expression look unnaturally smooth while details around the eyes and mouth lack the consistency of a real photograph.",
+                "C. The girl's face is near the center of the composition."
+              ],
+              "explanation": "Overly smooth skin, unstable facial details, and an exaggerated synthetic expression are useful clues. They are not proof by themselves, so the next step is to investigate the image's source and provenance."
+            }
+          }
+        }
+      },
+      "step_2_text_highlight": {
+        "simulated_post": {
+          "author": "Storm Truth Network",
+          "time_posted": "18 minutes ago",
+          "content": "Look at this little girl clinging to her puppy in the flood. The media will never show you what is really happening after the hurricane. This photo proves rescue teams abandoned families like hers while officials staged press conferences. Share it now before they delete the evidence."
+        },
+        "traps": {
+          "D001_TRAP_01": {
+            "matched_text": "This photo proves rescue teams abandoned families like hers while officials staged press conferences.",
+            "socratic_quiz": {
+              "question": "What unsupported leap does the post make from the image to its accusation?",
+              "options": [
+                "A. It verifies when and where the image was captured before discussing the response.",
+                "B. It treats an unverified emotional image as direct proof that rescue teams abandoned families.",
+                "C. It compares reports from several independent journalists covering the disaster."
+              ],
+              "explanation": "Even an authentic photograph would document only one moment. It could not, by itself, prove a broad claim about the entire disaster response. Here the image was synthetic, making the leap even more misleading."
+            }
+          }
+        }
+      },
+      "step_3_sorting_game": {
+        "context_text": "The synthetic rescue image enters a fast-moving news cycle during a real disaster and begins influencing how people judge the response.",
+        "pool_items": {
+          "D001_SORT_02": "Viewers react to the child's distress and repost the image as evidence that rescue teams failed families.",
+          "D001_SORT_03": "Repetition separates the image from its unknown origin, and the false story competes with verified reporting from the disaster.",
+          "D001_SORT_01": "An account posts a synthetic rescue image with a real-disaster caption but provides no photographer, location, or original source."
+        },
+        "validation_feedback": {
+          "success": "Correct. The synthetic image gains power through a real disaster, an emotional interpretation, and repeated sharing. As its origin disappears, the invented story can distract from verified reporting about real people.",
+          "failure": "Not quite. Begin with the unsourced image, then follow the emotional interpretation, and finish with what repeated sharing does to its origin and credibility."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "If an image creates a strong emotional reaction and appears to confirm what you already believe, what should you verify before sharing it?",
+      "mil_insight": "Trace the earliest available upload, identify the photographer or creator, confirm the date and location through independent reporting, and look for provenance such as Content Credentials. Visual artifacts are clues, not a final verdict: authentic images can also be falsely accused of being AI-generated."
+    }
+  },
+  "R001": {
+    "title": "The Classroom That Never Happened",
+    "short_summary": "A viral image claims AI is monitoring students. Verify the photo, decode the rhetoric, and expose the phishing chain.",
+    "skills": [
+      "Image forensics",
+      "Logical fallacies",
+      "Phishing patterns"
+    ],
+    "theme": [
+      "Education",
+      "Technology"
+    ],
+    "story_context": "A misinformation campaign based on the rumor that AI will replace teachers",
+    "modules": {
+      "step_1_image_forensics": {
+        "context_text": "The leaked image attached to the controversy post is claimed to be 'evidence that AI is monitoring and evaluating students during class.'",
+        "target_anomalies": {
+          "R001_IMG_01": {
+            "description": "Distorted, unreadable gibberish text rendered on the digital whiteboard screen.",
+            "socratic_quiz": {
+              "question": "Why is the writing on the classroom screen a strong warning sign?",
+              "options": [
+                "A. The screen is too bright for a classroom.",
+                "B. The writing is garbled and overlaps instead of forming readable words.",
+                "C. The screen is mounted above the teacher's desk."
+              ],
+              "explanation": "Image generators often produce plausible shapes but fail to keep text legible and consistent. Gibberish text is stronger evidence of manipulation than the screen's brightness or location."
+            }
+          },
+          "R001_IMG_02": {
+            "description": "Students in the center foreground are abnormally overlapping and clipping into each other.",
+            "socratic_quiz": {
+              "question": "What makes the students in this area a likely AI-generation error?",
+              "options": [
+                "A. Several students are seated close together.",
+                "B. The students overlap and merge in ways that do not match their bodies or seats.",
+                "C. The group is facing away from the camera."
+              ],
+              "explanation": "A crowded classroom can be natural, but bodies that merge or clip through one another break the scene's physical logic. That structural inconsistency is a useful deepfake clue."
+            }
+          }
+        }
+      },
+      "step_2_text_highlight": {
+        "simulated_post": {
+          "author": "Parents and Education Community",
+          "time_posted": "2 hours ago",
+          "content": "Just found out the Ministry of Education is piloting a new AI learning assistant in several schools next term. Honestly, this looks like a covert move to phase out real human teachers entirely. It's pretty obvious big tech is just trying to fully automate education to exploit student data for profit. Even Professor Tan stated in his latest report that 'AI is now taking full control over the classroom'. If parents don't stand up and boycott this rollout immediately, our kids will completely lose their capacity for critical thinking!"
+        },
+        "traps": {
+          "R001_TRAP_01": {
+            "matched_text": "Honestly, this looks like a covert move to phase out real human teachers entirely.",
+            "socratic_quiz": {
+              "question": "What primary logical flaw is the author relying on to convince you that teachers are being replaced?",
+              "options": [
+                "A. Relying on verified strategic documents published openly by the Ministry of Education.",
+                "B. Analyzing the statistical decline of employment numbers in the education sector over the last decade.",
+                "C. Attributing a sinister, hidden motive to a standard technology pilot without presenting concrete evidence."
+              ],
+              "explanation": "The author jumps straight to a hidden conspiracy theory, presenting a pilot program as a malicious plot without any verifiable proof."
+            }
+          },
+          "R001_TRAP_02": {
+            "matched_text": "It's pretty obvious big tech is just trying to fully automate education to exploit student data for profit.",
+            "socratic_quiz": {
+              "question": "How does the phrase 'It's pretty obvious' serve to manipulate the reader's analytical thinking?",
+              "options": [
+                "A. It indicates that the statement is backed by a broad consensus of peer-reviewed research.",
+                "B. It invites the reader to review the privacy terms and conditions of the software independently.",
+                "C. It bypasses the need for factual proof by presenting a complex assumption as an undeniable truth."
+              ],
+              "explanation": "Phrases like 'it's pretty obvious' are rhetorical tricks used to smuggle in major, unproven assertions as if they are unquestionable facts."
+            }
+          },
+          "R001_TRAP_03": {
+            "matched_text": "If parents don't stand up and boycott this rollout immediately, our kids will completely lose their capacity for critical thinking!",
+            "socratic_quiz": {
+              "push_question": "What psychological trap does the author force the reader into with how this closing statement is framed?",
+              "options": [
+                "A. Providing a clear, step-by-step roadmap to solve the issue.",
+                "B. Forcing a choice between an immediate boycott or facing absolute disaster, eliminating any moderate solutions.",
+                "C. Encouraging parents to conduct independent research before making a final decision."
+              ],
+              "explanation": "The author uses a false dilemma fallacy to strip away your ability to make a neutral, analytical choice."
+            }
+          }
+        }
+      },
+      "step_3_sorting_game": {
+        "context_text": "The panic spread by the post has led to a phishing email targeting parents.",
+        "pool_items": {
+          "R001_SORT_01": "Click the security link below to pay a processing fee (50,000 VND) and verify your right to opt out.",
+          "R001_SORT_02": "WARNING: Your child's personal data is currently scheduled to be synchronized with the Ministry's AI system.",
+          "R001_SORT_03": "To protect privacy and remove your child's name from the project, parents must complete the 'Opt-Out Form' within 24 hours."
+        },
+        "validation_feedback": {
+          "success": "Correct. You have decoded the classic psychological manipulation chain: Create fear and urgency (Hook) → Introduce an urgent solution (Pivot) → Insert a trap to collect money or personal data (Trap).",
+          "failure": "Incorrect logic. Phishing attacks rarely ask for money immediately. They usually begin by creating a fake crisis to overwhelm the victim's critical thinking."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Ask your Teacher/Parent: if a message from the school asks parents to click an unfamiliar link and make an urgent payment to 'protect their child's learning data,' what key sign proves that it is a scam?",
+      "mil_insight": "Help parents and students compare the message against standard administrative procedures: legitimate educational institutions never use time pressure (such as a 24-hour deadline) or unofficial payment links to handle security issues."
+    }
+  },
+  "R002": {
+    "title": "The Canteen Extortion File",
+    "short_summary": "An anonymous sender uses a doctored food photo and reputational pressure to extort a school.",
+    "skills": [
+      "Composite detection",
+      "Coercion patterns",
+      "Extortion structure"
+    ],
+    "theme": [
+      "Health",
+      "Safety",
+      "School"
+    ],
+    "story_context": "An anonymous extortion email claiming contaminated food in the school canteen, demanding money to prevent reputational damage.",
+    "modules": {
+      "step_1_image_forensics": {
+        "context_text": "The leaked image attached to the extortion email claims to show 'a disgusting cockroach served in the high school canteen food tray.'",
+        "target_anomalies": {
+          "R002_IMG_01": {
+            "description": "The cockroach has unusually saturated, polished coloring and a toy-like surface that does not respond to the scene's light like the rice and metal tray.",
+            "socratic_quiz": {
+              "question": "Which comparison would best test whether the cockroach belongs naturally in this scene?",
+              "options": [
+                "A. Measure its length against several grains of rice to decide whether that species could exist.",
+                "B. Compare its color transitions, surface texture, and highlights with the nearby food and metal under the same light.",
+                "C. Count how many separate food items appear in the tray around it."
+              ],
+              "explanation": "Size alone is unreliable because cockroach species vary. Here, the insect's overly saturated color and polished, toy-like surface respond differently to light than the rice and tray. Some generative AI models or compositing processes can create this kind of material mismatch, so it should be checked alongside source and context evidence."
+            }
+          }
+        }
+      },
+      "step_2_text_highlight": {
+        "simulated_post": {
+          "author": "Anonymous",
+          "time_posted": "5 hour ago",
+          "content": "I don't usually post stuff like this, but today's lunch honestly made me uncomfortable. While I was eating, I noticed what looked like a cockroach in my lunch tray. I don't know whether it came from the kitchen or somewhere else, maybe there's a perfectly good explanation out there, but if this really came from the cafeteria, students have a right to be worried. I'm not saying the cafeteria is unsafe. I'm just asking why this keeps happening and why nobody ever seems to explain anything afterward. The school seems to never take students' food feedback into consideration anyway, saying the problem is too complicated or something like that. At this point, I think parents deserve to know what's happening before this gets quietly swept under the rug..."
+        },
+        "traps": {
+          "R002_TRAP_01": {
+            "matched_text": "I'm not saying the cafeteria is unsafe. I'm just asking why this keeps happening and why nobody ever seems to explain anything afterward.",
+            "socratic_quiz": {
+              "question": "What evidence would be needed before 'why this keeps happening' becomes a fair question?",
+              "options": [
+                "A. The author's uncertainty about where the insect came from.",
+                "B. Independently verified earlier incidents showing that the same problem has actually recurred.",
+                "C. The absence of an immediate reply beneath this particular post."
+              ],
+              "explanation": "The phrase 'this keeps happening' assumes a repeated pattern before one has been established. The opening disclaimer does not remove that assumption. This rhetorical innuendo seeds doubt while allowing the author to retreat to 'I was only asking' if challenged."
+            }
+          },
+          "R002_TRAP_02": {
+            "matched_text": "The school seems to never take students' food feedback into consideration anyway, saying the problem is too complicated or something like that.",
+            "socratic_quiz": {
+              "question": "How could a reader evaluate a future school response without inheriting the post's framing?",
+              "options": [
+                "A. Judge the response by how many commenters already distrust the school.",
+                "B. Examine its evidence and reasoning before deciding whether complexity is genuine or merely an excuse.",
+                "C. Reject the response if it contains technical details that are difficult to understand."
+              ],
+              "explanation": "The post poisons the well by labeling a future explanation as an excuse before the school speaks. The word 'never' also overgeneralizes from unspecified experiences. A fair evaluation examines the eventual response and its evidence independently of that pre-framing."
+            }
+          },
+          "R002_TRAP_03": {
+            "matched_text": "At this point, I think parents deserve to know what's happening before this gets quietly swept under the rug...",
+            "socratic_quiz": {
+              "question": "How does 'before this gets quietly swept under the rug' change the order in which readers act and verify?",
+              "options": [
+                "A. It makes immediate sharing feel protective, moving escalation ahead of checking whether a cover-up exists.",
+                "B. It limits the claim to one personal observation and reduces pressure to act.",
+                "C. It directs readers to an independent source before they form a judgment."
+              ],
+              "explanation": "The implied cover-up introduces a conspiracy narrative and appeals to fear, making rapid sharing feel safer than waiting. That artificial urgency reverses a sound verification order: readers are pushed to amplify first and investigate later."
+            }
+          }
+        }
+      },
+      "step_3_sorting_game": {
+        "context_text": "A misleading social media post about the school canteen has spread across the community.",
+        "pool_items": {
+          "R002_SORT_01": "Other users repost the image with stronger claims, assuming the worst.",
+          "R002_SORT_02": "The rumor becomes accepted as 'common knowledge' even though the original claim was never confirmed.",
+          "R002_SORT_03": "Someone uploads a photo with a personal interpretation but without verified context.",
+          "R002_SORT_04": "People react emotionally and share the post before waiting for official verification."
+        },
+        "validation_feedback": {
+          "success": "Correct. Rumors often become believable through repetition rather than evidence. An unverified observation can evolve into 'everyone knows it's true' as people add assumptions, share emotionally, and stop checking the original source.",
+          "failure": "Not quite. False information rarely spreads because of one convincing post alone. It gains momentum as people amplify unverified claims and repeat them as facts before anyone verifies the evidence."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Ask your Teacher/Parent: If you received this message, what evidence would you need before believing the photo reflects a real food safety problem rather than a manipulated story?",
+      "mil_insight": "A single image rarely provides enough context to establish what happened. Discuss how to distinguish direct evidence from assumptions by checking the original source, verifying when and where the photo was taken, and following the school's official investigation process before drawing conclusions."
+    }
+  },
+  "R003": {
+    "title": "The Illusion of Success",
+    "short_summary": "A viral post flexes a 20-year-old's fake luxury lifestyle while belittling others. Uncover the AI anomalies and decode the toxic FOMO tactics.",
+    "skills": [
+      "Image forensics",
+      "Logical fallacies",
+      "FOMO & Toxic flexing analysis"
+    ],
+    "theme": [
+      "Social Media",
+      "Peer Pressure",
+      "Toxic Flexing"
+    ],
+    "story_context": "A viral post by a 'Minh Khang' persona about early financial wisdom, with a photo that seems suspect to careful eyes.",
+    "modules": {
+      "step_1_image_forensics": {
+        "context_text": "This photo supports Minh Khang's claims about his luxury lifestyle. Examine whether its physical details remain internally consistent.",
+        "target_anomalies": {
+          "R003_IMG_01": {
+            "description": "The phone-holding hand has a subtly over-saturated, waxy color and knuckle contours that do not fully align with a natural grip.",
+            "socratic_quiz": {
+              "question": "Which comparison would be most useful when examining the phone-holding hand?",
+              "options": [
+                "A. Check whether perspective alone explains why the hand appears larger than the wrist.",
+                "B. Check whether its color and knuckle contours transition naturally from the wrist through the grip.",
+                "C. Check whether the phone angle points in the same direction as the person's gaze."
+              ],
+              "explanation": "Perspective can explain size and pose, but the hand's unusually saturated color and subtly inconsistent knuckle contours do not transition naturally from the wrist. Some generative AI models can produce hands that look plausible at first glance while losing color or joint consistency under closer inspection. Treat this as a clue to verify alongside other evidence, not proof by itself."
+            }
+          },
+          "R003_IMG_02": {
+            "description": "The rigid window frame and handle develop uneven, wavy contours instead of preserving consistent manufactured geometry.",
+            "socratic_quiz": {
+              "question": "Which check would best distinguish perspective from an inconsistency in the window area?",
+              "options": [
+                "A. Compare the frame's brightness with the buildings visible outside.",
+                "B. Trace whether the rigid frame and handle keep smooth contours or ripple independently along their length.",
+                "C. Check whether the handle is positioned at a practical height for opening the window."
+              ],
+              "explanation": "Perspective may tilt or narrow a rigid object, but it should not make its edges ripple unpredictably from one section to another. Some generative AI models can introduce this kind of local warping in rigid geometry. The waviness is therefore a useful clue to compare with the rest of the image and with a genuine window structure."
+            }
+          }
+        }
+      },
+      "step_2_text_highlight": {
+        "simulated_post": {
+          "author": "Minh Khang",
+          "time_posted": "2 hours ago",
+          "content": "It's honestly funny how some people keep saying \"money doesn't buy happiness\" every time someone posts something nice. Like... just because you can't afford it doesn't mean it's \"showing off.\" Meanwhile, everyone I know is out here grinding, getting internships, buying what they want, and actually doing something with their lives. If you're still making excuses while everyone else is moving up, maybe stop blaming other people and ask yourself why you're getting left behind. Stay mad if you want, but don't expect the world to wait for you."
+        },
+        "traps": {
+          "R003_T1": {
+            "matched_text": "just because you can't afford it doesn't mean it's \"showing off.\"",
+            "socratic_quiz": {
+              "question": "What is this sentence really trying to do to anyone who criticizes the flex post?",
+              "options": [
+                "A. Directly addresses why the post might be considered showing off",
+                "B. Assigns a negative motive (jealousy over money) to anyone who criticizes, instead of engaging with whether the criticism is actually valid",
+                "C. Provides an objective, neutral explanation"
+              ],
+              "explanation": "This is an attacking-the-motive fallacy: instead of responding to the actual argument (whether the post is showing off or not), the writer assumes any critic is simply 'broke and jealous' — a way to dodge the real issue while demeaning the critic."
+            }
+          },
+          "R003_T2": {
+            "matched_text": "everyone I know is out here grinding, getting internships, buying what they want, and actually doing something with their lives",
+            "socratic_quiz": {
+              "question": "What is the logical problem with this comparison?",
+              "options": [
+                "A. It's a fair comparison since everyone starts from the exact same circumstances",
+                "B. It lumps together unrelated things (effort, internships, shopping) to imply that anyone who can't afford luxury goods is 'not doing anything with their life,' ignoring differences in people's actual circumstances",
+                "C. It's an accurate statistic about the writer's actual acquaintances"
+              ],
+              "explanation": "This is a false comparison: it equates 'being able to buy what you want' with 'succeeding in life,' while ignoring that people come from very different financial and family backgrounds — making this an unfair basis for comparison."
+            }
+          },
+          "R003_T3": {
+            "matched_text": "If you're still making excuses while everyone else is moving up, maybe stop blaming other people and ask yourself why you're getting left behind",
+            "socratic_quiz": {
+              "question": "How is this sentence psychologically affecting the reader?",
+              "options": [
+                "A. It offers sincere, actionable advice to help the reader grow",
+                "B. It creates a fear of being left behind (FOMO) by painting a picture of 'everyone moving up,' while implicitly blaming and belittling the reader as someone who 'makes excuses' and 'falls behind'",
+                "C. It's simply a rhetorical question with no particular purpose"
+              ],
+              "explanation": "This is a FOMO-inducing tactic combined with a personal attack: the sentence offers no real solution, but instead pressures the reader into feeling inadequate and anxious about falling behind an ambiguous, unverified standard."
+            }
+          },
+          "R003_T4": {
+            "matched_text": "Stay mad if you want, but don't expect the world to wait for you",
+            "socratic_quiz": {
+              "question": "What is the purpose of this closing sentence in response to any pushback?",
+              "options": [
+                "A. It invites an open conversation to understand other people's perspectives",
+                "B. It dismisses any negative reaction or criticism by labeling it as 'being mad,' allowing the writer to avoid reflecting on their own behavior",
+                "C. It offers genuine encouragement to everyone reading"
+              ],
+              "explanation": "This is an emotional dismissal tactic: any criticism or reaction is preemptively labeled as 'staying mad,' which lets the writer avoid examining their own bragging behavior while continuing to belittle others."
+            }
+          }
+        }
+      },
+      "step_3_sorting_game": {
+        "pool_items": {
+          "R003_SORT_01": "Readers experience intense FOMO and self-doubt, fearing they are falling behind their peers.",
+          "R003_SORT_02": "The influencer posts fabricated AI images of luxury items to establish fake status and authority.",
+          "R003_SORT_03": "The influencer pitches an expensive 'wealth mindset masterclass' as the ultimate shortcut to success.",
+          "R003_SORT_04": "The post uses false comparisons and condescending language to demean normal working youth as 'lazy'."
+        },
+        "validation_feedback": {
+          "success": "Correct! You have decoded the classic toxic flexing funnel: Fabricate status (Hook) → Belittle through false comparisons (Attack) → Trigger insecurity and FOMO (Anxiety) → Sell an expensive 'shortcut' course (Monetization).",
+          "failure": "Incorrect sequence. Toxic flexing manipulators first establish fake wealth, then attack the audience's self-esteem to create FOMO before offering their paid course as a fake solution."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Ask your Teacher/Parent: If a social media post makes you feel anxious that you are falling behind your peers who seem to afford luxury lifestyles, what steps can you take to evaluate what is real versus staged?",
+      "mil_insight": "Social media highlights rarely reflect full reality, and AI image tools make lavish lifestyles effortless to fake. Remind youth that success is not measured by material flexing or belittling others, and urgent pitches for expensive 'mindset courses' are almost always predatory scams."
+    }
+  },
+  "R004": {
+    "title": "National Exam Got Leaked",
+    "short_summary": "A viral Discord screenshot claims to leak national exam papers. Verify the image artifacts, decode the rhetoric, and expose the phishing chain.",
+    "skills": [
+      "Phishing detection",
+      "URL verification",
+      "Social engineering (urgency + authority)",
+      "Credential theft"
+    ],
+    "theme": [
+      "Education",
+      "Identity Theft",
+      "Financial Scam"
+    ],
+    "story_context": "A misinformation and phishing campaign based on fake national exam leaks circulated in a student Discord server",
+    "modules": {
+      "step_1_image_forensics": {
+        "context_text": "The screenshot attached to the channel is claimed to show '100% authentic exam papers from the Ministry of Education.' Examine whether its interface details are consistent with a genuine Discord screen.",
+        "target_anomalies": {
+          "R004_IMG_03": {
+            "description": "Distorted and malformed GIF/chat interface icons at the bottom right corner of the chat input bar.",
+            "socratic_quiz": {
+              "question": "Which observation is most useful when evaluating the two small buttons near the lower-right corner?",
+              "options": [
+                "A. Their dark background uses a similar color to the message bar.",
+                "B. The repeated GIF controls do not preserve consistent letterforms and geometry.",
+                "C. Their position is close to the other message controls."
+              ],
+              "explanation": "Repeated interface controls should keep the same recognizable lettering, proportions, and edges. When supposedly identical GIF buttons disagree in those details, compare the screenshot with a known genuine interface before trusting it."
+            }
+          },
+          "R004_IMG_04": {
+            "description": "The right edge of the highlighted message area is interrupted by an inward notch, breaking what should be a continuous boundary.",
+            "socratic_quiz": {
+              "question": "What is inconsistent about the right edge of the highlighted message area?",
+              "options": [
+                "A. Its upper and lower corners use the same rounded finish.",
+                "B. Its boundary is interrupted by an inward notch that does not continue the highlighted area.",
+                "C. Its right edge sits close to the side of the chat window."
+              ],
+              "explanation": "A message highlight should form one continuous panel. Here, the unexplained inward break interrupts its right border without any control or content causing that shape, indicating that this part of the screenshot was edited."
+            }
+          }
+        }
+      },
+      "step_2_text_highlight": {
+        "simulated_post": {
+          "author": "Scholarship Selection Committee",
+          "time_posted": "Just now",
+          "content": "Congratulations! You have already been selected for the Student Excellence Scholarship. Only 50 students have been selected. If you fail to verify within 2 hours, your place will be offered to another student. Please log in to pay your verification fee of 49,000 VND. Do not contact the school office because verification is handled by our scholarship partner."
+        },
+        "traps": {
+          "R004_TRAP_01": {
+            "matched_text": "You have already been selected for the Student Excellence Scholarship.",
+            "socratic_quiz": {
+              "question": "Why do scammers start the message by confirming the reward rather than asking you to apply?",
+              "options": [
+                "A. To trigger excitement and greed, making the victim drop their guard and become more willing to comply with subsequent demands.",
+                "B. To inform the student so they can celebrate with their family immediately.",
+                "C. To prove they have access to the school's confidential grading systems."
+              ],
+              "explanation": "This technique exploits 'reward baiting'. When people believe they have already won something valuable, their critical thinking decreases and they focus on claiming the prize rather than questioning its legitimacy."
+            }
+          },
+          "R004_TRAP_02": {
+            "matched_text": "If you fail to verify within 2 hours, your place will be offered to another student.",
+            "socratic_quiz": {
+              "question": "How does the email use the concept of time to manipulate the recipient?",
+              "options": [
+                "A. It establishes a reasonable administrative processing window for scholarship funds.",
+                "B. It creates artificial urgency, inducing panic to prevent the victim from thinking critically or verifying the claim.",
+                "C. It ensures the scholarship funds are distributed fairly among applicants."
+              ],
+              "explanation": "Artificial urgency is a cornerstone of social engineering. By forcing a 2-hour deadline, the scammer deprives the victim of the time needed to consult with parents, teachers, or IT staff."
+            }
+          },
+          "R004_TRAP_03": {
+            "matched_text": "verification fee of 49,000 VND",
+            "socratic_quiz": {
+              "question": "Why is the request for a small 'verification fee' highly suspicious in this context?",
+              "options": [
+                "A. Legitimate scholarships provide funds to students; they do not require recipients to pay money to receive money.",
+                "B. The amount is too small; real schools would charge at least 500,000 VND for administrative verification.",
+                "C. It indicates the school is trying to raise funds for the end-of-year party."
+              ],
+              "explanation": "This is a classic advance-fee scam mechanism. Scammers keep the fee intentionally small (like 49,000 VND) so it seems insignificant compared to the 'scholarship', increasing the likelihood the victim will pay."
+            }
+          },
+          "R004_TRAP_04": {
+            "matched_text": "Do not contact the school office because verification is handled by our scholarship partner.",
+            "socratic_quiz": {
+              "question": "What is the primary purpose of telling the student NOT to contact the school office?",
+              "options": [
+                "A. To reduce the workload of the school's administrative staff.",
+                "B. To isolate the victim from authoritative sources that would immediately expose the scam.",
+                "C. To comply with third-party privacy regulations regarding educational scholarships."
+              ],
+              "explanation": "Isolation tactics are used to cut victims off from a 'reality check'. The scammer knows that a single phone call to the school office would instantly reveal the scholarship is fake."
+            }
+          }
+        }
+      },
+      "step_3_sorting_game": {
+        "context_text": "Arrange the steps in the chronological order of how this phishing scam unfolds to understand the full scope of the danger.",
+        "pool_items": {
+          "R004_SORT_01": "Student receives an urgent scholarship email.",
+          "R004_SORT_02": "Student clicks the fake verification link.",
+          "R004_SORT_03": "Student enters their official school account username and password.",
+          "R004_SORT_04": "The scammer's database silently captures the credentials.",
+          "R004_SORT_05": "The fake website prompts the student for an OTP or payment detail.",
+          "R004_SORT_06": "The attacker actively logs into the student's real school account in the background.",
+          "R004_SORT_07": "The student loses access to their account before they even realize the money was a trick."
+        },
+        "validation_feedback": {
+          "success": "Correct! Scammers don't just want your money directly; stealing your school account credentials gives them access to internal systems and allows them to scam others using your identity. The actual theft happens before you even pay the fee.",
+          "failure": "Not quite. Remember that phishing attacks often steal your information *before* asking for money. Simply typing in your password is the critical point where the attacker takes control."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Ask your Teacher/Parent: If you really received a scholarship notification, how could you verify it independently without clicking the provided link?",
+      "mil_insight": "Understand that urgency and unexpected rewards are common manipulation tactics. Always verify official communications by navigating directly to the school's known official portal or contacting the administration office in person, rather than relying on provided links."
+    }
+  },
+  "R005": {
+    "title": "The Empty Square Myth",
+    "short_summary": "An image of a deserted Times Square with rumors of a 2026 pandemic outbreak causing a lockdown in New York. What is the truth behind this photo?",
+    "skills": [
+      "Synthetic image detection",
+      "Context verification",
+      "Emotion control"
+    ],
+    "theme": [
+      "Health misinformation",
+      "AI-edited photo"
+    ],
+    "story_context": "A social media post went viral featuring a completely deserted Times Square, claiming a severe pandemic outbreak in 2026 forced authorities to lock down the city. In reality, this is a genuine photo taken during the 2020 lockdown, but scammers used AI to alter timestamps and billboards to deceive the public.",
+    "source": {
+      "note": "Scenario based on real-world tactics where authentic past crisis footage is digitally altered to manufacture modern panic."
+    },
+    "modules": {
+      "step_1_image_forensics": {
+        "context_text": "Social media posts are sharing this photo as absolute proof of a 2026 Coronavirus emergency lockdown in Times Square.",
+        "target_anomalies": {
+          "R005_IMG_01": {
+            "description": "The first digit '2' in '2026' is flipped vertically, which is highly illogical compared to the original font.",
+            "socratic_quiz": {
+              "question": "Why did you select the '2026' detail on top of the building?",
+              "options": [
+                "A. The first '2' is flipped vertically, proving the original 2020 number was tampered with and overwritten.",
+                "B. Because buildings in New York are strictly prohibited from displaying the year on billboards.",
+                "C. This number is located too high above the eye level of pedestrians to be seen clearly."
+              ],
+              "explanation": "Carefully observing character shapes helps detect manual manipulation or render errors. The flipped '2' is evidence that the year 2026 was overlaid onto an old photo."
+            }
+          },
+          "R005_IMG_02": {
+            "description": "The text contains bizarre spelling errors, with distorted characters in 'STAYIE' and 'SSJCK'.",
+            "socratic_quiz": {
+              "question": "Why did you click on the green notification board on the right?",
+              "options": [
+                "A. The board is too bright compared to the overall ambient lighting.",
+                "B. The text features nonsensical words like 'STAYIE' and 'SSJCK' - a hallmark text generation error of AI tools.",
+                "C. Because the message advising people to stay home is completely false."
+              ],
+              "explanation": "Official billboards never contain such rudimentary spelling mistakes. Spotting distorted text helps confirm that the billboard was technically manipulated."
+            }
+          },
+          "R005_IMG_03": {
+            "description": "The puddle reflects a bright red light, yet there is no corresponding red light source from the surrounding billboards.",
+            "socratic_quiz": {
+              "question": "Why did you select the water reflection on the street?",
+              "options": [
+                "A. The puddle reflects a vibrant red light while the surrounding billboards have no corresponding red light source.",
+                "B. Because the wet street proves it just rained, which contradicts the 2026 weather forecast.",
+                "C. The discolored pavement indicates spilled chemicals or blood on the street."
+              ],
+              "explanation": "Identifying physical inconsistencies (reflections not matching light sources) helps you realize the image had its colors altered to create a sense of danger."
+            }
+          }
+        }
+      },
+      "step_2_text_highlight": {
+        "simulated_post": {
+          "author": "NYC Daily Uncensored",
+          "time_posted": "15 minutes ago",
+          "content": "The situation in New York has spiraled into complete chaos. A severe outbreak of a new Corona variant triggered an emergency lockdown across the entire Times Square earlier this morning. Government agencies are deliberately keeping this information hidden, but this photo reveals the full truth. If you don't take action immediately, your family could be caught in the next wave of the pandemic. Everyone needs to share this post with their groups right away to warn the community. Contact your relatives in the US immediately and tell them to stock up on food and cash before it's too late."
+        },
+        "traps": {
+          "R005_TRAP_01": {
+            "matched_text": "Government agencies are deliberately keeping this information hidden, but this photo reveals the full truth.",
+            "socratic_quiz": {
+              "question": "What is the post's objective when claiming the 'government is hiding information'?",
+              "options": [
+                "A. To provide evidence that has been vetted by medical experts.",
+                "B. To undermine the credibility of official sources so readers only trust this post.",
+                "C. To guide citizens on how to contact local authorities."
+              ],
+              "explanation": "Disinformation spreaders often dismiss official sources to position their post as the 'only truth', depriving readers of their ability to independently verify facts."
+            }
+          },
+          "R005_TRAP_02": {
+            "matched_text": "If you don't take action immediately, your family could be caught in the next wave of the pandemic.",
+            "socratic_quiz": {
+              "question": "How does the 'Appeal to fear' technique in this sentence affect the reader's psychology?",
+              "options": [
+                "A. It helps the reader make a wiser and calmer decision.",
+                "B. It forces the brain into a state of panic, reducing critical thinking capabilities.",
+                "C. It advises the reader to get a regular health checkup at the hospital."
+              ],
+              "explanation": "Fear triggers the brain's fight-or-flight response, causing users to hastily believe and share news before taking a moment to think logically."
+            }
+          },
+          "R005_TRAP_03": {
+            "matched_text": "Contact your relatives in the US immediately and tell them to stock up on food and cash before it's too late.",
+            "socratic_quiz": {
+              "question": "Which emotional manipulation tactic does this sentence use to compel immediate action?",
+              "options": [
+                "A. It creates artificial panic and a fear of missing out (FOMO), forcing readers to react on instinct instead of pausing to verify.",
+                "B. It presents a logical argument based on transparent economic statistics.",
+                "C. It encourages a spirit of mutual affection and solidarity within the community."
+              ],
+              "explanation": "Urgent calls to action target the emotions of fear and haste, leading readers to bypass fact-checking and immediately spread panic."
+            }
+          }
+        }
+      },
+      "step_3_sorting_game": {
+        "context_text": "The process by which scammers combine old footage, AI technology, and psychology to create a complete disinformation campaign.",
+        "pool_items": {
+          "R005_SORT_03": "Draft a post containing sensational words, sow conspiracy theories, and attach the AI-edited photo.",
+          "R005_SORT_01": "Collect a genuine photo of a deserted Times Square taken during the 2020 lockdown.",
+          "R005_SORT_04": "Distribute the post into social media groups to incite people to hoard goods and drive engagement.",
+          "R005_SORT_02": "Use Generative AI tools to change the year from 2020 to 2026 and alter details on the billboards to refresh the image."
+        },
+        "validation_feedback": {
+          "success": "Correct! You have completely uncovered the lifecycle of a hybrid scam: Find old footage -> Edit with AI -> Embed psychological traps -> Spread panic.",
+          "failure": "Not quite the right order. Start with selecting the original photo, then move to AI editing, followed by writing manipulative content, and finally, distribution."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "If you see a panic-inducing photo about a global situation, what is your 3-step verification process?",
+      "mil_insight": "1. Technical Forensics (AI Forensics): Zoom in to find anomalies like distorted text, flipped digits, and illogical reflections.\n2. Context Verification (Reverse Image Search): Use image search tools to determine when and where the original photo was taken.\n3. Cross-checking (Official Sources): Verify through statements from authorities or reputable news outlets before sharing."
+    }
+  }
+}

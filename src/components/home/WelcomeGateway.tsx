@@ -11,7 +11,7 @@ type GatewayState = "checking" | "open" | "closed";
 
 export function WelcomeGateway() {
   const router = useRouter();
-  const { t } = useI18n();
+  const { localizePath, t } = useI18n();
   const [state, setState] = useState<GatewayState>("checking");
   const [pendingDestination, setPendingDestination] = useState<string | null>(null);
 
@@ -92,14 +92,14 @@ export function WelcomeGateway() {
             </p>
 
             <div className="mt-9 grid gap-3 sm:grid-cols-3">
-              <Button autoFocus disabled={Boolean(pendingDestination)} tone="primary" className="min-h-14 w-full px-5 text-base" onClick={() => navigate(`/mission/${FEATURED_DEMO_CASE_ID}`)}>
-                {pendingDestination === `/mission/${FEATURED_DEMO_CASE_ID}` ? t("welcome.opening") : t("welcome.play")}
+              <Button autoFocus disabled={Boolean(pendingDestination)} tone="primary" className="min-h-14 w-full px-5 text-base" onClick={() => navigate(localizePath(`/mission/${FEATURED_DEMO_CASE_ID}`))}>
+                {pendingDestination === localizePath(`/mission/${FEATURED_DEMO_CASE_ID}`) ? t("welcome.opening") : t("welcome.play")}
               </Button>
-              <Button disabled={Boolean(pendingDestination)} tone="secondary" className="min-h-14 w-full px-5" onClick={() => navigate("/redeem")}>
-                {pendingDestination === "/redeem" ? t("welcome.opening") : t("welcome.redeem")}
+              <Button disabled={Boolean(pendingDestination)} tone="secondary" className="min-h-14 w-full px-5" onClick={() => navigate(localizePath("/redeem"))}>
+                {pendingDestination === localizePath("/redeem") ? t("welcome.opening") : t("welcome.redeem")}
               </Button>
-              <Button disabled={Boolean(pendingDestination)} tone="ghost" className="min-h-14 w-full px-5" onClick={() => navigate("/about")}>
-                {pendingDestination === "/about" ? t("welcome.opening") : t("welcome.about")}
+              <Button disabled={Boolean(pendingDestination)} tone="ghost" className="min-h-14 w-full px-5" onClick={() => navigate(localizePath("/about"))}>
+                {pendingDestination === localizePath("/about") ? t("welcome.opening") : t("welcome.about")}
               </Button>
             </div>
 

@@ -35,7 +35,7 @@ export function CaseFolder({
   const imageModule = caseData.modules.step_1_image_forensics;
   const isLocked = access === "locked";
   const isCompleted = access === "completed";
-  const { t } = useI18n();
+  const { localizePath, t } = useI18n();
 
   return (
     <div className="group relative pt-4">
@@ -77,7 +77,7 @@ export function CaseFolder({
               {t("case.unlock", { caseId: prerequisiteCaseId ?? t("case.previous") })}
             </div>
           ) : (
-            <ButtonLink href={`/cases/${caseData.case_id}`} tone={isCompleted ? "secondary" : "accent"} className="mt-4 w-full sm:w-auto">
+            <ButtonLink href={localizePath(`/cases/${caseData.case_id}`)} tone={isCompleted ? "secondary" : "accent"} className="mt-4 w-full sm:w-auto">
               {isCompleted ? t("case.review") : t("case.investigate")} <span aria-hidden>-&gt;</span>
             </ButtonLink>
           )}
