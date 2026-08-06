@@ -179,7 +179,21 @@ function validateArticle(article, label) {
   }
 }
 
-const { LOCALES } = await import("../src/i18n/registry.ts");
+const registrySource = await readFile(
+  path.join(process.cwd(), "src", "i18n", "registry.ts"),
+  "utf8",
+);
+const localeDefinitionPattern =
+  /^  ([a-z][a-z0-9-]*): \{[\s\S]*?^    status: "(complete|partial)",/gm;
+const LOCALES = Object.fromEntries(
+  [...registrySource.matchAll(localeDefinitionPattern)].map((match) => [
+    match[1],
+    { status: match[2] },
+  ]),
+);
+if (!("en" in LOCALES) || Object.keys(LOCALES).length === 0) {
+  fail("src/i18n/registry.ts must register English and at least one locale.");
+}
 const mechanicsCatalog = JSON.parse(await readFile(path.join(caseDirectory, "mechanics.json"), "utf8"));
 if (mechanicsCatalog.schema_version !== 1 || !Array.isArray(mechanicsCatalog.cases)) {
   fail("cases/mechanics.json must use schema_version 1 and contain a cases array.");

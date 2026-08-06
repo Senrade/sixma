@@ -7,7 +7,6 @@ import type { CaseData, SocraticQuiz, TextHighlightTrap } from "./case-types";
 import type { CaseTranslation, CaseTranslationCatalog, SocraticQuizTranslation } from "./case-translations";
 
 const mechanicsCatalog = mechanicsJson as CaseMechanicsCatalog;
-const localizedCasesPromises = new Map<Locale, Promise<CaseData[]>>();
 
 function requiredString(value: string | undefined, path: string): string {
   if (typeof value !== "string" || value.length === 0) {
@@ -245,11 +244,7 @@ async function readLocalizedCases(locale: Locale): Promise<CaseData[]> {
 }
 
 export function getCases(locale: Locale = "en"): Promise<CaseData[]> {
-  const cached = localizedCasesPromises.get(locale);
-  if (cached) return cached;
-  const cases = readLocalizedCases(locale);
-  localizedCasesPromises.set(locale, cases);
-  return cases;
+  return readLocalizedCases(locale);
 }
 
 export async function getCase(caseId: string, locale: Locale = "en"): Promise<CaseData | undefined> {

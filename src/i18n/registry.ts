@@ -1,17 +1,20 @@
+import enResources from "./locales/en";
+import viResources from "./locales/vi";
+
 export const LOCALES = {
   en: {
     label: "English",
     htmlLang: "en",
     status: "complete",
     fallback: null,
-    load: () => import("./locales/en").then((module) => module.default),
+    load: async () => enResources,
   },
   vi: {
     label: "Tiếng Việt",
     htmlLang: "vi",
     status: "complete",
     fallback: "en",
-    load: () => import("./locales/vi").then((module) => module.default),
+    load: async () => viResources,
   },
 } as const;
 
