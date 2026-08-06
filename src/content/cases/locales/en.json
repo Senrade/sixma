@@ -1,7 +1,7 @@
 {
   "D001": {
-    "title": "The Rescue Photo That Never Happened",
-    "short_summary": "A crying child, a puppy, and a flooded town became powerful evidence online.",
+    "title": "An urgent cry for help from Hurricane Helene",
+    "short_summary": "Amid the devastation of Hurricane Helene in 2024, a photo of a young girl weeping while clutching her puppy in floodwaters went viral, garnering millions of shares and igniting a fierce debate over rescue operations.",
     "skills": [
       "Synthetic image detection",
       "Emotional manipulation",
@@ -198,15 +198,15 @@
         "context_text": "The leaked image attached to the extortion email claims to show 'a disgusting cockroach served in the high school canteen food tray.'",
         "target_anomalies": {
           "R002_IMG_01": {
-            "description": "The insect appears digitally pasted onto the rice tray, exhibiting mismatched light direction, unnatural shadows, and blurred edge artifacts.",
+            "description": "The cockroach has unusually saturated, polished coloring and a toy-like surface that does not respond to the scene's light like the rice and metal tray.",
             "socratic_quiz": {
-              "question": "Why does the cockroach in this photo indicate digital tampering?",
+              "question": "Which comparison would best test whether the cockroach belongs naturally in this scene?",
               "options": [
-                "A. The cockroach is too large compared to standard rice grains.",
-                "B. Its shadow direction contradicts the main lighting, and its edges show artificial blurring from digital editing.",
-                "C. Cockroaches cannot land on cooked rice in a school canteen."
+                "A. Measure its length against several grains of rice to decide whether that species could exist.",
+                "B. Compare its color transitions, surface texture, and highlights with the nearby food and metal under the same light.",
+                "C. Count how many separate food items appear in the tray around it."
               ],
-              "explanation": "In composite or digitally manipulated images, mismatched lighting angles and edge-smudging artifacts around the inserted object betray digital insertion."
+              "explanation": "Size alone is unreliable because cockroach species vary. Here, the insect's overly saturated color and polished, toy-like surface respond differently to light than the rice and tray. Some generative AI models or compositing processes can create this kind of material mismatch, so it should be checked alongside source and context evidence."
             }
           }
         }
@@ -221,37 +221,37 @@
           "R002_TRAP_01": {
             "matched_text": "I'm not saying the cafeteria is unsafe. I'm just asking why this keeps happening and why nobody ever seems to explain anything afterward.",
             "socratic_quiz": {
-              "question": "How does the author introduce an unverified accusation while shielding themselves from accountability?",
+              "question": "What evidence would be needed before 'why this keeps happening' becomes a fair question?",
               "options": [
-                "A. By explicitly asserting that cafeteria workers intentionally contaminated the food.",
-                "B. By using a disclaimer ('I'm not saying...') to plant the premise that recurring incidents exist without presenting supporting data.",
-                "C. By demanding an immediate financial refund for all students enrolled in the lunch program."
+                "A. The author's uncertainty about where the insect came from.",
+                "B. Independently verified earlier incidents showing that the same problem has actually recurred.",
+                "C. The absence of an immediate reply beneath this particular post."
               ],
-              "explanation": "This is rhetorical innuendo. By pairing a denial of hostility ('I'm not saying...') with a loaded question ('why this keeps happening'), the author smuggles in an unproven premise of systemic negligence while maintaining plausible deniability."
+              "explanation": "The phrase 'this keeps happening' assumes a repeated pattern before one has been established. The opening disclaimer does not remove that assumption. This rhetorical innuendo seeds doubt while allowing the author to retreat to 'I was only asking' if challenged."
             }
           },
           "R002_TRAP_02": {
             "matched_text": "The school seems to never take students' food feedback into consideration anyway, saying the problem is too complicated or something like that.",
             "socratic_quiz": {
-              "question": "What structural function does this statement serve in manipulating how the audience evaluates a future response from the school?",
+              "question": "How could a reader evaluate a future school response without inheriting the post's framing?",
               "options": [
-                "A. It establishes a baseline of historical administrative records to ensure fair evaluation.",
-                "B. It pre-emptively discredits any potential explanation from the school by framing administrative complexity as an excuse.",
-                "C. It proves that the cafeteria's supplier operates without an active health license."
+                "A. Judge the response by how many commenters already distrust the school.",
+                "B. Examine its evidence and reasoning before deciding whether complexity is genuine or merely an excuse.",
+                "C. Reject the response if it contains technical details that are difficult to understand."
               ],
-              "explanation": "This technique 'poisons the well.' By pre-framing institutional responses as dismissive excuses ('saying the problem is too complicated'), the author ensures the audience rejects official clarifications before the school even speaks."
+              "explanation": "The post poisons the well by labeling a future explanation as an excuse before the school speaks. The word 'never' also overgeneralizes from unspecified experiences. A fair evaluation examines the eventual response and its evidence independently of that pre-framing."
             }
           },
           "R002_TRAP_03": {
             "matched_text": "At this point, I think parents deserve to know what's happening before this gets quietly swept under the rug...",
             "socratic_quiz": {
-              "question": "Why do you think the framing of 'before this gets quietly swept under the rug' is problematic?",
+              "question": "How does 'before this gets quietly swept under the rug' change the order in which readers act and verify?",
               "options": [
-                "A. It forces immediate, emotional escalation by implying an ongoing cover-up, discouraging readers from waiting for factual verification.",
-                "B. It offers a transparent protocol for parents to submit official complaints to local health inspectors.",
-                "C. It confirms that school authorities have already deleted internal incident logs."
+                "A. It makes immediate sharing feel protective, moving escalation ahead of checking whether a cover-up exists.",
+                "B. It limits the claim to one personal observation and reduces pressure to act.",
+                "C. It directs readers to an independent source before they form a judgment."
               ],
-              "explanation": "Implied cover-ups trigger immediate fear and artificial urgency. Framing an ongoing situation as 'being swept under the rug' manipulates readers into sharing the claim rapidly to prevent a conspiracy rather than pausing to verify the facts."
+              "explanation": "The implied cover-up introduces a conspiracy narrative and appeals to fear, making rapid sharing feel safer than waiting. That artificial urgency reverses a sound verification order: readers are pushed to amplify first and investigate later."
             }
           }
         }
@@ -291,30 +291,30 @@
     "story_context": "A viral post by a 'Minh Khang' persona about early financial wisdom, with a photo that seems suspect to careful eyes.",
     "modules": {
       "step_1_image_forensics": {
-        "context_text": "The profile picture for 'Minh Khang' features this photo from his 'wealth mindset' post. Find one clear visual anomaly that proves this photo is AI-generated.",
+        "context_text": "This photo supports Minh Khang's claims about his luxury lifestyle. Examine whether its physical details remain internally consistent.",
         "target_anomalies": {
           "R003_IMG_01": {
-            "description": "The leather strap and metallic clasps on the luxury bag are physically impossible, merging into random floating loops.",
+            "description": "The phone-holding hand has a subtly over-saturated, waxy color and knuckle contours that do not fully align with a natural grip.",
             "socratic_quiz": {
-              "question": "Why is the structure of this hand a clear indicator of AI generation?",
+              "question": "Which comparison would be most useful when examining the phone-holding hand?",
               "options": [
-                "A. It is holding the phone at a strange angle.",
-                "B. The fingers are impossibly numerous, distorted, and merged, breaking anatomical logic.",
-                "C. The hand is wearing a watch that matches the other hand."
+                "A. Check whether perspective alone explains why the hand appears larger than the wrist.",
+                "B. Check whether its color and knuckle contours transition naturally from the wrist through the grip.",
+                "C. Check whether the phone angle points in the same direction as the person's gaze."
               ],
-              "explanation": "Image generators often fail to render human hands accurately, frequently creating merged, missing, or extra digits. This extreme anatomical distortion is a classic sign."
+              "explanation": "Perspective can explain size and pose, but the hand's unusually saturated color and subtly inconsistent knuckle contours do not transition naturally from the wrist. Some generative AI models can produce hands that look plausible at first glance while losing color or joint consistency under closer inspection. Treat this as a clue to verify alongside other evidence, not proof by itself."
             }
           },
           "R003_IMG_02": {
-            "description": "The coffee cup fails to cast a natural reflection on the glossy tabletop, unlike the rest of the environment.",
+            "description": "The rigid window frame and handle develop uneven, wavy contours instead of preserving consistent manufactured geometry.",
             "socratic_quiz": {
-              "question": "Why is the distortion on the window handle a significant red flag?",
+              "question": "Which check would best distinguish perspective from an inconsistency in the window area?",
               "options": [
-                "A. It is a modern, artistic window design.",
-                "B. Rigid metal objects do not have fluid, warped, and distorted structures like this in reality.",
-                "C. The handle is out of focus due to the camera's shallow depth of field."
+                "A. Compare the frame's brightness with the buildings visible outside.",
+                "B. Trace whether the rigid frame and handle keep smooth contours or ripple independently along their length.",
+                "C. Check whether the handle is positioned at a practical height for opening the window."
               ],
-              "explanation": "Current AI generation techniques often struggle with rigid objects, creating severe physical warp and unnatural fluid forms. This type of distortion on a standard window handle is a typical structural failure."
+              "explanation": "Perspective may tilt or narrow a rigid object, but it should not make its edges ripple unpredictably from one section to another. Some generative AI models can introduce this kind of local warping in rigid geometry. The waviness is therefore a useful clue to compare with the rest of the image and with a genuine window structure."
             }
           }
         }
@@ -411,30 +411,30 @@
     "story_context": "A misinformation and phishing campaign based on fake national exam leaks circulated in a student Discord server",
     "modules": {
       "step_1_image_forensics": {
-        "context_text": "The screenshot attached to the channel is claimed to be '100% authentic exam papers from the Ministry of Education.' Find the visual anomalies in this generated image.",
+        "context_text": "The screenshot attached to the channel is claimed to show '100% authentic exam papers from the Ministry of Education.' Examine whether its interface details are consistent with a genuine Discord screen.",
         "target_anomalies": {
           "R004_IMG_03": {
             "description": "Distorted and malformed GIF/chat interface icons at the bottom right corner of the chat input bar.",
             "socratic_quiz": {
-              "question": "Why is the appearance of these chat interface icons a strong indicator of AI manipulation?",
+              "question": "Which observation is most useful when evaluating the two small buttons near the lower-right corner?",
               "options": [
-                "A. Discord regularly updates its icons to unique abstract shapes.",
-                "B. Standard UI elements like GIF buttons become warped, blurry, or structurally nonsensical when generated by AI.",
-                "C. The icons are simply hidden behind a dark mode theme filter."
+                "A. Their dark background uses a similar color to the message bar.",
+                "B. The repeated GIF controls do not preserve consistent letterforms and geometry.",
+                "C. Their position is close to the other message controls."
               ],
-              "explanation": "Image generators frequently struggle with replicating precise user interface (UI) text and standard icons consistently, resulting in deformed shapes instead of recognizable buttons like 'GIF'."
+              "explanation": "Repeated interface controls should keep the same recognizable lettering, proportions, and edges. When supposedly identical GIF buttons disagree in those details, compare the screenshot with a known genuine interface before trusting it."
             }
           },
           "R004_IMG_04": {
-            "description": "An unnatural, sharp geometric artifact protruding from the edge of the message box area.",
+            "description": "The right edge of the highlighted message area is interrupted by an inward notch, breaking what should be a continuous boundary.",
             "socratic_quiz": {
-              "question": "What makes this stray shape near the message border a telltale sign of AI generation?",
+              "question": "What is inconsistent about the right edge of the highlighted message area?",
               "options": [
-                "A. It is a standard feature used to expand long messages on Discord.",
-                "B. It is an arbitrary geometric glitch where the AI model failed to render the clean boundaries of a chat bubble.",
-                "C. It indicates a custom theme installed by the user."
+                "A. Its upper and lower corners use the same rounded finish.",
+                "B. Its boundary is interrupted by an inward notch that does not continue the highlighted area.",
+                "C. Its right edge sits close to the side of the chat window."
               ],
-              "explanation": "Clean software interfaces have strict symmetrical layouts and borders. Unexplained sharp spikes or floating artifacts sticking out of standard containers point directly to generative image flaws."
+              "explanation": "A message highlight should form one continuous panel. Here, the unexplained inward break interrupts its right border without any control or content causing that shape, indicating that this part of the screenshot was edited."
             }
           }
         }

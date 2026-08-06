@@ -227,26 +227,26 @@
       "modules": {
         "step_1_image_forensics": {
           "mechanic_type": "IMAGE_FORENSICS",
-          "image_url": "/assets/images/R003/R003_fake.png",
-          "image_width": 1000,
-          "image_height": 1000,
+          "image_url": "/assets/images/R003/R003_fake.jpg",
+          "image_width": 1402,
+          "image_height": 1122,
           "target_anomalies": [
             {
               "anomaly_id": "R003_IMG_01",
-              "name": "glitched_bag_hardware",
-              "x_pct": 10.5,
-              "y_pct": 76.5,
-              "radius_pct": 9,
+              "name": "inconsistent_hand_features",
+              "x_pct": 38.7,
+              "y_pct": 58.2,
+              "radius_pct": 8.6,
               "socratic_quiz": {
                 "correct_option": "B"
               }
             },
             {
               "anomaly_id": "R003_IMG_02",
-              "name": "inconsistent_table_reflection",
-              "x_pct": 48,
-              "y_pct": 89,
-              "radius_pct": 7.5,
+              "name": "warped_window_frame",
+              "x_pct": 17,
+              "y_pct": 49.9,
+              "radius_pct": 11.2,
               "socratic_quiz": {
                 "correct_option": "B"
               }
@@ -328,8 +328,8 @@
             {
               "anomaly_id": "R004_IMG_03",
               "name": "distorted_ui_icon",
-              "x_pct": 89.4,
-              "y_pct": 94.6,
+              "x_pct": 85.8,
+              "y_pct": 90,
               "radius_pct": 8,
               "socratic_quiz": {
                 "correct_option": "B"
@@ -338,8 +338,8 @@
             {
               "anomaly_id": "R004_IMG_04",
               "name": "artifact_edge_shape",
-              "x_pct": 95.3,
-              "y_pct": 36.8,
+              "x_pct": 93.6,
+              "y_pct": 31.8,
               "radius_pct": 8,
               "socratic_quiz": {
                 "correct_option": "B"
