@@ -2,7 +2,7 @@
   "schema_version": 1,
   "cases": [
     {
-      "level": "GREEN",
+      "level": "RED",
       "case_id": "D001",
       "duration_min": 6,
       "spotted_url": "/assets/images/D001/D001_spotted.png",
