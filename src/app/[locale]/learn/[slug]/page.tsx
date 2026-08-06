@@ -40,11 +40,17 @@ export default async function ArticlePage({
           <p className="mt-4 text-lg leading-8 text-ink-soft">{article.summary}</p>
           <p className="mt-3 font-mono text-xs font-bold"><LocalizedText messageKey="article.minuteRead" replacements={{ minutes: article.readTime }} /></p>
         </header>
-        <div className="mx-auto mt-10 max-w-3xl border-t-2 border-ink px-4 pt-8 sm:px-6">
+        <div className="mx-auto mt-10 max-w-3xl border-t-[3px] border-border px-4 pt-9 sm:px-6">
           {article.sections.map((section) => (
-            <section key={section.heading} className="mb-9">
-              <h2 className="text-2xl font-black">{section.heading}</h2>
-              <p className="mt-3 text-base leading-8 text-ink-soft">{section.body}</p>
+            <section key={section.heading} className="mb-10">
+              <h2 className="text-2xl font-black leading-tight text-info">{section.heading}</h2>
+              {"body" in section ? (
+                <p className="mt-3 text-base leading-8 text-ink-soft sm:text-lg">{section.body}</p>
+              ) : (
+                <ul className="mt-4 list-disc space-y-3 pl-6 text-base leading-7 text-ink-soft sm:text-lg">
+                  {section.items.map((item) => <li key={item}>{item}</li>)}
+                </ul>
+              )}
             </section>
           ))}
           <ButtonLink href={localizePath(locale, "/learn")} tone="secondary"><LocalizedText messageKey="article.back" /></ButtonLink>

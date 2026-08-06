@@ -1,0 +1,638 @@
+{
+  "D001": {
+    "title": "Un clamor urgente de ayuda tras el huracán Helene",
+    "short_summary": "En medio de la devastación causada por el huracán Helene en 2024, la foto de una niña llorando mientras abrazaba a su cachorro en una inundación se volvió viral, se compartió millones de veces y desató un intenso debate sobre las labores de rescate.",
+    "skills": [
+      "Pruebas visuales",
+      "Lenguaje y afirmaciones",
+      "Cadenas de información"
+    ],
+    "theme": [
+      "Respuesta ante desastres",
+      "Información pública"
+    ],
+    "story_context": "Tras el paso del huracán Helene, se difundió en las redes una imagen conmovedora de una niña llorando mientras abrazaba a un cachorro en una inundación. La imagen se presentó como el registro de un rescate real y se utilizó para influir en la opinión pública sobre la eficacia de la respuesta ante el desastre, aunque ni la niña ni la escena fotografiada existieron.",
+    "source": {
+      "note": "Escenario adaptado a partir del análisis de David Carson sobre la imagen generada por IA de la niña y el cachorro en la inundación que circuló durante el huracán Helene."
+    },
+    "modules": {
+      "step_1_image_forensics": {
+        "context_text": "Esta imagen se difundió como prueba documental del rescate de una menor durante las inundaciones catastróficas tras el huracán Helene.",
+        "target_anomalies": {
+          "D001_IMG_01": {
+            "description": "El rostro de la niña presenta un acabado demasiado liso y artificial, con incoherencias en los detalles alrededor de los ojos y la boca, así como en la expresión.",
+            "socratic_quiz": {
+              "question": "¿Por qué el rostro de la niña constituye una señal de alerta relevante de que la imagen podría ser sintética?",
+              "options": [
+                "A. Una niña real nunca podría ser fotografiada llorando.",
+                "B. La piel y la expresión se ven artificialmente lisas, mientras que los detalles de ojos y boca carecen de la consistencia propia de una fotografía real.",
+                "C. El rostro de la niña está situado cerca del centro de la composición."
+              ],
+              "explanation": "La piel excesivamente tersa, los detalles faciales inestables y una expresión sintética exagerada son indicios útiles. No constituyen una prueba definitiva por sí solos, por lo que el siguiente paso es investigar el origen y la procedencia de la imagen."
+            }
+          }
+        }
+      },
+      "step_2_text_highlight": {
+        "simulated_post": {
+          "author": "Storm Truth Network",
+          "time_posted": "Hace 18 minutos",
+          "content": "Mira a esta pequeña aferrada a su cachorro en medio de la inundación. Los medios jamás te mostrarán lo que realmente ocurre tras el huracán. Esta foto demuestra que los equipos de rescate abandonaron a familias como la suya mientras las autoridades daban ruedas de prensa. Compártela antes de que borren las pruebas."
+        },
+        "traps": {
+          "D001_TRAP_01": {
+            "matched_text": "Esta foto demuestra que los equipos de rescate abandonaron a familias como la suya mientras las autoridades daban ruedas de prensa.",
+            "socratic_quiz": {
+              "question": "¿Qué salto sin fundamento da la publicación desde la imagen hasta la acusación que formula?",
+              "options": [
+                "A. Verifica cuándo y dónde se tomó la imagen antes de cuestionar la respuesta de rescate.",
+                "B. Da por sentada una imagen emocional no verificada como prueba directa de que los equipos de rescate abandonaron a las familias.",
+                "C. Compara los informes de varios periodistas independientes que cubren el desastre."
+              ],
+              "explanation": "Incluso una fotografía auténtica solo documentaría un instante concreto. Jamás podría, por sí sola, probar una afirmación generalizada sobre la totalidad de las operaciones de rescate. En este caso la imagen era sintética, lo que vuelve la conclusión aún más engañosa."
+            }
+          }
+        }
+      },
+      "step_3_sorting_game": {
+        "context_text": "La imagen sintética del rescate entra en un ciclo de noticias acelerado durante un desastre real y comienza a condicionar la opinión pública sobre la respuesta institucional.",
+        "pool_items": {
+          "D001_SORT_02": "Los usuarios reaccionan ante el sufrimiento de la menor y difunden la imagen como prueba de que los equipos de rescate fallaron a las familias.",
+          "D001_SORT_03": "La difusión masiva desvincula la imagen de su origen desconocido, y el relato falso acaba compitiendo con la cobertura periodística verificada del desastre.",
+          "D001_SORT_01": "Una cuenta publica una imagen sintética sobre un rescate con un texto referido a un desastre real, sin atribuir fotógrafo, ubicación ni fuente original."
+        },
+        "validation_feedback": {
+          "success": "Correcto. La imagen sintética cobra fuerza al apoyarse en un desastre real, una lectura emocional y la difusión repetida. A medida que su origen se diluye, la narrativa inventada puede desviar la atención de los datos verificados sobre personas reales.",
+          "failure": "No es correcto. Comienza por la imagen sin fuente, sigue con la interpretación emocional y concluye con el impacto que la redifusión produce sobre el origen y la credibilidad de la imagen."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Si una imagen despierta una reacción emocional intensa y parece confirmar lo que ya creías, ¿qué deberías comprobar antes de compartirla?",
+      "mil_insight": "Rastrea la publicación original más antigua, identifica al fotógrafo o creador, confirma la fecha y ubicación mediante periodismo independiente y busca credenciales de procedencia como Content Credentials. Los artefactos visuales son indicios, no un veredicto definitivo: las imágenes auténticas también pueden ser acusadas falsamente de estar generadas por IA."
+    }
+  },
+  "R001": {
+    "title": "Ojos en el aula",
+    "short_summary": "La imagen de un aula desata un debate sobre cómo se utiliza la tecnología con los estudiantes, mientras una publicación encendida se difunde más rápido que las respuestas.",
+    "skills": [
+      "Pruebas visuales",
+      "Lenguaje y afirmaciones",
+      "Cadenas de información"
+    ],
+    "theme": [
+      "Educación",
+      "Tecnología"
+    ],
+    "story_context": "Estudiantes y familias están compartiendo la imagen de un aula junto con afirmaciones sobre supervisión y evaluación automatizadas. El debate se intensifica y varias publicaciones dirigen a los lectores hacia información adicional. Examina el material antes de decidir qué está ocurriendo realmente.",
+    "modules": {
+      "step_1_image_forensics": {
+        "context_text": "Se afirma que la imagen filtrada que acompaña a la publicación polémica es una «prueba de que la IA está supervisando y evaluando a los estudiantes durante las clases».",
+        "target_anomalies": {
+          "R001_IMG_01": {
+            "description": "Texto distorsionado, ilegible y sin sentido renderizado en la pantalla de la pizarra digital.",
+            "socratic_quiz": {
+              "question": "¿Por qué el texto en la pantalla del aula es una clara señal de alerta?",
+              "options": [
+                "A. La pantalla es demasiado brillante para un aula.",
+                "B. La escritura está distorsionada y se superpone en lugar de formar palabras legibles.",
+                "C. La pantalla está colgada encima del escritorio del profesor."
+              ],
+              "explanation": "Los generadores de imágenes suelen producir formas plausibles, pero tienen dificultades para mantener el texto legible y coherente. Un texto incoherente es una prueba de manipulación mucho más sólida que el brillo o la ubicación de la pantalla."
+            }
+          },
+          "R001_IMG_02": {
+            "description": "Los estudiantes situados en el centro del primer plano se superponen de forma anómala y se fusionan entre sí.",
+            "socratic_quiz": {
+              "question": "¿Qué convierte a los estudiantes de esta zona en un probable error de generación por IA?",
+              "options": [
+                "A. Hay varios estudiantes sentados muy juntos.",
+                "B. Los estudiantes se superponen y se fusionan de formas que no coinciden con sus cuerpos ni con los asientos.",
+                "C. El grupo está de espaldas a la cámara."
+              ],
+              "explanation": "Un aula llena puede ser algo natural, pero los cuerpos que se fusionan o se atraviesan rompen la lógica física de la escena. Esa incoherencia estructural es una pista muy útil para detectar un deepfake."
+            }
+          }
+        }
+      },
+      "step_2_text_highlight": {
+        "simulated_post": {
+          "author": "Comunidad Educativa y de Padres",
+          "time_posted": "Hace 2 horas",
+          "content": "Me acabo de enterar de que el Ministerio de Educación va a pilotar un nuevo asistente de aprendizaje con IA en varios colegios el próximo trimestre. Sinceramente, esto parece una jugada encubierta para eliminar por completo a los profesores humanos. Es bastante obvio que las grandes tecnológicas solo buscan automatizar la educación para explotar los datos de los estudiantes con fines de lucro. Incluso el profesor Tan afirmó en su último informe que «la IA está tomando el control total del aula». Si los padres no se plantan y boicotean esta implantación de inmediato, ¡nuestros hijos perderán por completo su capacidad de pensamiento crítico!"
+        },
+        "traps": {
+          "R001_TRAP_01": {
+            "matched_text": "Sinceramente, esto parece una jugada encubierta para eliminar por completo a los profesores humanos.",
+            "socratic_quiz": {
+              "question": "¿En qué fallo lógico principal se apoya el autor para convencerte de que se está reemplazando a los docentes?",
+              "options": [
+                "A. Se apoya en documentos estratégicos verificados y publicados de forma transparente por el Ministerio de Educación.",
+                "B. Analiza la caída estadística del empleo en el sector educativo durante la última década.",
+                "C. Atribuye una intención oculta y maliciosa a un programa piloto estándar sin aportar ninguna prueba concreta."
+              ],
+              "explanation": "El autor salta directamente a una teoría de la conspiración, presentando un programa piloto como un plan malévolo sin aportar ninguna prueba verificable."
+            }
+          },
+          "R001_TRAP_02": {
+            "matched_text": "Es bastante obvio que las grandes tecnológicas solo buscan automatizar la educación para explotar los datos de los estudiantes con fines de lucro.",
+            "socratic_quiz": {
+              "question": "¿De qué manera la frase «Es bastante obvio» busca manipular el juicio crítico del lector?",
+              "options": [
+                "A. Indica que la afirmación está respaldada por un amplio consenso de investigaciones revisadas por pares.",
+                "B. Invita al lector a revisar de forma independiente los términos y condiciones de privacidad del software.",
+                "C. Se salta la necesidad de aportar pruebas objetivas presentando una suposición compleja como si fuera una verdad indiscutible."
+              ],
+              "explanation": "Expresiones como «es bastante obvio» sirven para presentar afirmaciones contundentes sin demostrar como si fueran hechos incuestionables."
+            }
+          },
+          "R001_TRAP_03": {
+            "matched_text": "Si los padres no se plantan y boicotean esta implantación de inmediato, ¡nuestros hijos perderán por completo su capacidad de pensamiento crítico!",
+            "socratic_quiz": {
+              "push_question": "¿En qué trampa psicológica hace caer el autor al lector con el planteamiento de esta frase final?",
+              "options": [
+                "A. Ofrece una hoja de ruta clara y paso a paso para resolver el problema.",
+                "B. Fuerza a elegir entre un boicot inmediato o el desastre absoluto, eliminando cualquier postura intermedia.",
+                "C. Anima a los padres a realizar una investigación independiente antes de tomar una decisión definitiva."
+              ],
+              "explanation": "El autor recurre a la falacia del falso dilema para anular tu capacidad de tomar una decisión neutral y analítica."
+            }
+          }
+        }
+      },
+      "step_3_sorting_game": {
+        "context_text": "La alarma generada por la publicación ha derivado en un correo de suplantación de identidad (phishing) dirigido a los padres.",
+        "pool_items": {
+          "R001_SORT_01": "Haga clic en el enlace de seguridad a continuación para pagar una tasa de tramitación (50.000 VND) y confirmar su derecho a darse de baja.",
+          "R001_SORT_02": "ADVERTENCIA: Los datos personales de su hijo están programados para sincronizarse con el sistema de IA del Ministerio.",
+          "R001_SORT_03": "Para proteger la privacidad y eliminar el nombre de su hijo del proyecto, los padres deben completar el «Formulario de baja» en un plazo de 24 horas."
+        },
+        "validation_feedback": {
+          "success": "Correcto. Has descifrado la cadena clásica de manipulación psicológica: Crear miedo y urgencia (Gancho) → Presentar una solución urgente (Pivote) → Colar una trampa para obtener dinero o datos personales (Trampa).",
+          "failure": "Lógica incorrecta. Los ataques de phishing rara vez piden dinero de entrada. Suelen empezar creando una falsa crisis para desbordar el sentido crítico de la víctima."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Pregunta a tu docente o a tu familia: si un mensaje del centro educativo pide hacer clic en un enlace desconocido y realizar un pago urgente para «proteger los datos académicos de un estudiante», ¿qué señal clave indica que se trata de una estafa?",
+      "mil_insight": "Ayuda a las familias y a los estudiantes a comparar el mensaje con los canales administrativos habituales. Las instituciones educativas legítimas no deberían recurrir a plazos de presión, como un límite de 24 horas, ni a enlaces de pago no oficiales para gestionar asuntos de seguridad."
+    }
+  },
+  "R002": {
+    "title": "La queja de la cafetería",
+    "short_summary": "La inquietante foto de una bandeja de comida llega al personal del centro educativo acompañada de una exigencia de respuesta inmediata antes de que la historia se difunda.",
+    "skills": [
+      "Pruebas visuales",
+      "Lenguaje y afirmaciones",
+      "Cadenas de información"
+    ],
+    "theme": [
+      "Vida escolar",
+      "Seguridad alimentaria"
+    ],
+    "story_context": "Un mensaje anónimo incluye la foto de una cafetería escolar y advierte que se publicará en las redes si el centro no responde antes de que venza un plazo. Antes de tomar medidas, el personal debe determinar qué conclusiones permiten extraer realmente la imagen y el texto.",
+    "modules": {
+      "step_1_image_forensics": {
+        "context_text": "Se afirma que la imagen filtrada que se adjunta al correo de extorsión muestra «una repugnante cucaracha servida en la bandeja de comida de la cafetería del instituto».",
+        "target_anomalies": {
+          "R002_IMG_01": {
+            "description": "La cucaracha presenta un color inusualmente saturado y brillante, con una textura similar a la de un juguete que no reacciona a la luz de la escena como lo hacen el arroz y la bandeja metálica.",
+            "socratic_quiz": {
+              "question": "¿Qué comparación permitiría comprobar mejor si la cucaracha encaja de forma natural en esta escena?",
+              "options": [
+                "A. Comparar su longitud con varios granos de arroz para determinar si esa especie podría existir.",
+                "B. Comparar sus transiciones de color, textura superficial y destellos con los de la comida y el metal cercanos bajo la misma luz.",
+                "C. Contar cuántos alimentos diferentes aparecen en la bandeja alrededor del insecto."
+              ],
+              "explanation": "El tamaño por sí solo no es fiable, ya que existen distintas especies de cucarachas. En este caso, el color excesivamente saturado y la superficie pulida de aspecto plástico reaccionan a la luz de forma distinta que el arroz y la bandeja. Algunos modelos de IA generativa producen este tipo de incoherencias en las texturas, por lo que conviene analizar este indicio junto con la fuente y el contexto."
+            }
+          }
+        }
+      },
+      "step_2_text_highlight": {
+        "simulated_post": {
+          "author": "Anónimo",
+          "time_posted": "Hace 5 horas",
+          "content": "No suelo publicar estas cosas, pero la comida de hoy me ha parecido realmente desagradable. Mientras comía, vi lo que parecía ser una cucaracha en mi bandeja. No sé si venía de la cocina o de otra parte; tal vez exista una explicación perfectamente lógica. Sin embargo, si esto realmente salió de la cafetería, los estudiantes tienen derecho a preocuparse. No digo que la cafetería sea insegura. Solo me pregunto por qué esto sigue pasando y por qué después nadie se molesta en dar explicaciones. De todos modos, parece que el centro nunca toma en serio las quejas de los estudiantes sobre la comida y siempre dice que el tema es muy complejo o algo así. A estas alturas, creo que las familias merecen saber qué está pasando antes de que intenten ocultar el asunto discretamente..."
+        },
+        "traps": {
+          "R002_TRAP_01": {
+            "matched_text": "No digo que la cafetería sea insegura. Solo me pregunto por qué esto sigue pasando y por qué después nadie se molesta en dar explicaciones.",
+            "socratic_quiz": {
+              "question": "¿Qué pruebas harían falta para que la pregunta «por qué esto sigue pasando» fuera legítima?",
+              "options": [
+                "A. La duda del propio autor sobre la procedencia del insecto.",
+                "B. Incidentes anteriores verificados de forma independiente que demuestren que el mismo problema se ha repetido realmente.",
+                "C. La ausencia de una respuesta inmediata debajo de esta publicación en concreto."
+              ],
+              "explanation": "La expresión «esto sigue pasando» da por sentado un patrón recurrente sin que se haya demostrado ninguno. La aclaración inicial no elimina esa suposición. Esta insinuación retórica siembra la duda al tiempo que permite al autor escudarse en el «yo solo preguntaba» si se le cuestiona."
+            }
+          },
+          "R002_TRAP_02": {
+            "matched_text": "De todos modos, parece que el centro nunca toma en serio las quejas de los estudiantes sobre la comida y siempre dice que el tema es muy complejo o algo así.",
+            "socratic_quiz": {
+              "question": "¿Cómo podría un lector valorar una futura respuesta del centro sin dejarse condicionar por el enfoque de la publicación?",
+              "options": [
+                "A. Juzgar la respuesta en función de cuántos comentaristas desconfían ya del centro.",
+                "B. Examinar las pruebas y los argumentos del centro antes de decidir si la complejidad es real o una simple excusa.",
+                "C. Rechazar la respuesta si contiene detalles técnicos difíciles de entender."
+              ],
+              "explanation": "La publicación predispone en contra de la institución al etiquetar cualquier explicación futura como una excusa antes de que el centro se pronuncie. La palabra «nunca» también generaliza a partir de experiencias no especificadas. Una evaluación objetiva analiza la respuesta posterior y sus pruebas de forma independiente a ese condicionamiento previo."
+            }
+          },
+          "R002_TRAP_03": {
+            "matched_text": "A estas alturas, creo que las familias merecen saber qué está pasando antes de que intenten ocultar el asunto discretamente...",
+            "socratic_quiz": {
+              "question": "¿Cómo altera la frase «antes de que intenten ocultar el asunto discretamente» el orden en que los lectores actúan y verifican la información?",
+              "options": [
+                "A. Hace que compartir la publicación de inmediato parezca una forma de protección, anteponiendo la difusión a la comprobación de si existe realmente un encubrimiento.",
+                "B. Limita la afirmación a una sola observación personal y reduce la presión para actuar.",
+                "C. Dirige a los lectores hacia una fuente independiente antes de que se formen un juicio."
+              ],
+              "explanation": "La idea implícita de un encubrimiento introduce una narrativa conspirativa y apela al miedo, haciendo que compartir rápido parezca más seguro que esperar. Esa falsa urgencia invierte el proceso lógico de verificación: se empuja al lector a amplificar primero e investigar después."
+            }
+          }
+        }
+      },
+      "step_3_sorting_game": {
+        "context_text": "Una publicación engañosa en redes sociales sobre la cafetería del instituto se ha extendido por toda la comunidad escolar.",
+        "pool_items": {
+          "R002_SORT_01": "Otros usuarios vuelven a publicar la imagen con acusaciones más graves, poniéndose en lo peor.",
+          "R002_SORT_02": "El rumor acaba aceptándose como un «hecho sabido por todos», a pesar de que la afirmación inicial jamás se confirmó.",
+          "R002_SORT_03": "Alguien sube una foto con una interpretación personal pero sin ningún contexto verificado.",
+          "R002_SORT_04": "La gente reacciona de forma emotiva y comparte la publicación antes de esperar a una verificación oficial."
+        },
+        "validation_feedback": {
+          "success": "Correcto. Los rumores suelen volverse creíbles por repetición y no por aportar pruebas. Una observación no verificada puede convertirse en «todo el mundo sabe que es verdad» a medida que la gente añade suposiciones, comparte de forma impulsiva y deja de comprobar la fuente original.",
+          "failure": "No es del todo correcto. La información falsa rara vez se difunde a partir de una única publicación convincente. Gana fuerza cuando las personas amplifican afirmaciones no comprobadas y las repiten como hechos antes de que alguien verifique las pruebas."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Pregunta a tu docente o a tu familia: si recibieras este mensaje, ¿qué pruebas necesitarías antes de dar por hecho que la foto refleja un problema real de higiene alimentaria y no un montaje?",
+      "mil_insight": "Una sola imagen rara vez aporta contexto suficiente para determinar qué ocurrió exactamente. Analiza cómo diferenciar las pruebas directas de las suposiciones: comprueba la fuente original, verifica cuándo y dónde se tomó la foto y consulta los canales oficiales del centro antes de sacar conclusiones."
+    }
+  },
+  "R003": {
+    "title": "¿Veinte años y ya triunfando?",
+    "short_summary": "Una publicación impecable sobre dinero, disciplina y éxito arrastra a los lectores jóvenes a una acalorada comparación sobre quién se está quedando atrás.",
+    "skills": [
+      "Pruebas visuales",
+      "Lenguaje y afirmaciones",
+      "Cadenas de información"
+    ],
+    "theme": [
+      "Redes sociales",
+      "Finanzas personales"
+    ],
+    "story_context": "Una publicación firmada por un joven llamado «Minh Khang» combina consejos financieros con una aspiracional foto de estilo de vida lujoso. Su mensaje está desatando admiración, actitud defensiva y comparaciones entre quienes la ven. Examina la publicación antes de decidir cuánto crédito merece.",
+    "modules": {
+      "step_1_image_forensics": {
+        "context_text": "Esta foto respalda las afirmaciones de Minh Khang sobre su estilo de vida de lujo. Examina si sus detalles físicos mantienen una coherencia interna.",
+        "target_anomalies": {
+          "R003_IMG_01": {
+            "description": "La mano que sostiene el teléfono presenta un tono ceroso e inusualmente saturado, con unos nudillos cuyos contornos no se alinean del todo con un agarre natural.",
+            "socratic_quiz": {
+              "question": "¿Qué comparación resultaría más útil al examinar la mano que sostiene el teléfono?",
+              "options": [
+                "A. Comprobar si la perspectiva explica por sí sola por qué la mano parece más grande que la muñeca.",
+                "B. Comprobar si el tono de piel y los contornos de los nudillos se integran con naturalidad desde la muñeca hasta el agarre.",
+                "C. Comprobar si el ángulo del teléfono apunta en la misma dirección que la mirada de la persona."
+              ],
+              "explanation": "La perspectiva puede explicar el tamaño o la postura, pero el color excesivamente saturado de la mano y los contornos ligeramente incoherentes de los nudillos no se integran de forma natural con la muñeca. Algunos modelos de IA generativa crean manos que parecen verosímiles a primera vista, pero pierden coherencia en el color o las articulaciones cuando se examinan de cerca. Toma esta anomalía como una pista que debe contrastarse con otras pruebas, no como una prueba definitiva por sí sola."
+            }
+          },
+          "R003_IMG_02": {
+            "description": "El marco rígido de la ventana y el tirador presentan contornos ondulados e irregulares en lugar de mantener una geometría de fabricación uniforme.",
+            "socratic_quiz": {
+              "question": "¿Qué comprobación diferenciaría mejor la perspectiva de una incoherencia en la zona de la ventana?",
+              "options": [
+                "A. Comparar el brillo del marco con el de los edificios visibles en el exterior.",
+                "B. Trazar si el marco rígido y el tirador conservan contornos rectos o si se deforman de manera independiente a lo largo de su extensión.",
+                "C. Comprobar si el tirador está situado a una altura práctica para abrir la ventana."
+              ],
+              "explanation": "La perspectiva puede inclinar o estrechar un objeto rígido, pero no debería hacer que sus bordes se ondulen de forma impredecible de un tramo a otro. Algunos modelos de IA generativa introducen este tipo de deformaciones locales en arquitecturas y objetos rígidos. Por tanto, esta ondulación es una pista muy útil para comparar con el resto de la imagen y con la estructura real de una ventana."
+            }
+          }
+        }
+      },
+      "step_2_text_highlight": {
+        "simulated_post": {
+          "author": "Minh Khang",
+          "time_posted": "Hace 2 horas",
+          "content": "Sinceramente, me hace gracia cómo algunos saltan con el «el dinero no da la felicidad» cada vez que alguien comparte algo bonito. O sea... que tú no te lo puedas permitir no significa que sea «presumir». Mientras tanto, todos mis conocidos están ahí fuera esforzándose, consiguiendo prácticas, comprándose lo que quieren y haciendo algo de provecho con sus vidas. Si sigues poniendo excusas mientras los demás avanzan, tal vez deberías dejar de culpar a otros y preguntarte por qué te estás quedando atrás. Grítale a la pared si quieres, pero no esperes que el mundo se detenga por ti."
+        },
+        "traps": {
+          "R003_T1": {
+            "matched_text": "que tú no te lo puedas permitir no significa que sea «presumir».",
+            "socratic_quiz": {
+              "question": "¿Qué intenta hacer realmente esta frase contra cualquiera que critique la publicación ostentosa?",
+              "options": [
+                "A. Explica de forma directa por qué la publicación no debería considerarse una forma de presumir.",
+                "B. Atribuye un motivo negativo (envidia por dinero) a cualquiera que critique, en lugar de debatir si la crítica tiene o no validez.",
+                "C. Aporta una explicación objetiva y neutral."
+              ],
+              "explanation": "Se trata de una falacia de ataque al motivo, una forma de ad hominem: en lugar de responder al argumento de fondo —si la publicación es ostentosa—, el autor da por sentado que cualquier persona que la critique no tiene dinero y siente envidia. Así desvía el debate e intenta desacreditar a la otra persona."
+            }
+          },
+          "R003_T2": {
+            "matched_text": "todos mis conocidos están ahí fuera esforzándose, consiguiendo prácticas, comprándose lo que quieren y haciendo algo de provecho con sus vidas",
+            "socratic_quiz": {
+              "question": "¿Cuál es el problema lógico de esta comparación?",
+              "options": [
+                "A. Es una comparación justa, ya que todo el mundo parte exactamente de las mismas circunstancias.",
+                "B. Mezcla conceptos no equivalentes (esfuerzo, prácticas, compras de lujo) para dar a entender que quien no puede permitirse ciertos caprichos «no hace nada con su vida», ignorando la diversidad de realidades de cada persona.",
+                "C. Se trata de una estadística precisa sobre los conocidos reales del autor."
+              ],
+              "explanation": "Es una falsa equivalencia: equipara «poder comprar lo que uno quiere» con «triunfar en la vida», pasando por alto que cada persona parte de un trasfondo socioeconómico y familiar muy distinto, lo que convierte la comparación en algo injusto y tramposo."
+            }
+          },
+          "R003_T3": {
+            "matched_text": "Si sigues poniendo excusas mientras los demás avanzan, tal vez deberías dejar de culpar a otros y preguntarte por qué te estás quedando atrás",
+            "socratic_quiz": {
+              "question": "¿De qué manera afecta esta frase psicológicamente al lector?",
+              "options": [
+                "A. Ofrece un consejo sincero y práctico para ayudar al lector a crecer personalmente.",
+                "B. Induce un miedo a quedarse atrás (FOMO) al proyectar la idea de que «todo el mundo avanza», al tiempo que responsabiliza y devalúa implícitamente al lector acusándolo de «poner excusas».",
+                "C. Es una simple pregunta retórica sin mayor intención."
+              ],
+              "explanation": "Combina la táctica de generar FOMO con un ataque directo: la frase no aporta soluciones reales, sino que busca manipular al lector para que se sienta insuficiente e inseguro ante un estándar vago y no verificado."
+            }
+          },
+          "R003_T4": {
+            "matched_text": "Grítale a la pared si quieres, pero no esperes que el mundo se detenga por ti",
+            "socratic_quiz": {
+              "question": "¿Cuál es la función de esta frase de cierre ante cualquier postura en contra?",
+              "options": [
+                "A. Invita a una conversación abierta para comprender el punto de vista de los demás.",
+                "B. Descalifica de antemano cualquier reacción negativa o crítica tildándola de «pataleta», lo que permite al autor evitar reflexionar sobre su propia actitud.",
+                "C. Ofrece un ánimo genuino a todas las personas que leen la publicación."
+              ],
+              "explanation": "Es una táctica de desestimación emocional: cualquier objeción o comentario crítico se etiqueta de antemano como una «pataleta», permitiendo al autor eludir la autocrítica por su ostentación mientras sigue descalificando al resto."
+            }
+          }
+        }
+      },
+      "step_3_sorting_game": {
+        "pool_items": {
+          "R003_SORT_01": "Los lectores experimentan una gran sensación de FOMO e inseguridad, temiendo quedarse atrás respecto a sus iguales.",
+          "R003_SORT_02": "El influencer publica imágenes sintéticas de lujo creadas con IA para fabricar un estatus y una autoridad falsos.",
+          "R003_SORT_03": "El influencer promociona un costoso «curso magistral de mentalidad de riqueza» como el atajo definitivo hacia el éxito.",
+          "R003_SORT_04": "La publicación recurre a falsas comparaciones y a un lenguaje condescendiente para calificar de «perezosos» a los jóvenes trabajadores."
+        },
+        "validation_feedback": {
+          "success": "¡Correcto! Has descifrado la cadena tóxica de la ostentación en redes: Fabricar estatus (Gancho) → Devaluar mediante falsas comparaciones (Ataque) → Provocar inseguridad y FOMO (Ansiedad) → Vender un curso costoso como «atajo» (Monetización).",
+          "failure": "Secuencia incorrecta. Quienes manipulan mediante la ostentación tóxica primero construyen una falsa riqueza y atacan la autoestima de su audiencia para generar FOMO antes de ofrecer su curso de pago como una solución mágica."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Pregunta a tu docente o a tu familia: si una publicación en redes te hace sentir que te estás quedando atrás frente a personas que aparentan llevar una vida de lujo, ¿qué pasos seguirías para distinguir la realidad de una puesta en escena?",
+      "mil_insight": "Los recortes de la vida en redes sociales rara vez reflejan la realidad completa, y las herramientas de IA hacen que fingir un estilo de vida ostentoso no cueste nada. Recuerda a los jóvenes que el éxito no se mide exhibiendo posesiones ni despreciando a los demás, y que las ofertas urgentes de «cursos de mentalidad» caros suelen ser tácticas depredadoras."
+    }
+  },
+  "R004": {
+    "title": "¿Examen nacional filtrado?",
+    "short_summary": "Un canal de Discord se llena de capturas de pantalla, mensajes urgentes y ofertas vinculadas a una supuesta filtración de exámenes nacionales.",
+    "skills": [
+      "Pruebas visuales",
+      "Lenguaje y afirmaciones",
+      "Cadenas de información"
+    ],
+    "theme": [
+      "Educación",
+      "Comunidades en línea"
+    ],
+    "story_context": "Estudiantes en un servidor de Discord reaccionan ante afirmaciones de que los exámenes nacionales se han filtrado. Algunas cuentas prometen acceso inmediato, otras informan de lo que han oído a amigos y la fecha límite se acerca. Examina la captura de pantalla, los mensajes y la secuencia antes de decidir qué es creíble.",
+    "modules": {
+      "step_1_image_forensics": {
+        "context_text": "La captura de pantalla adjunta al canal afirma mostrar «exámenes 100 % auténticos del Ministerio de Educación». Examina si los detalles de su interfaz son coherentes con una pantalla real de Discord.",
+        "target_anomalies": {
+          "R004_IMG_03": {
+            "description": "Iconos deformados e irregulares de la interfaz de chat/GIF en la esquina inferior derecha de la barra de entrada de texto.",
+            "socratic_quiz": {
+              "question": "¿Qué observación resulta más útil al evaluar los dos botones pequeños cerca de la esquina inferior derecha?",
+              "options": [
+                "A. Su fondo oscuro utiliza un color similar al de la barra de mensajes.",
+                "B. Los controles de GIF repetidos no conservan formas de letra ni una geometría coherentes.",
+                "C. Su posición está cerca de los otros controles de mensaje."
+              ],
+              "explanation": "Los controles de interfaz repetidos deben mantener exactamente la misma tipografía, proporciones y bordes reconocibles. Cuando unos botones de GIF supuestamente idénticos difieren en esos detalles, conviene comparar la captura con una interfaz legítima conocida antes de confiar en ella."
+            }
+          },
+          "R004_IMG_04": {
+            "description": "El borde derecho del área de mensaje resaltada se ve interrumpido por un muesca hacia dentro que rompe lo que debería ser un límite continuo.",
+            "socratic_quiz": {
+              "question": "¿Qué resulta incoherente en el borde derecho del área de mensaje resaltada?",
+              "options": [
+                "A. Sus esquinas superior e inferior utilizan el mismo acabado redondeado.",
+                "B. Su límite se ve interrumpido por una muesca hacia dentro que no continúa la zona resaltada.",
+                "C. Su borde derecho está situado cerca del lateral de la ventana de chat."
+              ],
+              "explanation": "El resaltado de un mensaje debe formar un panel continuo. En este caso, el corte hacia dentro interrumpe el borde derecho sin que ningún control o contenido justifique esa forma, lo que indica que esa parte de la captura de pantalla fue editada."
+            }
+          }
+        }
+      },
+      "step_2_text_highlight": {
+        "simulated_post": {
+          "author": "Comité de Selección de Becas",
+          "time_posted": "Justo ahora",
+          "content": "¡Enhorabuena! Has sido seleccionado para la Beca de Excelencia Estudiantil. Solo 50 estudiantes han sido elegidos. Si no realizas la verificación en un plazo de 2 horas, tu plaza se ofrecerá a otro estudiante. Inicia sesión para pagar la tasa de verificación de 49.000 VND. No te pongas en contacto con la secretaría del centro, ya que la verificación la gestiona nuestra entidad colaboradora."
+        },
+        "traps": {
+          "R004_TRAP_01": {
+            "matched_text": "Has sido seleccionado para la Beca de Excelencia Estudiantil.",
+            "socratic_quiz": {
+              "question": "¿Por qué los estafadores comienzan el mensaje confirmando la recompensa en lugar de pedirte que la solicites?",
+              "options": [
+                "A. Para desencadenar entusiasmo y avaricia, haciendo que la víctima baje la guardia y esté más dispuesta a cumplir con las exigencias posteriores.",
+                "B. Para informar al estudiante y que pueda celebrarlo con su familia de inmediato.",
+                "C. Para demostrar que tienen acceso a los sistemas confidenciales de calificaciones del centro."
+              ],
+              "explanation": "Esta técnica explota el «gancho de la recompensa». Cuando las personas creen que ya han ganado algo valioso, su sentido crítico disminuye y se concentran en reclamar el premio en lugar de cuestionar su legitimidad."
+            }
+          },
+          "R004_TRAP_02": {
+            "matched_text": "Si no realizas la verificación en un plazo de 2 horas, tu plaza se ofrecerá a otro estudiante.",
+            "socratic_quiz": {
+              "question": "¿Cómo utiliza el mensaje el concepto del tiempo para manipular al destinatario?",
+              "options": [
+                "A. Establece un plazo administrativo razonable para el procesamiento de los fondos de la beca.",
+                "B. Crea una urgencia artificial, induciendo al pánico para evitar que la víctima piense de forma crítica o verifique la información.",
+                "C. Garantiza que los fondos de la beca se distribuyan de manera justa entre los solicitantes."
+              ],
+              "explanation": "La urgencia artificial es una táctica fundamental de la ingeniería social. Al imponer un límite de dos horas, el estafador impide que la víctima disponga de tiempo para consultar a su familia, a un docente o al personal técnico."
+            }
+          },
+          "R004_TRAP_03": {
+            "matched_text": "tasa de verificación de 49.000 VND",
+            "socratic_quiz": {
+              "question": "¿Por qué la solicitud de una pequeña «tasa de verificación» es sumamente sospechosa en este contexto?",
+              "options": [
+                "A. Las becas legítimas proporcionan fondos a los estudiantes; no exigen que los beneficiarios paguen dinero para recibir dinero.",
+                "B. La cantidad es demasiado pequeña; los centros reales cobrarían al menos 500.000 VND por la verificación administrativa.",
+                "C. Indica que el centro está intentando recaudar fondos para la fiesta de fin de curso."
+              ],
+              "explanation": "Es el mecanismo clásico de las estafas de pago por adelantado. Los estafadores mantienen la tasa intencionadamente baja (como 49.000 VND) para que parezca insignificante en comparación con la «beca», aumentando la probabilidad de que la víctima pague."
+            }
+          },
+          "R004_TRAP_04": {
+            "matched_text": "No te pongas en contacto con la secretaría del centro, ya que la verificación la gestiona nuestra entidad colaboradora.",
+            "socratic_quiz": {
+              "question": "¿Cuál es el propósito principal de decir al estudiante que NO contacte con la secretaría del centro?",
+              "options": [
+                "A. Reducir la carga de trabajo del personal administrativo del centro.",
+                "B. Aislar a la víctima de fuentes oficiales que expondrían la estafa de inmediato.",
+                "C. Cumplir con las regulaciones de privacidad de terceros relativas a becas educativas."
+              ],
+              "explanation": "Las tácticas de aislamiento buscan cortar cualquier comprobación con la realidad. El estafador sabe que una sola llamada a la secretaría del centro revelaría al instante que la beca es falsa."
+            }
+          }
+        }
+      },
+      "step_3_sorting_game": {
+        "context_text": "Ordena los pasos cronológicamente según cómo se desarrolla esta estafa de phising para comprender el alcance real del peligro.",
+        "pool_items": {
+          "R004_SORT_01": "El estudiante recibe un correo urgente sobre una beca.",
+          "R004_SORT_02": "El estudiante hace clic en el enlace de verificación falso.",
+          "R004_SORT_03": "El estudiante introduce el usuario y la contraseña de su cuenta oficial del centro.",
+          "R004_SORT_04": "La base de datos del estafador captura silenciosamente las credenciales.",
+          "R004_SORT_05": "El sitio web falso solicita al estudiante un código OTP o datos de pago.",
+          "R004_SORT_06": "El atacante inicia sesión activamente en la cuenta real del estudiante en segundo plano.",
+          "R004_SORT_07": "El estudiante pierde el acceso a su cuenta antes de darse cuenta de que la recompensa era un engaño."
+        },
+        "validation_feedback": {
+          "success": "¡Correcto! Los estafadores no solo quieren tu dinero directamente; robar tus credenciales de la cuenta escolar les da acceso a sistemas internos y les permite estafar a otros usando tu identidad. El verdadero robo ocurre antes de que llegues a pagar cualquier tasa.",
+          "failure": "No del todo. Recuerda que los ataques de suplantación de identidad suelen robar tu información *antes* de pedir dinero. El momento crítico ocurre cuando introduces tu contraseña y el atacante obtiene acceso a la cuenta."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Pregunta a tu docente o a tu familia: si realmente recibieras una notificación de beca, ¿cómo podrías verificarla de forma independiente sin hacer clic en el enlace proporcionado?",
+      "mil_insight": "Comprende que la urgencia y las recompensas inesperadas son tácticas de manipulación habituales. Verifica siempre las comunicaciones oficiales navegando directamente al portal oficial conocido de la institución o contactando en persona con la administración, en lugar de confiar en los enlaces proporcionados."
+    }
+  },
+  "R005": {
+    "title": "¿Por qué está vacío Times Square?",
+    "short_summary": "Una imagen de un Times Square desierto vuelve a circular con afirmaciones sobre una emergencia sanitaria en 2026 y un nuevo confinamiento, desatando un tenso debate.",
+    "skills": [
+      "Pruebas visuales",
+      "Lenguaje y afirmaciones",
+      "Cadenas de información"
+    ],
+    "theme": [
+      "Salud pública",
+      "Actualidad"
+    ],
+    "story_context": "Varias publicaciones comparten una imagen de Times Square completamente desierto mientras afirman que una grave emergencia sanitaria en 2026 obligó a las autoridades a confinar Nueva York. La fecha y la fuente originales no son visibles en las publicaciones en circulación. Examina lo que se puede determinar a partir de las pruebas disponibles.",
+    "source": {
+      "note": "Escenario basado en tácticas del mundo real en las que imágenes auténticas de crisis pasadas se alteran digitalmente para fabricar pánico en la actualidad."
+    },
+    "modules": {
+      "step_1_image_forensics": {
+        "context_text": "Publicaciones en redes sociales comparten esta foto como prueba absoluta de un confinamiento de emergencia por coronavirus en 2026 en Times Square.",
+        "target_anomalies": {
+          "R005_IMG_01": {
+            "description": "El primer dígito «2» en «2026» está invertido verticalmente, lo cual resulta totalmente ilógico en comparación con la tipografía original.",
+            "socratic_quiz": {
+              "question": "¿Por qué seleccionaste el detalle «2026» en la parte superior del edificio?",
+              "options": [
+                "A. El primer «2» está invertido verticalmente, lo que demuestra que el número 2020 original fue manipulado y sobrescrito.",
+                "B. Porque los edificios de Nueva York tienen estrictamente prohibido mostrar el año en carteles publicitarios.",
+                "C. Este número está situado demasiado alto por encima del nivel de los ojos de los peatones para verse con claridad."
+              ],
+              "explanation": "Observar detenidamente la forma de los caracteres ayuda a detectar manipulaciones manuales o errores de renderizado. El «2» invertido es una prueba de que el año 2026 se superpuso sobre una foto antigua."
+            }
+          },
+          "R005_IMG_02": {
+            "description": "El texto contiene errores ortográficos extravagantes, con caracteres deformados en «STAYIE» y «SSJCK».",
+            "socratic_quiz": {
+              "question": "¿Por qué hiciste clic en el panel de avisos verde de la derecha?",
+              "options": [
+                "A. El panel es demasiado brillante en comparación con la iluminación ambiental general.",
+                "B. El texto presenta palabras sin sentido como «STAYIE» y «SSJCK», un error de generación de texto característico de las herramientas de IA.",
+                "C. Porque el mensaje que aconseja a la gente quedarse en casa es completamente falso."
+              ],
+              "explanation": "Los carteles oficiales nunca contienen faltas de ortografía tan rudimentarias. Identificar texto deformado ayuda a confirmar que el cartel fue manipulado técnicamente."
+            }
+          },
+          "R005_IMG_03": {
+            "description": "El charco refleja una luz roja brillante, aunque no hay ninguna fuente de luz roja correspondiente en los carteles publicitarios de alrededor.",
+            "socratic_quiz": {
+              "question": "¿Por qué seleccionaste el reflejo del agua en la calle?",
+              "options": [
+                "A. El charco refleja una intensa luz roja mientras que los carteles de alrededor no tienen ninguna fuente de luz roja equivalente.",
+                "B. Porque el suelo mojado demuestra que acaba de llover, lo que contradice el pronóstico del tiempo para 2026.",
+                "C. El pavimento decolorado indica derrames químicos o sangre en la calle."
+              ],
+              "explanation": "Identificar incoherencias físicas (reflejos que no coinciden con las fuentes de luz) ayuda a darse cuenta de que a la imagen se le alteraron los colores para generar una sensación de peligro."
+            }
+          }
+        }
+      },
+      "step_2_text_highlight": {
+        "simulated_post": {
+          "author": "NYC Daily Uncensored",
+          "time_posted": "Hace 15 minutos",
+          "content": "La situación en Nueva York se ha descontrolado por completo. Un brote grave de una nueva variante de coronavirus ha provocado un confinamiento de emergencia en todo Times Square esta misma mañana. Las agencias gubernamentales están ocultando esta información deliberadamente, pero esta foto revela toda la verdad. Si no actúas de inmediato, tu familia podría verse atrapada en la próxima ola de la pandemia. Todo el mundo debe compartir esta publicación en sus grupos de inmediato para alertar a la comunidad. Ponte en contacto con tus familiares en EE. UU. inmediatamente y diles que se abastezcan de alimentos y efectivo antes de que sea demasiado tarde."
+        },
+        "traps": {
+          "R005_TRAP_01": {
+            "matched_text": "Las agencias gubernamentales están ocultando esta información deliberadamente, pero esta foto revela toda la verdad.",
+            "socratic_quiz": {
+              "question": "¿Cuál es el objetivo de la publicación al afirmar que «el gobierno está ocultando información»?",
+              "options": [
+                "A. Aportar pruebas que han sido revisadas por expertos médicos.",
+                "B. Mellar la credibilidad de las fuentes oficiales para que los lectores solo confíen en esta publicación.",
+                "C. Guiar a los ciudadanos sobre cómo ponerse en contacto con las autoridades locales."
+              ],
+              "explanation": "Quienes difunden desinformación suelen descartar las fuentes oficiales para posicionar su publicación como la «única verdad», privando a los lectores de su capacidad para verificar los hechos de forma independiente."
+            }
+          },
+          "R005_TRAP_02": {
+            "matched_text": "Si no actúas de inmediato, tu familia podría verse atrapada en la próxima ola de la pandemia.",
+            "socratic_quiz": {
+              "question": "¿Cómo afecta a la psicología del lector la técnica de «Apelación al miedo» utilizada en esta frase?",
+              "options": [
+                "A. Ayuda al lector a tomar una decisión más sabia y serena.",
+                "B. Fuerza al cerebro a entrar en un estado de pánico, reduciendo la capacidad de pensamiento crítico.",
+                "C. Aconseja al lector hacerse un chequeo médico de rutina en el hospital."
+              ],
+              "explanation": "El miedo desencadena la respuesta de lucha o huida del cerebro, lo que hace que los usuarios crean y compartan noticias apresuradamente antes de detenerse a pensar con lógica."
+            }
+          },
+          "R005_TRAP_03": {
+            "matched_text": "Ponte en contacto con tus familiares en EE. UU. inmediatamente y diles que se abastezcan de alimentos y efectivo antes de que sea demasiado tarde.",
+            "socratic_quiz": {
+              "question": "¿Qué táctica de manipulación emocional utiliza esta frase para obligar a actuar de inmediato?",
+              "options": [
+                "A. Crea un pánico artificial y temor a quedarse atrás (FOMO), obligando a los lectores a reaccionar por instinto en lugar de detenerse a verificar.",
+                "B. Presenta un argumento lógico basado en estadísticas económicas transparentes.",
+                "C. Fomenta un espíritu de afecto mutuo y solidaridad dentro de la comunidad."
+              ],
+              "explanation": "Llamados urgentes a la acción apelan a las emociones del miedo y la prisa, lo que lleva a los lectores a saltarse la verificación de hechos y difundir el pánico de inmediato."
+            }
+          }
+        }
+      },
+      "step_3_sorting_game": {
+        "context_text": "El proceso mediante el cual los desinformadores combinan imágenes antiguas, tecnología de IA y psicología para crear una campaña completa de desinformación.",
+        "pool_items": {
+          "R005_SORT_03": "Redactar una publicación con palabras sensacionalistas, sembrar teorías de la conspiración y adjuntar la foto editada con IA.",
+          "R005_SORT_01": "Recopilar una foto real de un Times Square desierto tomada durante el confinamiento de 2020.",
+          "R005_SORT_04": "Distribuir la publicación en grupos de redes sociales para incitar a la gente a acaparar productos y generar interacción.",
+          "R005_SORT_02": "Utilizar herramientas de IA generativa para cambiar el año de 2020 a 2026 y modificar detalles en los carteles publicitarios para renovar la imagen."
+        },
+        "validation_feedback": {
+          "success": "¡Correcto! Has descubierto por completo el ciclo de vida de una estafa híbrida: buscar imágenes antiguas -> editar con IA -> incorporar trampas psicológicas -> difundir el pánico.",
+          "failure": "Ese no es el orden correcto. Comienza por seleccionar la foto original, continúa con la edición mediante IA y la redacción del contenido manipulador, y termina difundiendo la publicación."
+        }
+      }
+    },
+    "dialogue_trigger": {
+      "question": "Si ves una foto que induce al pánico sobre una situación global, ¿cuál es tu proceso de verificación en 3 pasos?",
+      "mil_insight": "1. Análisis forense de la imagen: amplía la imagen para encontrar anomalías como texto deformado, dígitos invertidos y reflejos ilógicos.\n2. Verificación del contexto: utiliza una búsqueda inversa de imágenes para determinar cuándo y dónde se tomó la foto original.\n3. Contraste de fuentes: comprueba la información en comunicados de las autoridades o medios de comunicación fiables antes de compartirla."
+    }
+  }
+}

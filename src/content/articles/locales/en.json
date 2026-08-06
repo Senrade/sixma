@@ -1,58 +1,46 @@
 {
-  "spotting-ai-images": {
-    "category": "Visual verification",
-    "title": "How to inspect a suspicious image",
-    "summary": "Use structural clues, context checks, and source tracing before deciding whether an image is trustworthy.",
-    "sections": [
-      {
-        "heading": "Start with the claim",
-        "body": "An image is evidence only in relation to a claim. Write down what the post says happened, where it happened, and when. This makes missing context easier to see."
-      },
-      {
-        "heading": "Inspect physical consistency",
-        "body": "Look for broken geometry, merged objects, inconsistent reflections, unreadable text, and lighting that does not agree across the scene. One odd detail is a reason to investigate, not automatic proof."
-      },
-      {
-        "heading": "Verify outside the image",
-        "body": "Search for the earliest version, compare reports from independent sources, and check whether the alleged organization published the same material through an official channel."
-      }
-    ]
-  },
-  "emotional-manipulation": {
+  "common-media-fallacies": {
     "category": "Critical reasoning",
-    "title": "Recognizing emotional manipulation",
-    "summary": "Learn how urgency, fear, false dilemmas, and borrowed authority can shut down careful judgment.",
+    "title": "A Guide to Common Fallacies in Today's Media",
+    "summary": "Five reasoning traps appear again and again in social feeds. Learn how to recognize them before they shape what you believe or share.",
     "sections": [
       {
-        "heading": "Notice the pressure",
-        "body": "Manipulative posts often demand an immediate response. Pause when a message says there is no time to verify, only one acceptable choice, or catastrophic consequences for hesitation."
+        "heading": "Why fallacies thrive online",
+        "body": "Logical fallacies are errors in reasoning that make an argument unsound, even when its conclusion happens to be true. Social posts reward speed, brevity, and certainty, so oversimplified arguments can travel farther than careful explanations. Learning their patterns gives you a practical pause button before you react or share."
       },
       {
-        "heading": "Separate evidence from emotion",
-        "body": "Strong emotion does not make a claim false, but it can distract from weak evidence. Restate the factual claim without the loaded language and ask what still supports it."
+        "heading": "1. Attacking the messenger (Ad Hominem)",
+        "body": "An ad hominem attack targets the person making a claim instead of testing the claim itself. Someone might dismiss a sound proposal because its presenter made a mistake years ago. A person's history may affect credibility, but it does not settle whether the present evidence is valid. Ask: what part of the argument was actually answered?"
       },
       {
-        "heading": "Check quoted authority",
-        "body": "A real name or institution can be quoted inaccurately. Find the original statement and check whether the surrounding context supports the interpretation in the post."
-      }
-    ]
-  },
-  "phishing-chain": {
-    "category": "Digital safety",
-    "title": "Anatomy of a phishing chain",
-    "summary": "Understand how a harmless-looking hook becomes credential theft or financial loss.",
-    "sections": [
-      {
-        "heading": "The hook",
-        "body": "A phishing attempt begins with relevance: a prize, warning, deadline, or message that appears to come from someone familiar."
+        "heading": "2. The distortion tactic (Straw Man)",
+        "body": "A straw man replaces someone's real position with a weaker or more extreme version that is easier to attack. A call for sensible restrictions, for example, may be recast as a demand for a total ban. Compare the response with the original words: if they do not match, the real argument is still standing."
       },
       {
-        "heading": "The pivot",
-        "body": "The target is moved away from a trusted channel toward a link, attachment, form, or private conversation controlled by the attacker."
+        "heading": "3. Confusing coincidence with cause",
+        "body": "When two events happen together, it is tempting to assume that one caused the other. This is the post hoc fallacy: after this, therefore because of this. Correlation can be a useful clue, but another factor may explain both events. Look for a plausible mechanism, competing explanations, and evidence that rules them out."
       },
       {
-        "heading": "The trap",
-        "body": "The final step requests credentials, payment, private data, or software installation. Verify the request through a separate trusted channel before taking action."
+        "heading": "4. The all-or-nothing trap (False Dilemma)",
+        "body": "A false dilemma presents only two options when more choices exist. The unwanted option is then made to look impossible or dangerous, pushing you toward the speaker's preferred answer. Before accepting the choice, ask what middle ground, alternative, or combination has been left out."
+      },
+      {
+        "heading": "5. The chain reaction (Slippery Slope)",
+        "body": "A slippery-slope argument claims that one small step will inevitably trigger a chain of increasingly extreme consequences. Sometimes risks really do compound, but each link needs evidence. Ask where the chain could stop, what safeguards exist, and whether the predicted outcome has actually followed in comparable cases."
+      },
+      {
+        "heading": "How to level up your thinking",
+        "body": "Critical thinking is less about instantly finding the right answer than examining how well an answer is supported. When a post makes you react, pause and restate its claim in neutral language. Then ask: what is the evidence, does it support this exact claim, what alternatives were ignored, and what would change my mind?"
+      },
+      {
+        "heading": "References",
+        "items": [
+          "Zarvana. \"8 Fallacies You're Likely Falling For on Social Media.\"",
+          "Western Technical College. \"Fallacies: Illogical Arguments - Fake News and Fake Facts.\"",
+          "Wikipedia. \"List of fallacies.\"",
+          "University of Iowa. \"Logical Fallacies - Evaluating Online Information.\"",
+          "Owen M. Williamson, University of Texas at El Paso. \"Master List of Logical Fallacies.\""
+        ]
       }
     ]
   }

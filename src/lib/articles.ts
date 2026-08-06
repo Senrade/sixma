@@ -3,10 +3,9 @@ import "server-only";
 import articleIndex from "@/content/articles/index.json";
 import { loadLocale, type Locale } from "@/i18n/registry";
 
-export interface ArticleSection {
-  heading: string;
-  body: string;
-}
+export type ArticleSection =
+  | { heading: string; body: string; items?: never }
+  | { heading: string; items: string[]; body?: never };
 
 export interface Article {
   slug: string;
@@ -28,6 +27,17 @@ type ArticleCatalog = Record<string, ArticleTranslation>;
 
 const articlePromises = new Map<Locale, Promise<Article[]>>();
 
+function isArticleSection(value: unknown): value is ArticleSection {
+  if (typeof value !== "object" || value === null) return false;
+  const section = value as { heading?: unknown; body?: unknown; items?: unknown };
+  const hasBody = typeof section.body === "string";
+  const hasItems = Array.isArray(section.items)
+    && section.items.length > 0
+    && section.items.every((item) => typeof item === "string");
+
+  return typeof section.heading === "string" && hasBody !== hasItems;
+}
+
 function isArticleTranslation(value: unknown): value is ArticleTranslation {
   if (typeof value !== "object" || value === null) return false;
   const article = value as Partial<ArticleTranslation>;
@@ -36,9 +46,7 @@ function isArticleTranslation(value: unknown): value is ArticleTranslation {
     && typeof article.title === "string"
     && typeof article.summary === "string"
     && Array.isArray(article.sections)
-    && article.sections.every(
-      (section) => typeof section.heading === "string" && typeof section.body === "string",
-    )
+    && article.sections.every(isArticleSection)
   );
 }
 
