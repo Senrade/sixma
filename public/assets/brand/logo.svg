@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <clipPath id="logo-outer-bounds">
+      <path d="M2.074 10.219h115.5v99.562H2.074z" />
+    </clipPath>
+    <clipPath id="logo-hexagon">
+      <path d="M117.926 60 88.961 109.781H31.035L2.074 60l28.961-49.781h57.926z" />
+    </clipPath>
+    <clipPath id="logo-letter-bounds">
+      <path d="M22.375 25.762h75v68.25h-75z" />
+    </clipPath>
+  </defs>
+  <g clip-path="url(#logo-outer-bounds)">
+    <g clip-path="url(#logo-hexagon)">
+      <path d="m117.926 60-28.965 49.781H31.035L2.074 60l28.961-49.781h57.926z" fill="none" stroke="#fff" stroke-width="15" />
+    </g>
+  </g>
+  <g clip-path="url(#logo-letter-bounds)">
+    <path fill="#fff" fill-rule="evenodd" d="M51.832 72.234h16.332L62.5 62.414l-2.492-4.313-2.496 4.313-4.711 8.176zm21.477 8.922H46.688l-7.555 13.058-5.125-8.902 16.574-28.703 4.281-7.414-6.48-11.207-14.098 24.426-6.758 11.691-5.145-8.902 4.953-8.594L45.16 25.762h6.461l8.387 14.515 8.383-14.515h6.461l17.805 30.847 4.957 8.594-5.145 8.902-4.383-7.605-3.43-5.941-1.977-3.411-11.066-19.16-6.481 11.207 4.278 7.414 15.332 26.52h.015l1.25 2.199-5.129 8.906z" />
+  </g>
+</svg>

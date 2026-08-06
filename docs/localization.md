@@ -99,6 +99,37 @@ Locale files contain only text and address nested content by stable ID:
 }
 ```
 
+### Discovery metadata
+
+The case hub and briefing must create curiosity without revealing the verdict.
+Treat these fields as a spoiler-free discovery layer:
+
+| Field | Editorial purpose | Rule |
+| --- | --- | --- |
+| `title` | A short context hook or open question | Do not state that the evidence is fake, manipulated, a scam, or generated. |
+| `short_summary` | The claim, setting, and stakes | Describe what is circulating, not what the investigation will prove. |
+| `theme` | Broad subject domains used as discovery tags | Use exactly two short, distinct topics such as `Education`, `Technology`, or `Public health`. Never use a verdict or tactic as a topic. |
+| `skills` | The three module-level competencies | Use the same three labels for every case in that locale, in this order: visual evidence, language and claims, information chains. Translate the labels naturally when adding a locale. |
+| `story_context` | The pre-mission briefing | Present attribution gaps and open questions, but reserve the answer and teaching explanation for gameplay and debrief. |
+
+Good summary:
+
+> A Discord channel races with screenshots, urgent messages, and offers tied to
+> a supposed national exam leak.
+
+Avoid:
+
+> Expose the fake screenshot, manipulation tactics, and phishing scam.
+
+Detailed terms such as `phishing`, `false dilemma`, `synthetic image`, and
+`credential theft` belong in module questions, explanations, Knowledge Hub
+content, and the debrief after the learner has examined the evidence.
+
+The translation validator enforces two distinct themes, three distinct skills,
+and consistent skill labels across every case in a locale. When adding a new
+theme, choose a broad domain that can be reused instead of creating a tag for a
+single case outcome.
+
 Never add coordinates, image paths, answer keys, weapon IDs, case levels, or
 sorting sequences to a locale file. A translated case must contain the same
 text structure and IDs as its English entry.

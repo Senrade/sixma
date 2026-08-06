@@ -31,6 +31,13 @@ function assertOptionalStringArray(value, label) {
   }
 }
 
+function assertDistinctStringArray(value, expectedLength, label) {
+  if (!Array.isArray(value) || value.length !== expectedLength || value.some((item) => typeof item !== "string" || item.length === 0)) {
+    fail(`${label} must contain exactly ${expectedLength} non-empty strings.`);
+  }
+  if (new Set(value).size !== value.length) fail(`${label} must not contain duplicate values.`);
+}
+
 function validateQuiz(quiz, label) {
   if (quiz === undefined) return;
   assertAllowedKeys(
@@ -53,8 +60,8 @@ function validateCaseTranslation(translation, label) {
   for (const key of ["title", "short_summary", "story_context"]) {
     assertOptionalString(translation[key], `${label}.${key}`);
   }
-  assertOptionalStringArray(translation.skills, `${label}.skills`);
-  assertOptionalStringArray(translation.theme, `${label}.theme`);
+  assertDistinctStringArray(translation.skills, 3, `${label}.skills`);
+  assertDistinctStringArray(translation.theme, 2, `${label}.theme`);
 
   if (translation.source !== undefined) {
     assertAllowedKeys(translation.source, new Set(["note"]), `${label}.source`);
@@ -229,9 +236,13 @@ for (const [locale, definition] of Object.entries(LOCALES)) {
     fail(`${locale} is complete but is missing cases: ${missingCases.join(", ")}.`);
   }
 
+  const standardSkills = Object.values(cases)[0]?.skills;
   for (const [caseId, translation] of Object.entries(cases)) {
     const label = `${caseFile}:${caseId}`;
     validateCaseTranslation(translation, label);
+    if (JSON.stringify(translation.skills) !== JSON.stringify(standardSkills)) {
+      fail(`${label}.skills must use the same three module-aligned labels as every other case in ${locale}.`);
+    }
     assertSameShape(englishCases[caseId], translation, label);
     const mechanics = mechanicsById.get(caseId);
     const imageTranslation = translation.modules.step_1_image_forensics;
