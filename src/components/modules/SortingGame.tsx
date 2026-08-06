@@ -10,6 +10,7 @@ import type { ModuleGuideDefinition } from "@/lib/module-guides";
 import { useI18n } from "@/i18n/I18nProvider";
 import type { MessageKey } from "@/i18n/messages/types";
 import { ModuleGuide } from "./ModuleGuide";
+import { ProgressiveHint } from "./ProgressiveHint";
 import { RetroWindow } from "./RetroWindow";
 import {
   gameButton,
@@ -30,6 +31,7 @@ export interface SortingGameProps {
   poolItems: { id: string; text: string }[];
   correctSequence?: string[];
   validationFeedback?: SortingValidationFeedback;
+  guideDefaultExpanded?: boolean;
   onSort?: (sequence: string[]) => void;
   onComplete?: () => void;
 }
@@ -52,6 +54,7 @@ export function SortingGame({
   poolItems,
   correctSequence,
   validationFeedback,
+  guideDefaultExpanded = true,
   onSort,
   onComplete,
 }: SortingGameProps) {
@@ -64,6 +67,7 @@ export function SortingGame({
   const [dragTargetIndex, setDragTargetIndex] = useState<number | null>(null);
   const [status, setStatus] = useState<SortStatus>("Ready");
   const [feedback, setFeedback] = useState("");
+  const [incorrectAttempts, setIncorrectAttempts] = useState(0);
 
   const pointerMovedRef = useRef(false);
   const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
@@ -83,6 +87,7 @@ export function SortingGame({
       setDragTargetIndex(null);
       setStatus("Ready");
       setFeedback("");
+      setIncorrectAttempts(0);
       completionSentRef.current = false;
     }, 0);
 
@@ -116,6 +121,9 @@ export function SortingGame({
         ? validationFeedback?.success ?? t("module.sort.defaultSuccess")
         : validationFeedback?.failure ?? t("module.sort.defaultFailure"),
     );
+    if (!correct) {
+      setIncorrectAttempts((count) => count + 1);
+    }
     onSort?.(candidate);
 
   };
@@ -332,7 +340,7 @@ export function SortingGame({
 
   return (
     <RetroWindow title={t("module.sort.windowTitle")}>
-      <ModuleGuide guide={guide} />
+      <ModuleGuide guide={guide} defaultExpanded={guideDefaultExpanded} />
       <div className="mb-4 border-l-4 border-danger bg-accent/25 px-4 py-3">
         <p className="font-mono text-[11px] font-black uppercase text-danger">{t("module.sort.caseContext")}</p>
         <p className="mt-1 text-sm font-bold leading-6 text-ink">{contextText}</p>
@@ -501,6 +509,15 @@ export function SortingGame({
           {feedback}
         </p>
       )}
+      <ProgressiveHint
+        available={incorrectAttempts >= 1 && status !== "Correct"}
+        hints={[
+          t("module.hint.sort.inspect"),
+          t("module.hint.sort.first", {
+            item: poolItems.find((item) => item.id === expectedSequence[0])?.text ?? "",
+          }),
+        ]}
+      />
       {status === "Correct" && (
         <div className="mt-4 flex justify-end">
           <button type="button" onClick={handleComplete} className={gameButton}>

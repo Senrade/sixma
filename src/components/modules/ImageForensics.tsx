@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useI18n } from "@/i18n/I18nProvider";
 import type { ModuleGuideDefinition } from "@/lib/module-guides";
 import { ModuleGuide } from "./ModuleGuide";
+import { ProgressiveHint } from "./ProgressiveHint";
 import { RetroWindow } from "./RetroWindow";
 import {
   gameButton,
@@ -43,6 +44,7 @@ export interface ImageForensicsProps {
   socraticQuiz?: ImageForensicsQuiz;
   imageWidth?: number;
   imageHeight?: number;
+  guideDefaultExpanded?: boolean;
   onComplete?: () => void;
 }
 
@@ -72,6 +74,7 @@ const MIN_SMALLER_CIRCLE_OVERLAP = 0.3;
 const TARGET_CENTER_TOLERANCE = 1.15;
 const MAX_RADIUS_RATIO = 2.5;
 const REQUIRED_EVIDENCE_COUNT = 2;
+const HINT_ATTEMPT_THRESHOLD = 2;
 
 function getOptionKey(option: string): string {
   return option.trim().charAt(0).toUpperCase();
@@ -155,6 +158,7 @@ export function ImageForensics({
   socraticQuiz,
   imageWidth = 16,
   imageHeight = 9,
+  guideDefaultExpanded = true,
   onComplete,
 }: ImageForensicsProps) {
   const { t } = useI18n();
@@ -166,6 +170,8 @@ export function ImageForensics({
   const [drawnCircle, setDrawnCircle] = useState<DrawnCircle | null>(null);
   const [confirmedCircles, setConfirmedCircles] = useState<ConfirmedCircle[]>([]);
   const [isReviewingEvidence, setIsReviewingEvidence] = useState(false);
+  const [evidenceMisses, setEvidenceMisses] = useState(0);
+  const [quizMisses, setQuizMisses] = useState(0);
   const drawStartRef = useRef<{ x_pct: number; y_pct: number } | null>(null);
 
   const activeAnomaly = targetAnomalies.find(
@@ -182,6 +188,19 @@ export function ImageForensics({
   const imageStyle = {
     aspectRatio: `${imageWidth} / ${imageHeight}`,
   } satisfies CSSProperties;
+  const unresolvedAnomaly = targetAnomalies.find(
+    (anomaly) => !foundAnomalyIds.includes(anomaly.anomaly_id),
+  );
+  const horizontalArea = (unresolvedAnomaly?.x_pct ?? 50) < 34
+    ? t("module.hint.area.left")
+    : (unresolvedAnomaly?.x_pct ?? 50) > 66
+      ? t("module.hint.area.right")
+      : t("module.hint.area.center");
+  const verticalArea = (unresolvedAnomaly?.y_pct ?? 50) < 34
+    ? t("module.hint.area.top")
+    : (unresolvedAnomaly?.y_pct ?? 50) > 66
+      ? t("module.hint.area.bottom")
+      : t("module.hint.area.middle");
 
   const getImagePoint = (event: PointerEvent<HTMLDivElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -261,6 +280,7 @@ export function ImageForensics({
       )[0]?.anomaly;
 
     if (!selectedAnomaly) {
+      setEvidenceMisses((count) => count + 1);
       setDrawnCircle({ ...circle, result: "incorrect" });
       setClickMessage(t("module.image.drawError"));
       return;
@@ -271,6 +291,7 @@ export function ImageForensics({
     setActiveAnomalyId(selectedAnomaly.anomaly_id);
     setSelectedOption("");
     setQuizState("idle");
+    setQuizMisses(0);
   };
 
   const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
@@ -368,6 +389,7 @@ export function ImageForensics({
     }
 
     setQuizState("incorrect");
+    setQuizMisses((count) => count + 1);
   };
 
   const handleContinue = () => {
@@ -387,7 +409,7 @@ export function ImageForensics({
 
   return (
     <RetroWindow title={t("module.image.windowTitle")}>
-      <ModuleGuide guide={guide} />
+      <ModuleGuide guide={guide} defaultExpanded={guideDefaultExpanded} />
       <div className="grid min-h-0 gap-4 md:grid-cols-[minmax(0,1fr)_minmax(260px,380px)]">
         <div className="flex min-h-0 items-center justify-center overflow-hidden">
           <div
@@ -505,6 +527,13 @@ export function ImageForensics({
                   {t("module.image.quizError")}
                 </p>
               )}
+              <ProgressiveHint
+                available={quizMisses >= 1}
+                hints={[
+                  t("module.hint.quiz.compareEvidence"),
+                  t("module.hint.quiz.rejectAssumption"),
+                ]}
+              />
               {quizState === "correct" && (
                 <div className={`mt-3 ${gameFeedbackSuccess}`} role="status">
                   <p className="font-bold">{t("module.common.correct")}</p>
@@ -572,6 +601,16 @@ export function ImageForensics({
                 {clickMessage}
               </p>
             )}
+            <ProgressiveHint
+              available={evidenceMisses >= HINT_ATTEMPT_THRESHOLD}
+              hints={[
+                t("module.hint.image.inspect"),
+                t("module.hint.image.focus", {
+                  vertical: verticalArea,
+                  horizontal: horizontalArea,
+                }),
+              ]}
+            />
           </div>
         )}
       </div>
