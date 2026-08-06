@@ -1,17 +1,17 @@
 {
   "D001": {
     "title": "A cry for help from Hurricane Helene",
-    "short_summary": "Amid the devastation of Hurricane Helene in 2024, a photo of a young girl weeping while clutching her puppy in floodwaters went viral, garnering millions of shares and igniting a fierce debate over rescue operations.",
+    "short_summary": "A single flood photograph draws millions of views and sharp criticism of Hurricane Helene rescue efforts. What can the image actually support?",
     "skills": [
-      "Synthetic image detection",
-      "Emotional manipulation",
-      "Source tracing"
+      "Visual evidence",
+      "Language and claims",
+      "Information chains"
     ],
     "theme": [
       "Disaster response",
-      "Photojournalism"
+      "Public information"
     ],
-    "story_context": "After Hurricane Helene, an emotionally powerful image of a crying girl holding a puppy in floodwater spread online as if it documented a real rescue. The synthetic image was used to shape public judgment about the disaster response, even though the child and the photographed moment never existed.",
+    "story_context": "After Hurricane Helene, an emotionally powerful image of a crying girl holding a puppy in floodwater spread widely. Accounts cite it while criticizing the rescue response, but the original photographer, location, and upload are unclear. Examine what the evidence supports before reaching a conclusion.",
     "source": {
       "note": "Scenario adapted from David Carson's discussion of an AI-generated girl-and-puppy flood image that circulated during Hurricane Helene."
     },
@@ -73,18 +73,18 @@
     }
   },
   "R001": {
-    "title": "The Classroom That Never Happened",
-    "short_summary": "A viral image claims AI is monitoring students. Verify the photo, decode the rhetoric, and expose the phishing chain.",
+    "title": "Eyes in the Classroom",
+    "short_summary": "A classroom image sparks debate over how technology is being used around students, while a heated post spreads faster than answers.",
     "skills": [
-      "Image forensics",
-      "Logical fallacies",
-      "Phishing patterns"
+      "Visual evidence",
+      "Language and claims",
+      "Information chains"
     ],
     "theme": [
       "Education",
       "Technology"
     ],
-    "story_context": "A misinformation campaign based on the rumor that AI will replace teachers",
+    "story_context": "Students and parents are sharing a classroom image alongside claims about automated monitoring and evaluation. The discussion is escalating, and several posts direct readers toward further information. Examine the material before deciding what is happening.",
     "modules": {
       "step_1_image_forensics": {
         "context_text": "The leaked image attached to the controversy post is claimed to be 'evidence that AI is monitoring and evaluating students during class.'",
@@ -179,19 +179,18 @@
     }
   },
   "R002": {
-    "title": "The Canteen Extortion File",
-    "short_summary": "An anonymous sender uses a doctored food photo and reputational pressure to extort a school.",
+    "title": "The Canteen Complaint",
+    "short_summary": "A disturbing lunch-tray photo reaches school staff with a demand for an immediate response before the story spreads.",
     "skills": [
-      "Composite detection",
-      "Coercion patterns",
-      "Extortion structure"
+      "Visual evidence",
+      "Language and claims",
+      "Information chains"
     ],
     "theme": [
-      "Health",
-      "Safety",
-      "School"
+      "School life",
+      "Food safety"
     ],
-    "story_context": "An anonymous extortion email claiming contaminated food in the school canteen, demanding money to prevent reputational damage.",
+    "story_context": "An anonymous message includes a canteen photo and warns that it will be shared publicly unless the school responds before a deadline. Staff must determine what the image and wording actually support before taking action.",
     "modules": {
       "step_1_image_forensics": {
         "context_text": "The leaked image attached to the extortion email claims to show 'a disgusting cockroach served in the high school canteen food tray.'",
@@ -275,19 +274,18 @@
     }
   },
   "R003": {
-    "title": "The Illusion of Success",
-    "short_summary": "A viral post flexes a 20-year-old's fake luxury lifestyle while belittling others. Uncover the AI anomalies and decode the toxic FOMO tactics.",
+    "title": "Twenty and Already Winning?",
+    "short_summary": "A polished post about money, discipline, and success pulls young viewers into a heated comparison over who is falling behind.",
     "skills": [
-      "Image forensics",
-      "Logical fallacies",
-      "FOMO & Toxic flexing analysis"
+      "Visual evidence",
+      "Language and claims",
+      "Information chains"
     ],
     "theme": [
-      "Social Media",
-      "Peer Pressure",
-      "Toxic Flexing"
+      "Social media",
+      "Personal finance"
     ],
-    "story_context": "A viral post by a 'Minh Khang' persona about early financial wisdom, with a photo that seems suspect to careful eyes.",
+    "story_context": "A post by a young 'Minh Khang' persona pairs financial advice with an aspirational lifestyle photo. Its message is drawing admiration, defensiveness, and comparison among viewers. Examine the post before deciding how much weight it deserves.",
     "modules": {
       "step_1_image_forensics": {
         "context_text": "This photo supports Minh Khang's claims about his luxury lifestyle. Examine whether its physical details remain internally consistent.",
@@ -395,19 +393,17 @@
   },
   "R004": {
     "title": "National Exam Got Leaked",
-    "short_summary": "A viral Discord screenshot claims to leak national exam papers. Verify the image artifacts, decode the rhetoric, and expose the phishing chain.",
+    "short_summary": "A Discord channel races with screenshots, urgent messages, and offers tied to a supposed national exam leak.",
     "skills": [
-      "Phishing detection",
-      "URL verification",
-      "Social engineering (urgency + authority)",
-      "Credential theft"
+      "Visual evidence",
+      "Language and claims",
+      "Information chains"
     ],
     "theme": [
       "Education",
-      "Identity Theft",
-      "Financial Scam"
+      "Online communities"
     ],
-    "story_context": "A misinformation and phishing campaign based on fake national exam leaks circulated in a student Discord server",
+    "story_context": "Students in a Discord server are reacting to claims that national exam papers have leaked. Some accounts promise immediate access, others report what friends have heard, and the deadline is approaching. Examine the screenshot, messages, and sequence before deciding what is credible.",
     "modules": {
       "step_1_image_forensics": {
         "context_text": "The screenshot attached to the channel is claimed to show '100% authentic exam papers from the Ministry of Education.' Examine whether its interface details are consistent with a genuine Discord screen.",
@@ -518,18 +514,18 @@
     }
   },
   "R005": {
-    "title": "The Empty Square Myth",
-    "short_summary": "An image of a deserted Times Square with rumors of a 2026 pandemic outbreak causing a lockdown in New York. What is the truth behind this photo?",
+    "title": "Why Is Times Square Empty?",
+    "short_summary": "A deserted Times Square image recirculates with claims about a 2026 health emergency and a new lockdown, setting off anxious debate.",
     "skills": [
-      "Synthetic image detection",
-      "Context verification",
-      "Emotion control"
+      "Visual evidence",
+      "Language and claims",
+      "Information chains"
     ],
     "theme": [
-      "Health misinformation",
-      "AI-edited photo"
+      "Public health",
+      "Current events"
     ],
-    "story_context": "A social media post went viral featuring a completely deserted Times Square, claiming a severe pandemic outbreak in 2026 forced authorities to lock down the city. In reality, this is a genuine photo taken during the 2020 lockdown, but scammers used AI to alter timestamps and billboards to deceive the public.",
+    "story_context": "Posts are sharing a completely deserted Times Square image while claiming that a severe health emergency in 2026 forced authorities to lock down New York. The original date and source are not visible in the circulating posts. Examine what can be established from the available evidence.",
     "source": {
       "note": "Scenario based on real-world tactics where authentic past crisis footage is digitally altered to manufacture modern panic."
     },

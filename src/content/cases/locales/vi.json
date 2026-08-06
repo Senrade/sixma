@@ -1,17 +1,17 @@
 {
   "D001": {
     "title": "Lời cầu cứu tại tâm bão Helene",
-    "short_summary": "Giữa thảm họa bão Helene năm 2024, bức ảnh một bé gái ôm cún khóc giữa dòng nước lũ bùng nổ khắp mạng xã hội, kéo theo hàng triệu lượt chia sẻ và châm ngòi cho một làn sóng tranh cãi dữ dội về công tác cứu hộ.",
+    "short_summary": "Một bức ảnh giữa dòng nước lũ thu hút hàng triệu lượt xem và làm bùng lên chỉ trích về công tác cứu hộ sau bão Helene. Bức ảnh thực sự chứng minh được điều gì?",
     "skills": [
-      "Phát hiện ảnh tổng hợp",
-      "Nhận diện thao túng cảm xúc",
-      "Truy tìm nguồn tin"
+      "Bằng chứng hình ảnh",
+      "Ngôn từ và tuyên bố",
+      "Chuỗi lan truyền thông tin"
     ],
     "theme": [
       "Ứng phó thảm họa",
-      "Ảnh báo chí"
+      "Thông tin công chúng"
     ],
-    "story_context": "Sau bão Helene, một bức ảnh giàu cảm xúc về bé gái đang khóc, ôm chú chó con giữa dòng nước lũ lan truyền trên mạng như thể ghi lại một cuộc giải cứu có thật. Bức ảnh tổng hợp này được dùng để định hướng đánh giá của công chúng về công tác ứng phó thảm họa, dù cả em bé lẫn khoảnh khắc trong ảnh đều chưa từng tồn tại.",
+    "story_context": "Sau bão Helene, bức ảnh giàu cảm xúc về một bé gái đang khóc và ôm chú chó con giữa dòng nước lũ lan truyền rộng rãi. Nhiều tài khoản dùng ảnh để chỉ trích công tác cứu hộ, nhưng không rõ nhiếp ảnh gia, địa điểm hay bài đăng gốc. Hãy xem bằng chứng thực sự cho phép kết luận điều gì.",
     "source": {
       "note": "Tình huống được phỏng theo phần thảo luận của David Carson về bức ảnh bé gái và chó con trong lũ do AI tạo ra, từng lan truyền trong thời gian bão Helene."
     },
@@ -73,18 +73,18 @@
     }
   },
   "R001": {
-    "title": "Lớp học chưa từng tồn tại",
-    "short_summary": "Một bức ảnh lan truyền tuyên bố AI đang giám sát học sinh. Hãy kiểm chứng ảnh, giải mã ngôn từ và vạch trần chuỗi lừa đảo.",
+    "title": "Những ánh mắt trong lớp học",
+    "short_summary": "Một bức ảnh lớp học làm bùng lên tranh luận về cách công nghệ được sử dụng quanh học sinh, trong khi bài đăng nóng bỏng lan nhanh hơn câu trả lời.",
     "skills": [
-      "Giám định hình ảnh",
-      "Nhận diện ngụy biện",
-      "Phát hiện mô thức lừa đảo"
+      "Bằng chứng hình ảnh",
+      "Ngôn từ và tuyên bố",
+      "Chuỗi lan truyền thông tin"
     ],
     "theme": [
       "Giáo dục",
       "Công nghệ"
     ],
-    "story_context": "Một chiến dịch thông tin sai lệch dựa trên tin đồn rằng AI sẽ thay thế giáo viên.",
+    "story_context": "Học sinh và phụ huynh đang chia sẻ một bức ảnh lớp học kèm tuyên bố về việc giám sát và đánh giá tự động. Cuộc tranh luận ngày càng căng thẳng, và nhiều bài đăng dẫn người đọc tới thông tin bổ sung. Hãy xem xét tài liệu trước khi quyết định chuyện gì đang xảy ra.",
     "modules": {
       "step_1_image_forensics": {
         "context_text": "Bức ảnh rò rỉ đính kèm bài đăng gây tranh cãi được cho là 'bằng chứng AI đang giám sát và đánh giá học sinh trong lớp học'.",
@@ -179,19 +179,18 @@
     }
   },
   "R002": {
-    "title": "Hồ sơ tống tiền căng tin",
-    "short_summary": "Một người gửi ẩn danh dùng ảnh thực phẩm bị chỉnh sửa và áp lực danh tiếng để tống tiền nhà trường.",
+    "title": "Khiếu nại từ căng tin",
+    "short_summary": "Một bức ảnh khay cơm đáng lo ngại được gửi tới nhà trường, kèm yêu cầu phản hồi ngay trước khi câu chuyện bị công khai.",
     "skills": [
-      "Phát hiện ảnh ghép",
-      "Nhận diện mô thức cưỡng ép",
-      "Phân tích cấu trúc tống tiền"
+      "Bằng chứng hình ảnh",
+      "Ngôn từ và tuyên bố",
+      "Chuỗi lan truyền thông tin"
     ],
     "theme": [
-      "Sức khỏe",
-      "An toàn",
-      "Trường học"
+      "Đời sống học đường",
+      "An toàn thực phẩm"
     ],
-    "story_context": "Một email tống tiền ẩn danh tuyên bố thực phẩm trong căng tin trường bị nhiễm bẩn và đòi tiền để không làm tổn hại danh tiếng nhà trường.",
+    "story_context": "Một tin nhắn ẩn danh đính kèm ảnh từ căng tin và cảnh báo sẽ công khai sự việc nếu nhà trường không phản hồi trước hạn. Nhà trường cần xác định hình ảnh và ngôn từ thực sự chứng minh được điều gì trước khi hành động.",
     "modules": {
       "step_1_image_forensics": {
         "context_text": "Bức ảnh rò rỉ đính kèm email tống tiền được cho là chụp 'một con gián ghê tởm trong khay thức ăn của căng tin trường trung học'.",
@@ -275,19 +274,18 @@
     }
   },
   "R003": {
-    "title": "Ảo tưởng thành công",
-    "short_summary": "Một bài đăng lan truyền khoe lối sống xa hoa giả tạo của người trẻ 20 tuổi và hạ thấp người khác. Hãy tìm dị thường AI và giải mã chiến thuật FOMO độc hại.",
+    "title": "Tuổi 20 và đã thành công?",
+    "short_summary": "Một bài đăng trau chuốt về tiền bạc, kỷ luật và thành công kéo người trẻ vào cuộc so sánh gay gắt xem ai đang bị bỏ lại phía sau.",
     "skills": [
-      "Giám định hình ảnh",
-      "Nhận diện ngụy biện",
-      "Phân tích FOMO và khoe khoang độc hại"
+      "Bằng chứng hình ảnh",
+      "Ngôn từ và tuyên bố",
+      "Chuỗi lan truyền thông tin"
     ],
     "theme": [
       "Mạng xã hội",
-      "Áp lực đồng trang lứa",
-      "Khoe khoang độc hại"
+      "Tài chính cá nhân"
     ],
-    "story_context": "Một bài đăng lan truyền của nhân vật 'Minh Khang' về bí quyết tài chính khi còn trẻ, kèm bức ảnh có nhiều dấu hiệu đáng ngờ nếu quan sát kỹ.",
+    "story_context": "Một bài đăng của nhân vật trẻ tên 'Minh Khang' ghép lời khuyên tài chính với bức ảnh về lối sống đáng mơ ước. Thông điệp đang khiến người xem ngưỡng mộ, phòng thủ và so sánh bản thân. Hãy xem xét bài đăng trước khi quyết định nên tin tưởng tới mức nào.",
     "modules": {
       "step_1_image_forensics": {
         "context_text": "Bức ảnh này được dùng để củng cố tuyên bố của Minh Khang về lối sống xa hoa. Hãy xem các chi tiết vật lý trong ảnh có nhất quán với nhau hay không.",
@@ -395,20 +393,18 @@
     }
   },
   "R004": {
-    "title": "Lộ Đề Thi Quốc Gia",
-    "short_summary": "Ảnh chụp màn hình Discord lan truyền tin đồn lộ đề thi quốc gia. Hãy tìm điểm bất thường AI, bóc gỡ chiêu trò tâm lý và vạch trần bẫy lừa đảo (phishing) đứng sau!",
+    "title": "Đề thi quốc gia bị lộ?",
+    "short_summary": "Một kênh Discord tràn ngập ảnh chụp màn hình, tin nhắn khẩn cấp và những lời chào mời xoay quanh nghi vấn lộ đề thi quốc gia.",
     "skills": [
-      "Nhận diện Lừa đảo",
-      "Kiểm tra URL",
-      "Thao túng tâm lý",
-      "Đánh cắp danh tính"
+      "Bằng chứng hình ảnh",
+      "Ngôn từ và tuyên bố",
+      "Chuỗi lan truyền thông tin"
     ],
     "theme": [
-      "Học đường",
-      "Đánh cắp tài khoản",
-      "Lừa đảo tài chính"
+      "Giáo dục",
+      "Cộng đồng trực tuyến"
     ],
-    "story_context": "Một chiến dịch tin giả về việc rò rỉ đề thi quốc gia đang bùng nổ trên máy chủ Discord dành cho học sinh. Kẻ gian lợi dụng sự hoảng loạn và tâm lý ham lợi để tung bẫy lừa đảo (phishing), hòng đánh cắp tài khoản trường học và tiền của nạn nhân.",
+    "story_context": "Học sinh trong một máy chủ Discord đang phản ứng trước tuyên bố đề thi quốc gia đã bị lộ. Một số tài khoản hứa cung cấp ngay, số khác kể lại điều bạn bè nghe được, còn thời hạn thì đang đến gần. Hãy xem xét ảnh chụp, tin nhắn và trình tự sự việc trước khi đánh giá độ tin cậy.",
     "modules": {
       "step_1_image_forensics": {
         "context_text": "Ảnh chụp màn hình kênh Discord này đang lan truyền với lời khẳng định có '100% đề thi chính thức từ Bộ Giáo dục'. Hãy xem các chi tiết giao diện có nhất quán với một màn hình Discord thật hay không.",
@@ -519,18 +515,18 @@
     }
   },
   "R005": {
-    "title": "Virus Corona bùng phát trở lại năm 2026 tại Times Square",
-    "short_summary": "Một bức ảnh Quảng trường Thời đại vắng tanh đi kèm tin đồn dịch bệnh năm 2026 khiến New York phong tỏa. Sự thật phía sau bức ảnh là gì?",
+    "title": "Vì sao Quảng trường Thời đại vắng lặng?",
+    "short_summary": "Bức ảnh Quảng trường Thời đại vắng tanh xuất hiện trở lại cùng tuyên bố về tình trạng y tế khẩn cấp và lệnh phong tỏa mới năm 2026, làm dấy lên tranh luận lo lắng.",
     "skills": [
-      "Phát hiện ảnh deepfake",
-      "Xác minh bối cảnh",
-      "Kiểm soát cảm xúc"
+      "Bằng chứng hình ảnh",
+      "Ngôn từ và tuyên bố",
+      "Chuỗi lan truyền thông tin"
     ],
     "theme": [
-      "Thông tin sai lệch về sức khỏe",
-      "Ảnh chỉnh sửa bằng AI"
+      "Y tế công cộng",
+      "Sự kiện thời sự"
     ],
-    "story_context": "Một bài đăng mạng xã hội lan truyền bức ảnh Quảng trường Thời đại hoàn toàn vắng người, tuyên bố đợt bùng phát dịch virus Corona nghiêm trọng năm 2026 buộc chính quyền phong tỏa thành phố. Thực tế đây là ảnh thật được chụp trong đợt phong tỏa năm 2020, nhưng kẻ lừa đảo dùng AI thay đổi mốc thời gian và biển quảng cáo để đánh lừa công chúng.",
+    "story_context": "Các bài đăng đang chia sẻ bức ảnh Quảng trường Thời đại hoàn toàn vắng người và tuyên bố tình trạng y tế nghiêm trọng năm 2026 buộc New York phải phong tỏa. Ngày chụp và nguồn gốc ban đầu không xuất hiện trong các bài đang lan truyền. Hãy xem bằng chứng hiện có cho phép xác định điều gì.",
     "source": {
       "note": "Tình huống dựa trên thủ đoạn có thật: chỉnh sửa kỹ thuật số tư liệu xác thực từ các cuộc khủng hoảng trong quá khứ để tạo ra nỗi hoảng loạn ở hiện tại."
     },
