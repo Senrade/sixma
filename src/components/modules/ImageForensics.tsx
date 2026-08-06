@@ -501,7 +501,7 @@ export function ImageForensics({
               {t("module.common.criticalThinking")}
             </div>
             <div className="p-3">
-              <p className="text-xs font-bold" id="forensics-question">
+              <p className="text-sm font-bold leading-6" id="forensics-question">
                 {activeQuiz.question}
               </p>
               <div className="mt-3 space-y-1">
