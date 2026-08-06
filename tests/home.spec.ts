@@ -13,5 +13,7 @@ test('loads the home page and featured demo mission', async ({ page }) => {
   await page.goto('/en/mission/D001');
 
   await expect(page).toHaveURL(/\/en\/mission\/D001$/);
-  await expect(page.getByRole('main')).toBeVisible();
+  await expect(
+    page.getByRole('heading', { level: 2, name: 'Module 01 / Image Forensics' }),
+  ).toBeVisible({ timeout: 15_000 });
 });
