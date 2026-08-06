@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { AppShell } from "@/components/site/AppShell";
+import { SpecialCaseAccessBoundary } from "@/components/redeem/SpecialCaseAccessBoundary";
 import { ButtonLink, Chip, SectionLabel } from "@/components/ui/Primitives";
 import { getCase, getCases } from "@/lib/cases";
 import { MODULE_GUIDE_LIST } from "@/lib/module-guides";
@@ -9,6 +10,7 @@ import { LocalizedText } from "@/components/site/LocalizedCopy";
 import { requireLocale } from "@/i18n/params";
 import { localizePath } from "@/i18n/routing";
 import { getMessages } from "@/i18n/server";
+import { SPECIAL_EVENT_CASE_ID } from "@/lib/demo-event";
 
 export async function generateStaticParams() {
   return (await getCases()).map((caseData) => ({ case_id: caseData.case_id }));
@@ -27,7 +29,7 @@ export default async function CaseBriefingPage({ params }: { params: Promise<{ l
   const [caseData, messages] = await Promise.all([getCase(case_id, locale), getMessages(locale)]);
   if (!caseData) notFound();
 
-  return (
+  const content = (
     <AppShell>
       <section className="border-b-2 border-ink bg-surface-2 py-10 sm:py-14">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
@@ -55,4 +57,8 @@ export default async function CaseBriefingPage({ params }: { params: Promise<{ l
       </section>
     </AppShell>
   );
+
+  return caseData.case_id === SPECIAL_EVENT_CASE_ID
+    ? <SpecialCaseAccessBoundary>{content}</SpecialCaseAccessBoundary>
+    : content;
 }

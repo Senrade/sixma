@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MissionExperience } from "@/components/cases/MissionExperience";
+import { SpecialCaseAccessBoundary } from "@/components/redeem/SpecialCaseAccessBoundary";
 import { getCase, getCases } from "@/lib/cases";
 import { requireLocale } from "@/i18n/params";
 import { getMessages } from "@/i18n/server";
+import { SPECIAL_EVENT_CASE_ID } from "@/lib/demo-event";
 
 export async function generateStaticParams() {
   const cases = await getCases();
@@ -33,5 +35,8 @@ export default async function MissionPage({
     notFound();
   }
 
-  return <MissionExperience caseData={caseData} />;
+  const mission = <MissionExperience caseData={caseData} />;
+  return caseData.case_id === SPECIAL_EVENT_CASE_ID
+    ? <SpecialCaseAccessBoundary>{mission}</SpecialCaseAccessBoundary>
+    : mission;
 }

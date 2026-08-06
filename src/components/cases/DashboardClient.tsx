@@ -5,6 +5,8 @@ import { CaseFolder } from "@/components/cases/CaseFolder";
 import { Card, Progress } from "@/components/ui/Primitives";
 import type { CaseData } from "@/lib/case-types";
 import { useI18n } from "@/i18n/I18nProvider";
+import { SPECIAL_EVENT_CASE_ID } from "@/lib/demo-event";
+import { hasDemoEventAccess } from "@/lib/demo-event-storage";
 
 interface CaseProgress {
   step: number;
@@ -14,6 +16,7 @@ interface CaseProgress {
 export function DashboardClient({ cases }: { cases: CaseData[] }) {
   const { t } = useI18n();
   const [progress, setProgress] = useState<Record<string, CaseProgress> | null>(null);
+  const [hasSpecialAccess, setHasSpecialAccess] = useState<boolean | null>(null);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -28,12 +31,13 @@ export function DashboardClient({ cases }: { cases: CaseData[] }) {
         }
       }
       setProgress(next);
+      setHasSpecialAccess(hasDemoEventAccess());
     }, 0);
 
     return () => window.clearTimeout(timer);
   }, [cases]);
 
-  if (!progress) return <p className="mt-8 font-mono text-sm">{t("dashboard.loading")}</p>;
+  if (!progress || hasSpecialAccess === null) return <p className="mt-8 font-mono text-sm">{t("dashboard.loading")}</p>;
 
   const started = Object.values(progress).filter((item) => item.step > 0).length;
   const completed = Object.values(progress).filter((item) => item.completedAt).length;
@@ -51,7 +55,11 @@ export function DashboardClient({ cases }: { cases: CaseData[] }) {
           const percentage = state.completedAt ? 100 : state.step > 0 ? Math.round(((state.step - 1) / 3) * 100) : 0;
           const previousCase = caseIndex > 0 ? cases[caseIndex - 1] : undefined;
           const previousCompleted = previousCase ? Boolean(progress[previousCase.case_id]?.completedAt) : true;
-          const access = state.completedAt ? "completed" : previousCompleted ? "available" : "locked";
+          const access = state.completedAt
+            ? "completed"
+            : caseData.case_id === SPECIAL_EVENT_CASE_ID
+              ? hasSpecialAccess ? "available" : "redeem"
+              : previousCompleted ? "available" : "locked";
           return <CaseFolder key={caseData.case_id} caseData={caseData} progress={percentage} access={access} revealDetails={Boolean(state.completedAt)} prerequisiteCaseId={previousCase?.case_id} />;
         })}
       </div>
