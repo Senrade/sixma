@@ -22,13 +22,13 @@
           "D001_IMG_01": {
             "description": "Khuôn mặt bé gái có độ mịn nhân tạo bất thường; chi tiết quanh mắt, miệng và biểu cảm thiếu nhất quán.",
             "socratic_quiz": {
-              "question": "Vì sao khuôn mặt bé gái là một dấu hiệu cảnh báo đáng chú ý cho thấy ảnh có thể là ảnh tổng hợp?",
+              "question": "Sau khi nhận thấy khuôn mặt quá mịn và các chi tiết thiếu ổn định, kết luận nào là hợp lý nhất?",
               "options": [
-                "A. Một đứa trẻ thật không thể bị chụp ảnh khi đang khóc.",
-                "B. Da và biểu cảm mịn bất thường, trong khi chi tiết quanh mắt và miệng thiếu sự nhất quán của ảnh chụp thật.",
-                "C. Khuôn mặt bé gái nằm gần trung tâm bố cục."
+                "A. Chỉ riêng dấu hiệu này đủ để khẳng định toàn bộ bức ảnh do AI tạo ra.",
+                "B. Đây là manh mối cần được kiểm tra cùng ảnh gốc, nguồn đăng và các chi tiết khác.",
+                "C. Hiệu ứng xử lý của máy ảnh giải thích được dấu hiệu nên không cần kiểm tra thêm."
               ],
-              "explanation": "Làn da quá mịn, chi tiết khuôn mặt không ổn định và biểu cảm mang tính tổng hợp cường điệu là những manh mối hữu ích. Tuy nhiên, chúng chưa tự mình chứng minh điều gì; bước tiếp theo là điều tra nguồn gốc và xuất xứ của ảnh."
+              "explanation": "Một dị thường thị giác là manh mối, không phải phán quyết. Hãy đối chiếu ảnh gốc, nguồn đăng và nhiều dấu hiệu độc lập trước khi kết luận."
             }
           }
         }
@@ -43,13 +43,13 @@
           "D001_TRAP_01": {
             "matched_text": "Bức ảnh này chứng minh lực lượng cứu hộ đã bỏ mặc những gia đình như em trong khi các quan chức chỉ dàn dựng họp báo.",
             "socratic_quiz": {
-              "question": "Bài đăng đã thực hiện bước suy diễn thiếu căn cứ nào từ bức ảnh để đi đến lời cáo buộc?",
+              "question": "Thông tin nào sẽ giúp kiểm tra trực tiếp nhất cáo buộc lực lượng cứu hộ bỏ mặc các gia đình?",
               "options": [
-                "A. Bài đăng xác minh ảnh được chụp ở đâu và khi nào trước khi bàn về hoạt động ứng phó.",
-                "B. Bài đăng coi một hình ảnh giàu cảm xúc chưa được xác minh là bằng chứng trực tiếp rằng lực lượng cứu hộ đã bỏ mặc các gia đình.",
-                "C. Bài đăng đối chiếu thông tin từ nhiều nhà báo độc lập đang đưa tin về thảm họa."
+                "A. Số lượt chia sẻ và bình luận đồng tình với bài đăng trong ngày đầu tiên.",
+                "B. Hồ sơ cứu hộ, địa điểm, thời gian và tường thuật độc lập về chính khu vực được nhắc tới.",
+                "C. Một tài khoản khác đăng lại cùng bức ảnh với lời chú thích tương tự."
               ],
-              "explanation": "Ngay cả một bức ảnh thật cũng chỉ ghi lại một khoảnh khắc. Chỉ riêng nó không thể chứng minh một cáo buộc rộng về toàn bộ công tác ứng phó thảm họa. Đây là suy diễn không có căn cứ (Unsupported Inference) được khuếch đại bằng lời kêu gọi cảm xúc (Appeal to Emotion). Trong trường hợp này, ảnh còn là ảnh tổng hợp nên bước suy diễn càng gây hiểu lầm."
+              "explanation": "Một ảnh đơn lẻ không chứng minh được hoạt động của cả lực lượng cứu hộ. Cáo buộc phải được đối chiếu với hồ sơ và nguồn độc lập gắn đúng nơi, đúng thời điểm."
             }
           }
         }
@@ -92,25 +92,25 @@
           "R001_IMG_01": {
             "description": "Dòng chữ vô nghĩa, méo mó và không thể đọc được hiển thị trên bảng điện tử.",
             "socratic_quiz": {
-              "question": "Vì sao chữ viết trên màn hình lớp học là một dấu hiệu cảnh báo mạnh?",
+              "question": "Cách kiểm tra nào phân biệt tốt nhất chữ bị lỗi do tạo ảnh với chữ mờ do chất lượng ảnh thấp?",
               "options": [
-                "A. Màn hình quá sáng đối với một lớp học.",
-                "B. Chữ bị biến dạng, chồng lấn và không tạo thành từ có thể đọc được.",
-                "C. Màn hình được gắn phía trên bàn giáo viên."
+                "A. So độ sáng màn hình với các vùng sáng khác trong lớp.",
+                "B. Kiểm tra xem nét chữ có tạo thành ký tự nhất quán ở nhiều vị trí hay không.",
+                "C. Xác định màn hình có được đặt đúng vị trí thường thấy trong lớp học hay không."
               ],
-              "explanation": "Các trình tạo ảnh thường tạo được hình dạng có vẻ hợp lý nhưng không duy trì được chữ viết rõ ràng và nhất quán. Chữ vô nghĩa là bằng chứng thao túng mạnh hơn độ sáng hay vị trí của màn hình."
+              "explanation": "Ảnh mờ thường làm mất chi tiết một cách tương đối đồng đều; ký tự biến dạng khác nhau từng chỗ là dấu hiệu đáng kiểm tra với ảnh nguồn."
             }
           },
           "R001_IMG_02": {
             "description": "Các học sinh ở trung tâm tiền cảnh chồng lấn bất thường và hòa vào nhau.",
             "socratic_quiz": {
-              "question": "Điều gì khiến nhóm học sinh ở khu vực này có khả năng là lỗi tạo ảnh bằng AI?",
+              "question": "Nhìn nhóm học sinh ở giữa, phía trước ảnh. Chi tiết nào thực sự không ổn?",
               "options": [
-                "A. Một số học sinh ngồi gần nhau.",
-                "B. Cơ thể học sinh chồng lấn và hòa vào nhau theo cách không phù hợp với cơ thể hoặc ghế ngồi.",
-                "C. Cả nhóm quay lưng về phía máy ảnh."
+                "A. Các học sinh ngồi sát nhau nên một số bạn che khuất một phần cơ thể của nhau.",
+                "B. Đầu và vai của học sinh nhỏ ở giữa hòa vào những người xung quanh, khiến khó xác định cơ thể của từng người kết thúc ở đâu.",
+                "C. Khuôn mặt các học sinh bị mờ vì máy ảnh đang lấy nét vào robot."
               ],
-              "explanation": "Lớp học đông người có thể là bình thường, nhưng những cơ thể hòa vào hoặc xuyên qua nhau phá vỡ logic vật lý của cảnh. Sự thiếu nhất quán về cấu trúc này là một manh mối hữu ích để phát hiện ảnh giả."
+              "explanation": "Vị trí của các học sinh ở khu vực này bị chồng chéo lên nhau và không tuân theo một quy luật nhất định. Có 2 cái bàn nhưng  thay vì được che khuất rõ ràng thì vị trí của các học sinh lại không hợp lý. Chính chỗ hòa lẫn đó là dấu hiệu bất thường."
             }
           }
         }
@@ -125,37 +125,37 @@
           "R001_TRAP_01": {
             "matched_text": "Thành thật mà nói, đây có vẻ là một bước đi bí mật nhằm loại bỏ hoàn toàn giáo viên thật.",
             "socratic_quiz": {
-              "question": "Lỗi logic chính nào được tác giả dùng để thuyết phục bạn rằng giáo viên đang bị thay thế?",
+              "question": "Bằng chứng nào cần có trước khi kết luận chương trình thí điểm nhằm thay thế giáo viên?",
               "options": [
-                "A. Dựa vào các tài liệu chiến lược đã được Bộ Giáo dục công khai và xác minh.",
-                "B. Phân tích số liệu suy giảm việc làm trong ngành giáo dục suốt thập kỷ qua.",
-                "C. Gán một động cơ xấu xa, bí mật cho chương trình thí điểm công nghệ thông thường mà không đưa ra bằng chứng cụ thể."
+                "A. Nhiều phụ huynh cho biết họ lo ngại AI sẽ ảnh hưởng đến vai trò của giáo viên.",
+                "B. Chương trình có dùng một công cụ AI trong một số hoạt động học tập.",
+                "C. Kế hoạch nhân sự, ngân sách hoặc tài liệu triển khai cho thấy vị trí giáo viên thực sự bị loại bỏ."
               ],
-              "explanation": "Tác giả lập tức suy diễn thành thuyết âm mưu (Conspiracy Theory), mô tả chương trình thí điểm như một kế hoạch độc hại mà không có bằng chứng kiểm chứng được. Việc tự gán chủ ý xấu cho chương trình còn thể hiện thiên kiến chủ ý (Intentionality Bias)."
+              "explanation": "Sự tồn tại của công cụ AI không tự chứng minh mục đích thay thế giáo viên. Kết luận về động cơ cần tài liệu hoặc hành động cụ thể, không chỉ sự lo ngại."
             }
           },
           "R001_TRAP_02": {
             "matched_text": "Rõ ràng các tập đoàn công nghệ lớn chỉ đang muốn tự động hóa toàn bộ giáo dục để khai thác dữ liệu học sinh vì lợi nhuận.",
             "socratic_quiz": {
-              "question": "Cụm từ 'Rõ ràng' thao túng tư duy phân tích của người đọc như thế nào?",
+              "question": "Phản ứng nào giữ được tư duy độc lập trước cụm từ 'Rõ ràng'?",
               "options": [
-                "A. Cho thấy phát biểu được ủng hộ bởi sự đồng thuận rộng rãi từ các nghiên cứu bình duyệt.",
-                "B. Mời người đọc tự xem xét điều khoản quyền riêng tư của phần mềm.",
-                "C. Lách qua yêu cầu về bằng chứng bằng cách trình bày một giả định phức tạp như sự thật không thể phủ nhận."
+                "A. Tạm tin vì người viết diễn đạt chắc chắn và có vẻ nắm thông tin nội bộ.",
+                "B. Bác bỏ toàn bộ công nghệ giáo dục vì rủi ro thu thập dữ liệu là có thật.",
+                "C. Tách giọng điệu chắc chắn khỏi nội dung và yêu cầu bằng chứng cụ thể về dữ liệu cùng động cơ."
               ],
-              "explanation": "Những cụm từ như 'rõ ràng' là thủ thuật tu từ dùng để lén đưa các khẳng định lớn chưa được chứng minh vào như thể đó là sự thật không thể nghi ngờ. Cách gán động cơ chung cho cả ngành công nghệ thể hiện thiên kiến quy kết (Attribution Bias) và khái quát hóa quá mức (Overgeneralization)."
+              "explanation": "Giọng điệu tự tin không làm tăng chất lượng bằng chứng. Hãy tách từng khẳng định và yêu cầu nguồn kiểm chứng cho từng phần."
             }
           },
           "R001_TRAP_03": {
             "matched_text": "Nếu phụ huynh không đứng lên và tẩy chay việc triển khai này ngay lập tức, con em chúng ta sẽ mất hoàn toàn khả năng tư duy phản biện!",
             "socratic_quiz": {
-              "push_question": "Cách diễn đạt câu kết này ép người đọc rơi vào cái bẫy tâm lý nào?",
+              "push_question": "Câu kết đã loại bỏ những khả năng hợp lý nào khỏi lựa chọn của phụ huynh?",
               "options": [
-                "A. Cung cấp một lộ trình rõ ràng từng bước để giải quyết vấn đề.",
-                "B. Ép lựa chọn giữa tẩy chay ngay lập tức hoặc đối mặt thảm họa tuyệt đối, loại bỏ mọi giải pháp ôn hòa.",
-                "C. Khuyến khích phụ huynh tự nghiên cứu trước khi đưa ra quyết định cuối cùng."
+                "A. Khả năng ủng hộ chương trình ngay mà không cần điều kiện hay giám sát bổ sung.",
+                "B. Khả năng tìm hiểu, đặt điều kiện bảo vệ, thử nghiệm có giám sát hoặc phản đối một phần của chương trình.",
+                "C. Khả năng tẩy chay chương trình nếu sau này xuất hiện bằng chứng về rủi ro nghiêm trọng."
               ],
-              "explanation": "Tác giả dùng ngụy biện lưỡng phân sai (False Dilemma) để tước đi khả năng đưa ra lựa chọn trung lập và có phân tích. Việc dự đoán rằng không tẩy chay ngay sẽ khiến trẻ mất hoàn toàn tư duy phản biện còn tạo thành ngụy biện trượt dốc (Slippery Slope)."
+              "explanation": "Câu viết chỉ chừa hai cực đoan: tẩy chay ngay hoặc chịu thảm họa. Nhận ra các lựa chọn trung gian giúp người đọc thoát khỏi khung ép buộc."
             }
           }
         }
@@ -204,7 +204,7 @@
                 "B. So sánh chuyển màu, kết cấu bề mặt và vùng bắt sáng của nó với thức ăn và khay kim loại dưới cùng nguồn sáng.",
                 "C. Đếm số món ăn riêng biệt xuất hiện quanh nó trong khay."
               ],
-              "explanation": "Chỉ dựa vào kích thước là chưa đủ vì các loài gián có kích thước khác nhau. Ở đây, màu quá rực cùng bề mặt bóng như đồ chơi của con gián phản ứng với ánh sáng khác hẳn cơm và khay. Một số mô hình AI tạo sinh hoặc quy trình ghép ảnh có thể tạo ra sự lệch chất liệu (Material Mismatch) như vậy, nên cần đối chiếu thêm nguồn và bối cảnh."
+              "explanation": "Kích thước có thể thay đổi theo loài và phối cảnh. Sự khác biệt về chất liệu và ánh sáng dưới cùng điều kiện là phép so sánh đáng tin hơn, nhưng vẫn cần kiểm tra nguồn ảnh."
             }
           }
         }
@@ -225,7 +225,7 @@
                 "B. Những vụ việc trước đó đã được kiểm chứng độc lập, cho thấy cùng vấn đề thực sự tái diễn.",
                 "C. Việc bài đăng cụ thể này chưa nhận được phản hồi ngay lập tức."
               ],
-              "explanation": "Cụm từ 'chuyện này cứ xảy ra' mặc nhiên xem sự việc là một mô thức lặp lại dù chưa có bằng chứng. Lời phủ nhận mở đầu không loại bỏ giả định đó. Đây là lối nói bóng gió (Rhetorical Innuendo) nhằm gieo nghi ngờ (Seeding Doubt), đồng thời cho phép tác giả rút lui về lý do 'tôi chỉ hỏi' khi bị chất vấn."
+              "explanation": "Cụm từ 'cứ xảy ra' biến một trường hợp chưa xác minh thành mô thức. Muốn khẳng định sự lặp lại, cần nhiều vụ việc đã được kiểm chứng độc lập."
             }
           },
           "R002_TRAP_02": {
@@ -237,7 +237,7 @@
                 "B. Xem xét bằng chứng và lập luận trong phản hồi trước khi kết luận sự phức tạp là có thật hay chỉ là cái cớ.",
                 "C. Bác bỏ phản hồi nếu nó chứa chi tiết kỹ thuật khó hiểu."
               ],
-              "explanation": "Bài đăng dùng kỹ thuật đầu độc nguồn tin (Poisoning the Well) khi gắn nhãn mọi lời giải thích tương lai là cái cớ trước khi nhà trường lên tiếng. Từ 'không bao giờ' còn tạo ra sự khái quát hóa quá mức (Overgeneralization) từ những trải nghiệm không được nêu rõ. Đánh giá công bằng phải xem xét phản hồi và bằng chứng của nó độc lập với cách đóng khung ban đầu."
+              "explanation": "Bài đăng gắn nhãn mọi phản hồi tương lai là cái cớ trước khi nó xuất hiện. Đánh giá công bằng phải dựa trên bằng chứng trong phản hồi, không dựa trên cách đóng khung trước đó."
             }
           },
           "R002_TRAP_03": {
@@ -249,7 +249,7 @@
                 "B. Nó giới hạn tuyên bố ở một quan sát cá nhân và làm giảm áp lực hành động.",
                 "C. Nó hướng người đọc tới một nguồn độc lập trước khi hình thành nhận định."
               ],
-              "explanation": "Việc ám chỉ che đậy tạo ra thuyết âm mưu (Conspiracy Theory) và viện dẫn nỗi sợ (Appeal to Fear), khiến chia sẻ thật nhanh có vẻ an toàn hơn chờ đợi. Sự khẩn cấp giả tạo (Artificial Urgency) này đảo ngược trình tự kiểm chứng hợp lý: người đọc bị thúc đẩy khuếch đại trước rồi mới điều tra sau."
+              "explanation": "Ám chỉ che đậy khiến chia sẻ ngay có vẻ an toàn hơn chờ kiểm chứng. Thói quen đúng là xác minh trước, khuếch đại sau."
             }
           }
         }
@@ -299,7 +299,7 @@
                 "B. Kiểm tra màu da và đường nét khớp ngón có chuyển tiếp tự nhiên từ cổ tay đến tư thế cầm hay không.",
                 "C. Kiểm tra góc điện thoại có cùng hướng với ánh nhìn của người trong ảnh hay không."
               ],
-              "explanation": "Phối cảnh có thể giải thích kích thước và tư thế, nhưng màu da quá rực cùng đường nét khớp ngón thiếu nhất quán lại không chuyển tiếp tự nhiên từ cổ tay. Một số mô hình AI tạo sinh có thể tạo bàn tay thoạt nhìn hợp lý nhưng để lộ sự thiếu nhất quán về màu sắc hoặc cấu trúc khớp khi quan sát kỹ. Đây chỉ là dấu hiệu cần đối chiếu với bằng chứng khác, không phải kết luận riêng lẻ."
+              "explanation": "Phối cảnh có thể giải thích kích thước, nhưng không giải thích màu và cấu trúc khớp thiếu nhất quán. Hãy xem đây là manh mối, không phải bằng chứng duy nhất."
             }
           },
           "R003_IMG_02": {
@@ -311,7 +311,7 @@
                 "B. Lần theo khung và tay nắm để xem các vật cứng giữ đường nét trơn hay gợn sóng độc lập dọc theo chiều dài.",
                 "C. Kiểm tra tay nắm có nằm ở độ cao thuận tiện để mở cửa sổ hay không."
               ],
-              "explanation": "Phối cảnh có thể làm một vật cứng trông nghiêng hoặc hẹp hơn, nhưng không khiến đường viền gợn sóng thất thường giữa các đoạn. Một số mô hình AI tạo sinh có thể gây ra dạng cong vênh cục bộ này trên hình học cứng. Vì vậy, độ gợn sóng là dấu hiệu hữu ích để đối chiếu với phần còn lại của ảnh và với cấu trúc cửa sổ thật."
+              "explanation": "Phối cảnh có thể làm vật cứng trông nghiêng, nhưng đường viền vẫn phải liền mạch. Hãy đối chiếu độ gợn với toàn bộ khung và cửa sổ thật."
             }
           }
         }
@@ -326,49 +326,49 @@
           "R003_T1": {
             "matched_text": "chỉ vì bạn không đủ tiền mua không có nghĩa đó là 'khoe khoang'.",
             "socratic_quiz": {
-              "question": "Câu này thực chất muốn làm gì với bất kỳ ai chỉ trích bài đăng khoe của?",
+              "question": "Cách phản hồi nào đánh giá lời chỉ trích mà không suy đoán động cơ của người nói?",
               "options": [
-                "A. Trực tiếp giải thích vì sao bài đăng có thể bị coi là khoe khoang.",
-                "B. Gán động cơ tiêu cực là ghen tị vì tiền cho mọi người chỉ trích, thay vì xem xét lời chỉ trích có hợp lý hay không.",
-                "C. Đưa ra một lời giải thích khách quan và trung lập."
+                "A. Xem người chỉ trích có từng đăng nội dung về tiền bạc hay không.",
+                "B. Xem lời chỉ trích có nêu được hành vi cụ thể và tiêu chí hợp lý hay không.",
+                "C. Xem phần lớn người bình luận cho rằng họ ghen tị hay chân thành."
               ],
-              "explanation": "Đây là ngụy biện công kích động cơ (Attacking the Motive): thay vì phản hồi lập luận thực tế về việc bài đăng có khoe khoang hay không, người viết cho rằng mọi người phản đối chỉ vì 'nghèo và ghen tị'. Cách thay lời chỉ trích thật bằng một phiên bản yếu hơn còn tạo ra ngụy biện người rơm (Straw Man)."
+              "explanation": "Động cơ bị suy đoán không quyết định một lời phê bình đúng hay sai. Hãy đánh giá nội dung và bằng chứng của lời phê bình trước."
             }
           },
           "R003_T2": {
             "matched_text": "tất cả những người tôi biết đều đang cày cuốc, kiếm chỗ thực tập, mua thứ họ muốn và thực sự làm được điều gì đó với cuộc đời",
             "socratic_quiz": {
-              "question": "Vấn đề logic trong phép so sánh này là gì?",
+              "question": "Dữ liệu nào cần có để kiểm tra tuyên bố 'mua được đồ xa xỉ nghĩa là thành công hơn'?",
               "options": [
-                "A. Đây là phép so sánh công bằng vì mọi người đều bắt đầu trong hoàn cảnh giống hệt nhau.",
-                "B. Nó gộp những điều không liên quan như nỗ lực, thực tập và mua sắm để ám chỉ ai không mua nổi đồ xa xỉ thì 'không làm được gì trong đời', bỏ qua hoàn cảnh thực tế khác nhau.",
-                "C. Đây là số liệu chính xác về những người quen của tác giả."
+                "A. Giá trung bình của những món đồ xuất hiện trong bài đăng.",
+                "B. Tiêu chí thành công rõ ràng cùng dữ liệu về thu nhập, nợ, hỗ trợ gia đình và điểm xuất phát.",
+                "C. Số người quen của tác giả đã thích hoặc chia sẻ bài đăng."
               ],
-              "explanation": "Đây là phép so sánh sai (False Comparison): nó đánh đồng 'có thể mua thứ mình muốn' với 'thành công trong cuộc sống', đồng thời bỏ qua sự khác biệt lớn về hoàn cảnh tài chính và gia đình, khiến tiêu chí so sánh trở nên bất công."
+              "explanation": "Khả năng mua sắm không tự đại diện cho thành công. Một so sánh có ý nghĩa cần cùng tiêu chí và phải tính đến điểm xuất phát khác nhau."
             }
           },
           "R003_T3": {
             "matched_text": "Nếu bạn vẫn viện cớ trong khi tất cả mọi người đều tiến lên, có lẽ hãy ngừng đổ lỗi cho người khác và tự hỏi tại sao mình đang bị bỏ lại phía sau",
             "socratic_quiz": {
-              "question": "Câu này tác động tâm lý đến người đọc như thế nào?",
+              "question": "Bằng chứng nào cần có trước khi tin rằng 'mọi người đều đang tiến lên còn bạn tụt lại'?",
               "options": [
-                "A. Đưa ra lời khuyên chân thành và có thể thực hiện để giúp người đọc phát triển.",
-                "B. Tạo nỗi sợ bị bỏ lại phía sau bằng hình ảnh 'tất cả mọi người đều tiến lên', đồng thời ngầm đổ lỗi và hạ thấp người đọc là kẻ 'viện cớ' và 'tụt lại'.",
-                "C. Chỉ là một câu hỏi tu từ không có mục đích cụ thể."
+                "A. Nhiều bài đăng nổi bật cho thấy bạn bè đang mua sắm và đi du lịch.",
+                "B. Dữ liệu đại diện về tiến bộ của nhóm, gồm cả những trường hợp không được đăng và hoàn cảnh của họ.",
+                "C. Cảm giác lo lắng của người đọc sau khi xem liên tiếp nhiều nội dung tương tự."
               ],
-              "explanation": "Đây là chiến thuật kích hoạt nỗi sợ bị bỏ lỡ (Fear of Missing Out - FOMO) kết hợp công kích cá nhân (Personal Attack): câu nói không đưa ra giải pháp thật mà gây áp lực khiến người đọc cảm thấy kém cỏi và lo lắng vì không đạt một chuẩn mơ hồ, chưa được xác minh."
+              "explanation": "Dòng thời gian chỉ hiển thị phần mọi người chọn đăng, không phải mẫu đại diện. Đừng biến cảm giác bị bỏ lại thành kết luận về thực tế."
             }
           },
           "R003_T4": {
             "matched_text": "Cứ tức giận nếu bạn muốn, nhưng đừng mong thế giới chờ bạn.",
             "socratic_quiz": {
-              "question": "Câu kết này nhằm mục đích gì khi đối diện với phản đối?",
+              "question": "Cụm từ 'cứ tức đi' làm gì với một ý kiến phản đối có bằng chứng?",
               "options": [
-                "A. Mời gọi một cuộc trò chuyện cởi mở để hiểu quan điểm của người khác.",
-                "B. Gạt bỏ mọi phản ứng hoặc chỉ trích bằng cách gọi đó là 'tức giận', giúp tác giả né tránh việc xem xét hành vi của chính mình.",
-                "C. Đưa ra lời động viên chân thành cho mọi người đọc."
+                "A. Đòi hỏi người phản đối trình bày bằng chứng rõ hơn trước khi tranh luận.",
+                "B. Đổi ý kiến phản đối thành một phản ứng cảm xúc để khỏi trả lời nội dung của nó.",
+                "C. Thừa nhận cảm xúc của người phản đối rồi mời họ giải thích thêm."
               ],
-              "explanation": "Đây là chiến thuật phủ nhận cảm xúc (Emotional Dismissal): mọi lời chỉ trích đều bị gắn nhãn trước là 'tức giận', cho phép tác giả tránh xem xét hành vi khoe khoang của mình trong khi tiếp tục hạ thấp người khác."
+              "explanation": "Gắn nhãn cảm xúc không trả lời được nội dung phản đối. Hãy quay lại lập luận và bằng chứng thay vì phán đoán trạng thái của người nói."
             }
           }
         }
@@ -445,49 +445,49 @@
           "R004_TRAP_01": {
             "matched_text": "Bạn đã được chọn nhận Học bổng Sinh viên Xuất sắc.",
             "socratic_quiz": {
-              "question": "Vì sao kẻ lừa đảo lại mở đầu bằng việc 'trao quà khẩn cấp' thay vì yêu cầu nộp hồ sơ xét duyệt?",
+              "question": "Việc xác nhận bạn 'đã được chọn' nhằm thay đổi bước tiếp theo của bạn như thế nào?",
               "options": [
-                "A. Tung 'mồi nhử phần thưởng' để kích thích sự phấn hưng và tâm lý ham lợi, khiến nạn nhân mất cảnh giác và dễ sập bẫy tiếp theo.",
-                "B. Để sinh viên kịp thông báo tin vui cho gia đình.",
-                "C. Để chứng minh chúng đã truy cập vào hệ thống điểm của nhà trường."
+                "A. Chuyển sự chú ý từ kiểm tra tính hợp lệ sang làm nhanh các bước để nhận phần thưởng.",
+                "B. Khuyến khích người nhận hỏi nhà trường về tiêu chí xét chọn trước khi phản hồi.",
+                "C. Cho người nhận đủ thông tin để so sánh thông báo với quy trình học bổng chính thức."
               ],
-              "explanation": "Đây là thủ đoạn mồi nhử phần thưởng (Reward Baiting), kết hợp với thiên kiến thẩm quyền (Authority Bias) thông qua danh nghĩa hội đồng tuyển chọn. Khi tin rằng mình vừa nhận phần thưởng từ một tổ chức có vẻ chính thức, người đọc dễ giảm cảnh giác và làm theo chỉ dẫn tiếp theo mà không suy xét."
+              "explanation": "Cảm giác đã thắng khiến người nhận tập trung vào nhận thưởng thay vì xác minh. Hãy kiểm tra quy trình qua kênh chính thức trước khi làm bước tiếp theo."
             }
           },
           "R004_TRAP_02": {
             "matched_text": "Nếu bạn không hoàn tất xác minh trong vòng 2 giờ, suất học bổng của bạn sẽ được chuyển cho một sinh viên khác.",
             "socratic_quiz": {
-              "question": "Thủ thuật 'dồn ép thời gian 2 giờ' gây ra tác động tâm lý gì cho người đọc?",
+              "question": "Cách kiểm tra nào xác định tốt nhất thời hạn hai giờ có hợp lệ hay chỉ tạo áp lực?",
               "options": [
-                "A. Thiết lập quy trình xử lý hành chính nhanh gọn.",
-                "B. Tạo ra cảm giác khẩn cấp giả tạo (Artificial Urgency), khiến nạn nhân hoảng sợ và không kịp dừng lại kiểm chứng hay hỏi ý kiến ai.",
-                "C. Đảm bảo suất học bổng được trao công bằng."
+                "A. Xem đồng hồ đếm ngược trên trang có hoạt động chính xác hay không.",
+                "B. Kiểm tra quy định trên website chính thức và liên hệ đơn vị qua thông tin tự tìm được.",
+                "C. So sánh giá trị học bổng với thời gian còn lại để quyết định có đáng mạo hiểm."
               ],
-              "explanation": "Tạo cảm giác khẩn cấp giả tạo (Artificial Urgency) là đòn tâm lý cốt lõi của kỹ nghệ xã hội (Social Engineering). Áp đặt mốc thời hạn cực ngắn ép nạn nhân hành động theo bản năng hoảng sợ trước khi kịp hỏi thầy cô, bố mẹ hay bạn bè."
+              "explanation": "Thời hạn chỉ đáng tin khi xuất hiện trong quy trình chính thức và được xác nhận độc lập. Áp lực thời gian không thay thế được bằng chứng."
             }
           },
           "R004_TRAP_03": {
             "matched_text": "phí xác minh 49.000 VNĐ",
             "socratic_quiz": {
-              "question": "Tại sao yêu cầu nộp một khoản 'phí xác minh' nhỏ lại là dấu hiệu lừa đảo kinh điển?",
+              "question": "Hành động nào kiểm tra yêu cầu 'phí xác minh' mà không đi theo đường dẫn của người gửi?",
               "options": [
-                "A. Học bổng thật là để trao tiền cho sinh viên, tuyệt đối không bao giờ bắt sinh viên phải đóng tiền để được nhận tiền.",
-                "B. Phí này quá rẻ; nhà trường thật sẽ thu ít nhất 500.000 VNĐ phí hành chính.",
-                "C. Để nhà trường gây quỹ tổ chức sự kiện."
+                "A. Tìm điều lệ học bổng và hỏi đơn vị cấp học bổng qua website hoặc số điện thoại chính thức.",
+                "B. Chuyển thử số tiền nhỏ vì thiệt hại có vẻ thấp hơn giá trị phần thưởng.",
+                "C. Kiểm tra trang thanh toán có logo, màu sắc và ngôn ngữ chuyên nghiệp hay không."
               ],
-              "explanation": "Đây là cú lừa 'Trách nhiệm đóng phí trước' (Advance-Fee Scam). Kẻ gian cố tình đưa ra con số rất nhỏ (49.000 VNĐ) để nạn nhân thấy 'không đáng bao nhiêu' so với giá trị học bổng, từ đó dễ dàng chuyển tiền."
+              "explanation": "Khoản tiền nhỏ vẫn có thể là bước đầu của lừa đảo hoặc đánh cắp dữ liệu. Luôn xác minh yêu cầu qua một kênh do bạn tự tìm."
             }
           },
           "R004_TRAP_04": {
             "matched_text": "Không liên hệ với văn phòng nhà trường vì quá trình xác minh được thực hiện bởi đối tác học bổng của chúng tôi.",
             "socratic_quiz": {
-              "question": "Chiêu trò 'cấm liên hệ với nhà trường' nhằm mục đích đen tối gì?",
+              "question": "Vì sao việc tự liên hệ nhà trường qua kênh chính thức là phép thử quan trọng nhất ở đây?",
               "options": [
-                "A. Giảm tải công việc cho bộ phận hành chính của trường.",
-                "B. Cô lập nạn nhân khỏi các nguồn tin chính thống có thể lập tức vạch trần vụ lừa đảo.",
-                "C. Tuân thủ quy định bảo mật thông tin của bên thứ ba."
+                "A. Nhà trường có thể gia hạn thời hạn nên người nhận không cần đánh giá nội dung tin nhắn.",
+                "B. Một kênh tin cậy độc lập phá vỡ sự cô lập và xác nhận thông báo có tồn tại hay không.",
+                "C. Bộ phận hành chính có thể cho biết những học sinh khác đã trả phí bao nhiêu."
               ],
-              "explanation": "Chiến thuật cô lập (Isolation Tactic) ngăn bạn tìm đến nguồn kiểm chứng. Kẻ lừa đảo biết rất rõ chỉ cần bạn nhấc máy gọi cho nhà trường, kế hoạch lừa đảo của chúng sẽ đổ bể ngay lập tức."
+              "explanation": "Yêu cầu giữ bí mật thường ngăn nạn nhân tiếp cận phép kiểm tra thực tế. Liên hệ độc lập giúp xác minh mà không phụ thuộc vào người gửi."
             }
           }
         }
@@ -537,37 +537,37 @@
           "R005_IMG_01": {
             "description": "Chữ số '2' đầu tiên trong '2026' bị lật dọc, hoàn toàn phi logic so với phông chữ gốc.",
             "socratic_quiz": {
-              "question": "Vì sao bạn chọn chi tiết '2026' trên đỉnh tòa nhà?",
+              "question": "Phép đối chiếu nào giúp xác định con số '2026' là chi tiết thật hay được chèn thêm?",
               "options": [
-                "A. Chữ số '2' đầu tiên bị lật dọc, chứng minh số 2020 ban đầu đã bị can thiệp và ghi đè.",
-                "B. Các tòa nhà ở New York bị nghiêm cấm hiển thị năm trên biển quảng cáo.",
-                "C. Con số nằm quá cao so với tầm mắt người đi bộ nên không thể nhìn rõ."
+                "A. So hình dạng, phối cảnh và ánh sáng của từng chữ số với nhau và với ảnh cũ từ nguồn đáng tin.",
+                "B. Kiểm tra xem tòa nhà có thường trưng bày năm mới trên biển quảng cáo hay không.",
+                "C. Tăng độ nét để xem con số có đọc được rõ hơn các vật thể gần đó hay không."
               ],
-              "explanation": "Quan sát kỹ hình dạng ký tự giúp phát hiện thao tác thủ công hoặc lỗi kết xuất. Chữ số '2' bị lật là bằng chứng cho thấy năm 2026 đã được chèn lên một bức ảnh cũ."
+              "explanation": "Chi tiết chèn thêm thường lệch hình dạng, phối cảnh hoặc ánh sáng. Ảnh cũ từ nguồn độc lập giúp kiểm tra giả thuyết đó."
             }
           },
           "R005_IMG_02": {
             "description": "Dòng chữ có những lỗi chính tả kỳ quái, với các ký tự méo mó trong 'STAYIE' và 'SSJCK'.",
             "socratic_quiz": {
-              "question": "Vì sao bạn nhấp vào bảng thông báo màu xanh bên phải?",
+              "question": "Cách kiểm tra nào phân biệt chữ nhỏ bị nén với chữ bị tạo hoặc chỉnh sửa sai?",
               "options": [
-                "A. Bảng quá sáng so với ánh sáng chung của khung cảnh.",
-                "B. Dòng chữ chứa các từ vô nghĩa như 'STAYIE' và 'SSJCK', một lỗi tạo văn bản đặc trưng của công cụ AI.",
-                "C. Vì thông điệp khuyên mọi người ở nhà hoàn toàn sai."
+                "A. So độ sáng của bảng với các biển quảng cáo khác trong cùng khung hình.",
+                "B. Kiểm tra ký tự lặp lại có giữ hình dạng và tạo thành từ nhất quán trong ảnh nguồn hay không.",
+                "C. Đánh giá nội dung thông báo có phù hợp với tình hình được bài đăng mô tả hay không."
               ],
-              "explanation": "Biển quảng cáo chính thức không có những lỗi chính tả sơ đẳng như vậy. Phát hiện chữ bị méo giúp xác nhận biển quảng cáo đã bị can thiệp kỹ thuật."
+              "explanation": "Nén ảnh làm giảm chi tiết nhưng thường không biến từng ký tự thành cấu trúc khác nhau. Hãy đối chiếu ảnh nguồn trước khi kết luận bị chỉnh sửa."
             }
           },
           "R005_IMG_03": {
             "description": "Vũng nước phản chiếu ánh sáng đỏ rực nhưng không có nguồn sáng đỏ tương ứng từ các biển quảng cáo xung quanh.",
             "socratic_quiz": {
-              "question": "Vì sao bạn chọn phần nước phản chiếu trên đường?",
+              "question": "Phép kiểm tra nào đánh giá tốt nhất vùng phản chiếu màu đỏ trên mặt đường?",
               "options": [
-                "A. Vũng nước phản chiếu ánh đỏ rực trong khi các biển quảng cáo xung quanh không có nguồn sáng đỏ tương ứng.",
-                "B. Vì mặt đường ướt chứng minh trời vừa mưa, trái với dự báo thời tiết năm 2026.",
-                "C. Màu sắc bất thường trên mặt đường cho thấy có hóa chất hoặc máu bị đổ."
+                "A. Lần theo hướng và màu phản chiếu để tìm nguồn sáng tương ứng trong cảnh.",
+                "B. Đối chiếu mặt đường ướt với dự báo thời tiết của ngày được nêu trong bài.",
+                "C. So độ bão hòa màu đỏ với cài đặt màn hình đang dùng để xem ảnh."
               ],
-              "explanation": "Nhận diện sự thiếu nhất quán vật lý như phản chiếu không khớp nguồn sáng giúp bạn nhận ra màu sắc của ảnh đã bị thay đổi để tạo cảm giác nguy hiểm."
+              "explanation": "Phản chiếu phải liên hệ được với nguồn sáng về hướng và màu. Nếu không, đó là manh mối chỉnh sửa cần kiểm tra thêm."
             }
           }
         }
@@ -582,37 +582,37 @@
           "R005_TRAP_01": {
             "matched_text": "Các cơ quan chính phủ đang cố tình che giấu thông tin này, nhưng bức ảnh đã phơi bày toàn bộ sự thật.",
             "socratic_quiz": {
-              "question": "Bài đăng muốn đạt mục đích gì khi tuyên bố 'chính phủ đang che giấu thông tin'?",
+              "question": "Phản ứng nào tránh được cả tin mù quáng lẫn bác bỏ mọi nguồn chính thức?",
               "options": [
-                "A. Cung cấp bằng chứng đã được chuyên gia y tế thẩm định.",
-                "B. Làm suy yếu độ tin cậy của nguồn chính thức để người đọc chỉ tin bài đăng này.",
-                "C. Hướng dẫn người dân cách liên hệ chính quyền địa phương."
+                "A. Tin bài đăng nếu nhiều bình luận kể lại trải nghiệm tương tự.",
+                "B. So tuyên bố cụ thể với dữ liệu gốc và nhiều nguồn độc lập có phương pháp minh bạch.",
+                "C. Tin thông báo chính thức vì cơ quan công quyền luôn có đầy đủ thông tin."
               ],
-              "explanation": "Đây là chiến thuật hạ uy tín nguồn có thẩm quyền (Authority Undermining): người phát tán bác bỏ nguồn chính thức để định vị bài đăng của họ là 'sự thật duy nhất'. Khi kết hợp với cáo buộc che giấu chưa có bằng chứng, nó còn nuôi dưỡng thuyết âm mưu (Conspiracy Theory) và làm suy yếu khả năng tự kiểm chứng của người đọc."
+              "explanation": "Không nguồn nào nên được miễn kiểm tra. Hãy so từng tuyên bố với dữ liệu gốc, phương pháp và các nguồn độc lập."
             }
           },
           "R005_TRAP_02": {
             "matched_text": "Nếu không hành động ngay lập tức, gia đình bạn có thể bị cuốn vào làn sóng đại dịch tiếp theo.",
             "socratic_quiz": {
-              "question": "Kỹ thuật 'kêu gọi nỗi sợ' trong câu này ảnh hưởng tâm lý người đọc như thế nào?",
+              "question": "Dấu hiệu hành vi nào cho thấy nỗi sợ đang thay thế việc đánh giá bằng chứng?",
               "options": [
-                "A. Giúp người đọc đưa ra quyết định sáng suốt và bình tĩnh hơn.",
-                "B. Đẩy não bộ vào trạng thái hoảng loạn, làm giảm khả năng tư duy phản biện.",
-                "C. Khuyên người đọc khám sức khỏe định kỳ tại bệnh viện."
+                "A. Người đọc tìm bản tin gốc và ghi lại điều còn chưa chắc chắn.",
+                "B. Người đọc chia sẻ ngay để cảnh báo người khác trước khi kiểm tra nguồn và thời điểm.",
+                "C. Người đọc tạm dừng, so sánh nhiều nguồn rồi mới quyết định có hành động hay không."
               ],
-              "explanation": "Đây là viện dẫn nỗi sợ (Appeal to Fear), một dạng thao túng cảm xúc (Emotional Manipulation). Nỗi sợ kích hoạt phản ứng chiến đấu hoặc bỏ chạy, khiến người dùng dễ vội tin và chia sẻ trước khi dành thời gian suy nghĩ logic."
+              "explanation": "Cảm xúc trở thành thao túng khi nó đẩy hành động lên trước kiểm chứng. Nhận ra sự thôi thúc đó là tín hiệu để dừng lại."
             }
           },
           "R005_TRAP_03": {
             "matched_text": "Hãy liên hệ ngay với người thân ở Mỹ và bảo họ tích trữ thực phẩm cùng tiền mặt trước khi quá muộn.",
             "socratic_quiz": {
-              "question": "Câu này dùng chiến thuật thao túng cảm xúc nào để thúc ép hành động ngay?",
+              "question": "Bài đăng đang yêu cầu người đọc thực hiện các bước theo thứ tự nào?",
               "options": [
-                "A. Tạo hoảng loạn giả tạo và nỗi sợ bỏ lỡ, ép người đọc phản ứng theo bản năng thay vì dừng lại kiểm chứng.",
-                "B. Trình bày lập luận logic dựa trên số liệu kinh tế minh bạch.",
-                "C. Khuyến khích tình cảm và tinh thần đoàn kết trong cộng đồng."
+                "A. Chia sẻ để cảnh báo trước, còn nguồn và bằng chứng sẽ được kiểm tra sau.",
+                "B. Xác định nguồn gốc, đối chiếu bằng chứng rồi mới cảnh báo nếu cần.",
+                "C. Hỏi ý kiến cộng đồng, chờ đồng thuận rồi coi đó là xác minh."
               ],
-              "explanation": "Lời kêu gọi tạo ra sự khẩn cấp có chủ ý (Manufactured Urgency) và thúc đẩy hành động gây hoảng loạn (Panic-Inducing Action). Nó nhắm vào cảm xúc sợ hãi và vội vàng, khiến người đọc bỏ qua kiểm chứng rồi lập tức lan truyền hoảng loạn."
+              "explanation": "Lời kêu gọi đảo ngược quy trình an toàn bằng cách đặt chia sẻ trước kiểm chứng. Cảm giác cấp bách không làm bằng chứng đáng tin hơn."
             }
           }
         }

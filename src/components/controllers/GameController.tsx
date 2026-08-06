@@ -76,6 +76,7 @@ export default function GameController({
     `unesco-mil-game:${STORAGE_VERSION}:${caseData.case_id}:current-step`;
   const [currentStep, setCurrentStep] = useState<GameStep>(FIRST_STEP);
   const [hasRestoredStep, setHasRestoredStep] = useState(false);
+  const guideDefaultExpanded = caseData.case_id === "D001";
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -154,6 +155,7 @@ export default function GameController({
             correct_option: imageModule.socratic_quiz.correct_option,
             explanation: imageModule.socratic_quiz.explanation,
           } : undefined}
+          guideDefaultExpanded={guideDefaultExpanded}
           onComplete={handleStepComplete}
         />
       );
@@ -170,6 +172,7 @@ export default function GameController({
           content={textModule.simulated_post.content}
           traps={textModule.traps}
           iouThreshold={0.7}
+          guideDefaultExpanded={guideDefaultExpanded}
           onComplete={handleStepComplete}
         />
       );
@@ -188,6 +191,7 @@ export default function GameController({
           }))}
           correctSequence={sortingModule.correct_sequence}
           validationFeedback={sortingModule.validation_feedback}
+          guideDefaultExpanded={guideDefaultExpanded}
           onComplete={onCaseComplete ?? handleStepComplete}
         />
       );
