@@ -410,7 +410,11 @@ export function ImageForensics({
   return (
     <RetroWindow title={t("module.image.windowTitle")}>
       <ModuleGuide guide={guide} defaultExpanded={guideDefaultExpanded} />
-      <div className="grid min-h-0 gap-4 md:grid-cols-[minmax(0,1fr)_minmax(260px,380px)]">
+
+      {/* Cụm lưới Grid chứa Ảnh + Bảng điều khiển/Câu hỏi */}
+      <div className="flex flex-col gap-3 min-h-0 md:grid md:grid-cols-[minmax(0,1fr)_minmax(280px,360px)] md:gap-4">
+        
+        {/* 1. Khối Hình Ảnh */}
         <div className="flex min-h-0 items-center justify-center overflow-hidden">
           <div
             aria-label={t("module.image.canvasAria")}
@@ -419,12 +423,12 @@ export function ImageForensics({
             onPointerUp={handlePointerUp}
             onPointerCancel={handlePointerCancel}
             style={imageStyle}
-            className={`relative w-full max-w-full touch-none overflow-hidden rounded-[6px] border-2 border-ink bg-black shadow-[5px_5px_0_0_var(--color-ink)] ${
+            className={`relative w-full max-w-full touch-none overflow-hidden rounded-[6px] border-2 border-ink bg-black shadow-[4px_4px_0_0_var(--color-ink)] transition-all duration-200 ${
               isReviewingEvidence ? "cursor-default" : "cursor-crosshair"
             } ${
               activeAnomaly
-                ? "max-h-[43dvh] md:max-h-[calc(100dvh-60px)]"
-                : "max-h-[calc(100dvh-60px)]"
+                ? "max-h-[30dvh] md:max-h-[calc(100dvh-60px)]"
+                : "max-h-[45dvh] md:max-h-[calc(100dvh-60px)]"
             }`}
           >
             <Image
@@ -437,8 +441,8 @@ export function ImageForensics({
               draggable={false}
               className={`block h-auto w-full max-w-full object-contain ${
                 activeAnomaly
-                  ? "max-h-[43dvh] md:max-h-[calc(100dvh-60px)]"
-                  : "max-h-[calc(100dvh-60px)]"
+                  ? "max-h-[30dvh] md:max-h-[calc(100dvh-60px)]"
+                  : "max-h-[45dvh] md:max-h-[calc(100dvh-60px)]"
               }`}
             />
             <div className="pointer-events-none absolute inset-0">
@@ -474,91 +478,95 @@ export function ImageForensics({
                 />
               ))}
               {isReviewingEvidence && targetAnomalies.map((anomaly) => (
-                  <div
-                    key={anomaly.anomaly_id}
-                    aria-label={t("module.image.anomalyFoundAria", { name: anomaly.name })}
-                    className="absolute z-10 rounded-full border-[3px] border-info bg-info/20 shadow-[0_0_0_1px_var(--color-ink)]"
-                    style={{
-                      left: `${anomaly.x_pct}%`,
-                      top: `${anomaly.y_pct}%`,
-                      width: `${anomaly.radius_pct * 2}%`,
-                      aspectRatio: "1",
-                      transform: "translate(-50%, -50%)",
-                    }}
-                  />
-                ))}
+                <div
+                  key={anomaly.anomaly_id}
+                  aria-label={t("module.image.anomalyFoundAria", { name: anomaly.name })}
+                  className="absolute z-10 rounded-full border-[3px] border-info bg-info/20 shadow-[0_0_0_1px_var(--color-ink)]"
+                  style={{
+                    left: `${anomaly.x_pct}%`,
+                    top: `${anomaly.y_pct}%`,
+                    width: `${anomaly.radius_pct * 2}%`,
+                    aspectRatio: "1",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                />
+              ))}
             </div>
           </div>
         </div>
 
+        {/* 2. Khối Câu Hỏi / Bảng Nhật Ký */}
         {activeAnomaly && activeQuiz ? (
           <form
             onSubmit={handleQuizSubmit}
-            className={`${gamePanel} max-h-[45dvh] min-h-0 overflow-y-auto md:max-h-[calc(100dvh-90px)]`}
+            className={`${gamePanel} flex flex-col justify-between max-h-[50dvh] min-h-0 overflow-y-auto md:max-h-[calc(100dvh-90px)] border-t-2 border-ink pt-2`}
             aria-labelledby="forensics-question"
           >
-            <div className={gameSectionBar}>
-              {t("module.common.criticalThinking")}
-            </div>
-            <div className="p-3">
-              <p className="text-sm font-bold leading-6" id="forensics-question">
-                {activeQuiz.question}
-              </p>
-              <div className="mt-3 space-y-1">
-                {activeQuiz.options.map((option) => (
-                  <label
-                    key={option}
-                    className={gameOption}
-                  >
-                    <input
-                      type="radio"
-                      name={`forensics-${activeAnomaly.anomaly_id}`}
-                      value={option}
-                      checked={selectedOption === option}
-                      onChange={(event) => setSelectedOption(event.target.value)}
-                      className="mt-0.5"
-                    />
-                    <span>{option}</span>
-                  </label>
-                ))}
+            <div>
+              <div className={gameSectionBar}>
+                {t("module.common.criticalThinking")}
               </div>
-              {quizState === "incorrect" && (
-                <p className={`mt-3 ${gameFeedbackError}`} role="alert">
-                  {t("module.image.quizError")}
+              <div className="p-2.5">
+                <p className="text-sm font-bold leading-5" id="forensics-question">
+                  {activeQuiz.question}
                 </p>
-              )}
-              <ProgressiveHint
-                available={quizMisses >= 1}
-                hints={[
-                  t("module.hint.quiz.compareEvidence"),
-                  t("module.hint.quiz.rejectAssumption"),
-                ]}
-              />
-              {quizState === "correct" && (
-                <div className={`mt-3 ${gameFeedbackSuccess}`} role="status">
-                  <p className="font-bold">{t("module.common.correct")}</p>
-                  {activeQuiz.explanation && <p>{activeQuiz.explanation}</p>}
+                <div className="mt-2.5 space-y-1.5">
+                  {activeQuiz.options.map((option) => (
+                    <label
+                      key={option}
+                      className={`${gameOption} py-1.5 px-2 text-xs sm:text-sm`}
+                    >
+                      <input
+                        type="radio"
+                        name={`forensics-${activeAnomaly.anomaly_id}`}
+                        value={option}
+                        checked={selectedOption === option}
+                        onChange={(event) => setSelectedOption(event.target.value)}
+                        className="mt-0.5"
+                      />
+                      <span className="leading-tight">{option}</span>
+                    </label>
+                  ))}
                 </div>
-              )}
-              <div className="mt-3 flex justify-end gap-2 border-t-2 border-ink bg-surface pt-3 max-sm:[&>button]:w-full">
-                {quizState === "correct" ? (
-                  <button
-                    type="button"
-                    onClick={handleContinue}
-                    className={gameButton}
-                  >
-                    {hasRequiredEvidence ? t("module.image.reviewEvidence") : t("module.common.continue")}
-                  </button>
-                ) : (
-                  <button
-                    type="submit"
-                    disabled={!selectedOption}
-                    className={gameButton}
-                  >
-                    {t("module.common.checkAnswer")}
-                  </button>
+                {quizState === "incorrect" && (
+                  <p className={`mt-2 ${gameFeedbackError}`} role="alert">
+                    {t("module.image.quizError")}
+                  </p>
+                )}
+                <ProgressiveHint
+                  available={quizMisses >= 1}
+                  hints={[
+                    t("module.hint.quiz.compareEvidence"),
+                    t("module.hint.quiz.rejectAssumption"),
+                  ]}
+                />
+                {quizState === "correct" && (
+                  <div className={`mt-2 ${gameFeedbackSuccess}`} role="status">
+                    <p className="font-bold text-xs">{t("module.common.correct")}</p>
+                    {activeQuiz.explanation && <p className="text-xs">{activeQuiz.explanation}</p>}
+                  </div>
                 )}
               </div>
+            </div>
+
+            <div className="p-2.5 pt-0 mt-2 border-t border-ink/20">
+              {quizState === "correct" ? (
+                <button
+                  type="button"
+                  onClick={handleContinue}
+                  className={`w-full ${gameButton}`}
+                >
+                  {hasRequiredEvidence ? t("module.image.reviewEvidence") : t("module.common.continue")}
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  disabled={!selectedOption}
+                  className={`w-full ${gameButton}`}
+                >
+                  {t("module.common.checkAnswer")}
+                </button>
+              )}
             </div>
           </form>
         ) : isReviewingEvidence ? (
