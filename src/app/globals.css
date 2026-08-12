@@ -197,10 +197,14 @@ select {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
-  /* Cho phép vuốt cuộn dọc trang khi chạm vào hình ảnh trên điện thoại */
-img {
-  touch-action: pan-y;
-  -webkit-user-drag: none;
-  user-select: none;
+  /* Cho phép cuộn dọc cho toàn bộ thẻ img, canvas và vùng chứa ảnh */
+img,
+canvas,
+[class*="image"],
+.cyber-panel img {
+  touch-action: pan-y !important;
+  -webkit-user-drag: none !important;
+  user-select: none !important;
+  pointer-events: auto !important;
 }
 }

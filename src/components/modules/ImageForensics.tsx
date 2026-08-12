@@ -418,8 +418,11 @@ export function ImageForensics({
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
             onPointerCancel={handlePointerCancel}
-            style={imageStyle}
-            className={`relative w-full max-w-full touch-none overflow-hidden rounded-[6px] border-2 border-ink bg-black shadow-[5px_5px_0_0_var(--color-ink)] ${
+            style={{
+              ...imageStyle,
+              touchAction: "pan-y", // Ép trình duyệt cho phép cuộn trang chiều dọc
+            }}
+            className={`relative w-full max-w-full touch-pan-y overflow-hidden rounded-[6px] border-2 border-ink bg-black shadow-[5px_5px_0_0_var(--color-ink)] ${
               isReviewingEvidence ? "cursor-default" : "cursor-crosshair"
             } ${
               activeAnomaly
@@ -435,13 +438,14 @@ export function ImageForensics({
               preload
               sizes="(min-width: 768px) calc(100vw - 380px), 100vw"
               draggable={false}
-              className={`block h-auto w-full max-w-full object-contain ${
+              style={{ touchAction: "pan-y" }} // Ép thẻ img cho phép cuộn trang chiều dọc
+              className={`block h-auto w-full max-w-full object-contain touch-pan-y select-none ${
                 activeAnomaly
                   ? "max-h-[43dvh] md:max-h-[calc(100dvh-60px)]"
                   : "max-h-[calc(100dvh-60px)]"
               }`}
             />
-            <div className="pointer-events-none absolute inset-0">
+            <div className="pointer-events-none absolute inset-0 touch-pan-y">
               {drawnCircle && !isReviewingEvidence && (
                 <div
                   aria-label={t("module.image.circleAria")}
@@ -473,10 +477,13 @@ export function ImageForensics({
                   }}
                 />
               ))}
-              {isReviewingEvidence && targetAnomalies.map((anomaly) => (
+              {isReviewingEvidence &&
+                targetAnomalies.map((anomaly) => (
                   <div
                     key={anomaly.anomaly_id}
-                    aria-label={t("module.image.anomalyFoundAria", { name: anomaly.name })}
+                    aria-label={t("module.image.anomalyFoundAria", {
+                      name: anomaly.name,
+                    })}
                     className="absolute z-10 rounded-full border-[3px] border-info bg-info/20 shadow-[0_0_0_1px_var(--color-ink)]"
                     style={{
                       left: `${anomaly.x_pct}%`,
@@ -506,10 +513,7 @@ export function ImageForensics({
               </p>
               <div className="mt-3 space-y-1">
                 {activeQuiz.options.map((option) => (
-                  <label
-                    key={option}
-                    className={gameOption}
-                  >
+                  <label key={option} className={gameOption}>
                     <input
                       type="radio"
                       name={`forensics-${activeAnomaly.anomaly_id}`}
@@ -547,7 +551,9 @@ export function ImageForensics({
                     onClick={handleContinue}
                     className={gameButton}
                   >
-                    {hasRequiredEvidence ? t("module.image.reviewEvidence") : t("module.common.continue")}
+                    {hasRequiredEvidence
+                      ? t("module.image.reviewEvidence")
+                      : t("module.common.continue")}
                   </button>
                 ) : (
                   <button
@@ -562,7 +568,9 @@ export function ImageForensics({
             </div>
           </form>
         ) : isReviewingEvidence ? (
-          <div className={`${gamePanel} max-h-[calc(100dvh-90px)] overflow-y-auto`}>
+          <div
+            className={`${gamePanel} max-h-[calc(100dvh-90px)] overflow-y-auto`}
+          >
             <div className={gameSectionBar}>
               {t("module.image.reviewTitle")}
             </div>
@@ -571,11 +579,17 @@ export function ImageForensics({
             </p>
             <div className="mt-4 space-y-2 border-y-2 border-ink py-3 text-xs font-bold">
               <div className="flex items-center gap-2">
-                <span className="size-4 rounded-full border-2 border-dashed border-accent bg-accent/20" aria-hidden />
+                <span
+                  className="size-4 rounded-full border-2 border-dashed border-accent bg-accent/20"
+                  aria-hidden
+                />
                 <span>{t("module.image.userMarkLegend")}</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="size-4 rounded-full border-2 border-info bg-info/20" aria-hidden />
+                <span
+                  className="size-4 rounded-full border-2 border-info bg-info/20"
+                  aria-hidden
+                />
                 <span>{t("module.image.verifiedAreaLegend")}</span>
               </div>
             </div>
@@ -588,13 +602,16 @@ export function ImageForensics({
             </button>
           </div>
         ) : (
-          <div className={`${gamePanel} max-h-[calc(100dvh-90px)] overflow-y-auto`}>
-            <div className={gameSectionBar}>
-              {t("module.image.log")}
-            </div>
+          <div
+            className={`${gamePanel} max-h-[calc(100dvh-90px)] overflow-y-auto`}
+          >
+            <div className={gameSectionBar}>{t("module.image.log")}</div>
             <p className="text-sm leading-6">{contextText}</p>
             <div className="mt-4 border-t-2 border-ink pt-3 font-mono text-xs font-bold text-ink-soft">
-              {t("module.image.evidenceFound", { found: foundAnomalyIds.length, total: requiredEvidenceCount })}
+              {t("module.image.evidenceFound", {
+                found: foundAnomalyIds.length,
+                total: requiredEvidenceCount,
+              })}
             </div>
             {clickMessage && (
               <p className={`mt-3 ${gameFeedbackError}`} role="alert">
