@@ -197,4 +197,10 @@ select {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+  /* Cho phép vuốt cuộn dọc trang khi chạm vào hình ảnh trên điện thoại */
+img {
+  touch-action: pan-y;
+  -webkit-user-drag: none;
+  user-select: none;
+}
 }
