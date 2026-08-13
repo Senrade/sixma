@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { LanguageSwitch } from "@/components/site/SiteHeader";
@@ -11,7 +12,7 @@ type GatewayState = "checking" | "open" | "closed";
 
 export function WelcomeGateway() {
   const router = useRouter();
-  const { t } = useI18n();
+  const { localizePath, t } = useI18n();
   const [state, setState] = useState<GatewayState>("checking");
   const [pendingDestination, setPendingDestination] = useState<string | null>(null);
 
@@ -70,11 +71,11 @@ export function WelcomeGateway() {
         >
           <header className="flex min-h-12 items-center justify-between gap-4 border-b-[3px] border-info bg-surface-2 px-4 py-2">
             <div className="flex items-center gap-3">
-              <span className="grid size-7 place-items-center border-2 border-info bg-info text-sm font-black text-info-foreground" aria-hidden>S</span>
+              <Image src="/assets/brand/logo.svg" alt="" width={32} height={32} className="size-8 object-contain" preload />
               <span className="font-mono text-xs font-black uppercase text-info">SIXMA</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="hidden font-mono text-xs font-bold text-success sm:inline">● {t("welcome.online")}</span>
+              <span className="hidden font-mono text-sm font-bold text-success sm:inline">● {t("welcome.online")}</span>
               <LanguageSwitch className="[&_select]:h-9 [&_select]:min-w-28 [&_select]:border-2" />
             </div>
           </header>
@@ -92,18 +93,18 @@ export function WelcomeGateway() {
             </p>
 
             <div className="mt-9 grid gap-3 sm:grid-cols-3">
-              <Button autoFocus disabled={Boolean(pendingDestination)} tone="primary" className="min-h-14 w-full px-5 text-base" onClick={() => navigate(`/mission/${FEATURED_DEMO_CASE_ID}`)}>
-                {pendingDestination === `/mission/${FEATURED_DEMO_CASE_ID}` ? t("welcome.opening") : t("welcome.play")}
+              <Button autoFocus disabled={Boolean(pendingDestination)} tone="primary" className="min-h-14 w-full px-5 text-base" onClick={() => navigate(localizePath(`/mission/${FEATURED_DEMO_CASE_ID}`))}>
+                {pendingDestination === localizePath(`/mission/${FEATURED_DEMO_CASE_ID}`) ? t("welcome.opening") : t("welcome.play")}
               </Button>
-              <Button disabled={Boolean(pendingDestination)} tone="secondary" className="min-h-14 w-full px-5" onClick={() => navigate("/redeem")}>
-                {pendingDestination === "/redeem" ? t("welcome.opening") : t("welcome.redeem")}
+              <Button disabled={Boolean(pendingDestination)} tone="secondary" className="min-h-14 w-full px-5" onClick={() => navigate(localizePath("/redeem"))}>
+                {pendingDestination === localizePath("/redeem") ? t("welcome.opening") : t("welcome.redeem")}
               </Button>
-              <Button disabled={Boolean(pendingDestination)} tone="ghost" className="min-h-14 w-full px-5" onClick={() => navigate("/about")}>
-                {pendingDestination === "/about" ? t("welcome.opening") : t("welcome.about")}
+              <Button disabled={Boolean(pendingDestination)} tone="ghost" className="min-h-14 w-full px-5" onClick={() => navigate(localizePath("/about"))}>
+                {pendingDestination === localizePath("/about") ? t("welcome.opening") : t("welcome.about")}
               </Button>
             </div>
 
-            <p className="mt-5 font-mono text-xs leading-5 text-muted-foreground">{t("welcome.cardPrompt")}</p>
+            <p className="mt-5 font-mono text-lg leading-5 text-muted-foreground">{t("welcome.cardPrompt")}</p>
           </div>
         </section>
       </div>

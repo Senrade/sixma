@@ -10,6 +10,7 @@
 
 # Next.js and production output
 /.next/
+/.next-playwright/
 /out/
 /build/
 /dist/
@@ -58,3 +59,9 @@ Thumbs.db
 # tool caches
 .eslintcache
 /.turbo/
+
+# Playwright
+node_modules/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

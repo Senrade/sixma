@@ -6,24 +6,24 @@ import type { MessageKey } from "@/i18n/messages/types";
 
 const FAQS: Array<{ question: MessageKey; answer: MessageKey }> = [
   {
-    question: "faq.accountQuestion",
-    answer: "faq.accountAnswer",
+    question: "faq.whatQuestion",
+    answer: "faq.whatAnswer",
   },
   {
-    question: "faq.unescoQuestion",
-    answer: "faq.unescoAnswer",
+    question: "faq.valueQuestion",
+    answer: "faq.valueAnswer",
   },
   {
-    question: "faq.lockedQuestion",
-    answer: "faq.lockedAnswer",
+    question: "faq.insideQuestion",
+    answer: "faq.insideAnswer",
   },
   {
-    question: "faq.practiceQuestion",
-    answer: "faq.practiceAnswer",
+    question: "faq.proofQuestion",
+    answer: "faq.proofAnswer",
   },
   {
-    question: "faq.anomalyQuestion",
-    answer: "faq.anomalyAnswer",
+    question: "faq.proQuestion",
+    answer: "faq.proAnswer",
   },
 ];
 

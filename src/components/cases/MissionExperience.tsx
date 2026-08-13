@@ -9,13 +9,15 @@ import { Progress } from "@/components/ui/Primitives";
 import type { CaseData } from "@/lib/case-types";
 import { useI18n } from "@/i18n/I18nProvider";
 import type { MessageKey } from "@/i18n/messages/types";
+import { SPECIAL_EVENT_CASE_ID } from "@/lib/demo-event";
+import { awardDemoEventBadge } from "@/lib/demo-event-storage";
 import { MissionExitDialog } from "./MissionExitDialog";
 
 const STEP_LABELS: readonly MessageKey[] = ["mission.step.inspect", "mission.step.analyze", "mission.step.reconstruct"];
 
 export function MissionExperience({ caseData }: { caseData: CaseData }) {
   const router = useRouter();
-  const { t } = useI18n();
+  const { localizePath, t } = useI18n();
   const [currentStep, setCurrentStep] = useState<GameStep>(1);
   const [isExitDialogOpen, setIsExitDialogOpen] = useState(false);
 
@@ -31,12 +33,15 @@ export function MissionExperience({ caseData }: { caseData: CaseData }) {
         progressStorageKey,
         "1",
       );
+      if (caseData.case_id === SPECIAL_EVENT_CASE_ID) {
+        awardDemoEventBadge();
+      }
     } catch {
       // Completion still works when storage is unavailable.
     }
 
-    router.push(`/cases/${caseData.case_id}/debrief`);
-  }, [caseData.case_id, progressStorageKey, router]);
+    router.push(localizePath(`/cases/${caseData.case_id}/debrief`));
+  }, [caseData.case_id, localizePath, progressStorageKey, router]);
 
   const handleConfirmExit = useCallback(() => {
     try {
@@ -45,8 +50,8 @@ export function MissionExperience({ caseData }: { caseData: CaseData }) {
       // Navigation still works when storage is unavailable.
     }
 
-    router.push(`/cases/${caseData.case_id}`);
-  }, [caseData.case_id, progressStorageKey, router]);
+    router.push(localizePath(`/cases/${caseData.case_id}`));
+  }, [caseData.case_id, localizePath, progressStorageKey, router]);
 
   return (
     <main className="case-grid-bg min-h-screen bg-background text-foreground">

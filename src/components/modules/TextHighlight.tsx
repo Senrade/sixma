@@ -8,6 +8,7 @@ import {
 import type { ModuleGuideDefinition } from "@/lib/module-guides";
 import { useI18n } from "@/i18n/I18nProvider";
 import { ModuleGuide } from "./ModuleGuide";
+import { ProgressiveHint } from "./ProgressiveHint";
 import { RetroWindow } from "./RetroWindow";
 import {
   gameButton,
@@ -44,6 +45,7 @@ export interface TextHighlightProps {
   traps?: TextHighlightTrap[];
   iouThreshold?: number;
   socraticQuiz?: TextHighlightQuiz;
+  guideDefaultExpanded?: boolean;
   onComplete?: () => void;
   onSelectionComplete?: (start: number, end: number) => void;
 }
@@ -55,6 +57,7 @@ interface CharacterRange {
 
 type QuizState = "idle" | "incorrect" | "correct";
 type SelectionState = "idle" | "incorrect" | "matched";
+const HINT_ATTEMPT_THRESHOLD = 2;
 
 function getQuizQuestion(quiz: TextHighlightQuiz, fallback: string): string {
   return quiz.question ?? quiz.push_question ?? fallback;
@@ -112,6 +115,19 @@ function getSelectionRange(root: HTMLElement): CharacterRange | null {
   return start === end ? null : { start, end };
 }
 
+function getTextRegion(
+  trap: TextHighlightTrap | undefined,
+  contentLength: number,
+): "start" | "middle" | "end" {
+  if (!trap || contentLength === 0) return "middle";
+
+  const midpoint = (trap.ground_truth_start + trap.ground_truth_end) / 2;
+  const ratio = midpoint / contentLength;
+  if (ratio < 1 / 3) return "start";
+  if (ratio > 2 / 3) return "end";
+  return "middle";
+}
+
 export function TextHighlight({
   guide,
   postAuthor,
@@ -120,6 +136,7 @@ export function TextHighlight({
   traps = [],
   iouThreshold = 0.7,
   socraticQuiz,
+  guideDefaultExpanded = true,
   onComplete,
   onSelectionComplete,
 }: TextHighlightProps) {
@@ -133,6 +150,8 @@ export function TextHighlight({
   const [quizState, setQuizState] = useState<QuizState>("idle");
   const [selectionFeedback, setSelectionFeedback] = useState("");
   const [selectionState, setSelectionState] = useState<SelectionState>("idle");
+  const [selectionMisses, setSelectionMisses] = useState(0);
+  const [quizMisses, setQuizMisses] = useState(0);
   const selectionTimerRef = useRef<number | null>(null);
   const textRootRef = useRef<HTMLDivElement>(null);
   const confirmationRef = useRef<HTMLDivElement>(null);
@@ -147,6 +166,10 @@ export function TextHighlight({
   }));
   const activeTrap = traps.find((trap) => trap.trap_id === activeTrapId);
   const activeQuiz = activeTrap?.socratic_quiz ?? socraticQuiz;
+  const unresolvedTrap = traps.find(
+    (trap) => !completedTrapIds.includes(trap.trap_id),
+  );
+  const textRegion = t(`module.hint.text.region.${getTextRegion(unresolvedTrap, content.length)}`);
   const allTrapsCompleted = traps.length > 0 && completedTrapIds.length === traps.length;
   const authorInitials = postAuthor
     .split(/\s+/)
@@ -216,6 +239,7 @@ export function TextHighlight({
         required: Math.round(iouThreshold * 100),
       }));
       setSelectionState("incorrect");
+      setSelectionMisses((count) => count + 1);
       setPendingRange(null);
       return;
     }
@@ -224,6 +248,7 @@ export function TextHighlight({
     setActiveTrapId(candidate.trap.trap_id);
     setSelectedOption("");
     setQuizState("idle");
+    setQuizMisses(0);
     setSelectionFeedback(t("module.text.overlapSuccess", {
       overlap: Math.round(candidate.score * 100),
     }));
@@ -274,6 +299,7 @@ export function TextHighlight({
     }
 
     setQuizState("incorrect");
+    setQuizMisses((count) => count + 1);
   };
 
   const handleQuizCancel = () => {
@@ -293,7 +319,7 @@ export function TextHighlight({
 
   return (
     <RetroWindow title={t("module.text.windowTitle")}>
-      <ModuleGuide guide={guide} />
+      <ModuleGuide guide={guide} defaultExpanded={guideDefaultExpanded} />
       <div className={gamePanel}>
         <div className="mb-4 flex items-center justify-between gap-3 border-b-2 border-ink pb-3">
           <span className={gameSectionBar}>{t("module.text.communityWire")}</span>
@@ -391,6 +417,13 @@ export function TextHighlight({
             {selectionFeedback}
           </p>
         )}
+        <ProgressiveHint
+          available={selectionMisses >= HINT_ATTEMPT_THRESHOLD && !activeTrap}
+          hints={[
+            t("module.hint.text.inspect"),
+            t("module.hint.text.focus", { region: textRegion }),
+          ]}
+        />
         {allTrapsCompleted && (
           <p className={`mt-3 ${gameFeedbackSuccess}`} role="status">
             {t("module.text.allFound")}
@@ -435,6 +468,13 @@ export function TextHighlight({
                   {t("module.text.quizError")}
                 </p>
               )}
+              <ProgressiveHint
+                available={quizMisses >= 1}
+                hints={[
+                  t("module.hint.quiz.identifyEffect"),
+                  t("module.hint.quiz.rejectAssumption"),
+                ]}
+              />
               {quizState === "correct" && (
                 <div className={`mt-3 ${gameFeedbackSuccess}`} role="status">
                   <p className="font-bold">{t("module.common.correct")}</p>
