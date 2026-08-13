@@ -396,9 +396,7 @@ export function SortingGame({
                     ::
                   </span>
                   <span className="flex-1">{item.text}</span>
-                  <span className="hidden rounded-[4px] border-2 border-ink bg-surface-2 px-1.5 py-0.5 font-mono text-[10px] font-bold text-ink-soft sm:inline-flex">
-                    {item.id}
-                  </span>
+                  
                 </div>
               );
             })}
