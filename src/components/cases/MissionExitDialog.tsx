@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/Primitives";
+import { useI18n } from "@/i18n/I18nProvider";
 
 export function MissionExitDialog({
   open,
@@ -9,6 +10,7 @@ export function MissionExitDialog({
   onCancel: () => void;
   onConfirm: () => void;
 }) {
+  const { t } = useI18n();
   if (!open) return null;
 
   return (
@@ -26,20 +28,20 @@ export function MissionExitDialog({
         className="cyber-panel w-full max-w-lg p-5 sm:p-7"
       >
         <p className="font-mono text-xs font-black uppercase text-danger">
-          Unfinished investigation
+          {t("mission.exitDialog.eyebrow")}
         </p>
         <h2 id="exit-mission-title" className="mt-2 text-2xl font-black">
-          Exit this mission?
+          {t("mission.exitDialog.title")}
         </h2>
         <p id="exit-mission-description" className="mt-3 leading-7 text-ink-soft">
-          Your unfinished mission progress will be lost. The next time you open this case, it will restart from Module 01.
+          {t("mission.exitDialog.description")}
         </p>
         <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
           <Button type="button" tone="secondary" onClick={onConfirm}>
-            Exit mission
+            {t("mission.exitDialog.confirm")}
           </Button>
           <Button type="button" autoFocus onClick={onCancel}>
-            Continue mission
+            {t("mission.exitDialog.cancel")}
           </Button>
         </div>
       </section>

@@ -7,12 +7,17 @@ import GameController, {
 } from "@/components/controllers/GameController";
 import { Progress } from "@/components/ui/Primitives";
 import type { CaseData } from "@/lib/case-types";
+import { useI18n } from "@/i18n/I18nProvider";
+import type { MessageKey } from "@/i18n/messages/types";
+import { SPECIAL_EVENT_CASE_ID } from "@/lib/demo-event";
+import { awardDemoEventBadge } from "@/lib/demo-event-storage";
 import { MissionExitDialog } from "./MissionExitDialog";
 
-const STEP_LABELS = ["Inspect", "Analyze", "Reconstruct"] as const;
+const STEP_LABELS: readonly MessageKey[] = ["mission.step.inspect", "mission.step.analyze", "mission.step.reconstruct"];
 
 export function MissionExperience({ caseData }: { caseData: CaseData }) {
   const router = useRouter();
+  const { localizePath, t } = useI18n();
   const [currentStep, setCurrentStep] = useState<GameStep>(1);
   const [isExitDialogOpen, setIsExitDialogOpen] = useState(false);
 
@@ -28,12 +33,15 @@ export function MissionExperience({ caseData }: { caseData: CaseData }) {
         progressStorageKey,
         "1",
       );
+      if (caseData.case_id === SPECIAL_EVENT_CASE_ID) {
+        awardDemoEventBadge();
+      }
     } catch {
       // Completion still works when storage is unavailable.
     }
 
-    router.push(`/cases/${caseData.case_id}/debrief`);
-  }, [caseData.case_id, progressStorageKey, router]);
+    router.push(localizePath(`/cases/${caseData.case_id}/debrief`));
+  }, [caseData.case_id, localizePath, progressStorageKey, router]);
 
   const handleConfirmExit = useCallback(() => {
     try {
@@ -42,8 +50,8 @@ export function MissionExperience({ caseData }: { caseData: CaseData }) {
       // Navigation still works when storage is unavailable.
     }
 
-    router.push(`/cases/${caseData.case_id}`);
-  }, [caseData.case_id, progressStorageKey, router]);
+    router.push(localizePath(`/cases/${caseData.case_id}`));
+  }, [caseData.case_id, localizePath, progressStorageKey, router]);
 
   return (
     <main className="case-grid-bg min-h-screen bg-background text-foreground">
@@ -55,15 +63,15 @@ export function MissionExperience({ caseData }: { caseData: CaseData }) {
             className="inline-flex min-h-10 items-center rounded-[6px] border-2 border-ink bg-surface px-3 text-sm font-bold text-ink shadow-[3px_3px_0_0_var(--color-ink)] hover:bg-accent"
           >
             <span aria-hidden>&lt;-</span>
-            <span className="ml-2 hidden sm:inline">Exit mission</span>
+            <span className="ml-2 hidden sm:inline">{t("mission.exit")}</span>
           </button>
           <div className="min-w-0 flex-1">
             <div className="flex items-baseline justify-between gap-3">
               <p className="truncate font-mono text-xs font-black uppercase text-danger">
-                {caseData.case_id} / {STEP_LABELS[currentStep - 1]}
+                {caseData.case_id} / {t(STEP_LABELS[currentStep - 1])}
               </p>
               <span className="shrink-0 font-mono text-xs text-ink-soft">
-                Step {currentStep} of 3
+                {t("mission.progress", { current: currentStep, total: 3 })}
               </span>
             </div>
             <Progress

@@ -1,29 +1,115 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, Chip } from "@/components/ui/Primitives";
+import {
+  AchievementsView,
+  type AchievementTab,
+} from "@/components/cases/AchievementsView";
 import type { CaseData } from "@/lib/case-types";
+import { getActiveDemoEventCard } from "@/lib/demo-event";
+import { readDemoEventBadge } from "@/lib/demo-event-storage";
+import {
+  getLearningAchievementProgress,
+  type LearningAchievementId,
+} from "@/lib/learning-achievements";
+import { useI18n } from "@/i18n/I18nProvider";
+import type { MessageKey } from "@/i18n/messages/types";
+
+interface AchievementState {
+  completedCaseIds: string[];
+  hasEventBadge: boolean;
+}
+
+const ACHIEVEMENT_COPY_KEYS: Record<
+  LearningAchievementId,
+  { title: MessageKey; description: MessageKey }
+> = {
+  "evidence-loop": {
+    title: "achievements.evidence.title",
+    description: "achievements.evidence.description",
+  },
+  "method-transfer": {
+    title: "achievements.transfer.title",
+    description: "achievements.transfer.description",
+  },
+  "full-spectrum": {
+    title: "achievements.investigator.title",
+    description: "achievements.investigator.description",
+  },
+};
 
 export function AchievementsClient({ cases }: { cases: CaseData[] }) {
-  const [completed, setCompleted] = useState<number | null>(null);
+  const { localizePath, t } = useI18n();
+  const [state, setState] = useState<AchievementState | null>(null);
+  const [activeTab, setActiveTab] = useState<AchievementTab>("learning");
+
   useEffect(() => {
     const timer = window.setTimeout(() => {
-      let total = 0;
+      const completedCaseIds: string[] = [];
       try {
-        for (const caseData of cases) if (window.localStorage.getItem(`veritas-case:${caseData.case_id}:completed-at`)) total += 1;
-      } catch { total = 0; }
-      setCompleted(total);
+        for (const caseData of cases) {
+          if (
+            window.localStorage.getItem(
+              `veritas-case:${caseData.case_id}:completed-at`,
+            )
+          ) {
+            completedCaseIds.push(caseData.case_id);
+          }
+        }
+      } catch {
+        completedCaseIds.length = 0;
+      }
+      setState({
+        completedCaseIds,
+        hasEventBadge: readDemoEventBadge() !== null,
+      });
     }, 0);
 
     return () => window.clearTimeout(timer);
   }, [cases]);
 
-  const count = completed ?? 0;
-  const achievements = [
-    { title: "First investigation", description: "Complete one full case.", earned: count >= 1 },
-    { title: "Case investigator", description: "Complete every currently available case.", earned: count >= cases.length && cases.length > 0 },
-    { title: "Evidence habit", description: "Return to the knowledge hub after an investigation.", earned: false },
-  ];
+  if (!state) {
+    return <p className="mt-8 font-mono text-sm">{t("dashboard.loading")}</p>;
+  }
 
-  return <div className="mt-8 grid gap-5 md:grid-cols-3">{achievements.map((achievement) => <Card key={achievement.title} tone={achievement.earned ? "success" : "muted"} className="p-5"><Chip tone={achievement.earned ? "green" : "neutral"}>{achievement.earned ? "Earned" : "Locked"}</Chip><h2 className="mt-4 text-xl font-black">{achievement.title}</h2><p className="mt-2 text-sm leading-6">{achievement.description}</p></Card>)}</div>;
+  const achievements = getLearningAchievementProgress(
+    cases,
+    state.completedCaseIds,
+  ).map((achievement) => ({
+    ...achievement,
+    title: t(ACHIEVEMENT_COPY_KEYS[achievement.id].title),
+    description: t(ACHIEVEMENT_COPY_KEYS[achievement.id].description),
+  }));
+  const activeCard = getActiveDemoEventCard();
+
+  return (
+    <AchievementsView
+      activeTab={activeTab}
+      onTabChange={setActiveTab}
+      achievements={achievements}
+      badge={{
+        earned: state.hasEventBadge,
+        title: t("badge.signalBreaker.title"),
+        description: t("badge.signalBreaker.description"),
+        artworkUrl: activeCard.artworkUrl,
+        artworkAlt: t("redeem.cardArtAlt", { cardName: activeCard.name }),
+      }}
+      redeemHref={localizePath("/redeem")}
+      labels={{
+        tabListLabel: t("achievements.title"),
+        learningTab: t("achievements.tabs.learning"),
+        badgesTab: t("achievements.tabs.badges"),
+        earned: t("achievements.earned"),
+        locked: t("achievements.locked"),
+        caseProgress: t("achievements.caseProgress"),
+        badgeCount: t("achievements.badgeCount", {
+          current: state.hasEventBadge ? 1 : 0,
+          total: 1,
+        }),
+        badgeCollectionIntro: t("achievements.badgeCollectionIntro"),
+        badgeLockedHint: t("achievements.badgeLockedHint"),
+        redeemCard: t("achievements.redeemCard"),
+      }}
+    />
+  );
 }

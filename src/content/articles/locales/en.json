@@ -1,0 +1,47 @@
+{
+  "common-media-fallacies": {
+    "category": "Critical reasoning",
+    "title": "A Guide to Common Fallacies in Today's Media",
+    "summary": "Five reasoning traps appear again and again in social feeds. Learn how to recognize them before they shape what you believe or share.",
+    "sections": [
+      {
+        "heading": "Why fallacies thrive online",
+        "body": "Logical fallacies are errors in reasoning that make an argument unsound, even when its conclusion happens to be true. Social posts reward speed, brevity, and certainty, so oversimplified arguments can travel farther than careful explanations. Learning their patterns gives you a practical pause button before you react or share."
+      },
+      {
+        "heading": "1. Attacking the messenger (Ad Hominem)",
+        "body": "An ad hominem attack targets the person making a claim instead of testing the claim itself. Someone might dismiss a sound proposal because its presenter made a mistake years ago. A person's history may affect credibility, but it does not settle whether the present evidence is valid. Ask: what part of the argument was actually answered?"
+      },
+      {
+        "heading": "2. The distortion tactic (Straw Man)",
+        "body": "A straw man replaces someone's real position with a weaker or more extreme version that is easier to attack. A call for sensible restrictions, for example, may be recast as a demand for a total ban. Compare the response with the original words: if they do not match, the real argument is still standing."
+      },
+      {
+        "heading": "3. Confusing coincidence with cause",
+        "body": "When two events happen together, it is tempting to assume that one caused the other. This is the post hoc fallacy: after this, therefore because of this. Correlation can be a useful clue, but another factor may explain both events. Look for a plausible mechanism, competing explanations, and evidence that rules them out."
+      },
+      {
+        "heading": "4. The all-or-nothing trap (False Dilemma)",
+        "body": "A false dilemma presents only two options when more choices exist. The unwanted option is then made to look impossible or dangerous, pushing you toward the speaker's preferred answer. Before accepting the choice, ask what middle ground, alternative, or combination has been left out."
+      },
+      {
+        "heading": "5. The chain reaction (Slippery Slope)",
+        "body": "A slippery-slope argument claims that one small step will inevitably trigger a chain of increasingly extreme consequences. Sometimes risks really do compound, but each link needs evidence. Ask where the chain could stop, what safeguards exist, and whether the predicted outcome has actually followed in comparable cases."
+      },
+      {
+        "heading": "How to level up your thinking",
+        "body": "Critical thinking is less about instantly finding the right answer than examining how well an answer is supported. When a post makes you react, pause and restate its claim in neutral language. Then ask: what is the evidence, does it support this exact claim, what alternatives were ignored, and what would change my mind?"
+      },
+      {
+        "heading": "References",
+        "items": [
+          "Zarvana. \"8 Fallacies You're Likely Falling For on Social Media.\"",
+          "Western Technical College. \"Fallacies: Illogical Arguments - Fake News and Fake Facts.\"",
+          "Wikipedia. \"List of fallacies.\"",
+          "University of Iowa. \"Logical Fallacies - Evaluating Online Information.\"",
+          "Owen M. Williamson, University of Texas at El Paso. \"Master List of Logical Fallacies.\""
+        ]
+      }
+    ]
+  }
+}

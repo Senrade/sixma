@@ -1,0 +1,42 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { AppShell } from "@/components/site/AppShell";
+import { DemoAwarenessStory } from "@/components/cases/DemoAwarenessStory";
+import { DemoEventBadgeCallout } from "@/components/redeem/DemoEventBadgeCallout";
+import { SpecialCaseAccessBoundary } from "@/components/redeem/SpecialCaseAccessBoundary";
+import { ButtonLink, Card, Chip, SectionLabel } from "@/components/ui/Primitives";
+import { getCase, getCases } from "@/lib/cases";
+import { FEATURED_DEMO_CASE_ID } from "@/lib/demo-case";
+import { LocalizedText } from "@/components/site/LocalizedCopy";
+import { requireLocale } from "@/i18n/params";
+import { localizePath } from "@/i18n/routing";
+import { getMessages } from "@/i18n/server";
+import { SPECIAL_EVENT_CASE_ID } from "@/lib/demo-event";
+
+export async function generateStaticParams() {
+  return (await getCases()).map((caseData) => ({ case_id: caseData.case_id }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; case_id: string }> }): Promise<Metadata> {
+  const { locale: localeParam, case_id } = await params;
+  const locale = requireLocale(localeParam);
+  const [caseData, messages] = await Promise.all([getCase(case_id, locale), getMessages(locale)]);
+  return { title: caseData ? messages["metadata.title.debrief"].replace("{{caseId}}", caseData.case_id) : messages["metadata.notFound.debrief"] };
+}
+
+export default async function DebriefPage({ params }: { params: Promise<{ locale: string; case_id: string }> }) {
+  const { locale: localeParam, case_id } = await params;
+  const locale = requireLocale(localeParam);
+  const caseData = await getCase(case_id, locale);
+  if (!caseData) notFound();
+  if (caseData.case_id === FEATURED_DEMO_CASE_ID) {
+    return <DemoAwarenessStory caseData={caseData} />;
+  }
+  const traps = caseData.modules.step_2_text_highlight.traps;
+
+  const content = <AppShell><section className="border-b-2 border-ink bg-success py-12 sm:py-16"><div className="mx-auto max-w-4xl px-4 text-center sm:px-6"><p className="font-mono text-sm font-black uppercase"><LocalizedText messageKey="debrief.kicker" replacements={{ caseId: caseData.case_id }} /></p><h1 className="mt-3 text-4xl font-black sm:text-5xl"><LocalizedText messageKey="debrief.complete" /></h1><p className="mx-auto mt-4 max-w-2xl text-lg"><LocalizedText messageKey="debrief.summary" /></p></div></section><section className="py-12 sm:py-16"><div className="mx-auto max-w-4xl px-4 sm:px-6"><SectionLabel><LocalizedText messageKey="debrief.label" /></SectionLabel><h2 className="mt-3 text-3xl font-black"><LocalizedText messageKey="debrief.title" /></h2>{caseData.case_id === SPECIAL_EVENT_CASE_ID && <DemoEventBadgeCallout />}<Card tone="warn" className="mt-6 p-5 sm:p-7"><p className="text-sm font-black uppercase"><LocalizedText messageKey="debrief.reflection" /></p><p className="mt-3 text-xl font-bold">{caseData.dialogue_trigger.question}</p><p className="mt-4 leading-7">{caseData.dialogue_trigger.mil_insight}</p></Card><div className="mt-8 grid gap-4 sm:grid-cols-2">{traps.map((trap) => <div key={trap.trap_id} className="border-l-4 border-danger bg-surface-2 p-5"><div className="flex flex-wrap gap-2">{trap.weapon_type.map((weapon) => <Chip key={weapon} tone="red">{weapon}</Chip>)}</div><p className="mt-3 text-sm leading-6 text-ink-soft">{trap.socratic_quiz.explanation}</p></div>)}</div><div className="mt-8 flex flex-wrap gap-3"><ButtonLink href={localizePath(locale, "/cases")} tone="accent"><LocalizedText messageKey="debrief.anotherCase" /></ButtonLink><ButtonLink href={localizePath(locale, `/mission/${caseData.case_id}`)} tone="secondary"><LocalizedText messageKey="debrief.replay" /></ButtonLink><ButtonLink href={localizePath(locale, "/learn")} tone="ghost"><LocalizedText messageKey="debrief.knowledgeHub" /></ButtonLink></div></div></section></AppShell>;
+
+  return caseData.case_id === SPECIAL_EVENT_CASE_ID
+    ? <SpecialCaseAccessBoundary>{content}</SpecialCaseAccessBoundary>
+    : content;
+}

@@ -1,0 +1,516 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "level": "RED",
+      "case_id": "D001",
+      "duration_min": 6,
+      "spotted_url": "/assets/images/D001/D001_spotted.png",
+      "source": {
+        "title": "Seeing is no longer believing: Artificial Intelligence's impact on photojournalism",
+        "url": "https://jsk.stanford.edu/news/seeing-no-longer-believing-artificial-intelligences-impact-photojournalism"
+      },
+      "modules": {
+        "step_1_image_forensics": {
+          "mechanic_type": "IMAGE_FORENSICS",
+          "image_url": "/assets/images/D001/D001_fake.webp",
+          "image_width": 1024,
+          "image_height": 1024,
+          "target_anomalies": [
+            {
+              "anomaly_id": "D001_IMG_01",
+              "name": "synthetic_facial_features",
+              "x_pct": 49.8,
+              "y_pct": 30.1,
+              "radius_pct": 25.5,
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            }
+          ]
+        },
+        "step_2_text_highlight": {
+          "mechanic_type": "TEXT_HIGHLIGHT",
+          "traps": [
+            {
+              "trap_id": "D001_TRAP_01",
+              "weapon_type": [
+                "appeal_to_emotion",
+                "unsupported_inference"
+              ],
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            }
+          ]
+        },
+        "step_3_sorting_game": {
+          "mechanic_type": "DRAG_AND_DROP_SORTING",
+          "pool_item_ids": [
+            "D001_SORT_02",
+            "D001_SORT_03",
+            "D001_SORT_01"
+          ],
+          "correct_sequence": [
+            "D001_SORT_01",
+            "D001_SORT_02",
+            "D001_SORT_03"
+          ]
+        }
+      }
+    },
+    {
+      "level": "RED",
+      "case_id": "R001",
+      "duration_min": 15,
+      "spotted_url": "/assets/images/R001/R001_spotted.jpg",
+      "modules": {
+        "step_1_image_forensics": {
+          "mechanic_type": "IMAGE_FORENSICS",
+          "image_url": "/assets/images/R001/R001_fake.jpg",
+          "image_width": 1000,
+          "image_height": 1000,
+          "target_anomalies": [
+            {
+              "anomaly_id": "R001_IMG_01",
+              "name": "gibberish_text",
+              "x_pct": 57.4,
+              "y_pct": 18.7,
+              "radius_pct": 14.5,
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            },
+            {
+              "anomaly_id": "R001_IMG_02",
+              "name": "clipping_students",
+              "x_pct": 57.8,
+              "y_pct": 68.6,
+              "radius_pct": 15.7,
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            }
+          ]
+        },
+        "step_2_text_highlight": {
+          "mechanic_type": "TEXT_HIGHLIGHT",
+          "traps": [
+            {
+              "trap_id": "R001_TRAP_01",
+              "weapon_type": [
+                "conspiracy_theory",
+                "intentionality_bias"
+              ],
+              "socratic_quiz": {
+                "correct_option": "C"
+              }
+            },
+            {
+              "trap_id": "R001_TRAP_02",
+              "weapon_type": [
+                "attribution_bias",
+                "overgeneralization",
+                "conspiracy_theory"
+              ],
+              "socratic_quiz": {
+                "correct_option": "C"
+              }
+            },
+            {
+              "trap_id": "R001_TRAP_03",
+              "weapon_type": [
+                "false_dilemma",
+                "slippery_slope"
+              ],
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            }
+          ]
+        },
+        "step_3_sorting_game": {
+          "mechanic_type": "DRAG_AND_DROP_SORTING",
+          "pool_item_ids": [
+            "R001_SORT_01",
+            "R001_SORT_02",
+            "R001_SORT_03"
+          ],
+          "correct_sequence": [
+            "R001_SORT_02",
+            "R001_SORT_03",
+            "R001_SORT_01"
+          ]
+        }
+      }
+    },
+    {
+      "level": "RED",
+      "case_id": "R002",
+      "duration_min": 12,
+      "spotted_url": "/assets/images/R002/R002_spotted.png",
+      "modules": {
+        "step_1_image_forensics": {
+          "mechanic_type": "IMAGE_FORENSICS",
+          "image_url": "/assets/images/R002/R002_fake.png",
+          "image_width": 1020,
+          "image_height": 680,
+          "target_anomalies": [
+            {
+              "anomaly_id": "R002_IMG_01",
+              "name": "fake_cockroach_insertion",
+              "x_pct": 69.5,
+              "y_pct": 73,
+              "radius_pct": 13.5,
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            }
+          ]
+        },
+        "step_2_text_highlight": {
+          "mechanic_type": "TEXT_HIGHLIGHT",
+          "traps": [
+            {
+              "trap_id": "R002_TRAP_01",
+              "weapon_type": [
+                "seeding_doubt"
+              ],
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            },
+            {
+              "trap_id": "R002_TRAP_02",
+              "weapon_type": [
+                "poisoning_the_well",
+                "overgeneralization"
+              ],
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            },
+            {
+              "trap_id": "R002_TRAP_03",
+              "weapon_type": [
+                "conspiracy_theory",
+                "appeal_to_fear"
+              ],
+              "socratic_quiz": {
+                "correct_option": "A"
+              }
+            }
+          ]
+        },
+        "step_3_sorting_game": {
+          "mechanic_type": "DRAG_AND_DROP_SORTING",
+          "pool_item_ids": [
+            "R002_SORT_01",
+            "R002_SORT_02",
+            "R002_SORT_03",
+            "R002_SORT_04"
+          ],
+          "correct_sequence": [
+            "R002_SORT_03",
+            "R002_SORT_01",
+            "R002_SORT_04",
+            "R002_SORT_02"
+          ]
+        }
+      }
+    },
+    {
+      "level": "RED",
+      "case_id": "R003",
+      "duration_min": 15,
+      "spotted_url": "/assets/images/R003/R003_spotted.png",
+      "modules": {
+        "step_1_image_forensics": {
+          "mechanic_type": "IMAGE_FORENSICS",
+          "image_url": "/assets/images/R003/R003_fake.jpg",
+          "image_width": 1402,
+          "image_height": 1122,
+          "target_anomalies": [
+            {
+              "anomaly_id": "R003_IMG_01",
+              "name": "inconsistent_hand_features",
+              "x_pct": 38.7,
+              "y_pct": 58.2,
+              "radius_pct": 8.6,
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            },
+            {
+              "anomaly_id": "R003_IMG_02",
+              "name": "warped_window_frame",
+              "x_pct": 17,
+              "y_pct": 49.9,
+              "radius_pct": 11.2,
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            }
+          ]
+        },
+        "step_2_text_highlight": {
+          "mechanic_type": "TEXT_HIGHLIGHT",
+          "traps": [
+            {
+              "trap_id": "R003_T1",
+              "weapon_type": [
+                "attacking_motive",
+                "strawman"
+              ],
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            },
+            {
+              "trap_id": "R003_T2",
+              "weapon_type": [
+                "false_comparison"
+              ],
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            },
+            {
+              "trap_id": "R003_T3",
+              "weapon_type": [
+                "inducing_fomo",
+                "personal_attack"
+              ],
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            },
+            {
+              "trap_id": "R003_T4",
+              "weapon_type": [
+                "emotional_dismissal"
+              ],
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            }
+          ]
+        },
+        "step_3_sorting_game": {
+          "mechanic_type": "DRAG_AND_DROP_SORTING",
+          "pool_item_ids": [
+            "R003_SORT_01",
+            "R003_SORT_02",
+            "R003_SORT_03",
+            "R003_SORT_04"
+          ],
+          "correct_sequence": [
+            "R003_SORT_02",
+            "R003_SORT_04",
+            "R003_SORT_01",
+            "R003_SORT_03"
+          ]
+        }
+      }
+    },
+    {
+      "level": "RED",
+      "case_id": "R004",
+      "duration_min": 15,
+      "spotted_url": "/assets/images/R004/R004_spotted.jpg",
+      "modules": {
+        "step_1_image_forensics": {
+          "mechanic_type": "IMAGE_FORENSICS",
+          "image_url": "/assets/images/R004/R004_fake.jpg",
+          "image_width": 853,
+          "image_height": 548,
+          "target_anomalies": [
+            {
+              "anomaly_id": "R004_IMG_03",
+              "name": "distorted_ui_icon",
+              "x_pct": 85.8,
+              "y_pct": 90,
+              "radius_pct": 8,
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            },
+            {
+              "anomaly_id": "R004_IMG_04",
+              "name": "artifact_edge_shape",
+              "x_pct": 93.6,
+              "y_pct": 31.8,
+              "radius_pct": 8,
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            }
+          ]
+        },
+        "step_2_text_highlight": {
+          "mechanic_type": "TEXT_HIGHLIGHT",
+          "traps": [
+            {
+              "trap_id": "R004_TRAP_01",
+              "weapon_type": [
+                "authority_bias",
+                "reward_bait"
+              ],
+              "socratic_quiz": {
+                "correct_option": "A"
+              }
+            },
+            {
+              "trap_id": "R004_TRAP_02",
+              "weapon_type": [
+                "artificial_urgency"
+              ],
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            },
+            {
+              "trap_id": "R004_TRAP_03",
+              "weapon_type": [
+                "advance_fee_scam"
+              ],
+              "socratic_quiz": {
+                "correct_option": "A"
+              }
+            },
+            {
+              "trap_id": "R004_TRAP_04",
+              "weapon_type": [
+                "isolation_tactic"
+              ],
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            }
+          ]
+        },
+        "step_3_sorting_game": {
+          "mechanic_type": "DRAG_AND_DROP_SORTING",
+          "pool_item_ids": [
+            "R004_SORT_01",
+            "R004_SORT_02",
+            "R004_SORT_03",
+            "R004_SORT_04",
+            "R004_SORT_05",
+            "R004_SORT_06",
+            "R004_SORT_07"
+          ],
+          "correct_sequence": [
+            "R004_SORT_01",
+            "R004_SORT_02",
+            "R004_SORT_03",
+            "R004_SORT_04",
+            "R004_SORT_05",
+            "R004_SORT_06",
+            "R004_SORT_07"
+          ]
+        }
+      }
+    },
+    {
+      "level": "RED",
+      "case_id": "S005",
+      "duration_min": 6,
+      "spotted_url": "/assets/images/R005/R005_spotted.jpg",
+      "source": {
+        "title": "Context Collapse and Hybrid AI Misinformation",
+        "url": ""
+      },
+      "modules": {
+        "step_1_image_forensics": {
+          "mechanic_type": "IMAGE_FORENSICS",
+          "image_url": "/assets/images/R005/R005_fake.jpg",
+          "image_width": 1536,
+          "image_height": 1024,
+          "target_anomalies": [
+            {
+              "anomaly_id": "R005_IMG_01",
+              "name": "flipped_digit_in_year",
+              "x_pct": 48.5,
+              "y_pct": 6.5,
+              "radius_pct": 6,
+              "socratic_quiz": {
+                "correct_option": "A"
+              }
+            },
+            {
+              "anomaly_id": "R005_IMG_02",
+              "name": "corrupted_billboard_text",
+              "x_pct": 76,
+              "y_pct": 26.4,
+              "radius_pct": 15,
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            },
+            {
+              "anomaly_id": "R005_IMG_03",
+              "name": "illogical_light_reflection",
+              "x_pct": 49.5,
+              "y_pct": 82.1,
+              "radius_pct": 15,
+              "socratic_quiz": {
+                "correct_option": "A"
+              }
+            }
+          ]
+        },
+        "step_2_text_highlight": {
+          "mechanic_type": "TEXT_HIGHLIGHT",
+          "traps": [
+            {
+              "trap_id": "R005_TRAP_01",
+              "weapon_type": [
+                "conspiracy_theory",
+                "authority_undermining"
+              ],
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            },
+            {
+              "trap_id": "R005_TRAP_02",
+              "weapon_type": [
+                "appeal_to_fear",
+                "emotional_manipulation"
+              ],
+              "socratic_quiz": {
+                "correct_option": "B"
+              }
+            },
+            {
+              "trap_id": "R005_TRAP_03",
+              "weapon_type": [
+                "manufactured_urgency",
+                "panic_inducing_action"
+              ],
+              "socratic_quiz": {
+                "correct_option": "A"
+              }
+            }
+          ]
+        },
+        "step_3_sorting_game": {
+          "mechanic_type": "DRAG_AND_DROP_SORTING",
+          "pool_item_ids": [
+            "R005_SORT_03",
+            "R005_SORT_01",
+            "R005_SORT_04",
+            "R005_SORT_02"
+          ],
+          "correct_sequence": [
+            "R005_SORT_01",
+            "R005_SORT_02",
+            "R005_SORT_03",
+            "R005_SORT_04"
+          ]
+        }
+      }
+    }
+  ]
+}

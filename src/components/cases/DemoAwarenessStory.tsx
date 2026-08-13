@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button, cn } from "@/components/ui/Primitives";
@@ -22,8 +23,10 @@ const STORY_SCENES: readonly StoryScene[] = [
   { signal: "demoStory.signal4", title: "demoStory.title4", body: "demoStory.body4" },
 ];
 
+const DEMO_FEEDBACK_URL = "https://forms.gle/hKSCZC9vNWqYq5Au8";
+
 export function DemoAwarenessStory({ caseData }: { caseData: CaseData }) {
-  const { t } = useI18n();
+  const { localizePath, t } = useI18n();
   const [activeScene, setActiveScene] = useState(0);
   const scene = STORY_SCENES[activeScene];
   const isFinalScene = activeScene === STORY_SCENES.length - 1;
@@ -56,12 +59,15 @@ export function DemoAwarenessStory({ caseData }: { caseData: CaseData }) {
       <div className="absolute inset-x-0 top-0 h-1 bg-info" aria-hidden />
 
       <header className="relative z-10 flex min-h-16 items-center justify-between gap-4 border-b-2 border-border bg-background/95 px-4 sm:px-8">
-        <Link href="/" className="font-display text-lg font-black">SIX<span className="text-accent">MA</span></Link>
-        <span className="font-mono text-xs font-black uppercase text-info">D001 / Debrief</span>
+        <Link href={localizePath("/")} className="flex items-center gap-2 font-display text-lg font-black">
+          <Image src="/assets/brand/logo.svg" alt="" width={36} height={36} className="size-9 object-contain" preload />
+          <span>SIX<span className="text-accent">MA</span></span>
+        </Link>
+        <span className="font-mono text-xs font-black uppercase text-info">{t("demoStory.debrief")}</span>
       </header>
 
       <section className="relative z-10 mx-auto flex min-h-[calc(100svh-4rem)] max-w-6xl flex-col px-4 py-8 sm:px-8 sm:py-12">
-        <div className="flex items-center gap-2" aria-label={`${activeScene + 1} of ${STORY_SCENES.length}`}>
+        <div className="flex items-center gap-2" aria-label={t("demoStory.progressAria", { current: activeScene + 1, total: STORY_SCENES.length })}>
           {STORY_SCENES.map((_, index) => (
             <span key={index} className={cn("h-1.5 flex-1 border border-border", index <= activeScene ? "bg-info" : "bg-surface-2")} />
           ))}
@@ -87,6 +93,19 @@ export function DemoAwarenessStory({ caseData }: { caseData: CaseData }) {
                 </>
               )}
             </p>
+            {isFinalScene && (
+              <p className="mx-auto mt-6 max-w-2xl border-2 border-warn bg-warn/15 px-4 py-3 text-base font-bold leading-7 text-foreground sm:text-lg">
+                {t("demoStory.feedbackPrompt")} {" "}
+                <a
+                  href={DEMO_FEEDBACK_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-black text-warn underline decoration-[3px] underline-offset-4 transition-colors hover:text-accent focus-visible:text-accent"
+                >
+                  {t("demoStory.feedbackLink")}
+                </a>
+              </p>
+            )}
           </div>
         </div>
 
@@ -95,8 +114,8 @@ export function DemoAwarenessStory({ caseData }: { caseData: CaseData }) {
             {t("demoStory.back")}
           </Button>
           {isFinalScene ? (
-            <Link href="/" className="inline-flex min-h-12 items-center justify-center border-[3px] border-info bg-info px-5 font-mono text-sm font-black uppercase text-info-foreground shadow-[4px_4px_0_0_var(--color-accent)] transition-transform hover:-translate-y-px">
-              {t("demoStory.join")}
+            <Link href={localizePath("/")} className="inline-flex min-h-12 items-center justify-center border-[3px] border-info bg-info px-5 font-mono text-sm font-black uppercase text-info-foreground shadow-[4px_4px_0_0_var(--color-accent)] transition-transform hover:-translate-y-px">
+              {t("demoStory.explore")}
             </Link>
           ) : (
             <Button className="min-h-12 px-5" onClick={() => setActiveScene((current) => Math.min(current + 1, STORY_SCENES.length - 1))}>

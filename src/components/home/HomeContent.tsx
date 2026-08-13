@@ -25,7 +25,7 @@ const INVESTIGATION_STEPS: Array<{ number: string; title: MessageKey; text: Mess
 ];
 
 export function HomeContent({ cases }: { cases: CaseData[] }) {
-  const { t } = useI18n();
+  const { localizePath, t } = useI18n();
   const featuredCase = cases.find((caseData) => caseData.case_id === FEATURED_DEMO_CASE_ID) ?? cases[0];
 
   return (
@@ -34,7 +34,7 @@ export function HomeContent({ cases }: { cases: CaseData[] }) {
       <section className="relative h-[calc(100svh-4rem)] min-h-[520px] overflow-hidden border-b-[3px] border-border bg-background">
         <Image
           src="/assets/hero-pixel.jpg"
-          alt="A cyber investigator reviewing digital evidence"
+          alt={t("home.heroImageAlt")}
           fill
           priority
           sizes="100vw"
@@ -57,9 +57,9 @@ export function HomeContent({ cases }: { cases: CaseData[] }) {
               {t("home.description")}
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <ButtonLink href={`/mission/${FEATURED_DEMO_CASE_ID}`} tone="accent" className="min-h-12 px-5 max-sm:w-full">{t("home.playDemo")}</ButtonLink>
-              <ButtonLink href="/about" tone="ghost" className="min-h-12 px-5 max-sm:w-full">{t("nav.about")}</ButtonLink>
-              <ButtonLink href="/redeem" tone="secondary" className="min-h-12 px-5 max-sm:w-full">{t("home.redeem")}</ButtonLink>
+              <ButtonLink href={localizePath(`/mission/${FEATURED_DEMO_CASE_ID}`)} tone="accent" className="min-h-12 px-5 max-sm:w-full">{t("home.playDemo")}</ButtonLink>
+              <ButtonLink href={localizePath("/about")} tone="ghost" className="min-h-12 px-5 max-sm:w-full">{t("nav.about")}</ButtonLink>
+              <ButtonLink href={localizePath("/redeem")} tone="secondary" className="min-h-12 px-5 max-sm:w-full">{t("home.redeem")}</ButtonLink>
             </div>
           </div>
         </div>
@@ -111,7 +111,7 @@ export function HomeContent({ cases }: { cases: CaseData[] }) {
               <SectionLabel>{t("home.casesLabel")}</SectionLabel>
               <h2 className="mt-3 text-3xl font-black">{t("home.casesTitle")}</h2>
             </div>
-            <ButtonLink href="/cases" tone="secondary">{t("home.browseAll")}</ButtonLink>
+            <ButtonLink href={localizePath("/cases")} tone="secondary">{t("home.browseAll")}</ButtonLink>
           </div>
           <div className="mt-8 max-w-xl">
             {featuredCase && <CaseFolder caseData={featuredCase} revealDetails={false} />}

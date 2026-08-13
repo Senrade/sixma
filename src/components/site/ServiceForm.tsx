@@ -2,32 +2,36 @@
 
 import { useState, type FormEvent } from "react";
 import { Button, Input, Label, Textarea } from "@/components/ui/Primitives";
+import { DemoRedemptionController } from "@/components/redeem/DemoRedemptionController";
+import { useI18n } from "@/i18n/I18nProvider";
+import type { MessageKey } from "@/i18n/messages/types";
 
 type FormKind = "sign-in" | "sign-up" | "redeem" | "contact";
 
-const MESSAGE: Record<FormKind, string> = {
-  "sign-in": "Account sign-in is not connected in this test build. No credentials were sent or stored.",
-  "sign-up": "Account creation is not connected in this test build. No personal data was sent or stored.",
-  redeem: "Redemption requires the secure account service. This code was not sent or marked as used.",
-  contact: "Message delivery is not connected in this test build. Your message was not sent or stored.",
+const MESSAGE: Record<FormKind, MessageKey> = {
+  "sign-in": "form.signIn.message",
+  "sign-up": "form.signUp.message",
+  redeem: "form.redeem.message",
+  contact: "form.contact.message",
 };
 
 export function ServiceForm({ kind }: { kind: FormKind }) {
+  const { t } = useI18n();
   const [message, setMessage] = useState("");
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setMessage(MESSAGE[kind]);
+    setMessage(t(MESSAGE[kind]));
   };
 
   if (kind === "redeem") {
-    return <form onSubmit={submit} className="mt-6"><Label htmlFor="redeem-code">Event card code</Label><Input id="redeem-code" name="code" required minLength={6} maxLength={32} autoComplete="off" placeholder="XXXX-XXXX-XXXX" className="font-mono uppercase" /><Button type="submit" tone="accent" className="mt-4 w-full">Check code</Button>{message && <Status>{message}</Status>}</form>;
+    return <DemoRedemptionController />;
   }
 
   if (kind === "contact") {
-    return <form onSubmit={submit} className="mt-6 grid gap-4"><div><Label htmlFor="contact-name">Name</Label><Input id="contact-name" name="name" required autoComplete="name" /></div><div><Label htmlFor="contact-email">Email</Label><Input id="contact-email" name="email" required type="email" autoComplete="email" /></div><div><Label htmlFor="contact-message">Message</Label><Textarea id="contact-message" name="message" required minLength={10} /></div><Button type="submit" className="justify-self-start">Send message</Button>{message && <Status>{message}</Status>}</form>;
+    return <form onSubmit={submit} className="mt-6 grid gap-4"><div><Label htmlFor="contact-name">{t("form.name")}</Label><Input id="contact-name" name="name" required autoComplete="name" /></div><div><Label htmlFor="contact-email">{t("form.email")}</Label><Input id="contact-email" name="email" required type="email" autoComplete="email" /></div><div><Label htmlFor="contact-message">{t("form.message")}</Label><Textarea id="contact-message" name="message" required minLength={10} /></div><Button type="submit" className="justify-self-start">{t("form.sendMessage")}</Button>{message && <Status>{message}</Status>}</form>;
   }
 
-  return <form onSubmit={submit} className="mt-6 grid gap-4"><div><Label htmlFor="email">Email</Label><Input id="email" name="email" type="email" required autoComplete="email" placeholder="you@example.com" /></div><div><Label htmlFor="password">Password</Label><Input id="password" name="password" type="password" required minLength={8} autoComplete={kind === "sign-up" ? "new-password" : "current-password"} /></div>{kind === "sign-up" && <div><Label htmlFor="display-name">Display name</Label><Input id="display-name" name="displayName" required maxLength={50} autoComplete="name" /></div>}<Button type="submit" className="w-full">{kind === "sign-in" ? "Sign in" : "Create account"}</Button>{message && <Status>{message}</Status>}</form>;
+  return <form onSubmit={submit} className="mt-6 grid gap-4"><div><Label htmlFor="email">{t("form.email")}</Label><Input id="email" name="email" type="email" required autoComplete="email" placeholder={t("form.emailPlaceholder")} /></div><div><Label htmlFor="password">{t("form.password")}</Label><Input id="password" name="password" type="password" required minLength={8} autoComplete={kind === "sign-up" ? "new-password" : "current-password"} /></div>{kind === "sign-up" && <div><Label htmlFor="display-name">{t("form.displayName")}</Label><Input id="display-name" name="displayName" required maxLength={50} autoComplete="name" /></div>}<Button type="submit" className="w-full">{kind === "sign-in" ? t("form.signIn") : t("form.createAccount")}</Button>{message && <Status>{message}</Status>}</form>;
 }
 
 function Status({ children }: { children: string }) {

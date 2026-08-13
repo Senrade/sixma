@@ -5,21 +5,34 @@ import { Chip, Input } from "@/components/ui/Primitives";
 import type { CaseData, CaseLevel } from "@/lib/case-types";
 import { useI18n } from "@/i18n/I18nProvider";
 import { FEATURED_DEMO_CASE_ID } from "@/lib/demo-case";
+import { SPECIAL_EVENT_CASE_ID } from "@/lib/demo-event";
+import { hasDemoEventAccess } from "@/lib/demo-event-storage";
 import { CaseFolder, type CaseAccess } from "./CaseFolder";
 
 type Filter = "ALL" | CaseLevel;
 type GameMode = "full-case" | "module-practice";
 
 const FILTERS: Filter[] = ["ALL", "RED", "AMBER", "GREEN"];
+const SHOW_LEVEL_FILTERS = false;
+const FILTER_LABELS = {
+  ALL: "cases.filterAll",
+  RED: "cases.filterRed",
+  AMBER: "cases.filterAmber",
+  GREEN: "cases.filterGreen",
+} as const;
 
 export function CaseHubClient({ cases }: { cases: CaseData[] }) {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<Filter>("ALL");
   const [gameMode, setGameMode] = useState<GameMode>("full-case");
   const [completedCaseIds, setCompletedCaseIds] = useState<string[] | null>(null);
+  const [hasSpecialAccess, setHasSpecialAccess] = useState<boolean | null>(null);
   const { t } = useI18n();
   const regularCases = useMemo(
-    () => cases.filter((caseData) => caseData.case_id !== FEATURED_DEMO_CASE_ID),
+    () => cases.filter((caseData) =>
+      caseData.case_id !== FEATURED_DEMO_CASE_ID &&
+      caseData.case_id !== SPECIAL_EVENT_CASE_ID
+    ),
     [cases],
   );
 
@@ -35,6 +48,7 @@ export function CaseHubClient({ cases }: { cases: CaseData[] }) {
         }
       });
       setCompletedCaseIds(completed);
+      setHasSpecialAccess(hasDemoEventAccess());
     }, 0);
 
     return () => window.clearTimeout(timer);
@@ -53,6 +67,9 @@ export function CaseHubClient({ cases }: { cases: CaseData[] }) {
   const getCaseAccess = (caseData: CaseData): CaseAccess => {
     if (completedCaseIds?.includes(caseData.case_id)) return "completed";
     if (caseData.case_id === FEATURED_DEMO_CASE_ID) return "available";
+    if (caseData.case_id === SPECIAL_EVENT_CASE_ID) {
+      return hasSpecialAccess ? "available" : "redeem";
+    }
     const caseIndex = regularCases.findIndex((candidate) => candidate.case_id === caseData.case_id);
     if (caseIndex <= 0) return "available";
     return completedCaseIds?.includes(regularCases[caseIndex - 1].case_id) ? "available" : "locked";
@@ -68,19 +85,21 @@ export function CaseHubClient({ cases }: { cases: CaseData[] }) {
           </div>
           <div className="md:justify-self-end">
             <p className="mb-1.5 text-xs font-black uppercase">{t("cases.gameMode")}</p>
-            <div className="inline-grid w-full grid-cols-2 rounded-[6px] border-2 border-ink bg-surface p-1 sm:w-auto" aria-label="Select game mode">
+            <div className="inline-grid w-full grid-cols-2 rounded-[6px] border-2 border-ink bg-surface p-1 sm:w-auto" aria-label={t("cases.gameModeAria")}>
               <button type="button" onClick={() => setGameMode("full-case")} aria-pressed={gameMode === "full-case"} className={`min-h-10 px-4 text-sm font-black ${gameMode === "full-case" ? "bg-info text-info-foreground" : "text-ink-soft"}`}>{t("cases.fullCase")}</button>
               <button type="button" onClick={() => setGameMode("module-practice")} aria-pressed={gameMode === "module-practice"} className={`min-h-10 px-4 text-sm font-black ${gameMode === "module-practice" ? "bg-info text-info-foreground" : "text-ink-soft"}`}>{t("cases.practice")}</button>
             </div>
           </div>
         </div>
-        <div className="mt-4 flex flex-wrap gap-2" aria-label={t("cases.filter")}>
-          {FILTERS.map((value) => (
-            <button key={value} type="button" onClick={() => setFilter(value)} aria-pressed={filter === value} className={`min-h-10 rounded-[4px] border-2 border-ink px-3 text-xs font-black ${filter === value ? "bg-accent text-accent-foreground shadow-[2px_2px_0_0_var(--color-ink)]" : "bg-surface"}`}>
-              {value}
-            </button>
-          ))}
-        </div>
+        {SHOW_LEVEL_FILTERS && (
+          <div className="mt-4 flex flex-wrap gap-2" aria-label={t("cases.filter")}>
+            {FILTERS.map((value) => (
+              <button key={value} type="button" onClick={() => setFilter(value)} aria-pressed={filter === value} className={`min-h-10 rounded-[4px] border-2 border-ink px-3 text-xs font-black ${filter === value ? "bg-accent text-accent-foreground shadow-[2px_2px_0_0_var(--color-ink)]" : "bg-surface"}`}>
+                {t(FILTER_LABELS[value])}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {gameMode === "module-practice" ? (
@@ -89,7 +108,7 @@ export function CaseHubClient({ cases }: { cases: CaseData[] }) {
           <h2 className="mt-4 text-2xl font-black">{t("cases.practiceTitle")}</h2>
           <p className="mt-2 max-w-2xl text-ink-soft">{t("cases.practiceText")}</p>
         </div>
-      ) : completedCaseIds === null ? (
+      ) : completedCaseIds === null || hasSpecialAccess === null ? (
         <p className="mt-10 border-[3px] border-dashed border-border p-8 text-center font-bold">{t("cases.checking")}</p>
       ) : visibleCases.length > 0 ? (
         <div className="mt-8 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
