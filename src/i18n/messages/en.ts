@@ -218,7 +218,7 @@ export const en = {
   "module.guide.hide": "Hide steps",
   "module.image.title": "Inspect the image",
   "module.image.summary": "Mark a meaningful visual anomaly and explain why it matters.",
-  "module.image.step1": "Drag from one edge of a suspicious area to the opposite edge, or click its center.",
+  "module.image.step1": "Click or tap the image to activate circle mode, then drag across the suspicious area to mark it.",
   "module.image.step2": "Answer the evidence question to document the anomaly.",
   "module.text.title": "Analyze the language",
   "module.text.summary": "Highlight the exact passage that uses a persuasive trap.",
