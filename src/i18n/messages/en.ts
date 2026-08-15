@@ -404,4 +404,5 @@ export const en = {
   "terms.section4.body": "A public account-enabled launch requires formal legal review, a support process, age-appropriate consent decisions, and complete operator details.",
   "article.minuteRead": "{{minutes}} minute read",
   "article.back": "Back to knowledge hub",
+  "drawingActiveMode": "Circle mode active (Drag to mark)"
 } as const;

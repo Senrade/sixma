@@ -404,4 +404,5 @@ export const vi = {
   "terms.section4.body": "Để ra mắt bản chính thức có hỗ trợ tài khoản, nền tảng cần phải được đánh giá pháp lý đầy đủ, xây dựng quy trình hỗ trợ người dùng, tuân thủ các quy định về độ tuổi và cung cấp thông tin chi tiết về đơn vị vận hành.",
   "article.minuteRead": "{{minutes}} phút đọc",
   "article.back": "Quay lại kho kiến thức",
+  "drawingActiveMode": "Đang ở chế độ khoanh tròn (Kéo để khoanh)",
 } as const;

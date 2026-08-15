@@ -404,4 +404,5 @@ export const es = {
   "terms.section4.body": "Un lanzamiento público con cuentas requerirá una revisión jurídica formal, un proceso de asistencia, decisiones sobre el consentimiento adecuadas a la edad y datos completos de la entidad operadora.",
   "article.minuteRead": "{{minutes}} min de lectura",
   "article.back": "Volver al centro de conocimientos",
+  "drawingActiveMode": "Modo círculo activo (Arrastra para marcar)"
 } as const;
