@@ -1,0 +1,22 @@
+{
+  "/[locale]/about/page": "app/[locale]/about/page.js",
+  "/[locale]/achievements/page": "app/[locale]/achievements/page.js",
+  "/[locale]/auth/sign-in/page": "app/[locale]/auth/sign-in/page.js",
+  "/[locale]/auth/sign-up/page": "app/[locale]/auth/sign-up/page.js",
+  "/[locale]/cases/[case_id]/debrief/page": "app/[locale]/cases/[case_id]/debrief/page.js",
+  "/[locale]/cases/[case_id]/page": "app/[locale]/cases/[case_id]/page.js",
+  "/[locale]/cases/page": "app/[locale]/cases/page.js",
+  "/[locale]/contact/page": "app/[locale]/contact/page.js",
+  "/[locale]/dashboard/page": "app/[locale]/dashboard/page.js",
+  "/[locale]/faq/page": "app/[locale]/faq/page.js",
+  "/[locale]/learn/[slug]/page": "app/[locale]/learn/[slug]/page.js",
+  "/[locale]/learn/page": "app/[locale]/learn/page.js",
+  "/[locale]/mission/[case_id]/page": "app/[locale]/mission/[case_id]/page.js",
+  "/[locale]/page": "app/[locale]/page.js",
+  "/[locale]/privacy/page": "app/[locale]/privacy/page.js",
+  "/[locale]/redeem/page": "app/[locale]/redeem/page.js",
+  "/[locale]/terms/page": "app/[locale]/terms/page.js",
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js"
+}

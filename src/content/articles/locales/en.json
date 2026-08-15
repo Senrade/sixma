@@ -1,5 +1,6 @@
 {
   "common-media-fallacies": {
+    "date_posted": "August 6, 2026",
     "category": "Critical reasoning",
     "title": "A Guide to Common Fallacies in Today's Media",
     "summary": "Five reasoning traps appear again and again in social feeds. Learn how to recognize them before they shape what you believe or share.",
@@ -41,6 +42,19 @@
           "University of Iowa. \"Logical Fallacies - Evaluating Online Information.\"",
           "Owen M. Williamson, University of Texas at El Paso. \"Master List of Logical Fallacies.\""
         ]
+      }
+    ]
+  }
+  ,
+  "how-to-play-guide": {
+    "date_posted": "August 15, 2026",
+    "category": "Tutorial",
+    "title": "How to play: a quick guide",
+    "summary": "A one-minute walkthrough showing the core actions and what to look for during an investigation.",
+    "sections": [
+      {
+        "heading": "Watch the guide",
+        "body": "Watch the 1-minute guide within the demo, or download it: /assets/videos/guide/guide-video.webm"
       }
     ]
   }

@@ -1,5 +1,6 @@
 {
   "common-media-fallacies": {
+    "date_posted": "06 tháng 8, 2026",
     "category": "Tư duy phản biện",
     "title": "Cẩm nang về các lỗi ngụy biện phổ biến trên truyền thông hiện nay",
     "summary": "Năm kiểu ngụy biện thường xuyên xuất hiện trên mạng xã hội. Hãy học cách nhận diện chúng trước khi chúng định hình điều bạn tin hoặc chia sẻ.",
@@ -41,6 +42,19 @@
           "University of Iowa. \"Logical Fallacies - Evaluating Online Information.\"",
           "Owen M. Williamson, University of Texas at El Paso. \"Master List of Logical Fallacies.\""
         ]
+      }
+    ]
+  }
+  ,
+  "how-to-play-guide": {
+    "date_posted": "15 tháng 8, 2026",
+    "category": "Hướng dẫn",
+    "title": "Cách chơi: hướng dẫn nhanh",
+    "summary": "Hướng dẫn 1 phút mô tả các thao tác chính và những gì cần chú ý khi điều tra.",
+    "sections": [
+      {
+        "heading": "Xem hướng dẫn",
+        "body": "Xem hướng dẫn 1 phút trong bản demo, hoặc tải về: /assets/videos/guide/guide-video.webm"
       }
     ]
   }

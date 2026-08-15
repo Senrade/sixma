@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { LanguageSwitch } from "@/components/site/SiteHeader";
 import { Button } from "@/components/ui/Primitives";
+import VideoGuide from "@/components/ui/VideoGuide";
 import { useI18n } from "@/i18n/I18nProvider";
 import { FEATURED_DEMO_CASE_ID, WELCOME_SESSION_KEY } from "@/lib/demo-case";
 
@@ -15,6 +16,7 @@ export function WelcomeGateway() {
   const { localizePath, t } = useI18n();
   const [state, setState] = useState<GatewayState>("checking");
   const [pendingDestination, setPendingDestination] = useState<string | null>(null);
+  const [openVideo, setOpenVideo] = useState(false);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -40,12 +42,24 @@ export function WelcomeGateway() {
 
   const navigate = (href: string) => {
     if (pendingDestination) return;
-
     try {
       window.sessionStorage.setItem(WELCOME_SESSION_KEY, "true");
     } catch {
       // Navigation remains available when session storage is unavailable.
     }
+
+    // If the href is the same as the current path, router.push will be a no-op.
+    // In that case, close the welcome dialog locally so users don't get stuck.
+    try {
+      const current = window.location.pathname;
+      if (href === current) {
+        setState("closed");
+        return;
+      }
+    } catch {
+      // ignore
+    }
+
     setPendingDestination(href);
     router.push(href);
   };
@@ -71,8 +85,16 @@ export function WelcomeGateway() {
         >
           <header className="flex min-h-12 items-center justify-between gap-4 border-b-[3px] border-info bg-surface-2 px-4 py-2">
             <div className="flex items-center gap-3">
-              <Image src="/assets/brand/logo.svg" alt="" width={32} height={32} className="size-8 object-contain" preload />
-              <span className="font-mono text-xs font-black uppercase text-info">SIXMA</span>
+              <button
+                type="button"
+                onClick={() => navigate(localizePath("/"))}
+                className="flex items-center gap-3 focus:outline-none cursor-pointer"
+                aria-label={t("nav.home")}
+                role="link"
+              >
+                <Image src="/assets/brand/logo.svg" alt="" width={32} height={32} className="size-8 object-contain" preload />
+                <span className="font-mono text-xs font-black uppercase text-info">SIXMA</span>
+              </button>
             </div>
             <div className="flex items-center gap-2">
               <span className="hidden font-mono text-sm font-bold text-success sm:inline">● {t("welcome.online")}</span>
@@ -99,10 +121,12 @@ export function WelcomeGateway() {
               <Button disabled={Boolean(pendingDestination)} tone="secondary" className="min-h-14 w-full px-5" onClick={() => navigate(localizePath("/redeem"))}>
                 {pendingDestination === localizePath("/redeem") ? t("welcome.opening") : t("welcome.redeem")}
               </Button>
-              <Button disabled={Boolean(pendingDestination)} tone="ghost" className="min-h-14 w-full px-5" onClick={() => navigate(localizePath("/about"))}>
-                {pendingDestination === localizePath("/about") ? t("welcome.opening") : t("welcome.about")}
+              <Button disabled={Boolean(pendingDestination)} tone="ghost" className="min-h-14 w-full px-5" onClick={() => setOpenVideo(true)}>
+                {t("welcome.watchGuide")}
               </Button>
             </div>
+
+            <VideoGuide open={openVideo} onClose={() => setOpenVideo(false)} />
 
             <p className="mt-5 font-mono text-lg leading-5 text-muted-foreground">{t("welcome.cardPrompt")}</p>
           </div>

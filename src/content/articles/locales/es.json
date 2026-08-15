@@ -1,5 +1,6 @@
 {
   "common-media-fallacies": {
+    "date_posted": "6 de agosto de 2026",
     "category": "Razonamiento crítico",
     "title": "Guía sobre falacias comunes en los medios actuales",
     "summary": "Cinco trampas de razonamiento aparecen una y otra vez en las redes sociales. Aprende a reconocerlas antes de que moldeen lo que crees o compartes.",
@@ -41,6 +42,19 @@
           "University of Iowa. \"Logical Fallacies - Evaluating Online Information.\"",
           "Owen M. Williamson, University of Texas at El Paso. \"Master List of Logical Fallacies.\""
         ]
+      }
+    ]
+  }
+  ,
+  "how-to-play-guide": {
+    "date_posted": "15 de agosto de 2026",
+    "category": "Tutorial",
+    "title": "Cómo jugar: guía rápida",
+    "summary": "Un recorrido de un minuto que muestra las acciones principales y qué buscar durante una investigación.",
+    "sections": [
+      {
+        "heading": "Ver la guía",
+        "body": "Mira la guía de 1 minuto dentro de la demo, o descárgala: /assets/videos/guide/guide-video.webm"
       }
     ]
   }

@@ -39,6 +39,9 @@ export default async function ArticlePage({
           <h1 className="mt-5 text-4xl font-black leading-tight sm:text-5xl">{article.title}</h1>
           <p className="mt-4 text-lg leading-8 text-ink-soft">{article.summary}</p>
           <p className="mt-3 font-mono text-xs font-bold"><LocalizedText messageKey="article.minuteRead" replacements={{ minutes: article.readTime }} /></p>
+          {article.datePosted && (
+            <p className="mt-2 font-mono text-xs text-ink-soft">{article.datePosted}</p>
+          )}
         </header>
         <div className="mx-auto mt-10 max-w-3xl border-t-[3px] border-border px-4 pt-9 sm:px-6">
           {article.sections.map((section) => (

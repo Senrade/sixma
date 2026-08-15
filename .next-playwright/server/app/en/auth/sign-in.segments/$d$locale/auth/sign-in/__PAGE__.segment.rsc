@@ -1,0 +1,26 @@
+1:"$Sreact.fragment"
+2:I[73935,["/_next/static/chunks/1bov-oo31_eqc.js","/_next/static/chunks/3l9utm092i0t2.js","/_next/static/chunks/13fy69y4715s7.js"],"SiteHeader"]
+3:I[11848,["/_next/static/chunks/1bov-oo31_eqc.js","/_next/static/chunks/3l9utm092i0t2.js","/_next/static/chunks/13fy69y4715s7.js"],"LocalizedText"]
+4:I[49257,["/_next/static/chunks/1bov-oo31_eqc.js","/_next/static/chunks/3l9utm092i0t2.js","/_next/static/chunks/13fy69y4715s7.js"],"ServiceForm"]
+5:I[22016,["/_next/static/chunks/1bov-oo31_eqc.js","/_next/static/chunks/3l9utm092i0t2.js","/_next/static/chunks/13fy69y4715s7.js"],""]
+6:I[24115,["/_next/static/chunks/1bov-oo31_eqc.js","/_next/static/chunks/3l9utm092i0t2.js","/_next/static/chunks/13fy69y4715s7.js"],"SiteFooter"]
+7:I[97367,["/_next/static/chunks/3fntmmi971322.js"],"OutletBoundary"]
+8:"$Sreact.suspense"
+c:I[97367,["/_next/static/chunks/3fntmmi971322.js"],"ViewportBoundary"]
+d:I[97367,["/_next/static/chunks/3fntmmi971322.js"],"MetadataBoundary"]
+e:I[27201,["/_next/static/chunks/3fntmmi971322.js"],"IconMark"]
+10:I[39756,["/_next/static/chunks/3fntmmi971322.js"],"default"]
+11:I[37457,["/_next/static/chunks/3fntmmi971322.js"],"default"]
+b:X
+13:X
+13:C
+0:{"buildId":"JFSdapXluxcZ7WLb1GQKv","data":[{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex min-h-screen flex-col bg-background text-foreground","children":[["$","$L2",null,{}],["$","main",null,{"className":"flex-1","children":["$","section",null,{"className":"case-grid-bg py-14","children":["$","div",null,{"className":"mx-auto max-w-md px-4","children":["$","div",null,{"className":"rounded-[8px] border-2 border-ink bg-surface p-6 shadow-[7px_7px_0_0_var(--color-ink)]","children":[["$","p",null,{"className":"font-mono text-xs font-black uppercase text-danger","children":["$","$L3",null,{"messageKey":"auth.eyebrow"}]}],["$","h1",null,{"className":"mt-2 text-3xl font-black","children":["$","$L3",null,{"messageKey":"auth.signIn.title"}]}],["$","p",null,{"className":"mt-2 text-sm text-ink-soft","children":["$","$L3",null,{"messageKey":"auth.signIn.intro"}]}],["$","$L4",null,{"kind":"sign-in"}],["$","p",null,{"className":"mt-5 text-sm","children":[["$","$L3",null,{"messageKey":"auth.signIn.prompt"}]," ",["$","$L5",null,{"href":"/en/auth/sign-up","className":"font-bold underline","children":["$","$L3",null,{"messageKey":"auth.signIn.link"}]}]]}]]}]}]}]}],["$","$L6",null,{}]]}],[["$","script","script-0",{"src":"/_next/static/chunks/3l9utm092i0t2.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/13fy69y4715s7.js","async":true}]],["$","$L7",null,{"children":["$","$8",null,{"name":"Next.MetadataOutlet","children":"$@9"}]}]]}],"isPartial":"$@a","staleTime":"$b","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$Lc",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$Ld",null,{"children":["$","$8",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Sign In | SIXMA"}],["$","meta","1",{"name":"description","content":"Playable investigations that teach students and families to identify manipulated images, coercive rhetoric, and phishing patterns."}],["$","link","2",{"rel":"icon","href":"/favicon.ico?favicon.0m88wzozi9rl0.ico","sizes":"32x32","type":"image/x-icon"}],["$","$Le","3",{}]]}]}]}],null]}],"isPartial":"$@f","staleTime":"$b","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$L10",null,{"parallelRouterKey":"children","template":["$","$L11",null,{}]}]]}],"isPartial":"$@12","staleTime":"$b","varyParams":"$13"},{"rsc":["$","$1","c",{"children":[null,["$","$L10",null,{"parallelRouterKey":"children","template":["$","$L11",null,{}]}]]}],"isPartial":"$@14","staleTime":"$b","varyParams":"$13"}],"isUpgradeableISRFallback":false,"a":"$@15","rootVaryParams":null,"needsRuntimeRequest":"$@16"}
+9:null
+16:true
+b:300
+b:C
+15:0
+f:"$undefined"
+12:"$undefined"
+14:"$undefined"
+a:"$undefined"

@@ -1,0 +1,22 @@
+1:"$Sreact.fragment"
+2:I[13015,["/_next/static/chunks/1bov-oo31_eqc.js","/_next/static/chunks/3mau6909tk8ic.js","/_next/static/chunks/13fy69y4715s7.js"],"InfoPage"]
+3:I[11848,["/_next/static/chunks/1bov-oo31_eqc.js","/_next/static/chunks/3mau6909tk8ic.js","/_next/static/chunks/13fy69y4715s7.js"],"LocalizedText"]
+4:I[97367,["/_next/static/chunks/3fntmmi971322.js"],"OutletBoundary"]
+5:"$Sreact.suspense"
+9:I[97367,["/_next/static/chunks/3fntmmi971322.js"],"ViewportBoundary"]
+a:I[97367,["/_next/static/chunks/3fntmmi971322.js"],"MetadataBoundary"]
+b:I[27201,["/_next/static/chunks/3fntmmi971322.js"],"IconMark"]
+d:I[39756,["/_next/static/chunks/3fntmmi971322.js"],"default"]
+e:I[37457,["/_next/static/chunks/3fntmmi971322.js"],"default"]
+8:X
+10:X
+10:C
+0:{"buildId":"JFSdapXluxcZ7WLb1GQKv","data":[{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"eyebrow":"about.eyebrow","title":"about.title","intro":"about.intro","children":[["$","h2",null,{"children":["$","$L3",null,{"messageKey":"about.section1.title"}]}],["$","p",null,{"children":["$","$L3",null,{"messageKey":"about.section1.body"}]}],["$","h2",null,{"children":["$","$L3",null,{"messageKey":"about.section2.title"}]}],["$","p",null,{"children":["$","$L3",null,{"messageKey":"about.section2.body"}]}],["$","h2",null,{"children":["$","$L3",null,{"messageKey":"about.section3.title"}]}],["$","p",null,{"children":["$","$L3",null,{"messageKey":"about.section3.body"}]}]]}],[["$","script","script-0",{"src":"/_next/static/chunks/3mau6909tk8ic.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/13fy69y4715s7.js","async":true}]],["$","$L4",null,{"children":["$","$5",null,{"name":"Next.MetadataOutlet","children":"$@6"}]}]]}],"isPartial":"$@7","staleTime":"$8","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$L9",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$La",null,{"children":["$","$5",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Giới thiệu | SIXMA"}],["$","meta","1",{"name":"description","content":"Các cuộc điều tra dưới dạng trò chơi giúp học sinh và gia đình nhận diện hình ảnh bị chỉnh sửa, các thủ thuật thao túng ngôn từ và các mánh khóe lừa đảo."}],["$","link","2",{"rel":"icon","href":"/favicon.ico?favicon.0m88wzozi9rl0.ico","sizes":"32x32","type":"image/x-icon"}],["$","$Lb","3",{}]]}]}]}],null]}],"isPartial":"$@c","staleTime":"$8","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Ld",null,{"parallelRouterKey":"children","template":["$","$Le",null,{}]}]]}],"isPartial":"$@f","staleTime":"$8","varyParams":"$10"}],"isUpgradeableISRFallback":false,"a":"$@11","rootVaryParams":null,"needsRuntimeRequest":"$@12"}
+6:null
+12:true
+8:300
+8:C
+11:0
+c:"$undefined"
+f:"$undefined"
+7:"$undefined"
