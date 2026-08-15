@@ -1,0 +1,25 @@
+1:"$Sreact.fragment"
+2:I[73935,["/_next/static/chunks/1bov-oo31_eqc.js","/_next/static/chunks/17ltjueetoy2u.js","/_next/static/chunks/13fy69y4715s7.js"],"SiteHeader"]
+3:I[11848,["/_next/static/chunks/1bov-oo31_eqc.js","/_next/static/chunks/17ltjueetoy2u.js","/_next/static/chunks/13fy69y4715s7.js"],"LocalizedPageIntro"]
+4:I[11848,["/_next/static/chunks/1bov-oo31_eqc.js","/_next/static/chunks/17ltjueetoy2u.js","/_next/static/chunks/13fy69y4715s7.js"],"LocalizedText"]
+5:I[22016,["/_next/static/chunks/1bov-oo31_eqc.js","/_next/static/chunks/17ltjueetoy2u.js","/_next/static/chunks/13fy69y4715s7.js"],""]
+6:I[24115,["/_next/static/chunks/1bov-oo31_eqc.js","/_next/static/chunks/17ltjueetoy2u.js","/_next/static/chunks/13fy69y4715s7.js"],"SiteFooter"]
+7:I[97367,["/_next/static/chunks/3fntmmi971322.js"],"OutletBoundary"]
+8:"$Sreact.suspense"
+c:I[97367,["/_next/static/chunks/3fntmmi971322.js"],"ViewportBoundary"]
+d:I[97367,["/_next/static/chunks/3fntmmi971322.js"],"MetadataBoundary"]
+e:I[27201,["/_next/static/chunks/3fntmmi971322.js"],"IconMark"]
+10:I[39756,["/_next/static/chunks/3fntmmi971322.js"],"default"]
+11:I[37457,["/_next/static/chunks/3fntmmi971322.js"],"default"]
+b:X
+13:X
+13:C
+0:{"buildId":"JFSdapXluxcZ7WLb1GQKv","data":[{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex min-h-screen flex-col bg-background text-foreground","children":[["$","$L2",null,{}],["$","main",null,{"className":"flex-1","children":["$","section",null,{"className":"case-grid-bg min-h-[70vh] py-12 sm:py-16","children":["$","div",null,{"className":"mx-auto max-w-7xl px-4 sm:px-6","children":[["$","$L3",null,{"kicker":"learn.kicker","title":"learn.title","description":"learn.intro","descriptionClassName":"max-w-4xl"}],["$","div",null,{"className":"mt-10 border-y-[3px] border-border","children":[["$","article","common-media-fallacies",{"className":"border-b-[3px] border-border py-7 last:border-b-0 sm:py-9","children":["$","div",null,{"className":"grid items-start gap-6 md:grid-cols-[minmax(0,1fr)_auto] md:gap-10","children":[["$","div",null,{"className":"min-w-0","children":[["$","p",null,{"className":"text-xs font-black uppercase text-info","children":"Critical reasoning"}],["$","h2",null,{"className":"mt-2 max-w-4xl text-2xl font-black leading-tight sm:text-3xl","children":"A Guide to Common Fallacies in Today's Media"}],["$","p",null,{"className":"mt-3 max-w-3xl text-sm leading-7 text-ink-soft sm:text-base","children":"Five reasoning traps appear again and again in social feeds. Learn how to recognize them before they shape what you believe or share."}],["$","p",null,{"className":"mt-4 text-xs font-bold uppercase text-muted-foreground","children":[7," ",["$","$L4",null,{"messageKey":"learn.minRead"}]]}]]}],["$","$L5",null,{"href":"/en/learn/common-media-fallacies","className":"inline-flex min-h-10 items-center justify-center gap-2 border-[3px] px-4 font-mono text-sm font-black uppercase transition-[transform,box-shadow,background-color,border-color,color] duration-100 hover:-translate-x-px hover:-translate-y-px active:translate-x-[2px] active:translate-y-[2px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-50 border-info bg-info text-info-foreground shadow-[4px_4px_0_0_var(--color-accent)] hover:border-accent hover:bg-accent hover:text-accent-foreground md:mt-7 md:self-start","children":["$","$L4",null,{"messageKey":"learn.read"}]}]]}]}]]}]]}]}]}],["$","$L6",null,{}]]}],[["$","script","script-0",{"src":"/_next/static/chunks/17ltjueetoy2u.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/13fy69y4715s7.js","async":true}]],["$","$L7",null,{"children":["$","$8",null,{"name":"Next.MetadataOutlet","children":"$@9"}]}]]}],"isPartial":"$@a","staleTime":"$b","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$Lc",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$Ld",null,{"children":["$","$8",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Knowledge Hub | SIXMA"}],["$","meta","1",{"name":"description","content":"Playable investigations that teach students and families to identify manipulated images, coercive rhetoric, and phishing patterns."}],["$","link","2",{"rel":"icon","href":"/favicon.ico?favicon.0m88wzozi9rl0.ico","sizes":"32x32","type":"image/x-icon"}],["$","$Le","3",{}]]}]}]}],null]}],"isPartial":"$@f","staleTime":"$b","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$L10",null,{"parallelRouterKey":"children","template":["$","$L11",null,{}]}]]}],"isPartial":"$@12","staleTime":"$b","varyParams":"$13"}],"isUpgradeableISRFallback":false,"a":"$@14","rootVaryParams":null,"needsRuntimeRequest":"$@15"}
+9:null
+15:true
+b:300
+b:C
+14:0
+f:"$undefined"
+12:"$undefined"
+a:"$undefined"

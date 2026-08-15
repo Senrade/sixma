@@ -1,0 +1,24 @@
+1:"$Sreact.fragment"
+2:I[73935,["/_next/static/chunks/1bov-oo31_eqc.js","/_next/static/chunks/3l9utm092i0t2.js","/_next/static/chunks/13fy69y4715s7.js"],"SiteHeader"]
+3:I[11848,["/_next/static/chunks/1bov-oo31_eqc.js","/_next/static/chunks/3l9utm092i0t2.js","/_next/static/chunks/13fy69y4715s7.js"],"LocalizedPageIntro"]
+4:I[49257,["/_next/static/chunks/1bov-oo31_eqc.js","/_next/static/chunks/3l9utm092i0t2.js","/_next/static/chunks/13fy69y4715s7.js"],"ServiceForm"]
+5:I[24115,["/_next/static/chunks/1bov-oo31_eqc.js","/_next/static/chunks/3l9utm092i0t2.js","/_next/static/chunks/13fy69y4715s7.js"],"SiteFooter"]
+6:I[97367,["/_next/static/chunks/3fntmmi971322.js"],"OutletBoundary"]
+7:"$Sreact.suspense"
+b:I[97367,["/_next/static/chunks/3fntmmi971322.js"],"ViewportBoundary"]
+c:I[97367,["/_next/static/chunks/3fntmmi971322.js"],"MetadataBoundary"]
+d:I[27201,["/_next/static/chunks/3fntmmi971322.js"],"IconMark"]
+f:I[39756,["/_next/static/chunks/3fntmmi971322.js"],"default"]
+10:I[37457,["/_next/static/chunks/3fntmmi971322.js"],"default"]
+a:X
+12:X
+12:C
+0:{"buildId":"JFSdapXluxcZ7WLb1GQKv","data":[{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"flex min-h-screen flex-col bg-background text-foreground","children":[["$","$L2",null,{}],["$","main",null,{"className":"flex-1","children":["$","section",null,{"className":"case-grid-bg min-h-[75vh] py-12 sm:py-16","children":["$","div",null,{"className":"mx-auto max-w-6xl px-4 sm:px-6","children":[["$","$L3",null,{"kicker":"redeem.kicker","title":"redeem.title","description":"redeem.intro"}],["$","$L4",null,{"kind":"redeem"}]]}]}]}],["$","$L5",null,{}]]}],[["$","script","script-0",{"src":"/_next/static/chunks/3l9utm092i0t2.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/13fy69y4715s7.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"isPartial":"$@9","staleTime":"$a","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$Lb",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$Lc",null,{"children":["$","$7",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Redeem Event Card | SIXMA"}],["$","meta","1",{"name":"description","content":"Playable investigations that teach students and families to identify manipulated images, coercive rhetoric, and phishing patterns."}],["$","link","2",{"rel":"icon","href":"/favicon.ico?favicon.0m88wzozi9rl0.ico","sizes":"32x32","type":"image/x-icon"}],["$","$Ld","3",{}]]}]}]}],null]}],"isPartial":"$@e","staleTime":"$a","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Lf",null,{"parallelRouterKey":"children","template":["$","$L10",null,{}]}]]}],"isPartial":"$@11","staleTime":"$a","varyParams":"$12"}],"isUpgradeableISRFallback":false,"a":"$@13","rootVaryParams":null,"needsRuntimeRequest":"$@14"}
+8:null
+14:true
+a:300
+a:C
+13:0
+e:"$undefined"
+11:"$undefined"
+9:"$undefined"

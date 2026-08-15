@@ -1,0 +1,23 @@
+1:"$Sreact.fragment"
+2:I[13015,["/_next/static/chunks/1bov-oo31_eqc.js","/_next/static/chunks/3tt9vqwvi3qt4.js","/_next/static/chunks/13fy69y4715s7.js"],"InfoPage"]
+3:I[11848,["/_next/static/chunks/1bov-oo31_eqc.js","/_next/static/chunks/3tt9vqwvi3qt4.js","/_next/static/chunks/13fy69y4715s7.js"],"LocalizedText"]
+4:I[49257,["/_next/static/chunks/1bov-oo31_eqc.js","/_next/static/chunks/3tt9vqwvi3qt4.js","/_next/static/chunks/13fy69y4715s7.js"],"ServiceForm"]
+5:I[97367,["/_next/static/chunks/3fntmmi971322.js"],"OutletBoundary"]
+6:"$Sreact.suspense"
+a:I[97367,["/_next/static/chunks/3fntmmi971322.js"],"ViewportBoundary"]
+b:I[97367,["/_next/static/chunks/3fntmmi971322.js"],"MetadataBoundary"]
+c:I[27201,["/_next/static/chunks/3fntmmi971322.js"],"IconMark"]
+e:I[39756,["/_next/static/chunks/3fntmmi971322.js"],"default"]
+f:I[37457,["/_next/static/chunks/3fntmmi971322.js"],"default"]
+9:X
+11:X
+11:C
+0:{"buildId":"JFSdapXluxcZ7WLb1GQKv","data":[{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"eyebrow":"contact.eyebrow","title":"contact.title","intro":"contact.intro","children":[["$","h2",null,{"children":["$","$L3",null,{"messageKey":"contact.send"}]}],["$","$L4",null,{"kind":"contact"}]]}],[["$","script","script-0",{"src":"/_next/static/chunks/3tt9vqwvi3qt4.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/13fy69y4715s7.js","async":true}]],["$","$L5",null,{"children":["$","$6",null,{"name":"Next.MetadataOutlet","children":"$@7"}]}]]}],"isPartial":"$@8","staleTime":"$9","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$La",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$Lb",null,{"children":["$","$6",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Liên hệ | SIXMA"}],["$","meta","1",{"name":"description","content":"Các cuộc điều tra dưới dạng trò chơi giúp học sinh và gia đình nhận diện hình ảnh bị chỉnh sửa, các thủ thuật thao túng ngôn từ và các mánh khóe lừa đảo."}],["$","link","2",{"rel":"icon","href":"/favicon.ico?favicon.0m88wzozi9rl0.ico","sizes":"32x32","type":"image/x-icon"}],["$","$Lc","3",{}]]}]}]}],null]}],"isPartial":"$@d","staleTime":"$9","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Le",null,{"parallelRouterKey":"children","template":["$","$Lf",null,{}]}]]}],"isPartial":"$@10","staleTime":"$9","varyParams":"$11"}],"isUpgradeableISRFallback":false,"a":"$@12","rootVaryParams":null,"needsRuntimeRequest":"$@13"}
+7:null
+13:true
+9:300
+9:C
+12:0
+d:"$undefined"
+10:"$undefined"
+8:"$undefined"

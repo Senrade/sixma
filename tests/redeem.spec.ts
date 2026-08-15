@@ -131,7 +131,9 @@ async function completeSortingModule(page: import("@playwright/test").Page) {
     "R005_SORT_03",
     "R005_SORT_04",
   ].entries()) {
-    await page.getByRole("button").filter({ hasText: itemId }).first().click();
+    const button = page.getByRole("button").filter({ hasText: itemId }).first();
+    await button.waitFor({ state: "visible" });
+    await button.click();
     await page.locator(`[data-slot-index="${slot}"]`).click();
   }
   await page.getByRole("button", { name: "Complete investigation" }).click();

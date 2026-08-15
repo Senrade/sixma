@@ -1,0 +1,22 @@
+{
+  "/[locale]/about/page": "/[locale]/about",
+  "/[locale]/achievements/page": "/[locale]/achievements",
+  "/[locale]/auth/sign-in/page": "/[locale]/auth/sign-in",
+  "/[locale]/auth/sign-up/page": "/[locale]/auth/sign-up",
+  "/[locale]/cases/[case_id]/debrief/page": "/[locale]/cases/[case_id]/debrief",
+  "/[locale]/cases/[case_id]/page": "/[locale]/cases/[case_id]",
+  "/[locale]/cases/page": "/[locale]/cases",
+  "/[locale]/contact/page": "/[locale]/contact",
+  "/[locale]/dashboard/page": "/[locale]/dashboard",
+  "/[locale]/faq/page": "/[locale]/faq",
+  "/[locale]/learn/[slug]/page": "/[locale]/learn/[slug]",
+  "/[locale]/learn/page": "/[locale]/learn",
+  "/[locale]/mission/[case_id]/page": "/[locale]/mission/[case_id]",
+  "/[locale]/page": "/[locale]",
+  "/[locale]/privacy/page": "/[locale]/privacy",
+  "/[locale]/redeem/page": "/[locale]/redeem",
+  "/[locale]/terms/page": "/[locale]/terms",
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/favicon.ico/route": "/favicon.ico"
+}

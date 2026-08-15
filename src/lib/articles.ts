@@ -13,6 +13,7 @@ export interface Article {
   title: string;
   summary: string;
   readTime: number;
+  datePosted?: string;
   sections: ArticleSection[];
 }
 
@@ -20,6 +21,7 @@ interface ArticleTranslation {
   category: string;
   title: string;
   summary: string;
+  date_posted?: string;
   sections: ArticleSection[];
 }
 
@@ -66,6 +68,7 @@ async function readArticles(locale: Locale): Promise<Article[]> {
     return {
       slug: entry.slug,
       readTime: entry.read_time,
+      datePosted: translation.date_posted,
       ...translation,
     };
   });

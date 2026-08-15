@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
+import VideoGuide from "@/components/ui/VideoGuide";
 import GameController, {
   type GameStep,
 } from "@/components/controllers/GameController";
@@ -20,6 +21,7 @@ export function MissionExperience({ caseData }: { caseData: CaseData }) {
   const { localizePath, t } = useI18n();
   const [currentStep, setCurrentStep] = useState<GameStep>(1);
   const [isExitDialogOpen, setIsExitDialogOpen] = useState(false);
+  const [openGuide, setOpenGuide] = useState(false);
 
   const progressStorageKey = `unesco-mil-game:v2:${caseData.case_id}:current-step`;
 
@@ -70,9 +72,16 @@ export function MissionExperience({ caseData }: { caseData: CaseData }) {
               <p className="truncate font-mono text-xs font-black uppercase text-danger">
                 {caseData.case_id} / {t(STEP_LABELS[currentStep - 1])}
               </p>
-              <span className="shrink-0 font-mono text-xs text-ink-soft">
-                {t("mission.progress", { current: currentStep, total: 3 })}
-              </span>
+              <div className="flex items-center gap-3">
+                <span className="shrink-0 font-mono text-xs text-ink-soft">
+                  {t("mission.progress", { current: currentStep, total: 3 })}
+                </span>
+                {caseData.case_id === "D001" && (
+                  <button type="button" className="ml-2 inline-flex items-center rounded border-[3px] border-border bg-surface px-3 py-1 text-sm font-bold" onClick={() => setOpenGuide(true)}>
+                    {t("guide.watchGuide")}
+                  </button>
+                )}
+              </div>
             </div>
             <Progress
               value={(currentStep / 3) * 100}
@@ -95,6 +104,7 @@ export function MissionExperience({ caseData }: { caseData: CaseData }) {
         onCancel={() => setIsExitDialogOpen(false)}
         onConfirm={handleConfirmExit}
       />
+      <VideoGuide open={openGuide} onClose={() => setOpenGuide(false)} />
     </main>
   );
 }

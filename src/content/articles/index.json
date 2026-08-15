@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "articles": [
+    { "slug": "how-to-play-guide", "read_time": 1 },
     { "slug": "common-media-fallacies", "read_time": 7 }
   ]
 }
