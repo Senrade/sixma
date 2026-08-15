@@ -218,7 +218,7 @@ export const vi = {
   "module.guide.hide": "Ẩn các bước",
   "module.image.title": "Giám định hình ảnh",
   "module.image.summary": "Khoanh vùng một điểm bất thường rõ rệt và giải thích lý do tại sao nó đáng ngờ.",
-  "module.image.step1": "Kéo từ một rìa của vùng đáng ngờ sang rìa đối diện, hoặc nhấn vào tâm vùng đó.",
+  "module.image.step1": "Chạm hoặc click vào ảnh để bật chế độ khoanh tròn, sau đó kéo chọn vùng nghi vấn để đánh dấu.",
   "module.image.step2": "Trả lời câu hỏi về bằng chứng để ghi nhận lại điểm bất thường.",
   "module.text.title": "Phân tích ngôn từ",
   "module.text.summary": "Bôi đen đoạn văn bản sử dụng mánh khóe thao túng tâm lý.",

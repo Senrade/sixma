@@ -218,7 +218,7 @@ export const es = {
   "module.guide.hide": "Ocultar pasos",
   "module.image.title": "Examinar la imagen",
   "module.image.summary": "Marca una anomalía visual relevante y explica por qué importa.",
-  "module.image.step1": "Arrastra desde un extremo de una zona sospechosa hasta el extremo opuesto, o haz clic en el centro.",
+  "module.image.step1": "Haz clic o toca la imagen para activar el modo de círculo y luego arrastra sobre la zona sospechosa para marcarla.",
   "module.image.step2": "Responde la pregunta sobre las pruebas para documentar la anomalía.",
   "module.text.title": "Analizar el lenguaje",
   "module.text.summary": "Resalta el fragmento exacto que utiliza una trampa persuasiva.",

@@ -1,6 +1,7 @@
 import {
   useRef,
   useState,
+  useEffect,
   type CSSProperties,
   type PointerEvent,
 } from "react";
@@ -172,7 +173,30 @@ export function ImageForensics({
   const [isReviewingEvidence, setIsReviewingEvidence] = useState(false);
   const [evidenceMisses, setEvidenceMisses] = useState(0);
   const [quizMisses, setQuizMisses] = useState(0);
+
+  // Trạng thái kích hoạt chế độ khoanh tròn
+  const [isDrawingActive, setIsDrawingActive] = useState(false);
+
   const drawStartRef = useRef<{ x_pct: number; y_pct: number } | null>(null);
+  const tapStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
+  const imageContainerRef = useRef<HTMLDivElement>(null);
+
+  // Click ra ngoài hình ảnh để hủy chế độ khoanh tròn nếu lỡ bật
+  useEffect(() => {
+    const handlePointerDownOutside = (event: globalThis.PointerEvent) => {
+      if (
+        imageContainerRef.current &&
+        !imageContainerRef.current.contains(event.target as Node)
+      ) {
+        setIsDrawingActive(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDownOutside);
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDownOutside);
+    };
+  }, []);
 
   const activeAnomaly = targetAnomalies.find(
     (anomaly) => anomaly.anomaly_id === activeAnomalyId,
@@ -281,11 +305,13 @@ export function ImageForensics({
 
     if (!selectedAnomaly) {
       setEvidenceMisses((count) => count + 1);
+      // GIỮ LẠI HÌNH TRÒN SAI TRÊN MÀN HÌNH ĐỂ NGƯỜI CHƠI QUAN SÁT
       setDrawnCircle({ ...circle, result: "incorrect" });
       setClickMessage(t("module.image.drawError"));
       return;
     }
 
+    // GIỮ LẠI HÌNH TRÒN ĐÚNG TRÊN MÀN HÌNH
     setDrawnCircle({ ...circle, result: "correct" });
     setClickMessage("");
     setActiveAnomalyId(selectedAnomaly.anomaly_id);
@@ -299,17 +325,39 @@ export function ImageForensics({
       return;
     }
 
-    event.preventDefault();
+    // Nếu chưa ở chế độ khoanh tròn: Ghi lại vị trí nhấn
+    if (!isDrawingActive) {
+      tapStartRef.current = {
+        x: event.clientX,
+        y: event.clientY,
+        time: Date.now(),
+      };
+      return;
+    }
+
+    if (event.pointerType === "touch" && event.cancelable) {
+      event.preventDefault();
+    }
+
     const point = getImagePoint(event);
     drawStartRef.current = point;
     setClickMessage("");
     setDrawnCircle({ ...point, radius_pct: 0, result: "pending" });
-    event.currentTarget.setPointerCapture(event.pointerId);
+
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    } catch {
+      // Fallback
+    }
   };
 
   const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
-    if (!drawStartRef.current || activeAnomalyId || isReviewingEvidence) {
+    if (!isDrawingActive || !drawStartRef.current || activeAnomalyId || isReviewingEvidence) {
       return;
+    }
+
+    if (event.pointerType === "touch" && event.cancelable) {
+      event.preventDefault();
     }
 
     const point = getImagePoint(event);
@@ -323,36 +371,64 @@ export function ImageForensics({
   };
 
   const handlePointerUp = (event: PointerEvent<HTMLDivElement>) => {
-    if (!drawStartRef.current || activeAnomalyId || isReviewingEvidence) {
+    if (activeAnomalyId || isReviewingEvidence) {
       return;
     }
 
-    const point = getImagePoint(event);
-    const imageBounds = event.currentTarget.getBoundingClientRect();
-    const distance = Math.hypot(
-      point.x_pct - drawStartRef.current.x_pct,
-      (point.y_pct - drawStartRef.current.y_pct) *
-        (imageBounds.height / imageBounds.width),
-    );
-    const circle = distance < CLICK_DRAG_THRESHOLD_PCT
-      ? {
-          ...drawStartRef.current,
-          radius_pct: DEFAULT_CLICK_RADIUS_PCT,
-          result: "pending" as const,
+    // TRƯỜNG HỢP 1: Chưa bật chế độ khoanh tròn -> Chạm 1 lần (hoặc Click 1 lần) để BẬT
+    if (!isDrawingActive) {
+      if (tapStartRef.current) {
+        const dx = Math.abs(event.clientX - tapStartRef.current.x);
+        const dy = Math.abs(event.clientY - tapStartRef.current.y);
+        const dt = Date.now() - tapStartRef.current.time;
+
+        if (dx < 10 && dy < 10 && dt < 500) {
+          setIsDrawingActive(true); // Bật chế độ khoanh tròn
         }
-      : getCircleFromDrag(drawStartRef.current, point, imageBounds);
+        tapStartRef.current = null;
+      }
+      return;
+    }
 
-    drawStartRef.current = null;
-    evaluateDrawnCircle(circle, imageBounds);
+    // TRƯỜNG HỢP 2: Đã bật chế độ khoanh tròn -> Vẽ & TỰ ĐỘNG THOÁT CHẾ ĐỘ VẼ
+    if (drawStartRef.current) {
+      const point = getImagePoint(event);
+      const imageBounds = event.currentTarget.getBoundingClientRect();
+      const distance = Math.hypot(
+        point.x_pct - drawStartRef.current.x_pct,
+        (point.y_pct - drawStartRef.current.y_pct) *
+          (imageBounds.height / imageBounds.width),
+      );
+      const circle =
+        distance < CLICK_DRAG_THRESHOLD_PCT
+          ? {
+              ...drawStartRef.current,
+              radius_pct: DEFAULT_CLICK_RADIUS_PCT,
+              result: "pending" as const,
+            }
+          : getCircleFromDrag(drawStartRef.current, point, imageBounds);
 
-    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-      event.currentTarget.releasePointerCapture(event.pointerId);
+      drawStartRef.current = null;
+      
+      // Đánh giá và LƯU HÌNH TRÒN vào State
+      evaluateDrawnCircle(circle, imageBounds);
+
+      // Tắt chế độ vẽ để người dùng có thể Scroll down ngay lập tức
+      setIsDrawingActive(false);
+
+      try {
+        if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+          event.currentTarget.releasePointerCapture(event.pointerId);
+        }
+      } catch {
+        // Ignore
+      }
     }
   };
 
   const handlePointerCancel = () => {
     drawStartRef.current = null;
-    setDrawnCircle(null);
+    tapStartRef.current = null;
   };
 
   const handleQuizSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -409,210 +485,302 @@ export function ImageForensics({
 
   return (
     <RetroWindow title={t("module.image.windowTitle")}>
-      <ModuleGuide guide={guide} defaultExpanded={guideDefaultExpanded} />
-      <div className="grid min-h-0 gap-4 md:grid-cols-[minmax(0,1fr)_minmax(260px,380px)]">
-        <div className="flex min-h-0 items-center justify-center overflow-hidden">
-          <div
-            aria-label={t("module.image.canvasAria")}
-            onPointerDown={handlePointerDown}
-            onPointerMove={handlePointerMove}
-            onPointerUp={handlePointerUp}
-            onPointerCancel={handlePointerCancel}
-            style={imageStyle}
-            className={`relative w-full max-w-full touch-none overflow-hidden rounded-[6px] border-2 border-ink bg-black shadow-[5px_5px_0_0_var(--color-ink)] ${
-              isReviewingEvidence ? "cursor-default" : "cursor-crosshair"
-            } ${
-              activeAnomaly
-                ? "max-h-[43dvh] md:max-h-[calc(100dvh-60px)]"
-                : "max-h-[calc(100dvh-60px)]"
-            }`}
-          >
-            <Image
-              src={imageUrl}
-              alt={t("module.image.evidenceAlt")}
-              width={imageWidth}
-              height={imageHeight}
-              preload
-              sizes="(min-width: 768px) calc(100vw - 380px), 100vw"
-              draggable={false}
-              className={`block h-auto w-full max-w-full object-contain ${
-                activeAnomaly
-                  ? "max-h-[43dvh] md:max-h-[calc(100dvh-60px)]"
-                  : "max-h-[calc(100dvh-60px)]"
-              }`}
-            />
-            <div className="pointer-events-none absolute inset-0">
-              {drawnCircle && !isReviewingEvidence && (
-                <div
-                  aria-label={t("module.image.circleAria")}
-                  className={`absolute rounded-full border-2 ${
-                    drawnCircle.result === "incorrect"
-                      ? "border-danger bg-danger/20"
-                      : "border-dashed border-accent bg-accent/20"
-                  }`}
-                  style={{
-                    left: `${drawnCircle.x_pct}%`,
-                    top: `${drawnCircle.y_pct}%`,
-                    width: `${drawnCircle.radius_pct * 2}%`,
-                    aspectRatio: "1",
-                    transform: "translate(-50%, -50%)",
-                  }}
-                />
-              )}
-              {confirmedCircles.map((circle) => (
-                <div
-                  key={circle.anomalyId}
-                  aria-label={t("module.image.userMarkAria")}
-                  className="absolute z-20 rounded-full border-[3px] border-dashed border-accent bg-accent/15"
-                  style={{
-                    left: `${circle.x_pct}%`,
-                    top: `${circle.y_pct}%`,
-                    width: `${circle.radius_pct * 2}%`,
-                    aspectRatio: "1",
-                    transform: "translate(-50%, -50%)",
-                  }}
-                />
-              ))}
-              {isReviewingEvidence && targetAnomalies.map((anomaly) => (
-                  <div
-                    key={anomaly.anomaly_id}
-                    aria-label={t("module.image.anomalyFoundAria", { name: anomaly.name })}
-                    className="absolute z-10 rounded-full border-[3px] border-info bg-info/20 shadow-[0_0_0_1px_var(--color-ink)]"
-                    style={{
-                      left: `${anomaly.x_pct}%`,
-                      top: `${anomaly.y_pct}%`,
-                      width: `${anomaly.radius_pct * 2}%`,
-                      aspectRatio: "1",
-                      transform: "translate(-50%, -50%)",
-                    }}
-                  />
-                ))}
-            </div>
-          </div>
-        </div>
+      <ModuleGuide
+        guide={guide}
+        defaultExpanded={guideDefaultExpanded}
+      />
 
-        {activeAnomaly && activeQuiz ? (
-          <form
-            onSubmit={handleQuizSubmit}
-            className={`${gamePanel} max-h-[45dvh] min-h-0 overflow-y-auto md:max-h-[calc(100dvh-90px)]`}
-            aria-labelledby="forensics-question"
-          >
-            <div className={gameSectionBar}>
-              {t("module.common.criticalThinking")}
-            </div>
-            <div className="p-3">
-              <p className="text-sm font-bold leading-6" id="forensics-question">
-                {activeQuiz.question}
-              </p>
-              <div className="mt-3 space-y-1">
-                {activeQuiz.options.map((option) => (
-                  <label
-                    key={option}
-                    className={gameOption}
-                  >
-                    <input
-                      type="radio"
-                      name={`forensics-${activeAnomaly.anomaly_id}`}
-                      value={option}
-                      checked={selectedOption === option}
-                      onChange={(event) => setSelectedOption(event.target.value)}
-                      className="mt-0.5"
-                    />
-                    <span>{option}</span>
-                  </label>
-                ))}
-              </div>
-              {quizState === "incorrect" && (
-                <p className={`mt-3 ${gameFeedbackError}`} role="alert">
-                  {t("module.image.quizError")}
-                </p>
-              )}
-              <ProgressiveHint
-                available={quizMisses >= 1}
-                hints={[
-                  t("module.hint.quiz.compareEvidence"),
-                  t("module.hint.quiz.rejectAssumption"),
-                ]}
-              />
-              {quizState === "correct" && (
-                <div className={`mt-3 ${gameFeedbackSuccess}`} role="status">
-                  <p className="font-bold">{t("module.common.correct")}</p>
-                  {activeQuiz.explanation && <p>{activeQuiz.explanation}</p>}
-                </div>
-              )}
-              <div className="mt-3 flex justify-end gap-2 border-t-2 border-ink bg-surface pt-3 max-sm:[&>button]:w-full">
-                {quizState === "correct" ? (
-                  <button
-                    type="button"
-                    onClick={handleContinue}
-                    className={gameButton}
-                  >
-                    {hasRequiredEvidence ? t("module.image.reviewEvidence") : t("module.common.continue")}
-                  </button>
-                ) : (
-                  <button
-                    type="submit"
-                    disabled={!selectedOption}
-                    className={gameButton}
-                  >
-                    {t("module.common.checkAnswer")}
-                  </button>
-                )}
-              </div>
-            </div>
-          </form>
-        ) : isReviewingEvidence ? (
-          <div className={`${gamePanel} max-h-[calc(100dvh-90px)] overflow-y-auto`}>
-            <div className={gameSectionBar}>
-              {t("module.image.reviewTitle")}
-            </div>
-            <p className="text-sm leading-6">
-              {t("module.image.reviewSummary")}
-            </p>
-            <div className="mt-4 space-y-2 border-y-2 border-ink py-3 text-xs font-bold">
-              <div className="flex items-center gap-2">
-                <span className="size-4 rounded-full border-2 border-dashed border-accent bg-accent/20" aria-hidden />
-                <span>{t("module.image.userMarkLegend")}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="size-4 rounded-full border-2 border-info bg-info/20" aria-hidden />
-                <span>{t("module.image.verifiedAreaLegend")}</span>
-              </div>
-            </div>
-            <button
-              type="button"
-              onClick={onComplete}
-              className={`mt-4 w-full ${gameButton}`}
-            >
-              {t("module.image.continueToText")}
-            </button>
-          </div>
-        ) : (
-          <div className={`${gamePanel} max-h-[calc(100dvh-90px)] overflow-y-auto`}>
-            <div className={gameSectionBar}>
-              {t("module.image.log")}
-            </div>
-            <p className="text-sm leading-6">{contextText}</p>
-            <div className="mt-4 border-t-2 border-ink pt-3 font-mono text-xs font-bold text-ink-soft">
-              {t("module.image.evidenceFound", { found: foundAnomalyIds.length, total: requiredEvidenceCount })}
-            </div>
-            {clickMessage && (
-              <p className={`mt-3 ${gameFeedbackError}`} role="alert">
-                {clickMessage}
-              </p>
-            )}
-            <ProgressiveHint
-              available={evidenceMisses >= HINT_ATTEMPT_THRESHOLD}
-              hints={[
-                t("module.hint.image.inspect"),
-                t("module.hint.image.focus", {
-                  vertical: verticalArea,
-                  horizontal: horizontalArea,
-                }),
-              ]}
+      <div className="rounded-[6px] border-2 border-ink bg-surface shadow-[5px_5px_0_0_var(--color-ink)] md:border-0 md:bg-transparent md:shadow-none">
+        <div className="grid min-h-0 gap-4 md:grid-cols-[minmax(0,1fr)_minmax(260px,380px)]">
+          {/* === PHẦN 1: HÌNH ẢNH === */}
+<div className="flex min-h-0 flex-col items-center justify-center overflow-hidden p-2 md:p-0">
+  
+  {/* THÔNG BÁO NHỎ NẰM PHÍA TRÊN VÀ BÊN NGOÀI HÌNH ẢNH (KHÔNG CHÈN VÀO ẢNH) */}
+  {isDrawingActive && (
+    <div className="mb-2 flex items-center justify-center gap-2 rounded-md border border-amber-500 bg-amber-400/20 px-3 py-1 text-amber-300 backdrop-blur-sm animate-pulse">
+      <span className="relative flex size-2">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75"></span>
+        <span className="relative inline-flex size-2 rounded-full bg-amber-500"></span>
+      </span>
+      <span className="font-mono text-xs font-bold uppercase tracking-wide">
+        Đang ở chế độ khoanh tròn (Kéo để khoanh)
+      </span>
+    </div>
+  )}
+
+  <div
+    ref={imageContainerRef}
+    aria-label={t("module.image.canvasAria")}
+    onPointerDown={handlePointerDown}
+    onPointerMove={handlePointerMove}
+    onPointerUp={handlePointerUp}
+    onPointerCancel={handlePointerCancel}
+    style={{
+      ...imageStyle,
+      touchAction: isDrawingActive ? "none" : "pan-y",
+      WebkitTouchCallout: "none",
+      WebkitUserSelect: "none",
+      userSelect: "none",
+    }}
+    className={`relative w-full max-w-full overflow-hidden rounded-[4px] bg-black select-none transition-all duration-200 md:rounded-[6px] ${
+      isDrawingActive
+        ? "ring-4 ring-inset ring-amber-400 border-4 border-amber-400 shadow-[0_0_20px_rgba(251,191,36,0.5)] cursor-crosshair"
+        : "border-4 border-ink shadow-[5px_5px_0_0_var(--color-ink)] cursor-pointer"
+    } ${
+      activeAnomaly
+        ? "max-h-[43dvh] md:max-h-[calc(100dvh-60px)]"
+        : "max-h-[calc(100dvh-60px)]"
+    }`}
+  >
+    {/* Hình ảnh AI */}
+    <Image
+      src={imageUrl}
+      alt={t("module.image.evidenceAlt")}
+      fill
+      unoptimized
+      draggable={false}
+      sizes="(min-width: 768px) calc(100vw - 380px), 100vw"
+      className="pointer-events-none block h-full w-full object-contain select-none"
+    />
+
+    {/* OVERLAY HÌNH TRÒN */}
+    <div className="pointer-events-none absolute inset-0 select-none z-10">
+      <svg
+        className="h-full w-full pointer-events-none"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+      >
+        {/* Các hình tròn đã xác nhận đúng từ trước */}
+        {confirmedCircles.map((circle, idx) => (
+          <ellipse
+            key={circle.anomalyId || idx}
+            cx={circle.x_pct}
+            cy={circle.y_pct}
+            rx={circle.radius_pct}
+            ry={circle.radius_pct * (imageWidth / imageHeight)}
+            className="fill-accent/20 stroke-accent stroke-[1.5] [stroke-dasharray:4_2]"
+          />
+        ))}
+
+        {/* Review Mode */}
+        {isReviewingEvidence &&
+          targetAnomalies.map((anomaly) => (
+            <ellipse
+              key={anomaly.anomaly_id}
+              cx={anomaly.x_pct}
+              cy={anomaly.y_pct}
+              rx={anomaly.radius_pct}
+              ry={anomaly.radius_pct * (imageWidth / imageHeight)}
+              className="fill-info/20 stroke-info stroke-[1.5]"
             />
-          </div>
+          ))}
+
+        {/* HÌNH TRÒN VỪA KHOANH */}
+        {drawnCircle && (
+          <ellipse
+            cx={drawnCircle.x_pct}
+            cy={drawnCircle.y_pct}
+            rx={drawnCircle.radius_pct}
+            ry={drawnCircle.radius_pct * (imageWidth / imageHeight)}
+            className={
+              drawnCircle.result === "correct"
+                ? "fill-emerald-500/20 stroke-emerald-500 stroke-[2]"
+                : drawnCircle.result === "incorrect"
+                  ? "fill-rose-500/20 stroke-rose-500 stroke-[2]"
+                  : "fill-amber-400/20 stroke-amber-400 stroke-[1.5] [stroke-dasharray:3_3]"
+            }
+          />
         )}
+      </svg>
+    </div>
+  </div>
+</div>
+
+          {/* === PHẦN 2: CÂU HỎI / LOG / REVIEW === */}
+          {activeAnomaly && activeQuiz ? (
+            <form
+              onSubmit={handleQuizSubmit}
+              className={`${gamePanel} max-h-[45dvh] min-h-0 overflow-y-auto border-t-2 border-ink md:border-t-0 md:max-h-[calc(100dvh-90px)]`}
+              aria-labelledby="forensics-question"
+            >
+              <div className={gameSectionBar}>
+                {t("module.common.criticalThinking")}
+              </div>
+
+              <div className="p-3">
+                <p
+                  className="text-sm font-bold leading-6"
+                  id="forensics-question"
+                >
+                  {activeQuiz.question}
+                </p>
+
+                <div className="mt-3 space-y-1">
+                  {activeQuiz.options.map((option) => (
+                    <label
+                      key={option}
+                      className={gameOption}
+                    >
+                      <input
+                        type="radio"
+                        name={`forensics-${activeAnomaly.anomaly_id}`}
+                        value={option}
+                        checked={selectedOption === option}
+                        onChange={(event) =>
+                          setSelectedOption(event.target.value)
+                        }
+                        className="mt-0.5"
+                      />
+
+                      <span>{option}</span>
+                    </label>
+                  ))}
+                </div>
+
+                {quizState === "incorrect" && (
+                  <p
+                    className={`mt-3 ${gameFeedbackError}`}
+                    role="alert"
+                  >
+                    {t("module.image.quizError")}
+                  </p>
+                )}
+
+                <ProgressiveHint
+                  available={quizMisses >= 1}
+                  hints={[
+                    t("module.hint.quiz.compareEvidence"),
+                    t("module.hint.quiz.rejectAssumption"),
+                  ]}
+                />
+
+                {quizState === "correct" && (
+                  <div
+                    className={`mt-3 ${gameFeedbackSuccess}`}
+                    role="status"
+                  >
+                    <p className="font-bold">
+                      {t("module.common.correct")}
+                    </p>
+
+                    {activeQuiz.explanation && (
+                      <p>{activeQuiz.explanation}</p>
+                    )}
+                  </div>
+                )}
+
+                <div className="mt-3 flex justify-end gap-2 border-t-2 border-ink bg-surface pt-3 max-sm:[&>button]:w-full">
+                  {quizState === "correct" ? (
+                    <button
+                      type="button"
+                      onClick={handleContinue}
+                      className={gameButton}
+                    >
+                      {hasRequiredEvidence
+                        ? t("module.image.reviewEvidence")
+                        : t("module.common.continue")}
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      disabled={!selectedOption}
+                      className={gameButton}
+                    >
+                      {t("module.common.checkAnswer")}
+                    </button>
+                  )}
+                </div>
+              </div>
+            </form>
+          ) : isReviewingEvidence ? (
+            <div
+              className={`${gamePanel} max-h-[calc(100dvh-90px)] overflow-y-auto border-t-2 border-ink md:border-t-0`}
+            >
+              <div className={gameSectionBar}>
+                {t("module.image.reviewTitle")}
+              </div>
+
+              <div className="p-3">
+                <p className="text-sm leading-6">
+                  {t("module.image.reviewSummary")}
+                </p>
+
+                <div className="mt-4 space-y-2 border-y-2 border-ink py-3 text-xs font-bold">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="size-4 rounded-full border-2 border-dashed border-accent bg-accent/20"
+                      aria-hidden
+                    />
+                    <span>
+                      {t("module.image.userMarkLegend")}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="size-4 rounded-full border-2 border-info bg-info/20"
+                      aria-hidden
+                    />
+                    <span>
+                      {t("module.image.verifiedAreaLegend")}
+                    </span>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={onComplete}
+                  className={`mt-4 w-full ${gameButton}`}
+                >
+                  {t("module.image.continueToText")}
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div
+              className={`${gamePanel} max-h-[calc(100dvh-90px)] overflow-y-auto border-t-2 border-ink md:border-t-0`}
+            >
+              <div className={gameSectionBar}>
+                {t("module.image.log")}
+              </div>
+
+              <div className="p-3">
+                <p className="text-sm leading-6">
+                  {contextText}
+                </p>
+
+                <div className="mt-4 border-t-2 border-ink pt-3 font-mono text-xs font-bold text-ink-soft">
+                  {t("module.image.evidenceFound", {
+                    found: foundAnomalyIds.length,
+                    total: requiredEvidenceCount,
+                  })}
+                </div>
+
+                {clickMessage && (
+                  <p
+                    className={`mt-3 ${gameFeedbackError}`}
+                    role="alert"
+                  >
+                    {clickMessage}
+                  </p>
+                )}
+
+                <ProgressiveHint
+                  available={
+                    evidenceMisses >= HINT_ATTEMPT_THRESHOLD
+                  }
+                  hints={[
+                    t("module.hint.image.inspect"),
+                    t("module.hint.image.focus", {
+                      vertical: verticalArea,
+                      horizontal: horizontalArea,
+                    }),
+                  ]}
+                />
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </RetroWindow>
   );
