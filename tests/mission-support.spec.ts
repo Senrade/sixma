@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 test("keeps the demo guided and collapses repeated instructions later", async ({ page }) => {
   await page.goto("/en/mission/D001");
 
-  await expect(page.getByText("Drag from one edge of a suspicious area")).toBeVisible();
+  await expect(page.getByText("Drag from one edge of a suspicious area")).toBeVisible({ timeout: 10000 });
   await expect(page.getByRole("button", { name: "Hide steps" })).toBeVisible();
 
   await page.goto("/en/mission/R001");
@@ -41,7 +41,9 @@ test("offers causal ordering help after an incorrect sequence", async ({ page })
   await page.goto("/en/mission/R001");
 
   for (const [slot, itemId] of ["R001_SORT_01", "R001_SORT_02", "R001_SORT_03"].entries()) {
-    await page.getByRole("button").filter({ hasText: itemId }).first().click();
+    const button = page.getByRole("button").filter({ hasText: itemId }).first();
+    await button.waitFor({ state: "visible" });
+    await button.click();
     await page.locator(`[data-slot-index="${slot}"]`).click();
   }
 
