@@ -43,6 +43,25 @@ export default async function ArticlePage({
             <p className="mt-2 font-mono text-xs text-ink-soft">{article.datePosted}</p>
           )}
         </header>
+        {article.slug === "how-to-play-guide" && (
+          <div className="mx-auto mt-6 max-w-3xl px-4 sm:px-6">
+            <h3 className="text-xl font-black text-info">Watch the guide</h3>
+            <p className="mt-2 text-ink-soft">Watch the 1-minute walkthrough below.</p>
+            <div className="mt-4">
+              <video
+                controls
+                playsInline
+                preload="metadata"
+                className="w-full rounded bg-black"
+                poster="/assets/videos/guide/guide-thumbnail.jpg"
+              >
+                <source src="/assets/videos/guide/guide-video.webm" type="video/webm" />
+                <source src="/assets/videos/guide/guide-video.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        )}
         <div className="mx-auto mt-10 max-w-3xl border-t-[3px] border-border px-4 pt-9 sm:px-6">
           {article.sections.map((section) => (
             <section key={section.heading} className="mb-10">

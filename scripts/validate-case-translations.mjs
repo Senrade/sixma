@@ -172,7 +172,8 @@ function assertSameShape(reference, candidate, label) {
 }
 
 function validateArticle(article, label) {
-  assertAllowedKeys(article, new Set(["category", "title", "summary", "sections"]), label);
+  // Allow an optional `date_posted` translation field for display; ensure it's a string when present.
+  assertAllowedKeys(article, new Set(["category", "title", "summary", "sections", "date_posted"]), label);
   for (const key of ["category", "title", "summary"]) {
     if (typeof article[key] !== "string" || article[key].length === 0) fail(`${label}.${key} is required.`);
   }
@@ -188,6 +189,7 @@ function validateArticle(article, label) {
       fail(`${sectionLabel} requires a heading and exactly one of a body string or non-empty items list.`);
     }
   }
+  assertOptionalString(article.date_posted, `${label}.date_posted`);
 }
 
 const registrySource = await readFile(
