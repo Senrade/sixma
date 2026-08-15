@@ -63,7 +63,7 @@ export default async function ArticlePage({
           </div>
         )}
         <div className="mx-auto mt-10 max-w-3xl border-t-[3px] border-border px-4 pt-9 sm:px-6">
-          {article.sections.map((section) => (
+          {article.slug !== "how-to-play-guide" && article.sections.map((section) => (
             <section key={section.heading} className="mb-10">
               <h2 className="text-2xl font-black leading-tight text-info">{section.heading}</h2>
               {"body" in section ? (
