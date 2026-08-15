@@ -493,104 +493,108 @@ export function ImageForensics({
       <div className="rounded-[6px] border-2 border-ink bg-surface shadow-[5px_5px_0_0_var(--color-ink)] md:border-0 md:bg-transparent md:shadow-none">
         <div className="grid min-h-0 gap-4 md:grid-cols-[minmax(0,1fr)_minmax(260px,380px)]">
           {/* === PHẦN 1: HÌNH ẢNH === */}
-          <div className="flex min-h-0 flex-col items-center justify-center overflow-hidden p-2 md:p-0">
-            <div
-              ref={imageContainerRef}
-              aria-label={t("module.image.canvasAria")}
-              onPointerDown={handlePointerDown}
-              onPointerMove={handlePointerMove}
-              onPointerUp={handlePointerUp}
-              onPointerCancel={handlePointerCancel}
-              style={{
-                ...imageStyle,
-                touchAction: isDrawingActive ? "none" : "pan-y",
-                WebkitTouchCallout: "none",
-                WebkitUserSelect: "none",
-                userSelect: "none",
-              }}
-              className={`relative w-full max-w-full overflow-hidden rounded-[4px] bg-black select-none transition-all duration-200 md:rounded-[6px] ${
-                isDrawingActive
-                  ? "ring-4 ring-inset ring-amber-400 border-4 border-amber-400 shadow-[0_0_20px_rgba(251,191,36,0.8)] cursor-crosshair"
-                  : "border-4 border-ink shadow-[5px_5px_0_0_var(--color-ink)] cursor-pointer"
-              } ${
-                activeAnomaly
-                  ? "max-h-[43dvh] md:max-h-[calc(100dvh-60px)]"
-                  : "max-h-[calc(100dvh-60px)]"
-              }`}
-            >
-              {/* CẢNH BÁO / CHỈ BÁO TRẠNG THÁI RÕ RÀNG TRÊN PC, IPAD & MOBILE */}
-              {isDrawingActive && (
-                <div className="pointer-events-none absolute top-3 left-1/2 z-20 -translate-x-1/2 rounded-full border-2 border-amber-500 bg-amber-400/95 px-4 py-1.5 shadow-lg backdrop-blur-sm animate-pulse">
-                  <span className="flex items-center gap-2 font-mono text-xs font-black uppercase tracking-wider text-black">
-                    <span className="inline-block size-2.5 rounded-full bg-red-600 animate-ping" />
-                    Đang ở chế độ khoanh tròn (Kéo để khoanh)
-                  </span>
-                </div>
-              )}
+<div className="flex min-h-0 flex-col items-center justify-center overflow-hidden p-2 md:p-0">
+  
+  {/* THÔNG BÁO NHỎ NẰM PHÍA TRÊN VÀ BÊN NGOÀI HÌNH ẢNH (KHÔNG CHÈN VÀO ẢNH) */}
+  {isDrawingActive && (
+    <div className="mb-2 flex items-center justify-center gap-2 rounded-md border border-amber-500 bg-amber-400/20 px-3 py-1 text-amber-300 backdrop-blur-sm animate-pulse">
+      <span className="relative flex size-2">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75"></span>
+        <span className="relative inline-flex size-2 rounded-full bg-amber-500"></span>
+      </span>
+      <span className="font-mono text-xs font-bold uppercase tracking-wide">
+        Đang ở chế độ khoanh tròn (Kéo để khoanh)
+      </span>
+    </div>
+  )}
 
-              {/* Hình ảnh AI */}
-              <Image
-                src={imageUrl}
-                alt={t("module.image.evidenceAlt")}
-                fill
-                unoptimized
-                draggable={false}
-                sizes="(min-width: 768px) calc(100vw - 380px), 100vw"
-                className="pointer-events-none block h-full w-full object-contain select-none"
-              />
+  <div
+    ref={imageContainerRef}
+    aria-label={t("module.image.canvasAria")}
+    onPointerDown={handlePointerDown}
+    onPointerMove={handlePointerMove}
+    onPointerUp={handlePointerUp}
+    onPointerCancel={handlePointerCancel}
+    style={{
+      ...imageStyle,
+      touchAction: isDrawingActive ? "none" : "pan-y",
+      WebkitTouchCallout: "none",
+      WebkitUserSelect: "none",
+      userSelect: "none",
+    }}
+    className={`relative w-full max-w-full overflow-hidden rounded-[4px] bg-black select-none transition-all duration-200 md:rounded-[6px] ${
+      isDrawingActive
+        ? "ring-4 ring-inset ring-amber-400 border-4 border-amber-400 shadow-[0_0_20px_rgba(251,191,36,0.5)] cursor-crosshair"
+        : "border-4 border-ink shadow-[5px_5px_0_0_var(--color-ink)] cursor-pointer"
+    } ${
+      activeAnomaly
+        ? "max-h-[43dvh] md:max-h-[calc(100dvh-60px)]"
+        : "max-h-[calc(100dvh-60px)]"
+    }`}
+  >
+    {/* Hình ảnh AI */}
+    <Image
+      src={imageUrl}
+      alt={t("module.image.evidenceAlt")}
+      fill
+      unoptimized
+      draggable={false}
+      sizes="(min-width: 768px) calc(100vw - 380px), 100vw"
+      className="pointer-events-none block h-full w-full object-contain select-none"
+    />
 
-              {/* OVERLAY HÌNH TRÒN */}
-              <div className="pointer-events-none absolute inset-0 select-none z-10">
-                <svg
-                  className="h-full w-full pointer-events-none"
-                  viewBox="0 0 100 100"
-                  preserveAspectRatio="none"
-                >
-                  {/* Các hình tròn đã xác nhận đúng từ trước */}
-                  {confirmedCircles.map((circle, idx) => (
-                    <ellipse
-                      key={circle.anomalyId || idx}
-                      cx={circle.x_pct}
-                      cy={circle.y_pct}
-                      rx={circle.radius_pct}
-                      ry={circle.radius_pct * (imageWidth / imageHeight)}
-                      className="fill-accent/20 stroke-accent stroke-[1.5] [stroke-dasharray:4_2]"
-                    />
-                  ))}
+    {/* OVERLAY HÌNH TRÒN */}
+    <div className="pointer-events-none absolute inset-0 select-none z-10">
+      <svg
+        className="h-full w-full pointer-events-none"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+      >
+        {/* Các hình tròn đã xác nhận đúng từ trước */}
+        {confirmedCircles.map((circle, idx) => (
+          <ellipse
+            key={circle.anomalyId || idx}
+            cx={circle.x_pct}
+            cy={circle.y_pct}
+            rx={circle.radius_pct}
+            ry={circle.radius_pct * (imageWidth / imageHeight)}
+            className="fill-accent/20 stroke-accent stroke-[1.5] [stroke-dasharray:4_2]"
+          />
+        ))}
 
-                  {/* Review Mode */}
-                  {isReviewingEvidence &&
-                    targetAnomalies.map((anomaly) => (
-                      <ellipse
-                        key={anomaly.anomaly_id}
-                        cx={anomaly.x_pct}
-                        cy={anomaly.y_pct}
-                        rx={anomaly.radius_pct}
-                        ry={anomaly.radius_pct * (imageWidth / imageHeight)}
-                        className="fill-info/20 stroke-info stroke-[1.5]"
-                      />
-                    ))}
+        {/* Review Mode */}
+        {isReviewingEvidence &&
+          targetAnomalies.map((anomaly) => (
+            <ellipse
+              key={anomaly.anomaly_id}
+              cx={anomaly.x_pct}
+              cy={anomaly.y_pct}
+              rx={anomaly.radius_pct}
+              ry={anomaly.radius_pct * (imageWidth / imageHeight)}
+              className="fill-info/20 stroke-info stroke-[1.5]"
+            />
+          ))}
 
-                  {/* HÌNH TRÒN VỪA KHOANH (ĐƯỢC GIỮ NGUYÊN SAU KHI THẢ TAY/THOÁT CHẾ ĐỘ VẼ) */}
-                  {drawnCircle && (
-                    <ellipse
-                      cx={drawnCircle.x_pct}
-                      cy={drawnCircle.y_pct}
-                      rx={drawnCircle.radius_pct}
-                      ry={drawnCircle.radius_pct * (imageWidth / imageHeight)}
-                      className={
-                        drawnCircle.result === "correct"
-                          ? "fill-emerald-500/20 stroke-emerald-500 stroke-[2]"
-                          : drawnCircle.result === "incorrect"
-                            ? "fill-rose-500/20 stroke-rose-500 stroke-[2]"
-                            : "fill-amber-400/20 stroke-amber-400 stroke-[1.5] [stroke-dasharray:3_3]"
-                      }
-                    />
-                  )}
-                </svg>
-              </div>
-            </div>
-          </div>
+        {/* HÌNH TRÒN VỪA KHOANH */}
+        {drawnCircle && (
+          <ellipse
+            cx={drawnCircle.x_pct}
+            cy={drawnCircle.y_pct}
+            rx={drawnCircle.radius_pct}
+            ry={drawnCircle.radius_pct * (imageWidth / imageHeight)}
+            className={
+              drawnCircle.result === "correct"
+                ? "fill-emerald-500/20 stroke-emerald-500 stroke-[2]"
+                : drawnCircle.result === "incorrect"
+                  ? "fill-rose-500/20 stroke-rose-500 stroke-[2]"
+                  : "fill-amber-400/20 stroke-amber-400 stroke-[1.5] [stroke-dasharray:3_3]"
+            }
+          />
+        )}
+      </svg>
+    </div>
+  </div>
+</div>
 
           {/* === PHẦN 2: CÂU HỎI / LOG / REVIEW === */}
           {activeAnomaly && activeQuiz ? (
