@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 test("keeps the demo guided and collapses repeated instructions later", async ({ page }) => {
   await page.goto("/en/mission/D001");
 
-  await expect(page.getByText(/Drag from one edge of a suspicious area|Click or tap the image/)).toBeVisible({ timeout: 10000 });
+  await expect(page.getByText("Drag from one edge of a suspicious area")).toBeVisible({ timeout: 10000 });
   await expect(page.getByRole("button", { name: "Hide steps" })).toBeVisible();
 
   await page.goto("/en/mission/R001");
@@ -18,15 +18,12 @@ test("offers progressive image hints after repeated misses", async ({ page }) =>
   const evidence = page.getByLabel(
     "Forensic evidence image. Drag across or click a suspicious area.",
   );
-  await evidence.waitFor({ state: "visible" });
-  const initialBounds = await evidence.boundingBox();
-  if (!initialBounds) throw new Error("Evidence image did not render");
-  // Click near the top-left and expect the miss message
   await evidence.click({ position: { x: 8, y: 8 } });
   await expect(page.getByText(/That mark does not overlap/)).toBeVisible();
 
-  // Then click near the bottom-left to simulate a second miss
-  await evidence.click({ position: { x: 8, y: initialBounds.height - 8 } });
+  const bounds = await evidence.boundingBox();
+  if (!bounds) throw new Error("Evidence image did not render");
+  await evidence.click({ position: { x: 8, y: bounds.height - 8 } });
 
   const hintButton = page.getByRole("button", { name: "Need a hint?" });
   await expect(hintButton).toBeVisible();

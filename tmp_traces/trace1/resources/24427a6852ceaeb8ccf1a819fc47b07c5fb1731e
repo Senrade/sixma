@@ -1,0 +1,110 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: mission-support.spec.ts >> keeps the demo guided and collapses repeated instructions later
+- Location: tests\mission-support.spec.ts:3:5
+
+# Error details
+
+```
+Error: expect(locator).toBeVisible() failed
+
+Locator: getByText('Drag from one edge of a suspicious area')
+Expected: visible
+Timeout: 10000ms
+Error: element(s) not found
+
+Call log:
+  - Expect "toBeVisible" with timeout 10000ms
+  - waiting for getByText('Drag from one edge of a suspicious area')
+
+```
+
+```yaml
+- main:
+  - button "Exit mission"
+  - paragraph: D001 / Inspect
+  - text: Step 1 of 3
+  - button "Watch the 1‑minute guide"
+  - text: S
+  - heading "Module 01 / Image Forensics" [level=2]
+  - 'region "How to play: Inspect the image"':
+    - paragraph: How to play / Module 01
+    - button "Hide steps" [expanded]
+    - paragraph: Mark a meaningful visual anomaly and explain why it matters.
+    - list:
+      - listitem: 1. Click or tap the image to activate circle mode, then drag across the suspicious area to mark it.
+      - listitem: 2. Answer the evidence question to document the anomaly.
+  - img "Evidence"
+  - img
+  - text: Investigation log
+  - paragraph: This image was shared as documentary proof of a child's rescue during catastrophic flooding after Hurricane Helene.
+  - text: "Evidence found: 0 / 1"
+- alert
+```
+
+# Test source
+
+```ts
+  1  | import { expect, test } from "@playwright/test";
+  2  | 
+  3  | test("keeps the demo guided and collapses repeated instructions later", async ({ page }) => {
+  4  |   await page.goto("/en/mission/D001");
+  5  | 
+> 6  |   await expect(page.getByText("Drag from one edge of a suspicious area")).toBeVisible({ timeout: 10000 });
+     |                                                                           ^ Error: expect(locator).toBeVisible() failed
+  7  |   await expect(page.getByRole("button", { name: "Hide steps" })).toBeVisible();
+  8  | 
+  9  |   await page.goto("/en/mission/R001");
+  10 | 
+  11 |   await expect(page.getByRole("button", { name: "Show steps" })).toBeVisible();
+  12 |   await expect(page.getByText("Drag from one edge of a suspicious area")).toBeHidden();
+  13 | });
+  14 | 
+  15 | test("offers progressive image hints after repeated misses", async ({ page }) => {
+  16 |   await page.goto("/en/mission/D001");
+  17 | 
+  18 |   const evidence = page.getByLabel(
+  19 |     "Forensic evidence image. Drag across or click a suspicious area.",
+  20 |   );
+  21 |   await evidence.click({ position: { x: 8, y: 8 } });
+  22 |   await expect(page.getByText(/That mark does not overlap/)).toBeVisible();
+  23 | 
+  24 |   const bounds = await evidence.boundingBox();
+  25 |   if (!bounds) throw new Error("Evidence image did not render");
+  26 |   await evidence.click({ position: { x: 8, y: bounds.height - 8 } });
+  27 | 
+  28 |   const hintButton = page.getByRole("button", { name: "Need a hint?" });
+  29 |   await expect(hintButton).toBeVisible();
+  30 |   await hintButton.click();
+  31 |   await expect(page.getByText(/Compare text, repeated shapes, lighting/)).toBeVisible();
+  32 | 
+  33 |   await page.getByRole("button", { name: "Show a stronger hint" }).click();
+  34 |   await expect(page.getByText(/Narrow your search to the upper-center area/)).toBeVisible();
+  35 | });
+  36 | 
+  37 | test("offers causal ordering help after an incorrect sequence", async ({ page }) => {
+  38 |   await page.addInitScript(() => {
+  39 |     window.localStorage.setItem("unesco-mil-game:v2:R001:current-step", "3");
+  40 |   });
+  41 |   await page.goto("/en/mission/R001");
+  42 | 
+  43 |   for (const [slot, itemId] of ["R001_SORT_01", "R001_SORT_02", "R001_SORT_03"].entries()) {
+  44 |     const button = page.getByRole("button").filter({ hasText: itemId }).first();
+  45 |     await button.waitFor({ state: "visible" });
+  46 |     await button.click();
+  47 |     await page.locator(`[data-slot-index="${slot}"]`).click();
+  48 |   }
+  49 | 
+  50 |   const hintButton = page.getByRole("button", { name: "Need a hint?" });
+  51 |   await expect(hintButton).toBeVisible();
+  52 |   await hintButton.click();
+  53 |   await expect(page.getByText(/Separate what creates attention/)).toBeVisible();
+  54 | });
+  55 | 
+```
