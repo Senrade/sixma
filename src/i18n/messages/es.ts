@@ -64,7 +64,6 @@ export const es = {
   "welcome.cardPrompt": "¿Tienes una tarjeta de caso SIXMA? Canjéala para acceder a la investigación.",
   "welcome.redeem": "Canjear una tarjeta",
   "welcome.about": "Acerca de SIXMA",
-  "welcome.online": "En línea",
   "demoStory.signal1": "Detrás de la imagen",
   "demoStory.title1": "Esta foto de un rescate no era real.",
   "demoStory.body1": "La niña y el cachorro fueron creados con IA. Aun así, la imagen llegó a personas reales e influyó en cómo se sintieron ante un desastre real.",

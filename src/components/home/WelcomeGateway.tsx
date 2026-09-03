@@ -97,7 +97,6 @@ export function WelcomeGateway() {
               </button>
             </div>
             <div className="flex items-center gap-2">
-              <span className="hidden font-mono text-sm font-bold text-success sm:inline">● {t("welcome.online")}</span>
               <LanguageSwitch className="[&_select]:h-9 [&_select]:min-w-28 [&_select]:border-2" />
             </div>
           </header>
