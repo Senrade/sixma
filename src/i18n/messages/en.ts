@@ -64,7 +64,6 @@ export const en = {
   "welcome.cardPrompt": "Have a SIXMA case card? Redeem it to access its investigation.",
   "welcome.redeem": "Redeem a card",
   "welcome.about": "About SIXMA",
-  "welcome.online": "Online",
   "demoStory.signal1": "Behind the image",
   "demoStory.title1": "This rescue photo was not real.",
   "demoStory.body1": "The girl and puppy were created with AI. But the picture still reached real people and shaped how they felt about a real disaster.",

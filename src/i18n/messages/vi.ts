@@ -64,7 +64,6 @@ export const vi = {
   "welcome.cardPrompt": "Bạn có thẻ SIXMA? Hãy nhập mã để mở khóa câu chuyện.",
   "welcome.redeem": "Nhập mã thẻ",
   "welcome.about": "Về SIXMA",
-  "welcome.online": "Trực tuyến",
   "demoStory.signal1": "Góc khuất đằng sau bức ảnh",
   "demoStory.title1": "Bức ảnh cứu hộ này hoàn toàn là giả.",
   "demoStory.body1": "Cô bé và chú chó đều do AI tạo ra. Dù vậy, nó vẫn tiếp cận hàng triệu người thật, âm thầm thao túng dư luận ngay trong một thảm họa có thật.",
